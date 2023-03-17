@@ -1,0 +1,104 @@
+@font-face {
+    font-family: 'ProductSansBoldItalic';
+    src: url('../assets/fonts/product-sans/ProductSansBoldItalic.ttf');
+}
+
+@font-face {
+    font-family: 'ProductSansBold';
+    src: url('../assets/fonts/product-sans/ProductSansBold.ttf');
+}
+
+
+.navbar-custom{
+    background-color: #006B3B;
+}
+
+.siteLogo {
+    height: 5rem;
+}
+
+.btn-custom {
+    background-color: #961313;
+}
+
+.searchIcon {
+    height: 1rem;
+}
+
+.custom-toggler {
+    border: none;
+}
+
+.custom-toggler .navbar-toggler-icon {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='white' stroke-width='4' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+}
+
+input:placeholder-shown {
+   font-style: italic;
+}
+
+#profileBackground {
+    background-color: #9b2f2f;
+    height: 35rem;
+    width: auto;
+}
+
+#coverPhoto {
+    max-width: 50rem;
+    max-height: 20rem;
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+#profile {
+    width: 50rem;
+}
+
+#profilePicture {
+    height: 10rem;
+    width: 10rem;
+    object-fit: cover;
+    border-radius: 50%;
+    position: relative;
+    bottom: 3rem;
+}
+
+/* #pageName {
+    position: relative;
+    left: 12rem;
+    bottom: 9.5rem;
+    max-width: 40rem;
+} */
+
+#profileDetails {
+    position: relative;
+    left: 12rem;
+    bottom: 9.5rem;
+}
+
+#profileDetails p {
+    max-width: 40rem;
+    margin-bottom: 0;
+    color: white;
+}
+
+#profileDetails #pageName {
+    font-size: 1.75rem;
+    font-family: 'ProductSansBold';
+}
+
+#profileDetails #classification {
+    font-size: 1rem;
+    font-family: 'ProductSansBoldItalic';
+}
+
+
+
+
+
+
+
+
