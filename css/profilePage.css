@@ -8,6 +8,14 @@
     src: url('../assets/fonts/product-sans/ProductSansBold.ttf');
 }
 
+@font-face {
+    font-family: 'ProductSansRegular';
+    src: url('../assets/fonts/product-sans/ProductSansRegular.ttf');
+}
+
+body {
+    background-color: #d9d9d9;
+}
 
 .navbar-custom{
     background-color: #006B3B;
@@ -21,12 +29,16 @@
     background-color: #961313;
 }
 
+.btn-custom:hover {
+    background-color: #961313;
+}
+
 .searchIcon {
     height: 1rem;
 }
 
-.custom-toggler {
-    border: none;
+.searchIcon:hover {
+    background-color: ;
 }
 
 .custom-toggler .navbar-toggler-icon {
@@ -39,7 +51,7 @@ input:placeholder-shown {
 
 #profileBackground {
     background-color: #9b2f2f;
-    height: 35rem;
+    height: 32rem;
     width: auto;
 }
 
@@ -55,6 +67,7 @@ input:placeholder-shown {
 
 #profile {
     width: 50rem;
+    height: 7rem;
 }
 
 #profilePicture {
@@ -66,13 +79,6 @@ input:placeholder-shown {
     bottom: 3rem;
 }
 
-/* #pageName {
-    position: relative;
-    left: 12rem;
-    bottom: 9.5rem;
-    max-width: 40rem;
-} */
-
 #profileDetails {
     position: relative;
     left: 12rem;
@@ -80,20 +86,73 @@ input:placeholder-shown {
 }
 
 #profileDetails p {
-    max-width: 40rem;
     margin-bottom: 0;
     color: white;
+    max-width: 30vmax;
+
 }
 
 #profileDetails #pageName {
-    font-size: 1.75rem;
+    font-size: 3vmin;
     font-family: 'ProductSansBold';
 }
 
 #profileDetails #classification {
-    font-size: 1rem;
+    font-size: 2vmin;
     font-family: 'ProductSansBoldItalic';
 }
+
+#profileDivider {
+    height: 1rem;
+    width: 50rem;
+}
+
+#profileDivider hr{
+    margin-left: 1rem;
+    margin-right: 1rem;
+    border: 0.10rem solid white;
+}
+
+#navbarProfileOptions {
+    width: 50rem;
+    padding-left: 1rem;
+}
+
+.nav-item {
+    margin-left: 1rem;
+    margin-right: 1rem;
+}
+
+.nav-item a {
+    font-size: 1.75vmin;
+    font-family: 'ProductSansRegular';
+    color: white;
+}
+
+#navbarProfileOptions {
+    overflow: hidden;
+}
+
+#navbarProfileOptions a {
+    text-decoration: none;
+    border-bottom: 2px solid transparent;
+    padding-bottom: 0.25rem;
+}
+
+#navbarProfileOptions a:hover {
+    color: white;
+    border-bottom: 2px solid white;
+}
+
+#navbarProfileOptions a.active {
+    color: white;
+    border-bottom: 2px solid white;
+}
+   
+
+
+
+
 
 
 
