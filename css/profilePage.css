@@ -83,13 +83,12 @@ input:placeholder-shown {
     position: relative;
     left: 12rem;
     bottom: 9.5rem;
+    max-width: 50vmax;
 }
 
 #profileDetails p {
     margin-bottom: 0;
     color: white;
-    max-width: 30vmax;
-
 }
 
 #profileDetails #pageName {
@@ -149,16 +148,18 @@ input:placeholder-shown {
     border-bottom: 2px solid white;
 }
 
-#sample {
-    background-color: orange;
-    width: 70rem;
-    height: 100rem;
+#contentArea {
+    width: 65rem;
 }
 
-#sample img {
-    max-width: 10rem;
-    height: auto;
+#posts {
+    background-color: yellow;
 }
+
+#photos {
+    background-color: blueviolet;
+}
+
 
 
    

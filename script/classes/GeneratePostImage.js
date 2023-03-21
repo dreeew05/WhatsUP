@@ -12,8 +12,12 @@ export class GeneratePostImage {
 
     generateImage(count, filenames, captions) {
 
-        const DIVHOLDER = document.getElementById("sample"),
+        const POST_HOLDER = document.getElementById("posts"),
               BASE_PATH = "../../assets/images/";
+
+        let DIV  = document.createElement("div");      
+        DIV.setAttribute("class", "d-flex justify-content-center");
+        DIV.setAttribute("style", "background-color: orange;");
 
         for(let i = 0; i < count; i++) {
             let LINK = document.createElement("a"),
@@ -26,7 +30,8 @@ export class GeneratePostImage {
             IMG.src = FILE_PATH;
             IMG.setAttribute("alt", filenames[i])
             this.resizeBaseOnCount(count, IMG);
-            DIVHOLDER.appendChild(LINK);
+            POST_HOLDER.appendChild(DIV);
+            DIV.appendChild(LINK);
             LINK.appendChild(IMG);
         }
     }
@@ -35,18 +40,21 @@ export class GeneratePostImage {
         switch(count) {
             case 1:
                 IMG.setAttribute("style", "height: 40rem;" + 
-                    "min-width: 50rem; object-fit: cover;" + 
-                    "margin-left: 0.5rem; margin-right: 0.5rem;");
+                    "max-width: 30rem; object-fit: cover;" + 
+                    "margin-left: 0.1rem; margin-right: 0.1rem;");
                 break;
             case 2:
-                IMG.setAttribute("style", "height: 40rem;" + 
-                    "min-width: 24.5rem; object-fit: cover;" + 
-                    "margin-left: 0.5rem; margin-right: 0.5rem;");
+                IMG.setAttribute("style", "height: 20rem;" + 
+                    "max-width: 19.5rem; object-fit: cover;" + 
+                    "margin-left: 0.1rem; margin-right: 0.1rem;" +
+                    "border-radius: 0.5rem;");
                     break;
+            case 3:
+                break;
             case 4:
                 IMG.setAttribute("style", "height: 20rem; width: 100%;" +  
-                    "min-width: 20rem; object-fit: cover;" +
-                    "margin-left: 0.5rem; margin-right: 0.5rem;");
+                    "max-width: 20rem; object-fit: cover;" +
+                    "margin-left: 0.1rem; margin-right: 0.1rem;");
                 break;
             default:
                 break;
