@@ -25,8 +25,31 @@ export class GeneratePostImage {
             LINK.setAttribute("href", FILE_PATH);
             IMG.src = FILE_PATH;
             IMG.setAttribute("alt", filenames[i])
+            this.resizeBaseOnCount(count, IMG);
             DIVHOLDER.appendChild(LINK);
             LINK.appendChild(IMG);
         }
+    }
+
+    resizeBaseOnCount(count, IMG) {
+        switch(count) {
+            case 1:
+                IMG.setAttribute("style", "height: 40rem;" + 
+                    "min-width: 50rem; object-fit: cover;" + 
+                    "margin-left: 0.5rem; margin-right: 0.5rem;");
+                break;
+            case 2:
+                IMG.setAttribute("style", "height: 40rem;" + 
+                    "min-width: 24.5rem; object-fit: cover;" + 
+                    "margin-left: 0.5rem; margin-right: 0.5rem;");
+                    break;
+            case 4:
+                IMG.setAttribute("style", "height: 20rem; width: 100%;" +  
+                    "min-width: 20rem; object-fit: cover;" +
+                    "margin-left: 0.5rem; margin-right: 0.5rem;");
+                break;
+            default:
+                break;
+        } 
     }
 }

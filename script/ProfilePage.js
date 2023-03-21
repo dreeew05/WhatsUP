@@ -1,5 +1,5 @@
 //Author: fiVe
-//Description: JavaScript for profilePage
+//Description: JavaScript for ProfilePage
 
 import { NavBarSectionDivider } from "./classes/NavBarSectionDivider.js";
 import { GeneratePostImage } from "./classes/GeneratePostImage.js";
@@ -14,7 +14,7 @@ class ProfilePage {
         new NavBarSectionDivider(links);
     }
     generatePostImage() {
-        let filenames = ["cityCampus", "cityCampus2", "cityCampus3", "cityCampus4"],
+        let filenames = ["cityCampus", "cityCampus2"],
             captions  = ["Team Picture", "Balay Ilonggo", "Front Gate UP - Visayas", "LGBT OBLE"];
         new GeneratePostImage(filenames.length, filenames, captions);
     }

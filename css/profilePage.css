@@ -152,6 +152,7 @@ input:placeholder-shown {
 #sample {
     background-color: orange;
     width: 70rem;
+    height: 100rem;
 }
 
 #sample img {
