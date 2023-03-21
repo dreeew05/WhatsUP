@@ -1,4 +1,4 @@
-// Author: fiVe
+// Author: fiVe [G. Bulaong]
 // Description: Active Link when link is clicked
 
 export class NavBarSectionDivider {

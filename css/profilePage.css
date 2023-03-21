@@ -37,10 +37,6 @@ body {
     height: 1rem;
 }
 
-.searchIcon:hover {
-    background-color: ;
-}
-
 .custom-toggler .navbar-toggler-icon {
     background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='white' stroke-width='4' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
 }
@@ -51,22 +47,24 @@ input:placeholder-shown {
 
 #profileBackground {
     background-color: #9b2f2f;
-    height: 31rem;
+    height: 31.5rem;
     width: auto;
 }
 
 #coverPhoto {
-    max-width: 50rem;
+    max-width: 70rem;
     max-height: 20rem;
     height: 100%;
     width: 100%;
     object-fit: cover;
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
 }
 
 #profile {
-    width: 50rem;
+    width: 70rem;
     height: 7rem;
 }
 
@@ -77,6 +75,8 @@ input:placeholder-shown {
     border-radius: 50%;
     position: relative;
     bottom: 3rem;
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
 }
 
 #profileDetails {
@@ -104,7 +104,7 @@ input:placeholder-shown {
 
 #profileDivider {
     height: 1rem;
-    width: 50rem;
+    width: 70rem;
 }
 
 #profileDivider hr{
@@ -114,7 +114,7 @@ input:placeholder-shown {
 }
 
 #navbarProfileOptions {
-    width: 50rem;
+    width: 70rem;
     padding-left: 1rem;
 }
 
@@ -148,6 +148,18 @@ input:placeholder-shown {
     color: white;
     border-bottom: 2px solid white;
 }
+
+#sample {
+    background-color: orange;
+    width: 70rem;
+}
+
+#sample img {
+    max-width: 10rem;
+    height: auto;
+}
+
+
    
 
 
