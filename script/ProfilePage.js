@@ -14,7 +14,7 @@ class ProfilePage {
         new NavBarSectionDivider(links);
     }
     generatePostImage() {
-        let filenames = ["cityCampus", "cityCampus2"],
+        let filenames = ["poster1", "cityCampus2", "cityCampus3"],
             captions  = ["Team Picture", "Balay Ilonggo", "Front Gate UP - Visayas", "LGBT OBLE"];
         new GeneratePostImage(filenames.length, filenames, captions);
     }

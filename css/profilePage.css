@@ -148,17 +148,15 @@ input:placeholder-shown {
     border-bottom: 2px solid white;
 }
 
-#contentArea {
-    width: 65rem;
-}
-
 #posts {
     background-color: yellow;
+    width: 60rem;
 }
 
-#photos {
-    background-color: blueviolet;
+#imageHolder {
+    padding: 2rem;
 }
+
 
 
 

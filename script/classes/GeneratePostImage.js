@@ -7,17 +7,29 @@ export class GeneratePostImage {
         this.filenames = filenames;
         this.captions  = captions;
 
-        this.generateImage(count, filenames, captions);
+        this.generateImage(this.getCount(), this.getFileNames(), this.getCaptions());
+    }
+
+    getCount() {
+        return this.count;
+    }
+
+    getFileNames() {
+        return this.filenames;
+    }
+
+    getCaptions() {
+        return this.captions;
     }
 
     generateImage(count, filenames, captions) {
 
-        const POST_HOLDER = document.getElementById("posts"),
+        const POST_HOLDER = document.getElementById("imageHolder"),
               BASE_PATH = "../../assets/images/";
 
         let DIV  = document.createElement("div");      
         DIV.setAttribute("class", "d-flex justify-content-center");
-        DIV.setAttribute("style", "background-color: orange;");
+        DIV.setAttribute("style", "background-color: orange; height: 100rem;");
 
         for(let i = 0; i < count; i++) {
             let LINK = document.createElement("a"),
@@ -29,35 +41,52 @@ export class GeneratePostImage {
             LINK.setAttribute("href", FILE_PATH);
             IMG.src = FILE_PATH;
             IMG.setAttribute("alt", filenames[i])
-            this.resizeBaseOnCount(count, IMG);
+            this.resizeBaseOnCount(count, IMG, i, DIV);
             POST_HOLDER.appendChild(DIV);
             DIV.appendChild(LINK);
             LINK.appendChild(IMG);
         }
     }
 
-    resizeBaseOnCount(count, IMG) {
+    resizeBaseOnCount(count, IMG, counter, DIV) {
         switch(count) {
             case 1:
-                IMG.setAttribute("style", "height: 40rem;" + 
-                    "max-width: 30rem; object-fit: cover;" + 
-                    "margin-left: 0.1rem; margin-right: 0.1rem;");
+                IMG.setAttribute("class", "img-fluid");
+                IMG.setAttribute("style", this.getImageCommonStyleAttributes());
                 break;
             case 2:
-                IMG.setAttribute("style", "height: 20rem;" + 
-                    "max-width: 19.5rem; object-fit: cover;" + 
-                    "margin-left: 0.1rem; margin-right: 0.1rem;" +
-                    "border-radius: 0.5rem;");
-                    break;
+                console.log(this.generateTwoImagesInRow());
+                IMG.setAttribute("style", this.generateTwoImagesInRow());
+                break;
             case 3:
+                if(counter == 2) {
+                    lineBreak = document.createElement("br");
+                    DIV.appendChild(lineBreak);
+                    IMG.setAttribute("style", "height: 20rem; width: 39rem;" +
+                        this.getImageCommonStyleAttributes());
+                }
+                else {
+                    IMG.setAttribute("style", this.generateTwoImagesInRow());
+                }
                 break;
             case 4:
                 IMG.setAttribute("style", "height: 20rem; width: 100%;" +  
-                    "max-width: 20rem; object-fit: cover;" +
-                    "margin-left: 0.1rem; margin-right: 0.1rem;");
+                    "width: 20rem;" + + this.getImageCommonStyleAttributes());
                 break;
             default:
                 break;
         } 
+    }
+
+    generateTwoImagesInRow() {
+        return "max-height: 20rem; max-width: auto;" + 
+            "height: 100%; width: 100%;" + 
+            this.getImageCommonStyleAttributes();
+    }
+
+    getImageCommonStyleAttributes() {
+        return "object-fit: cover;" + 
+            "padding: 0.1rem;" + 
+            "border-radius: 0.5rem;";
     }
 }
