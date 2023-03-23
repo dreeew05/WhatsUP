@@ -17,6 +17,9 @@ class ProfilePage {
         let filenames = ["poster1", "cityCampus2", "cityCampus3"],
             captions  = ["Team Picture", "Balay Ilonggo", "Front Gate UP - Visayas", "LGBT OBLE"];
         new GeneratePostImage(filenames.length, filenames, captions);
+        new GeneratePostImage(2, ["poster1", "cityCampus3"], captions);
+        new GeneratePostImage(1, ["poster1"], captions);
+
     }
 }
 
