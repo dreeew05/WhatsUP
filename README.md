@@ -1,6 +1,6 @@
 18/03/2023 - Started profilePage.html
 
-Script is OOP. Website will not function properly unless on server due to security vulnerabilities. The following is the instruction how to view the site properly. 
+Script is OOP. Website will not function properly unless on server due to security vulnerabilities. The following is the instruction on how to view the site properly. 
 
 Instructions:
 
