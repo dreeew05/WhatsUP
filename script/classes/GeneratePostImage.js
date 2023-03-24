@@ -1,21 +1,29 @@
 // Author: fiVe [G. Bulaong]
 // Description: Generates the Images of the Post
 
+import { CreateDiv } from "./CreateDiv.js";
+
 export class GeneratePostImage {
 
-    constructor(count, filenames, captions) {
-        this.count     = count;
-        this.filenames = filenames;
-        this.captions  = captions;
+    constructor(POST_HOLDER, filenames, captions) {
+        this.POST_HOLDER = POST_HOLDER;
+        this.filenames   = filenames;
+        this.captions    = captions;
 
         this.generateImage(this.getCount(), this.getFileNames(), this.getCaptions());
     }
 
-    NEW_DIV      = '';
-    IMAGE_HOLDER = document.createElement("div");
+    NEW_DIV       = '';
+    NEW_DIV_NEXT  = '';
+    CONTAINER_DIV = new CreateDiv(null, "container-4").createDiv();
+    IMAGE_HOLDER  = new CreateDiv(null, "image-holder").createDiv();
+
+    getPostHolder() {
+        return this.POST_HOLDER;
+    }
 
     getCount() {
-        return this.count;
+        return this.getFileNames().length;
     }
 
     getFileNames() {
@@ -37,48 +45,30 @@ export class GeneratePostImage {
         IMG.setAttribute("alt", FILE_NAME);
     }
 
-    createDivForSmallImagesTwo() {
-        let div = document.createElement("div");
-        div.setAttribute("class", "small-images-2");
-        return div;
-    }
-
-    createDivForSmallImagesFour() {
-        let div = document.createElement("div");
-        div.setAttribute("class", "small-images-4");
-        return div;
-    }
-
-    createDivForMediumImages() {
-        let div = document.createElement("div");
-        div.setAttribute("class", "medium-images");
-        return div;
-    }
-
     getDiv() {
         return this.NEW_DIV;
     }
 
     setDiv(NEW_DIV) {
         this.NEW_DIV = NEW_DIV;
-    }
-
-    getPostHolder() {
-        return document.getElementById("posts");
-    }
+    } 
 
     getImageHolder() {
         return this.IMAGE_HOLDER;
     }
 
+    getContainerDiv() {
+        return this.CONTAINER_DIV;
+    }
+
     initializeImageHolder() {
         this.getImageHolder().setAttribute("class", "container d-flex justify-content-center");
         this.getImageHolder().setAttribute("style", "margin-top: 0.5rem; margin-bottom: 0.5rem;" +
-            "width: 80%;");
+            "width: 90%;");
     }
 
-    divLinkAppend(LINK, IMG) {
-        this.getDiv().appendChild(LINK);
+    divLinkAppend(DIV, LINK, IMG) {
+        DIV.appendChild(LINK);
         LINK.appendChild(IMG);
     }
 
@@ -92,7 +82,7 @@ export class GeneratePostImage {
                 IMG  = document.createElement("img"),
                 FILE_PATH = BASE_PATH.concat(filenames[i]).concat(".jpg");
             
-            this.setLinkAttribute(LINK, FILE_PATH, captions[i]);
+            this.setLinkAttribute(LINK, FILE_PATH, captions);
             this.setImageAttribute(IMG, filenames[i], FILE_PATH);
 
             this.resizeBaseOnCount(count, i, IMG, LINK);
@@ -100,24 +90,29 @@ export class GeneratePostImage {
     }
 
     resizeBaseOnCount(count, counter, IMG, LINK) {
+
+        let newDiv = null;
+
         switch(count) {
             case 1:
                 IMG.setAttribute("class", "img-fluid");
-                IMG.setAttribute("style", "height: 48rem;");
+                IMG.setAttribute("style", "height: 100%;");
                 this.getPostHolder().appendChild(this.getImageHolder());
                 this.getImageHolder().appendChild(LINK);
                 LINK.appendChild(IMG);
                 break;
             case 2:
+                newDiv = new CreateDiv(null, "medium-images");
                 if(counter == 0) {
-                    this.setDiv(this.createDivForMediumImages());   
+                    this.setDiv(newDiv.createDiv());   
                 }
                 IMG.setAttribute("class", "medium-image");
                 this.getPostHolder().appendChild(this.getImageHolder());
                 this.getImageHolder().appendChild(this.getDiv());
-                this.divLinkAppend(LINK, IMG);
+                this.divLinkAppend(this.getDiv(), LINK, IMG);
                 break;
             case 3:
+                newDiv = new CreateDiv(null, "small-images-2");
                 switch(counter) {
                     case 0:
                         IMG.setAttribute("class", "big-image");
@@ -126,35 +121,43 @@ export class GeneratePostImage {
                         LINK.appendChild(IMG);
                         break;
                     case 1:
-                        this.setDiv(this.createDivForSmallImagesTwo());
+                        this.setDiv(newDiv.createDiv());
                         IMG.setAttribute("class", "small-image");
                         IMG.setAttribute("style", "padding-bottom: 0.5rem;");
                         this.getPostHolder().appendChild(this.getImageHolder());
                         this.getImageHolder().appendChild(this.getDiv());
-                        this.divLinkAppend(LINK, IMG)
+                        this.divLinkAppend(this.getDiv(), LINK, IMG)
                         break;
                     case 2:
                         IMG.setAttribute("class", "small-image");
-                        this.divLinkAppend(LINK, IMG)
-                        break;
-                }
-                break;
-            case 4:
-                switch(counter % 2) {
-                    case 0:
-                        this.setDiv(this.createDivForSmallImagesFour());
-                        IMG.setAttribute("class", "small-image");
-                        IMG.setAttribute("style", "padding-bottom: 0.5rem;");
-                        this.getPostHolder().appendChild(this.getImageHolder());
-                        this.getImageHolder().appendChild(this.getDiv());
-                        this.divLinkAppend(LINK, IMG)
-                    case 1:
-                        IMG.setAttribute("class", "small-image");
-                        this.divLinkAppend(LINK, IMG)
+                        this.divLinkAppend(this.getDiv(), LINK, IMG)
                         break;
                     default:
                         break;
                 }
+                break;
+            case 4:
+                let rowDiv = new CreateDiv(null, "row"),
+                    colDiv = new CreateDiv(null, "col");
+                switch(counter % 2) {
+                    case 0:
+                        this.setDiv(rowDiv.createDiv());
+                        colDiv = colDiv.createDiv();
+                        IMG.setAttribute("style", "padding-bottom: 0.5rem;");
+                        this.getPostHolder().appendChild(this.getImageHolder());
+                        this.getImageHolder().appendChild(this.getContainerDiv());
+                        this.getContainerDiv().appendChild(this.getDiv());
+                        this.getDiv().appendChild(colDiv);
+                        this.divLinkAppend(colDiv, LINK, IMG);
+                        break;
+                    case 1:
+                        colDiv = colDiv.createDiv();
+                        this.getDiv().appendChild(colDiv);
+                        this.divLinkAppend(colDiv, LINK, IMG);
+                        break;
+                    default:
+                        break;
+                    }
                 break;
             default:
                 break;

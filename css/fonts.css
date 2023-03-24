@@ -1,0 +1,19 @@
+@font-face {
+    font-family: 'ProductSansBoldItalic';
+    src: url('../assets/fonts/product-sans/ProductSansBoldItalic.ttf');
+}
+
+@font-face {
+    font-family: 'ProductSansBold';
+    src: url('../assets/fonts/product-sans/ProductSansBold.ttf');
+}
+
+@font-face {
+    font-family: 'ProductSansRegular';
+    src: url('../assets/fonts/product-sans/ProductSansRegular.ttf');
+}
+
+@font-face {
+    font-family: 'SegoeUIRegular';
+    src: url('../assets/fonts/segoeUI/SegoeUI.ttf');
+}
