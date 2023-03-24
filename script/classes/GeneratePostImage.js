@@ -11,6 +11,9 @@ export class GeneratePostImage {
         this.generateImage(this.getCount(), this.getFileNames(), this.getCaptions());
     }
 
+    NEW_DIV      = '';
+    IMAGE_HOLDER = document.createElement("div");
+
     getCount() {
         return this.count;
     }
@@ -34,35 +37,49 @@ export class GeneratePostImage {
         IMG.setAttribute("alt", FILE_NAME);
     }
 
-    createDivForSmallImages() {
+    createDivForSmallImagesTwo() {
         let div = document.createElement("div");
-        div.setAttribute("class", "small-images");
+        div.setAttribute("class", "small-images-2");
         return div;
     }
 
-    newDiv = '';
-
-    getDiv() {
-        return this.newDiv;
+    createDivForSmallImagesFour() {
+        let div = document.createElement("div");
+        div.setAttribute("class", "small-images-4");
+        return div;
     }
 
-    setDiv(newDiv) {
-        this.newDiv = newDiv;
+    createDivForMediumImages() {
+        let div = document.createElement("div");
+        div.setAttribute("class", "medium-images");
+        return div;
+    }
+
+    getDiv() {
+        return this.NEW_DIV;
+    }
+
+    setDiv(NEW_DIV) {
+        this.NEW_DIV = NEW_DIV;
     }
 
     getPostHolder() {
         return document.getElementById("posts");
     }
 
-    imageHolder = document.createElement("div");
-
     getImageHolder() {
-        return this.imageHolder;
+        return this.IMAGE_HOLDER;
     }
 
     initializeImageHolder() {
         this.getImageHolder().setAttribute("class", "container d-flex justify-content-center");
-        this.getImageHolder().setAttribute("style", "margin-top: 0.5rem; margin-bottom: 0.5rem;")
+        this.getImageHolder().setAttribute("style", "margin-top: 0.5rem; margin-bottom: 0.5rem;" +
+            "width: 80%;");
+    }
+
+    divLinkAppend(LINK, IMG) {
+        this.getDiv().appendChild(LINK);
+        LINK.appendChild(IMG);
     }
 
     generateImage(count, filenames, captions) {
@@ -86,64 +103,61 @@ export class GeneratePostImage {
         switch(count) {
             case 1:
                 IMG.setAttribute("class", "img-fluid");
-                IMG.setAttribute("style", this.getImageCommonStyleAttributes());
+                IMG.setAttribute("style", "height: 48rem;");
                 this.getPostHolder().appendChild(this.getImageHolder());
                 this.getImageHolder().appendChild(LINK);
                 LINK.appendChild(IMG);
                 break;
             case 2:
-                // console.log(this.generateTwoImagesInRow());
-                IMG.setAttribute("style", this.generateTwoImagesInRow());
+                if(counter == 0) {
+                    this.setDiv(this.createDivForMediumImages());   
+                }
+                IMG.setAttribute("class", "medium-image");
+                this.getPostHolder().appendChild(this.getImageHolder());
+                this.getImageHolder().appendChild(this.getDiv());
+                this.divLinkAppend(LINK, IMG);
                 break;
             case 3:
                 switch(counter) {
-
                     case 0:
                         IMG.setAttribute("class", "big-image");
-                        IMG.setAttribute("style", this.getImageCommonStyleAttributes());
                         this.getPostHolder().appendChild(this.getImageHolder());
                         this.getImageHolder().appendChild(LINK);
                         LINK.appendChild(IMG);
                         break;
                     case 1:
-                        this.setDiv(this.createDivForSmallImages());
+                        this.setDiv(this.createDivForSmallImagesTwo());
                         IMG.setAttribute("class", "small-image");
-                        IMG.setAttribute("style", "padding-bottom: 0.5rem;" +
-                        this.getImageCommonStyleAttributes());
+                        IMG.setAttribute("style", "padding-bottom: 0.5rem;");
                         this.getPostHolder().appendChild(this.getImageHolder());
                         this.getImageHolder().appendChild(this.getDiv());
-                        this.getDiv().appendChild(LINK);
-                        LINK.appendChild(IMG);
+                        this.divLinkAppend(LINK, IMG)
                         break;
                     case 2:
                         IMG.setAttribute("class", "small-image");
-                        IMG.setAttribute("style", this.getImageCommonStyleAttributes());
-                        this.getPostHolder().appendChild(this.getImageHolder());
-                        this.getImageHolder().appendChild(this.getDiv());
-                        this.getDiv().appendChild(LINK);
-                        LINK.appendChild(IMG);
+                        this.divLinkAppend(LINK, IMG)
                         break;
                 }
                 break;
             case 4:
-                IMG.setAttribute("style", "height: 20rem; width: 100%;" +  
-                    "width: 20rem;" + + this.getImageCommonStyleAttributes());
+                switch(counter % 2) {
+                    case 0:
+                        this.setDiv(this.createDivForSmallImagesFour());
+                        IMG.setAttribute("class", "small-image");
+                        IMG.setAttribute("style", "padding-bottom: 0.5rem;");
+                        this.getPostHolder().appendChild(this.getImageHolder());
+                        this.getImageHolder().appendChild(this.getDiv());
+                        this.divLinkAppend(LINK, IMG)
+                    case 1:
+                        IMG.setAttribute("class", "small-image");
+                        this.divLinkAppend(LINK, IMG)
+                        break;
+                    default:
+                        break;
+                }
                 break;
             default:
                 break;
         } 
-    }
-
-    generateTwoImagesInRow() {
-        return "max-height: 20rem; max-width: auto;" + 
-            "height: 100%; width: 100%;" + 
-            this.getImageCommonStyleAttributes();
-    } 
-
-    getImageCommonStyleAttributes() {
-        return "object-fit: cover;" + 
-            "padding-left: 0.25rem;" +
-            "padding-right: 0.25rem;" +
-            "border-radius: 1rem;" ;
     }
 }

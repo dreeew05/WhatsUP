@@ -14,10 +14,12 @@ class ProfilePage {
         new NavBarSectionDivider(links);
     }
     generatePostImage() {
-        let filenames = ["poster1", "cityCampus2", "cityCampus3"],
+        let filenames = ["poster1", "cityCampus2", "cityCampus3", "cityCampus4"],
+            filename3 = ["poster1", "cityCampus2", "cityCampus3"],
             captions  = ["Team Picture", "Balay Ilonggo", "Front Gate UP - Visayas", "LGBT OBLE"];
         new GeneratePostImage(filenames.length, filenames, captions);
-        new GeneratePostImage(2, ["poster1", "cityCampus3"], captions);
+        new GeneratePostImage(filename3.length, filename3, captions)
+        new GeneratePostImage(2, ["cityCampus", "cityCampus3"], captions);
         new GeneratePostImage(1, ["poster1"], captions);
 
     }
