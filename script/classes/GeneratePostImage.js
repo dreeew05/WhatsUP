@@ -62,7 +62,7 @@ export class GeneratePostImage {
     }
 
     initializeImageHolder() {
-        this.getImageHolder().setAttribute("class", "container d-flex justify-content-center");
+        this.getImageHolder().setAttribute("class", "container d-flex justify-content-center custom-container");
         this.getImageHolder().setAttribute("style", "margin-top: 0.5rem; margin-bottom: 0.5rem;" +
             "width: 90%;");
     }

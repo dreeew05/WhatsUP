@@ -22,7 +22,7 @@ class ProfilePage {
             DATE_TIME    = new Date();
 
             new GeneratePost(PROFILE_NAME, PROFILE_PIC, DATE_TIME, POST, FILE_NAMES);
-            new GeneratePost(PROFILE_NAME, PROFILE_PIC, DATE_TIME, "Hello hehehhe", ["cityCampus2", "cityCampus", "cityCampus4", "poster1"]);
+            new GeneratePost(PROFILE_NAME, PROFILE_PIC, DATE_TIME, "Hello hehehhe", ["cityCampus2", "poster1", "poster1", "cityCampus3"]);
             new GeneratePost(PROFILE_NAME, PROFILE_PIC, DATE_TIME, POST, ["poster1"]);
             new GeneratePost(PROFILE_NAME, PROFILE_PIC, DATE_TIME, POST, ["cityCampus", "cityCampus2"]);
     }

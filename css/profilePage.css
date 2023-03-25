@@ -158,26 +158,33 @@ input:placeholder-shown {
     padding-bottom: 0.5rem;
     display: flex;
     flex-direction: row;
+    display: flex;
+    flex-direction: row;
+    height: 2.5vmax;
+    margin-bottom: 0.25rem;
 }
 
 .post-profile img {
-    height: 10%;
-    width: 10%;
+    max-height: auto;
+    max-width: auto;
 }
 
 .profile-text-content {
-    padding-left: 2%;
-    padding-top: 1.3%   ;
-    margin-top: 0.25%;
+    padding-left: 1%;
+}
+
+.profile-text-content {
+    max-width: auto;
+    max-height: auto;
 }
 
 .profile-text-content .profile-name {
-    font-size: 2vmin;
+    font-size: 0.75vmax;
     font-family: 'ProductSansBold';
 }
 
 .profile-text-content .date-time {
-    font-size: 1.25vmin;
+    font-size: 0.5vmax;
     font-family: 'SegoeUIRegular';
     margin-top: -1rem;
 }
@@ -189,7 +196,7 @@ input:placeholder-shown {
 }
 
 .post-text p {
-    font-size: 1.5vmin;
+    font-size: 0.85vmax;
 }
 
 .big-image {
