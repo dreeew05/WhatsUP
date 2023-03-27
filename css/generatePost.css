@@ -1,0 +1,116 @@
+#post-holder {
+    background-color: orange;
+    width: 70%;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    border-radius: 1rem;
+}
+
+#post-holder img {
+    object-fit: cover;
+    padding-left: 0.25rem;
+    padding-right: 0.25rem;
+    border-radius: 1rem;
+}
+
+.post-profile {
+    padding-left: 6%;
+    padding-right: 6%;
+    padding-bottom: 0.5rem;
+    display: flex;
+    flex-direction: row;
+    display: flex;
+    flex-direction: row;
+    height: 2.5vmax;
+    margin-bottom: 0.25rem;
+}
+
+.post-profile img {
+    max-height: auto;
+    max-width: auto;
+}
+
+.profile-text-content {
+    padding-left: 1%;
+}
+
+.profile-text-content {
+    max-width: auto;
+    max-height: auto;
+}
+
+.profile-text-content .profile-name {
+    font-size: 0.75vmax;
+    font-family: 'ProductSansBold';
+}
+
+.profile-text-content .date-time {
+    font-size: 0.5vmax;
+    font-family: 'SegoeUIRegular';
+    margin-top: -1rem;
+}
+
+.post-text {
+    font-family: 'SegoeUIRegular';
+    padding-left: 7%;
+    padding-right: 6%;
+}
+
+.post-text p {
+    font-size: 0.85vmax;
+}
+
+.big-image {
+    height: 100%;
+    width: 100%;
+    max-width: 25rem;
+    object-fit: cover;
+}
+
+.small-images-2, .small-images-4, .medium-images {
+    display: flex;
+    justify-content: space-between;
+    object-fit: cover;
+}
+
+.small-images-2 {
+    flex-direction: column;
+}
+
+.medium-images {
+    flex-direction: row;
+}
+
+.small-images-2 img {
+    width: 100%;
+    height: 100%;
+    max-width: 25rem;
+}
+
+.medium-images img {
+    width: 100%;
+    height: 100%;
+    max-width: 25rem;
+}
+
+.container-4 {
+  display: flex;
+  flex-direction: row;
+}
+
+.row {
+  display: flex;
+  flex-direction: column;
+}
+
+.col {
+  flex: 1;
+}
+
+.col img {
+  width: 100%;
+  height: 100%;
+  max-width: 25rem;
+}

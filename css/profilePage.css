@@ -1,4 +1,6 @@
 @import url('/css/fonts.css');
+@import url('/css/generatePost.css');
+@import url('/css/hamburgerMenu.css');
 
 body {
     background-color: #d9d9d9;
@@ -20,7 +22,7 @@ body {
     background-color: #961313;
 }
 
-.searchIcon {
+.search-icon {
     height: 1rem;
 }
 
@@ -32,13 +34,13 @@ input:placeholder-shown {
    font-style: italic;
 }
 
-#profileBackground {
+#profile-background {
     background-color: #9b2f2f;
     height: 31.5rem;
     width: auto;
 }
 
-#coverPhoto {
+#cover-photo {
     max-width: 70rem;
     max-height: 20rem;
     height: 100%;
@@ -55,10 +57,10 @@ input:placeholder-shown {
     height: 7rem;
 }
 
-#profilePicture {
+#profile-picture {
     height: 10rem;
     width: 10rem;
-    object-fit: cover;
+    object-fit: fill;
     border-radius: 50%;
     position: relative;
     bottom: 3rem;
@@ -66,42 +68,43 @@ input:placeholder-shown {
     margin-right: 0.5rem;
 }
 
-#profileDetails {
+#profile-details {
     position: relative;
     left: 12rem;
     bottom: 9.5rem;
     max-width: 50vmax;
 }
 
-#profileDetails p {
+#profile-details p {
     margin-bottom: 0;
     color: white;
 }
 
-#profileDetails #pageName {
+#profile-details #page-name {
     font-size: 3vmin;
     font-family: 'ProductSansBold';
 }
 
-#profileDetails #classification {
+#profile-details #classification {
     font-size: 2vmin;
     font-family: 'ProductSansBoldItalic';
 }
 
-#profileDivider {
+#profile-divider {
     height: 1rem;
     width: 70rem;
 }
 
-#profileDivider hr{
+#profile-divider hr{
     margin-left: 1rem;
     margin-right: 1rem;
     border: 0.10rem solid white;
 }
 
-#navbarProfileOptions {
+#navbar-profile-options {
     width: 70rem;
     padding-left: 1rem;
+    overflow: hidden;
 }
 
 .nav-item {
@@ -115,141 +118,20 @@ input:placeholder-shown {
     color: white;
 }
 
-#navbarProfileOptions {
-    overflow: hidden;
-}
-
-#navbarProfileOptions a {
+#navbar-profile-options a {
     text-decoration: none;
     border-bottom: 2px solid transparent;
     padding-bottom: 0.25rem;
 }
 
-#navbarProfileOptions a:hover {
+#navbar-profile-options a:hover {
     color: white;
     border-bottom: 2px solid white;
 }
 
-#navbarProfileOptions a.active {
+#navbar-profile-options a.active {
     color: white;
     border-bottom: 2px solid white;
-}
-
-#post-holder {
-    background-color: orange;
-    width: 70%;
-    margin-top: 0.5rem;
-    margin-bottom: 0.5rem;
-    padding-top: 0.5rem;
-    padding-bottom: 0.5rem;
-    border-radius: 1rem;
-}
-
-#post-holder img {
-    object-fit: cover;
-    padding-left: 0.25rem;
-    padding-right: 0.25rem;
-    border-radius: 1rem;
-}
-
-.post-profile {
-    padding-left: 6%;
-    padding-right: 6%;
-    padding-bottom: 0.5rem;
-    display: flex;
-    flex-direction: row;
-    display: flex;
-    flex-direction: row;
-    height: 2.5vmax;
-    margin-bottom: 0.25rem;
-}
-
-.post-profile img {
-    max-height: auto;
-    max-width: auto;
-}
-
-.profile-text-content {
-    padding-left: 1%;
-}
-
-.profile-text-content {
-    max-width: auto;
-    max-height: auto;
-}
-
-.profile-text-content .profile-name {
-    font-size: 0.75vmax;
-    font-family: 'ProductSansBold';
-}
-
-.profile-text-content .date-time {
-    font-size: 0.5vmax;
-    font-family: 'SegoeUIRegular';
-    margin-top: -1rem;
-}
-
-.post-text {
-    font-family: 'SegoeUIRegular';
-    padding-left: 7%;
-    padding-right: 6%;
-}
-
-.post-text p {
-    font-size: 0.85vmax;
-}
-
-.big-image {
-    height: 100%;
-    width: 100%;
-    max-width: 25rem;
-    object-fit: cover;
-}
-
-.small-images-2, .small-images-4, .medium-images {
-    display: flex;
-    justify-content: space-between;
-    object-fit: cover;
-}
-
-.small-images-2 {
-    flex-direction: column;
-}
-
-.medium-images {
-    flex-direction: row;
-}
-
-.small-images-2 img {
-    width: 100%;
-    height: 100%;
-    max-width: 25rem;
-}
-
-.medium-images img {
-    width: 100%;
-    height: 100%;
-    max-width: 25rem;
-}
-
-.container-4 {
-  display: flex;
-  flex-direction: row;
-}
-
-.row {
-  display: flex;
-  flex-direction: column;
-}
-
-.col {
-  flex: 1;
-}
-
-.col img {
-  width: 100%;
-  height: 100%;
-  max-width: 25rem;
 }
 
 
