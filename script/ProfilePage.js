@@ -2,7 +2,7 @@
 //Description: JavaScript for ProfilePage
 
 import { NavBarSectionDivider } from "./classes/NavBarSectionDivider.js";
-import { HamburgerMenu } from "./classes/HamburgerMenu.js";
+import { HamburgerMenu } from "./classes/SideNavbar.js";
 import { GeneratePost } from "./classes/GeneratePost.js";
 
 class ProfilePage {

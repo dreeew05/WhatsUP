@@ -29,13 +29,26 @@
             <div class="container-fluid">
                 <!-- [START] HAMBURGER MENU -->
                 <!-- Collapse button -->
-                <button id="hamburger-button" class="navbar-toggler hamburger-button" type="button" data-toggle="collapse" aria-expanded="false" aria-label="Toggle navigation" onclick="Nav()" style="z-index: 2">
+                <button id="hamburger-button" class="navbar-toggler me-3 hamburger-button" type="button" data-toggle="collapse" aria-expanded="false" aria-label="Toggle navigation" onclick="Nav()" style="z-index: 2">
                     <div class="animated-icon"><span></span><span></span><span></span></div>
                 </button>
                 <!-- <button class="navbar-toggler me-3 custom-toggler"  type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button> -->
                 <!-- [END] HAMBURGER MENU -->
+
+                <!-- [START] SIDENAVBAR -->
+                <div class="row">
+                    <div class="col-2 d-flex justify-content-center">
+                        <div id="mySidenav" class="sidenav">
+                            <a href="#">About</a>
+                            <a href="#">Services</a>
+                            <a href="#">Clients</a>
+                            <a href="#">Contact</a>
+                        </div>  
+                    </div>
+                </div>
+                <!-- [END] SIDENAVBAR -->
 
                 <a class="navbar-brand" href="#">
                     <img alt="Site Logo" src="assets/svg/What'sUpLogo.svg" class="siteLogo">
@@ -50,6 +63,7 @@
                 </form>
                 <!-- [END] SEARCH -->
             </div>
+
         </nav>
         
         <div id="profile-background">
@@ -89,17 +103,6 @@
         <main class="d-flex justify-content-center">
             <div id="posts"></div>
         </main>
-
-        <div class="row">
-            <div class="col-1 d-flex justify-content-center">
-                <div id="mySidenav" class="sidenav">
-                    <a href="#">About</a>
-                    <a href="#">Services</a>
-                    <a href="#">Clients</a>
-                    <a href="#">Contact</a>
-                </div>
-            </div>
-        </div>
 
     </body>
 

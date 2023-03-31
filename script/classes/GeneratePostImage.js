@@ -16,7 +16,7 @@ export class GeneratePostImage {
     NEW_DIV       = '';
     NEW_DIV_NEXT  = '';
     CONTAINER_DIV = new CreateDiv(null, "container-4").createDiv();
-    IMAGE_HOLDER  = new CreateDiv(null, "image-holder").createDiv();
+    IMAGE_HOLDER  = new CreateDiv("image-holder", null).createDiv();
 
     getPostHolder() {
         return this.POST_HOLDER;
@@ -62,9 +62,7 @@ export class GeneratePostImage {
     }
 
     initializeImageHolder() {
-        this.getImageHolder().setAttribute("class", "container d-flex justify-content-center custom-container");
-        this.getImageHolder().setAttribute("style", "margin-top: 0.5rem; margin-bottom: 0.5rem;" +
-            "width: 90%;");
+        this.getImageHolder().setAttribute("class", "container d-flex justify-content-center");
     }
 
     divLinkAppend(DIV, LINK, IMG) {

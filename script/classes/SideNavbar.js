@@ -2,7 +2,7 @@ export class HamburgerMenu {
     hamburgerToggler() {
         var width = document.getElementById("mySidenav").style.width;
         if (width === "0px" || width == "") {
-            document.getElementById("mySidenav").style.width = "250px";
+            document.getElementById("mySidenav").style.width = "24rem";
             $('.animated-icon').toggleClass('open');
         }
         else {
