@@ -1,4 +1,13 @@
 export class HamburgerMenu {
+    
+    constructor() {
+        this.createSideNavBar();
+    }
+
+    createSideNavBar() {
+
+    }
+
     hamburgerToggler() {
         var width = document.getElementById("mySidenav").style.width;
         if (width === "0px" || width == "") {

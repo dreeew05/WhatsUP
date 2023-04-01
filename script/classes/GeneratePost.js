@@ -46,21 +46,25 @@ export class GeneratePost {
             textDiv     = new CreateDiv(null, "profile-text-content").createDiv(),
             profilePic  = document.createElement("img"),
             profileName = document.createElement("p"),
-            dateTime    = document.createElement("p");
+            dateTime    = document.createElement("p"),
+            linkHolder  = document.createElement("a");
 
         profilePic.setAttribute("src", this.getProfilePic());
         profilePic.setAttribute("alt", this.getProfilePic());
 
         profileName.textContent = this.getProfileName();
         dateTime.textContent    = this.getDateTime();
-
+        
+        linkHolder.setAttribute("class", "profile-name-link-holder");
+        linkHolder.setAttribute("href", "#");
         profileName.setAttribute("class", "profile-name");
         dateTime.setAttribute("class", "date-time");
 
         POST_HOLDER.appendChild(newDiv);
         newDiv.appendChild(profilePic);
         newDiv.appendChild(textDiv);
-        textDiv.appendChild(profileName);
+        textDiv.appendChild(linkHolder);
+        linkHolder.appendChild(profileName);
         textDiv.appendChild(dateTime);
     }
 

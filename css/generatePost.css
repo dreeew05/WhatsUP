@@ -1,7 +1,7 @@
 #post-holder {
-    background-color: orange;
+    background-color: white;
     width: 80%;
-    margin-top: 0.5rem;
+    margin-top: 1rem;
     margin-bottom: 0.5rem;
     padding-top: 0.5rem;
     padding-bottom: 0.5rem;
@@ -22,7 +22,7 @@
     display: flex;
     flex-direction: row;
     display: flex;
-    flex-direction: row;
+    flex-direction: row; 
     height: 2.5vmax;
     margin-top: 0.5rem;
     margin-bottom: 0.25rem;
@@ -40,6 +40,11 @@
 .profile-text-content {
     max-width: auto;
     max-height: auto;
+}
+
+.profile-name-link-holder {
+    text-decoration: none;
+    color: black;
 }
 
 .profile-text-content .profile-name {
@@ -105,7 +110,8 @@
 .small-images-2 img {
     width: 100%;
     height: 100%;
-    max-width: 30rem;
+    max-width: 32rem;
+    max-height: 18rem;
 }
 
 /* [END] 3 IMAGES*/
@@ -129,7 +135,8 @@
 .col img {
   width: 100%;
   height: 100%;
-  max-width: 30rem;
+  max-width: 32rem;
+  max-height: 20rem;
 }
 
 /* [END] 4 IMAGES*/

@@ -130,3 +130,23 @@ button:focus{
     text-align: center;
     vertical-align: middle;
 }
+
+/* [START] SIDENAV CONTENTS */
+
+#profile-name-holder {
+    background-color: orange;
+    height: auto;
+    margin-top: 2.75rem;
+    margin-bottom: 2.75rem;
+    margin-left: 2rem;
+    margin-right: 2rem;
+}
+
+#holder-title-text {
+    text-align: center;
+    text-transform: uppercase;
+    font-family: 'ProductSansBold';
+    font-size: 2rem;
+}
+
+/* [END] SIDENAV CONTENTS */
