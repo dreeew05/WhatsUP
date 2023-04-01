@@ -2,7 +2,7 @@
 //Description: JavaScript for ProfilePage
 
 import { NavBarSectionDivider } from "./classes/NavBarSectionDivider.js";
-import { HamburgerMenu } from "./classes/SideNavbar.js";
+import { SideNavBar } from "./classes/SideNavbar.js";
 import { GeneratePost } from "./classes/GeneratePost.js";
 
 class ProfilePage {
@@ -31,7 +31,7 @@ class ProfilePage {
             new GeneratePost("College of Arts and Sciences", CAS_PIC, DATE_TIME, POST, ["sample1", "sample2", "sample3", "sample4"]);
     }
     hamburgerMenuImplementation() {
-        let hamburgerMenu = new HamburgerMenu();
+        let hamburgerMenu = new SideNavBar();
         
         document.getElementById("hamburger-button").onclick = function() {
             hamburgerMenu.hamburgerToggler();

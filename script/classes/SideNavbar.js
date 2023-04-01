@@ -1,4 +1,4 @@
-export class HamburgerMenu {
+export class SideNavBar {
     
     constructor() {
         this.createSideNavBar();
@@ -17,6 +17,6 @@ export class HamburgerMenu {
         else {
             document.getElementById("mySidenav").style.width = "0px";
             $('.animated-icon').toggleClass('open');
-        }
+        }   
     }
 }
