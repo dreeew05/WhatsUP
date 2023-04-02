@@ -17,9 +17,7 @@ class ProfilePage {
         new NavBarSectionDivider(links);
     }
     initializeSideNavBar() {
-        const contents = JSON.parse('{"College of Arts and Sciences" : {"organizations" : {"UPV Komsai.org" : "komsai.png", "UPV Chemistry Society" : "chem.png", "UPV Statistical Society" : "stat.png", "Elektrons" : "elektrons.png", "Redbolts" : "redbolts.png"}},' + 
-                         '"School of Technology" : {"organizations" : {"Food Tech" : "foodtech.jpg", "SoTech Student Council" : "sotechSC.jpg", "OUnCES" : "ounces.jpg"}}}');
-        let sideNavBar = new SideNavBar(contents);
+        let sideNavBar = new SideNavBar();
         
         document.getElementById("hamburger-button").onclick = function() {
             sideNavBar.hamburgerToggler();

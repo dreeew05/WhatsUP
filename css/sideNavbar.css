@@ -99,6 +99,7 @@
     transform: rotate(45deg);
     top: 0px;
     left: 8px;
+    background: black;
 }
   
 .animated-icon.open span:nth-child(2) {
@@ -113,6 +114,7 @@
     transform: rotate(-45deg);
     top: 21px;
     left: 8px;
+    background: black;
 }
   
 button {
@@ -133,8 +135,7 @@ button:focus{
 
 /* [START] SIDENAV CONTENTS */
 
-#profile-name-holder {
-    background-color: orange;
+.profile-name-holder {
     height: auto;
     margin-top: 2.75rem;
     margin-bottom: 2.75rem;
@@ -144,13 +145,26 @@ button:focus{
     border-top-right-radius: 1rem;
 }
 
-#holder-title-text {
+.profile-name-holder:nth-child(1) {
+    background-color: #008542;
+}
+
+.profile-name-holder:nth-child(2) {
+    background-color: #800000;
+}
+
+.profile-name-holder:nth-child(3) {
+    background-color: #0c3227;
+}
+
+.holder-title-text {
     text-align: center;
     text-transform: uppercase;
     font-family: 'ProductSansBold';
     font-size: 2rem;
     margin: auto;
     padding-top: 0.5rem;
+    color: white;
 }
 
 .child-profile-holder {
