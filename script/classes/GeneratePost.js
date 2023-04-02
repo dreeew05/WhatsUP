@@ -2,7 +2,7 @@
 // Description: Generates Posts
 
 import { GeneratePostImage } from "./GeneratePostImage.js";
-import { CreateDiv } from "./CreateDiv.js";
+import { CreateElement } from "./CreateElement.js";
 
 export class GeneratePost {
 
@@ -42,12 +42,12 @@ export class GeneratePost {
     }
 
     createPostProfile(POST_HOLDER) {
-        let newDiv      = new CreateDiv(null, "post-profile").createDiv(),
-            textDiv     = new CreateDiv(null, "profile-text-content").createDiv(),
-            profilePic  = document.createElement("img"),
-            profileName = document.createElement("p"),
-            dateTime    = document.createElement("p"),
-            linkHolder  = document.createElement("a");
+        let newDiv      = new CreateElement("div", null, "post-profile").createElement(),
+            textDiv     = new CreateElement("div", null, "profile-text-content").createElement(),
+            profilePic  = new CreateElement("img", null, null).createElement(),
+            profileName = new CreateElement("p", null, "profile-name").createElement(),
+            dateTime    = new CreateElement("p", null, "date-time").createElement(),
+            linkHolder  = new CreateElement("a", null, "profile-name-link-holder").createElement();
 
         profilePic.setAttribute("src", this.getProfilePic());
         profilePic.setAttribute("alt", this.getProfilePic());
@@ -55,10 +55,7 @@ export class GeneratePost {
         profileName.textContent = this.getProfileName();
         dateTime.textContent    = this.getDateTime();
         
-        linkHolder.setAttribute("class", "profile-name-link-holder");
-        linkHolder.setAttribute("href", "#");
-        profileName.setAttribute("class", "profile-name");
-        dateTime.setAttribute("class", "date-time");
+        linkHolder.setAttribute("href", "#")
 
         POST_HOLDER.appendChild(newDiv);
         newDiv.appendChild(profilePic);
@@ -69,8 +66,8 @@ export class GeneratePost {
     }
 
     createPostParagraph(POST_HOLDER) {
-        let newDiv = new CreateDiv(null, "post-text").createDiv(),
-            text   = document.createElement("p");
+        let newDiv = new CreateElement("div", null, "post-text").createElement(),
+            text   = new CreateElement("p", null, null).createElement();
 
         text.textContent = this.getPost();
         POST_HOLDER.appendChild(newDiv);
@@ -83,7 +80,7 @@ export class GeneratePost {
     }
 
     createPost() {
-        let newDiv = new CreateDiv("post-holder", "container justify-content-center").createDiv();
+        let newDiv = new CreateElement("div", "post-holder", "container justify-content-center").createElement();
         this.getPostsContainer().appendChild(newDiv);
 
         this.createPostProfile(newDiv);

@@ -10,11 +10,20 @@ class ProfilePage {
     constructor() {
         this.navBarSectionDividerImplementation();
         this.generatePost();
-        this.hamburgerMenuImplementation();
+        this.initializeSideNavBar();
     }
     navBarSectionDividerImplementation() {
         const links  = document.querySelectorAll('.nav-item a');
         new NavBarSectionDivider(links);
+    }
+    initializeSideNavBar() {
+        const contents = JSON.parse('{"College of Arts and Sciences" : {"organizations" : {"UPV Komsai.org" : "komsai.png", "UPV Chemistry Society" : "chem.png", "UPV Statistical Society" : "stat.png", "Elektrons" : "elektrons.png", "Redbolts" : "redbolts.png"}},' + 
+                         '"School of Technology" : {"organizations" : {"Food Tech" : "foodtech.jpg", "SoTech Student Council" : "sotechSC.jpg", "OUnCES" : "ounces.jpg"}}}');
+        let sideNavBar = new SideNavBar(contents);
+        
+        document.getElementById("hamburger-button").onclick = function() {
+            sideNavBar.hamburgerToggler();
+        };
     }
     generatePost() {
         let FILE_NAMES   = ["cityCampus2", "cityCampus", "cityCampus4"],
@@ -29,13 +38,6 @@ class ProfilePage {
             new GeneratePost(PROFILE_NAME, PROFILE_PIC, DATE_TIME, POST, ["poster1"]);
             new GeneratePost(PROFILE_NAME, PROFILE_PIC, DATE_TIME, POST, ["cityCampus", "cityCampus2"]);
             new GeneratePost("College of Arts and Sciences", CAS_PIC, DATE_TIME, POST, ["sample1", "sample2", "sample3", "sample4"]);
-    }
-    hamburgerMenuImplementation() {
-        let hamburgerMenu = new SideNavBar();
-        
-        document.getElementById("hamburger-button").onclick = function() {
-            hamburgerMenu.hamburgerToggler();
-        };
     }
 }
 

@@ -1,7 +1,7 @@
 // Author: fiVe [G. Bulaong]
 // Description: Generates the Images of the Post
 
-import { CreateDiv } from "./CreateDiv.js";
+import { CreateElement } from "./CreateElement.js";
 
 export class GeneratePostImage {
 
@@ -15,8 +15,8 @@ export class GeneratePostImage {
 
     NEW_DIV       = '';
     NEW_DIV_NEXT  = '';
-    CONTAINER_DIV = new CreateDiv(null, "container-4").createDiv();
-    IMAGE_HOLDER  = new CreateDiv("image-holder", null).createDiv();
+    CONTAINER_DIV = new CreateElement("div", null, "container-4").createElement();
+    IMAGE_HOLDER  = new CreateElement("div", null, "image-holder").createElement();
 
     getPostHolder() {
         return this.POST_HOLDER;
@@ -62,7 +62,7 @@ export class GeneratePostImage {
     }
 
     initializeImageHolder() {
-        this.getImageHolder().setAttribute("class", "container d-flex justify-content-center");
+        this.getImageHolder().setAttribute("class", "container d-flex justify-content-center custom-container");
     }
 
     divLinkAppend(DIV, LINK, IMG) {
@@ -76,8 +76,8 @@ export class GeneratePostImage {
         this.initializeImageHolder();
 
         for(let i = 0; i < count; i++) {
-            let LINK = document.createElement("a"),
-                IMG  = document.createElement("img"),
+            let LINK      = new CreateElement("a", null, null).createElement(),
+                IMG       = new CreateElement("img", null, null).createElement(),
                 FILE_PATH = BASE_PATH.concat(filenames[i]).concat(".jpg");
             
             this.setLinkAttribute(LINK, FILE_PATH, captions);
@@ -94,15 +94,14 @@ export class GeneratePostImage {
         switch(count) {
             case 1:
                 IMG.setAttribute("class", "img-fluid");
-                IMG.setAttribute("style", "height: 100%;");
                 this.getPostHolder().appendChild(this.getImageHolder());
                 this.getImageHolder().appendChild(LINK);
                 LINK.appendChild(IMG);
                 break;
             case 2:
-                newDiv = new CreateDiv(null, "medium-images");
+                newDiv = new CreateElement("div", null, "medium-images");
                 if(counter == 0) {
-                    this.setDiv(newDiv.createDiv());   
+                    this.setDiv(newDiv.createElement());   
                 }
                 IMG.setAttribute("class", "medium-image");
                 this.getPostHolder().appendChild(this.getImageHolder());
@@ -110,7 +109,7 @@ export class GeneratePostImage {
                 this.divLinkAppend(this.getDiv(), LINK, IMG);
                 break;
             case 3:
-                newDiv = new CreateDiv(null, "small-images-2");
+                newDiv = new CreateElement("div", null, "small-images-2");
                 switch(counter) {
                     case 0:
                         IMG.setAttribute("class", "big-image");
@@ -119,7 +118,7 @@ export class GeneratePostImage {
                         LINK.appendChild(IMG);
                         break;
                     case 1:
-                        this.setDiv(newDiv.createDiv());
+                        this.setDiv(newDiv.createElement());
                         IMG.setAttribute("class", "small-image");
                         IMG.setAttribute("style", "padding-bottom: 0.5rem;");
                         this.getPostHolder().appendChild(this.getImageHolder());
@@ -135,12 +134,12 @@ export class GeneratePostImage {
                 }
                 break;
             case 4:
-                let rowDiv = new CreateDiv(null, "row"),
-                    colDiv = new CreateDiv(null, "col");
+                let rowDiv = new CreateElement("div", null, "row"),
+                    colDiv = new CreateElement("div", null, "col");
                 switch(counter % 2) {
                     case 0:
-                        this.setDiv(rowDiv.createDiv());
-                        colDiv = colDiv.createDiv();
+                        this.setDiv(rowDiv.createElement());
+                        colDiv = colDiv.createElement();
                         IMG.setAttribute("style", "padding-bottom: 0.5rem;");
                         this.getPostHolder().appendChild(this.getImageHolder());
                         this.getImageHolder().appendChild(this.getContainerDiv());
@@ -149,7 +148,7 @@ export class GeneratePostImage {
                         this.divLinkAppend(colDiv, LINK, IMG);
                         break;
                     case 1:
-                        colDiv = colDiv.createDiv();
+                        colDiv = colDiv.createElement();
                         this.getDiv().appendChild(colDiv);
                         this.divLinkAppend(colDiv, LINK, IMG);
                         break;
