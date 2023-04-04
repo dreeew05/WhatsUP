@@ -3,6 +3,11 @@
 
 import { GenerateSideNavBarContents } from "./GenerateSideNavBarContents.js";
 
+// TEST DATA
+import collegeJSON from "../../test/sideNavBar/collegeContents.json" assert { type: 'json' };
+import studentJSON from "../../test/sideNavBar/studentContents.json" assert { type: 'json' };
+import universityJSON from "../../test/sideNavBar/universityContents.json" assert { type: 'json' };
+
 export class SideNavBar {
 
     constructor() {
@@ -10,14 +15,11 @@ export class SideNavBar {
     }
     
     createSideNavBar() {
-        // this.createEntityContents(entity);
 
-        const collegeContents    = JSON.parse('{"College of Arts and Sciences" : {"pages" : {"UPV Komsai.org" : "komsai.png", "UPV Chemistry Society" : "chem.png", "UPV Statistical Society" : "stat.png", "Elektrons" : "elektrons.png", "Redbolts" : "redbolts.png"}},' + 
-                                   '"School of Technology" : {"pages" : {"Food Tech" : "foodtech.jpg", "SoTech Student Council" : "sotechSC.jpg", "OUnCES" : "ounces.jpg"}}}'),
-              studentContents    = JSON.parse('{"Scholarships": {"pages" : {"DOST" : "dost.jpg", "CHED" : "ched.jpg", "NGCP" : "ngcp.jpg", "Bello" : "bello.jpg", "SLAS" : "slas.jpg"}},' +
-                                   '"Student Organizations" : {"pages" : {"UPV Student Council" : "upvStudentCouncil.jpg", "CAS SC" : "casSC.jpg"}}}'),
-              universityContents = JSON.parse('{"UP System" : {"pages" : {"UP - System" : "upSystem.jpg", "Philippine Collegian" : "phkule.jpg"}},' +
-                                   '"University of the Philippines - Visayas" : {"pages" : {"UP - Visayas" : "upVisayas.jpg", "UPV Registrar" : "upvRegistrar.jpg", "UPV CRSIS" : "upVisayas.jpg", "UPV Student Affairs" : "upVisayas.jpg", "UPV Freedom Wall(?)" : "upvFreedomWall.jpg"}}}')
+        // TEST DATA [FINAL DATA MUST COME FROM THE DATABASE]
+        const collegeContents    = collegeJSON,
+              studentContents    = studentJSON,
+              universityContents = universityJSON;
 
         let college    = null,
             student    = null,

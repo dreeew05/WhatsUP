@@ -78,7 +78,7 @@ export class GeneratePostImage {
         for(let i = 0; i < count; i++) {
             let LINK      = new CreateElement("a", null, null).createElement(),
                 IMG       = new CreateElement("img", null, null).createElement(),
-                FILE_PATH = BASE_PATH.concat(filenames[i]).concat(".jpg");
+                FILE_PATH = BASE_PATH.concat(filenames[i]);
             
             this.setLinkAttribute(LINK, FILE_PATH, captions);
             this.setImageAttribute(IMG, filenames[i], FILE_PATH);

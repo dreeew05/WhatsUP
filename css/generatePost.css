@@ -1,4 +1,4 @@
-#post-holder {
+.post-holder {
     background-color: white;
     width: 80%;
     margin-top: 1rem;
@@ -8,7 +8,7 @@
     border-radius: 1rem;
 }
 
-#post-holder img {
+.post-holder img {
     object-fit: cover;
     padding-left: 0.25rem;
     padding-right: 0.25rem;

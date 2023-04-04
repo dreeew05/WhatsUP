@@ -6,39 +6,44 @@ import { CreateElement } from "./CreateElement.js";
 
 export class GeneratePost {
 
-    constructor(profileName, profilePic, dateTime, post, postContent) {
-        this.profileName = profileName;
-        this.profilePic  = profilePic;
-        this.dateTime    = dateTime;
-        this.post        = post;
-        this.postContent = postContent;
-
-        this.createPost();
+    constructor(id, profileName, profilePic, dateTime, post, postMedia, postMediaType, postMap) {
+        this.id            = id;
+        this.profileName   = profileName;
+        this.profilePic    = profilePic;
+        this.dateTime      = dateTime;
+        this.post          = post;
+        this.postMedia     = postMedia;
+        this.postMediaType = postMediaType;
+        this.postMap       = postMap;
     }
 
+    getId() {
+        return this.id;
+    }
     getPostsContainer() {
         let POSTS  = document.getElementById("posts");
         return POSTS;
     }
-
     getProfileName() {
         return this.profileName;
     }
-
     getProfilePic() {
         return this.profilePic;
     }
-    
     getDateTime() {
         return this.dateTime;
     }
-
     getPost() {
         return this.post;
     }
-
-    getPostContent() {
-        return this.postContent;
+    getPostMedia() {
+        return this.postMedia;
+    }
+    getPostMediaType() {
+        return this.postMediaType;
+    }
+    getPostMap() {
+        return this.postMap;
     }
 
     createPostProfile(POST_HOLDER) {
@@ -49,7 +54,9 @@ export class GeneratePost {
             dateTime    = new CreateElement("p", null, "date-time").createElement(),
             linkHolder  = new CreateElement("a", null, "profile-name-link-holder").createElement();
 
-        profilePic.setAttribute("src", this.getProfilePic());
+        let BASE_PATH = "../../assets/images/logos/";
+
+        profilePic.setAttribute("src", BASE_PATH + this.getProfilePic());
         profilePic.setAttribute("alt", this.getProfilePic());
 
         profileName.textContent = this.getProfileName();
@@ -76,16 +83,16 @@ export class GeneratePost {
     }
 
     createPostImages(POST_HOLDER) {
-        new GeneratePostImage(POST_HOLDER, this.getPostContent(), this.getPost());
+        new GeneratePostImage(POST_HOLDER, this.getPostMedia(), this.getPost());
     }
 
     createPost() {
-        let newDiv = new CreateElement("div", "post-holder", "container justify-content-center").createElement();
-        this.getPostsContainer().appendChild(newDiv);
+        let postHolder = new CreateElement("div", "post-holder-" + this.getId(), "container justify-content-center post-holder").createElement();
+        this.getPostsContainer().appendChild(postHolder);
 
-        this.createPostProfile(newDiv);
-        this.createPostParagraph(newDiv);
-        this.createPostImages(newDiv);
+        this.createPostProfile(postHolder);
+        this.createPostParagraph(postHolder);
+        this.createPostImages(postHolder);
     }
 
 }

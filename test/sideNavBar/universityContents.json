@@ -1,0 +1,19 @@
+[
+    {
+        "UP System" : {
+            "pages" : {
+                "UP - System" : "upSystem.jpg", 
+                "Philippine Collegian" : "phkule.jpg"
+            }
+        },
+        "University of the Philippines - Visayas" : {
+            "pages" : {
+                "UP - Visayas" : "upVisayas.jpg",
+                "UPV Registrar" : "upvRegistrar.jpg", 
+                "UPV CRSIS" : "upVisayas.jpg", 
+                "UPV Student Affairs" : "upVisayas.jpg", 
+                "UPV Freedom Wall(?)" : "upvFreedomWall.jpg"
+            }
+        }
+    }
+]

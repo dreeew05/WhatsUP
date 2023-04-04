@@ -1,0 +1,20 @@
+[
+    {
+        "College of Arts and Sciences": {
+            "pages": {
+                "UPV Komsai.org": "komsai.png",
+                "UPV Chemistry Society": "chem.png",
+                "UPV Statistical Society": "stat.png",
+                "Elektrons": "elektrons.png",
+                "Redbolts": "redbolts.png"
+            }
+        },
+        "School of Technology": {
+            "pages": {
+                "Food Tech": "foodtech.jpg",
+                "SoTech Student Council": "sotechSC.jpg",
+                "OUnCES": "ounces.jpg"
+            }
+        }
+    }
+]

@@ -1,0 +1,21 @@
+[  
+    {
+        "Scholarships": {
+            "pages" : {
+                "DOST" : "dost.jpg", 
+                "CHED" : "ched.jpg", 
+                "NGCP" : "ngcp.jpg", 
+                "Bello" : "bello.jpg", 
+                "SLAS" : "slas.jpg"
+                }
+            },
+        "Student Organizations" : {
+            "pages" : {
+                "UPV Student Council" : "upvStudentCouncil.jpg", 
+                "CAS SC" : "casSC.jpg"
+            }
+        }
+    }
+]
+
+  

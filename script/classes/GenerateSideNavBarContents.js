@@ -53,8 +53,8 @@ export class GenerateSideNavBarContents {
 
         PROFILE_NAME_HOLDER.appendChild(accordionFlush);
 
-        let keys   = Object.keys(this.getContents()),
-            values = Object.values(this.getContents()); 
+        let keys   = Object.keys(this.getContents()[0]),
+            values = Object.values(this.getContents()[0]); 
         
         for(let i = 0; i < keys.length; i++ ) {
             let groupName = keys[i];

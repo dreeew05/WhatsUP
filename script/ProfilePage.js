@@ -4,6 +4,11 @@
 import { NavBarSectionDivider } from "./classes/NavBarSectionDivider.js";
 import { SideNavBar } from "./classes/SideNavbar.js";
 import { GeneratePost } from "./classes/GeneratePost.js";
+import { GenerateThread } from "./classes/GenerateThread.js";
+
+// TEST DATA
+import postsJSON from "../test/posts.json" assert { type: 'json' };
+console.log(postsJSON);
 
 class ProfilePage {
 
@@ -24,21 +29,24 @@ class ProfilePage {
         };
     }
     generatePost() {
-        let FILE_NAMES   = ["cityCampus2", "cityCampus", "cityCampus4"],
-            POST         = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-            PROFILE_NAME = "University Of the Philippines - Visayas",
-            PROFILE_PIC  = "../assets/images/UP_Visayas_Logo.svg.png",
-            CAS_PIC      = "../assets/images/CAS_dp.jpg",
-            DATE_TIME    = new Date();
+        // TEST DATA [FINAL DATA MUST COME FROM THE DATABASE]
+        
+        for(let i = 0; i < postsJSON.length; i++) {
+            let postID        = postsJSON[i].id,
+                profileName   = postsJSON[i].profile_name,
+                profilePic    = postsJSON[i].profile_pic,
+                dateTime      = postsJSON[i].date_time,
+                post          = postsJSON[i].post,
+                postMedia     = postsJSON[i].post_media.file,
+                postMediaType = postsJSON[i].post_media.type,
+                postMap       = postsJSON[i].post_map;
+            
+            new GeneratePost(postID, profileName, profilePic, dateTime, post, postMedia, postMediaType, postMap).createPost();
+        }
 
-            new GeneratePost(PROFILE_NAME, PROFILE_PIC, DATE_TIME, POST, FILE_NAMES);
-            new GeneratePost(PROFILE_NAME, PROFILE_PIC, DATE_TIME, "Hello hehehhe", ["cityCampus2", "poster1", "poster1", "cityCampus3"]);
-            new GeneratePost(PROFILE_NAME, PROFILE_PIC, DATE_TIME, POST, ["poster1"]);
-            new GeneratePost(PROFILE_NAME, PROFILE_PIC, DATE_TIME, POST, ["cityCampus", "cityCampus2"]);
-            new GeneratePost("College of Arts and Sciences", CAS_PIC, DATE_TIME, POST, ["sample1", "sample2", "sample3", "sample4"]);
     }
 }
 
-// DRIVER [PLEASE DO NOT MODFIY!]
+// DRIVER [PLEASE DO NOT MODFIY]
 new ProfilePage();
 
