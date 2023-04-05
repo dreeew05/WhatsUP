@@ -2,18 +2,42 @@
     {
         "College of Arts and Sciences": {
             "pages": {
-                "UPV Komsai.org": "komsai.png",
-                "UPV Chemistry Society": "chem.png",
-                "UPV Statistical Society": "stat.png",
-                "Elektrons": "elektrons.png",
-                "Redbolts": "redbolts.png"
+                "UPV Komsai.org": {
+                    "image" : "komsai.png",
+                    "link" : "#"
+                }, 
+                "UPV Chemistry Society": {
+                    "image" : "chem.png",
+                    "link" : "#"
+                }, 
+                "UPV Statistical Society": {
+                    "image" : "stat.png",
+                    "link" : "#"
+                }, 
+                "Elektrons": {
+                    "image" : "elektrons.png",
+                    "link" : "#"
+                }, 
+                "Redbolts": {
+                    "image" : "redbolts.png",
+                    "link" : "#"
+                }
             }
         },
         "School of Technology": {
             "pages": {
-                "Food Tech": "foodtech.jpg",
-                "SoTech Student Council": "sotechSC.jpg",
-                "OUnCES": "ounces.jpg"
+                "Food Tech": {
+                    "image" : "foodtech.jpg",
+                    "link" : "#"
+                }, 
+                "SoTech Student Council": {
+                    "image" : "sotechSC.jpg",
+                    "link" : "#"
+                }, 
+                "OUnCES": {
+                    "image" : "ounces.jpg",
+                    "link" : "#"
+                }
             }
         }
     }

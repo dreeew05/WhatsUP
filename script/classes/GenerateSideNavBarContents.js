@@ -92,8 +92,8 @@ export class GenerateSideNavBarContents {
 
             for(let j = 0; j < organizationLength; j++) {
                 let organizationName = Object.keys(values[i].pages)[j],
-                    organizationImg  = Object.values(values[i].pages)[j]
-                // console.log(organizationImg);
+                    organizationImg  = Object.values(values[i].pages)[j].image,
+                    organizationLink = Object.values(values[i].pages)[j].link;
 
                 let childProfileHolder = new CreateElement("div", null, "child-profile-holder").createElement(),
                     profileImage       = new CreateElement("img", null, null).createElement(),

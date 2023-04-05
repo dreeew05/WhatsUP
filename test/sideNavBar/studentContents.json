@@ -2,17 +2,38 @@
     {
         "Scholarships": {
             "pages" : {
-                "DOST" : "dost.jpg", 
-                "CHED" : "ched.jpg", 
-                "NGCP" : "ngcp.jpg", 
-                "Bello" : "bello.jpg", 
-                "SLAS" : "slas.jpg"
-                }
-            },
+                "DOST" : {
+                    "image" : "dost.jpg",
+                    "link" : "#"
+                }, 
+                "CHED" : {
+                    "image" : "ched.jpg",
+                    "link" : "#"
+                },
+                "NGCP" : {
+                    "image" : "ngcp.jpg",
+                    "link" : "#"
+                },
+                "Bello" : {
+                    "image" : "bello.jpg",
+                    "link" : "#"
+                }, 
+                "SLAS" : {
+                    "image" : "dost.jpg",
+                    "link" : "#"
+                } 
+            }
+        },
         "Student Organizations" : {
             "pages" : {
-                "UPV Student Council" : "upvStudentCouncil.jpg", 
-                "CAS SC" : "casSC.jpg"
+                "UPV Student Council" : {
+                    "image" : "upvStudentCouncil.jpg",
+                    "link" : "#"
+                }, 
+                "CAS SC" : {
+                    "image" : "casSC.jpg",
+                    "link" : "#"
+                } 
             }
         }
     }

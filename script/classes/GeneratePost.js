@@ -6,8 +6,8 @@ import { CreateElement } from "./CreateElement.js";
 
 export class GeneratePost {
 
-    constructor(id, profileName, profilePic, dateTime, post, postMedia, postMediaType, postMap) {
-        this.id            = id;
+    constructor(postID, profileName, profilePic, dateTime, post, postMedia, postMediaType, postMap) {
+        this.postID        = postID;
         this.profileName   = profileName;
         this.profilePic    = profilePic;
         this.dateTime      = dateTime;
@@ -17,8 +17,8 @@ export class GeneratePost {
         this.postMap       = postMap;
     }
 
-    getId() {
-        return this.id;
+    getPostID() {
+        return this.postID;
     }
     getPostsContainer() {
         let POSTS  = document.getElementById("posts");
@@ -87,7 +87,7 @@ export class GeneratePost {
     }
 
     createPost() {
-        let postHolder = new CreateElement("div", "post-holder-" + this.getId(), "container justify-content-center post-holder").createElement();
+        let postHolder = new CreateElement("div", "post-holder-" + this.getPostID(), "container justify-content-center post-holder").createElement();
         this.getPostsContainer().appendChild(postHolder);
 
         this.createPostProfile(postHolder);

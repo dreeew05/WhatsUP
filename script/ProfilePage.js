@@ -8,7 +8,7 @@ import { GenerateThread } from "./classes/GenerateThread.js";
 
 // TEST DATA
 import postsJSON from "../test/posts.json" assert { type: 'json' };
-console.log(postsJSON);
+import threadJSON from "../test/threads.json" assert { type: 'json' };
 
 class ProfilePage {
 
@@ -31,8 +31,9 @@ class ProfilePage {
     generatePost() {
         // TEST DATA [FINAL DATA MUST COME FROM THE DATABASE]
         
+        // POST
         for(let i = 0; i < postsJSON.length; i++) {
-            let postID        = postsJSON[i].id,
+            let postID        = postsJSON[i].post_id,
                 profileName   = postsJSON[i].profile_name,
                 profilePic    = postsJSON[i].profile_pic,
                 dateTime      = postsJSON[i].date_time,
@@ -43,6 +44,21 @@ class ProfilePage {
             
             new GeneratePost(postID, profileName, profilePic, dateTime, post, postMedia, postMediaType, postMap).createPost();
         }
+
+        // THREAD   
+        for(let i = 0; i < threadJSON.length; i++) {
+            let threadID      = threadJSON[i].thread_id,
+                postID        = threadJSON[i].post_id,
+                profileName   = threadJSON[i].profile_name,
+                profilePic    = threadJSON[i].profile_pic,
+                dateTime      = threadJSON[i].date_time,
+                post          = threadJSON[i].post,
+                postMedia     = threadJSON[i].post_media.file,
+                postMediaType = threadJSON[i].post_media.type,
+                postMap       = threadJSON[i].post_map; 
+
+            new GenerateThread(threadID, postID, profileName, profilePic, dateTime, post, postMedia, postMediaType, postMap).createThread();
+        }        
 
     }
 }

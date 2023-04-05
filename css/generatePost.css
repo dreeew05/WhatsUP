@@ -111,7 +111,7 @@
     width: 100%;
     height: 100%;
     max-width: 32rem;
-    max-height: 18rem;
+    max-height: 20rem;
 }
 
 /* [END] 3 IMAGES*/
@@ -136,7 +136,17 @@
   width: 100%;
   height: 100%;
   max-width: 32rem;
-  max-height: 20rem;
+  max-height: 15rem;
 }
 
 /* [END] 4 IMAGES*/
+
+/* THREADS */
+
+.thread-divider {
+    width: 95%;
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+    margin-left: auto;
+    margin-right: auto;
+}

@@ -21,13 +21,9 @@ export class SideNavBar {
               studentContents    = studentJSON,
               universityContents = universityJSON;
 
-        let college    = null,
-            student    = null,
-            university = null;
-        
-        college    = new GenerateSideNavBarContents("College", collegeContents, 0);
-        student    = new GenerateSideNavBarContents("Student", studentContents, college.getCounter());
-        university = new GenerateSideNavBarContents("University", universityContents, student.getCounter());
+        let college    = new GenerateSideNavBarContents("College", collegeContents, 0),
+            student    = new GenerateSideNavBarContents("Student", studentContents, college.getCounter()),
+            university = new GenerateSideNavBarContents("University", universityContents, student.getCounter());
     }
 
     hamburgerToggler() {

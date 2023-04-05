@@ -2,17 +2,38 @@
     {
         "UP System" : {
             "pages" : {
-                "UP - System" : "upSystem.jpg", 
-                "Philippine Collegian" : "phkule.jpg"
+                "UP - System" : {
+                    "image" : "upSystem.jpg",
+                    "link" : "#"
+                }, 
+                "Philippine Collegian" : {
+                    "image" : "phkule.jpg",
+                    "link" : "#"
+                }
             }
         },
         "University of the Philippines - Visayas" : {
             "pages" : {
-                "UP - Visayas" : "upVisayas.jpg",
-                "UPV Registrar" : "upvRegistrar.jpg", 
-                "UPV CRSIS" : "upVisayas.jpg", 
-                "UPV Student Affairs" : "upVisayas.jpg", 
-                "UPV Freedom Wall(?)" : "upvFreedomWall.jpg"
+                "UP - Visayas" : {
+                    "image" : "upVisayas.jpg",
+                    "link" : "#"
+                }, 
+                "UPV Registrar" : {
+                    "image" : "upvRegistrar.jpg",
+                    "link" : "#"
+                }, 
+                "UPV CRSIS" : {
+                    "image" : "upVisayas.jpg",
+                    "link" : "#"
+                }, 
+                "UPV Student Affairs" : {
+                    "image" : "upVisayas.jpg",
+                    "link" : "#"
+                }, 
+                "UPV Freedom Wall(?)" : {
+                    "image" : "upvFreedomWall.jpg",
+                    "link" : "#"
+                }
             }
         }
     }
