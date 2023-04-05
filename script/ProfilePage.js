@@ -5,24 +5,27 @@ import { NavBarSectionDivider } from "./classes/NavBarSectionDivider.js";
 import { SideNavBar } from "./classes/SideNavbar.js";
 import { GeneratePost } from "./classes/GeneratePost.js";
 import { GenerateThread } from "./classes/GenerateThread.js";
+import { GenerateAbout } from "./classes/GenerateAbout.js";
 
 // TEST DATA
 import postsJSON from "../test/posts.json" assert { type: 'json' };
 import threadJSON from "../test/threads.json" assert { type: 'json' };
+import aboutJSON from "../test/about.json" assert { type: 'json' };
 
 class ProfilePage {
 
     constructor() {
         this.navBarSectionDividerImplementation();
-        this.generatePost();
         this.initializeSideNavBar();
+        this.generatePost();
+        this.generateAbout();
     }
     navBarSectionDividerImplementation() {
         const links     = document.querySelectorAll('.nav-item a'),
               ABOUT_DIV = "about", 
-              HOME_DIV  = "home";
-        
-        let nbsd = new NavBarSectionDivider(links);
+              HOME_DIV  = "posts",
+              CARD_DIVS = ["posts", "about"];
+        let nbsd = new NavBarSectionDivider(links, CARD_DIVS);
 
         document.getElementById("about-button").onclick = function() {
             nbsd.changeDiv(ABOUT_DIV);
@@ -70,6 +73,14 @@ class ProfilePage {
             new GenerateThread(threadID, postID, profileName, profilePic, dateTime, post, postMedia, postMediaType, postMap).createThread();
         }        
 
+    }
+    generateAbout() {
+        let profileName = aboutJSON[0].profile_name,
+            details     = aboutJSON[0].details,
+            category    = aboutJSON[0].category,
+            contact     = aboutJSON[0].contact,
+            socials     = aboutJSON[0].socials;
+        new GenerateAbout(profileName, details, category, contact, socials);
     }
 }
 

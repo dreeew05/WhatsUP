@@ -1,0 +1,20 @@
+[
+    {
+        "profile_name" : "University of the Philippines Visayas",
+        "details" : "The University of the Philippines Visayas (UPV) is one of the constituent units of the UP System. It has campuses in Miagao, Iloilo; Iloilo City; and Tacloban City — with Miagao being the main campus where the central administration offices are located. UPV’s strategic location has given it the enviable status of being the University with the most far-reaching influence in two regions – Region 6 and 7. UPV has four colleges and a school. These are the College of Fisheries and Ocean Sciences (CFOS), the College of Arts and Sciences (CAS), the College of Management (CM), the School of Technology (SoTech), and the UPV Tacloban College (UPVTC).",
+        "category" : "College & University",
+        "contact" : {
+            "address" : "Miagao, Iloilo",
+            "email" : "ipo.upvisayas@up.edu.ph",
+            "mobile" : "0961 795 0005",
+            "telephone" : null
+        },
+        "socials" : {
+            "website" : "www.upv.edu.ph",
+            "facebook" : "fb.com/UPVisayas",
+            "youtube" : "youtube.com/UPVisayas",
+            "twitter" : "twitter.com/UPVisayas",
+            "tiktok" : null
+        }
+    }
+]

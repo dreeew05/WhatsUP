@@ -2,11 +2,19 @@
 // Description: Active Link when link is clicked
 
 export class NavBarSectionDivider {
-    constructor(links) {
-       this.links = links; 
+    constructor(links, divCards) {
+       this.links    = links; 
+       this.divCards = divCards;
 
        this.defaultView();
-       this.changeActiveLink(links);
+       this.changeActiveLink(this.getLinks());
+    }
+
+    getLinks() {
+        return this.links;
+    }
+    getDivCards() {
+        return this.divCards;
     }
     changeActiveLink(allLinks){
         allLinks.forEach(link => {
@@ -19,14 +27,15 @@ export class NavBarSectionDivider {
             });
         });
     }
-    changeDiv(divName) {
-        if(divName == "home") {
-            document.getElementById("about").style.display = "none";
-            document.getElementById("posts").style.display = "block";
-        }
-        else {
-            document.getElementById("about").style.display = "block";
-            document.getElementById("posts").style.display = "none";
+    changeDiv(divID) {
+        for(let i = 0; i < this.getDivCards().length; i++) {
+            let currentCard = this.getDivCards()[i];
+            if(currentCard == divID) {
+                document.getElementById(currentCard).style.display = "block";
+            }
+            else {
+                document.getElementById(currentCard).style.display = "none";
+            }
         }
     }
     defaultView() {

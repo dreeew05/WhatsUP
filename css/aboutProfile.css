@@ -1,12 +1,52 @@
 .about-holder {
     width: 80%;
     margin-top: 1rem;
+    margin-bottom: 1rem;
     background-color: white;
     border-radius: 1rem;
     padding-top: 1rem;
     padding-bottom: 1rem;
+    display: flex;
+    flex-direction: column;
 }
 
-#samplePara {
-    max-width: 80%;
+#introduction, #category, #contact, #social {
+    margin-left: 2%;
+    margin-right: 2%;
 }
+
+#intro-title {
+    font-family: 'ProductSansBold';
+    font-size: 1.25vmax;
+}
+
+.about-paragraph {
+    font-family: 'ProductSansRegular';
+    font-size: 0.75vmax;
+}
+
+.emphasized-text {
+    font-family: 'ProductSansBold';
+    font-size: 1vmax;
+}
+
+.logo-text-holder {
+    display: flex;
+    flex-direction: row;
+}
+
+.logo-text-holder i {
+    font-size: 1vmax;
+}
+
+.logo-text-holder p {
+    margin-left: 1vmax;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+
+
