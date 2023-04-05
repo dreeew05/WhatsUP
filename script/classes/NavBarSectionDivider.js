@@ -5,7 +5,8 @@ export class NavBarSectionDivider {
     constructor(links) {
        this.links = links; 
 
-       this.changeActiveLink(links)
+       this.defaultView();
+       this.changeActiveLink(links);
     }
     changeActiveLink(allLinks){
         allLinks.forEach(link => {
@@ -17,5 +18,19 @@ export class NavBarSectionDivider {
                 this.classList.add('active');
             });
         });
+    }
+    changeDiv(divName) {
+        if(divName == "home") {
+            document.getElementById("about").style.display = "none";
+            document.getElementById("posts").style.display = "block";
+        }
+        else {
+            document.getElementById("about").style.display = "block";
+            document.getElementById("posts").style.display = "none";
+        }
+    }
+    defaultView() {
+        document.getElementById("about").style.display = "none";
+        document.getElementById("posts").style.display = "block";
     }
 }  

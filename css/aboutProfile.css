@@ -1,0 +1,12 @@
+.about-holder {
+    width: 80%;
+    margin-top: 1rem;
+    background-color: white;
+    border-radius: 1rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
+
+#samplePara {
+    max-width: 80%;
+}

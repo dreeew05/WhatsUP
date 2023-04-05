@@ -18,8 +18,18 @@ class ProfilePage {
         this.initializeSideNavBar();
     }
     navBarSectionDividerImplementation() {
-        const links  = document.querySelectorAll('.nav-item a');
-        new NavBarSectionDivider(links);
+        const links     = document.querySelectorAll('.nav-item a'),
+              ABOUT_DIV = "about", 
+              HOME_DIV  = "home";
+        
+        let nbsd = new NavBarSectionDivider(links);
+
+        document.getElementById("about-button").onclick = function() {
+            nbsd.changeDiv(ABOUT_DIV);
+        }
+        document.getElementById("home-button").onclick = function() {
+            nbsd.changeDiv(HOME_DIV);
+        }
     }
     initializeSideNavBar() {
         let sideNavBar = new SideNavBar();

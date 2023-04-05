@@ -1,7 +1,7 @@
 // Author: fiVe [G. Bulaong]
 // Description: Generates Posts
 
-import { GeneratePostImage } from "./GeneratePostImage.js";
+import { GeneratePostMedia } from "./GeneratePostMedia.js";
 import { CreateElement } from "./CreateElement.js";
 
 export class GeneratePost {
@@ -83,7 +83,7 @@ export class GeneratePost {
     }
 
     createPostImages(POST_HOLDER) {
-        new GeneratePostImage(POST_HOLDER, this.getPostMedia(), this.getPost());
+        new GeneratePostMedia(POST_HOLDER, this.getPostMediaType(), this.getPostMedia(), this.getPost());
     }
 
     createPost() {

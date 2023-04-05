@@ -104,7 +104,7 @@ export class GenerateSideNavBarContents {
                 profileImage.setAttribute("src", BASE_PATH + organizationImg);
                 profileImage.setAttribute("alt", organizationImg);
 
-                profileLink.setAttribute("href", "#");
+                profileLink.setAttribute("href", organizationLink);
                 profileLink.textContent = organizationName;
 
                 // LINK ELEMENTS
