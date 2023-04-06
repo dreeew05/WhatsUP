@@ -6,7 +6,6 @@ export class NavBarSectionDivider {
        this.links    = links; 
        this.divCards = divCards;
 
-       this.defaultView();
        this.changeActiveLink(this.getLinks());
     }
 
@@ -30,16 +29,23 @@ export class NavBarSectionDivider {
     changeDiv(divID) {
         for(let i = 0; i < this.getDivCards().length; i++) {
             let currentCard = this.getDivCards()[i];
-            if(currentCard == divID) {
-                document.getElementById(currentCard).style.display = "block";
-            }
-            else {
-                document.getElementById(currentCard).style.display = "none";
+            switch(divID) {
+                case "all":
+                    document.getElementById(currentCard).style.display = "block";
+                    break;
+                default:
+                    if(currentCard == divID) {
+                        document.getElementById(currentCard).style.display = "block";
+                    }
+                    else {
+                        document.getElementById(currentCard).style.display = "none";
+                    }
+                    break;
             }
         }
     }
-    defaultView() {
-        document.getElementById("about").style.display = "none";
+    defaultViewProfilePage() {
         document.getElementById("posts").style.display = "block";
+        document.getElementById("about").style.display = "none";
     }
 }  

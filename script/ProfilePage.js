@@ -33,7 +33,10 @@ class ProfilePage {
               ABOUT_DIV = "about", 
               HOME_DIV  = "posts",
               CARD_DIVS = ["posts", "about"];
+
         let nbsd = new NavBarSectionDivider(links, CARD_DIVS);
+
+        nbsd.defaultViewProfilePage();
 
         document.getElementById("about-button").onclick = function() {
             nbsd.changeDiv(ABOUT_DIV);

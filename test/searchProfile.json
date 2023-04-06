@@ -1,0 +1,20 @@
+[
+    {
+        "profile_name" : "University of the Philippines - Visayas",
+        "profile_image" : "../assets/images/logos/upVisayas.jpg",
+        "profile_category" : "College and University",
+        "profile_description" : "The University of the Philippines Visayas is a public research university in the Philippines. A constituent university of the University of the Philippines system, it teaches management, accountancy, marketing, economics, chemistry, applied mathematics and physics, marine science education and research, fisheries, and aquaculture."
+    },
+    {
+        "profile_name" : "University of the Philippines System",
+        "profile_image" : "../assets/images/logos/upSystem.jpg",
+        "profile_category" : "College and University",
+        "profile_description" : "From the education of ordinary Filipinos under Americans at the time of UP President Bartlett to its journey onto another century under the stewardship of President Danilo Lardizabal Concepcion, the university has produced at least 37 National Scientists; at least 39 National Artists; 7 out of the 16 Presidents of the Republic; 13 Chief Justices of the Supreme Court; at least 15,000 doctors; 8,000 lawyers; 15,000 engineers; 23,000 teachers and hundreds of thousands of graduates in other academic fields."
+    },
+    {
+        "profile_name" : "UPV Komsai.org",
+        "profile_image" : "../assets/images/logos/komsai.png",
+        "profile_category" : "Hehehhehe",
+        "profile_description" : "The basic principle is that if an individual shares his or her knowledge to another person, they both acquire new knowledge and another new knowledge is formed from the fusion of the two ideas. It would be only logical that if the same concept, if applied to a group of individuals, a massive amount of new ideas would be generated, uplifting the level of consciousness of each individual in the group. Making ourselves better individuals, better persons to others and making a bit of difference to life."
+    }
+]

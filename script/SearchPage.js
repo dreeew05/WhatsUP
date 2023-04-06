@@ -7,13 +7,16 @@ import { GeneratePost } from "./classes/GeneratePost.js";
 
 // TEST DATA
 import postsJSON from "../test/posts.json" assert { type: 'json' };
+import profileJSON from "../test/searchProfile.json" assert { type: 'json' };
+import { GenerateProfileSearch } from "./classes/GenerateProfileSearch.js";
 
 class SearchPage {
 
     constructor() {
         this.initializeSideNavBar();
-        // this.navBarSectionDividerImplementation();
+        this.navBarSectionDividerImplementation();
         this.generatePost();
+        this.generateProfile();
     }
 
     initializeSideNavBar() {
@@ -24,17 +27,36 @@ class SearchPage {
         };
     }
     navBarSectionDividerImplementation() {
-        const links     = document.querySelectorAll('.nav-item a'),
-              ABOUT_DIV = "about", 
-              HOME_DIV  = "posts",
-              CARD_DIVS = ["posts", "about"];
+        const links       = document.querySelectorAll('.nav-item a'),
+              ALL_DIV     = "all",
+              POSTS_DIV   = "posts",
+              PROFILE_DIV = "profile",
+              CARD_DIVS = ["posts", "profile"];
+
         let nbsd = new NavBarSectionDivider(links, CARD_DIVS);
 
-        document.getElementById("about-button").onclick = function() {
-            nbsd.changeDiv(ABOUT_DIV);
+        document.getElementById("all-button").onclick = function() {
+            nbsd.changeDiv(ALL_DIV);
         }
-        document.getElementById("home-button").onclick = function() {
-            nbsd.changeDiv(HOME_DIV);
+        document.getElementById("posts-button").onclick = function() {
+            nbsd.changeDiv(POSTS_DIV);
+        }
+        document.getElementById("profile-button").onclick = function() {
+            nbsd.changeDiv(PROFILE_DIV);
+        }
+    }
+    generateProfile() {
+        // TEST DATA [FINAL DATA MUST COME FROM THE DATABASE]
+
+        let genProfile = new GenerateProfileSearch();
+
+        for(let i = 0; i < profileJSON.length; i++) {
+            let profileName        = profileJSON[i].profile_name,
+                profileImage       = profileJSON[i].profile_image,
+                profileCategory    = profileJSON[i].profile_category,
+                profileDescription = profileJSON[i].profile_description;
+            
+            genProfile.generateProfile(profileImage, profileName, profileCategory, profileDescription);
         }
     }
     generatePost() {

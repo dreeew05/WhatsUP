@@ -11,6 +11,10 @@ body {
     background-color: #d9d9d9;
 }
 
+img {
+    object-fit: cover;
+}
+
 .navbar-custom{
     background-color: #006B3B;
 }
@@ -42,25 +46,41 @@ input:placeholder-shown {
    font-style: italic;
 }
 
+#main-content-holder {
+    margin-top: 1.25rem;
+}
+
 #selection-holder {
     background-color: white;
-    width: 56%;
-    margin-top: 1rem;
-    margin-bottom: 0.5rem;
-    padding-top: 0.5rem;
-    padding-bottom: 1rem;
-    border-radius: 1rem;
+    padding-top: 0.25rem;
+    padding-bottom: 0.5rem;
+    border-radius: 0.75vmax;
+    width: 80%;
+    display: block;
+    margin: auto;
+    margin-bottom: 1rem;
 }
 
 /* NAVBARSECTION DIVIDER OVERRIDE */
 
 .nav-item a {
     color: black !important;
+    font-family: 'ProductSansBold';
 }
 
 #navbar-profile-options {
     width: auto !important;
     padding-left: 0 !important;
+}
+
+.nav-item:nth-child(odd) {
+    padding-left: 2vmax;
+    padding-right: 2vmax;
+}
+
+.nav-item:nth-child(even) {
+    padding-left: 8vmax;
+    padding-right: 8vmax;
 }
 
 #navbar-profile-options a:hover {
@@ -72,4 +92,77 @@ input:placeholder-shown {
     color: black !important;
     border-bottom: 2px solid black !important;
 }
+
+/* PROFILE */
+
+#profile {
+    background-color: white;
+    border-radius: 0.75vmax;
+    width: 80%;
+    display: block;
+    margin: auto;
+}
+
+#profile-pages-holder {
+    width: auto;
+    padding-left: 2%;
+}
+
+#profile-pages-holder img {
+    width: 80%;
+}
+
+.profile-text {
+    margin-top: 0.5rem;
+}
+
+.profile-text p {
+    text-align: left;
+    font-family: 'ProductSansBold';
+    font-size: 2.25vmax;
+}
+
+#profile-results-holder {
+    padding-bottom: 0rem;
+    display: flex;
+    flex-direction: row;
+    margin-top: 0.15rem;
+}
+
+#profile-results-holder img {
+    height: 100%;
+    width: 100%;
+    max-height: 4vmax;
+    max-width: 4vmax;
+}
+
+.profile-result-text {
+    padding-left: 2rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.profile-result-text a {
+    color: black;
+    text-decoration: none;
+}
+
+.profile-title {
+    font-family: 'ProductSansBold';
+    font-size: 1.25vmax;
+    margin-bottom: 0rem;
+}
+
+.profile-category {
+    font-family: 'ProductSansRegular';
+    font-size: 0.75vmax;
+    font-style: italic;
+    margin-bottom: 0.10rem;
+}
+
+.profile-description {
+    font-size: 0.5vmax;
+    font-family: 'ProductSansRegular';
+}
+
 
