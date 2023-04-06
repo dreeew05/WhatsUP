@@ -5,6 +5,7 @@ import { SideNavBar } from "./classes/SideNavbar.js";
 import { NavBarSectionDivider } from "./classes/NavBarSectionDivider.js";
 import { GeneratePost } from "./classes/GeneratePost.js";
 
+
 // TEST DATA
 import postsJSON from "../test/posts.json" assert { type: 'json' };
 import profileJSON from "../test/searchProfile.json" assert { type: 'json' };

@@ -19,7 +19,7 @@ export class GenerateProfileSearch {
             profileTextPara      = new CreateElement("p", null, null).createElement();
         
         // SET ATTRIBUTE
-        profileTextPara.textContent = "Profile";
+        profileTextPara.textContent = "Profiles";
 
         // LINK ELEMENTS
         PROFILE.appendChild(profileDiv);

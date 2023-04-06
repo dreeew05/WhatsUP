@@ -23,7 +23,7 @@ export class LimitWords {
         
         if(words.length > this.getWordCount()) {
             words = words.slice(0, this.getWordCount());
-            this.setParagraph(words.join(' ') + "...");
+            this.setParagraph(words.join(' ') + " ...");
         }
 
         return this.getParagraph();

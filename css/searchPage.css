@@ -106,6 +106,7 @@ input:placeholder-shown {
 #profile-pages-holder {
     width: auto;
     padding-left: 2%;
+    padding-right: 2%;
 }
 
 #profile-pages-holder img {
