@@ -1,26 +1,21 @@
-//Author: fiVe
-//Description: JavaScript for ProfilePage
+// Author: fiVe
+// Description: JavaScript for SearchPage
 
-import { NavBarSectionDivider } from "./classes/NavBarSectionDivider.js";
 import { SideNavBar } from "./classes/SideNavbar.js";
+import { NavBarSectionDivider } from "./classes/NavBarSectionDivider.js";
 import { GeneratePost } from "./classes/GeneratePost.js";
-import { GenerateThread } from "./classes/GenerateThread.js";
-import { GenerateAbout } from "./classes/GenerateAbout.js";
 
 // TEST DATA
 import postsJSON from "../test/posts.json" assert { type: 'json' };
-import threadJSON from "../test/threads.json" assert { type: 'json' };
-import aboutJSON from "../test/about.json" assert { type: 'json' };
 
-class ProfilePage {
+class SearchPage {
 
     constructor() {
         this.initializeSideNavBar();
-        this.navBarSectionDividerImplementation();
+        // this.navBarSectionDividerImplementation();
         this.generatePost();
-        this.generateThread();
-        this.generateAbout();
     }
+
     initializeSideNavBar() {
         let sideNavBar = new SideNavBar();
         
@@ -57,32 +52,8 @@ class ProfilePage {
             new GeneratePost(postID, profileName, profilePic, dateTime, post, postMedia, postMediaType, postMap).createPost();
         } 
     }
-    generateThread() {
-        // TEST DATA [FINAL DATA MUST COME FROM THE DATABASE]
-        for(let i = 0; i < threadJSON.length; i++) {
-            let threadID      = threadJSON[i].thread_id,
-                postID        = threadJSON[i].post_id,
-                profileName   = threadJSON[i].profile_name,
-                profilePic    = threadJSON[i].profile_pic,
-                dateTime      = threadJSON[i].date_time,
-                post          = threadJSON[i].post,
-                postMedia     = threadJSON[i].post_media.file,
-                postMediaType = threadJSON[i].post_media.type,
-                postMap       = threadJSON[i].post_map; 
 
-            new GenerateThread(threadID, postID, profileName, profilePic, dateTime, post, postMedia, postMediaType, postMap).createThread();
-        }        
-    }
-    generateAbout() {
-        let profileName = aboutJSON[0].profile_name,
-            details     = aboutJSON[0].details,
-            category    = aboutJSON[0].category,
-            contact     = aboutJSON[0].contact,
-            socials     = aboutJSON[0].socials;
-        new GenerateAbout(profileName, details, category, contact, socials);
-    }
 }
 
 // DRIVER [PLEASE DO NOT MODFIY]
-new ProfilePage();
-
+new SearchPage();

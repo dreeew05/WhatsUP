@@ -103,30 +103,34 @@ export class GeneratePostMedia {
               BASE_VIDEO_PATH = "../../assets/videos/";    
 
         for(let i = 0; i < count; i++) {
-            let LINK      = new CreateElement("a", null, null).createElement(),
-                IMG       = new CreateElement("img", null, null).createElement(),
-                VIDEO     = new CreateElement("video", null, null).createElement(),
-                FILE_PATH = null;
+            let MEDIA_DIV  = new CreateElement("div", null, "media-div").createElement(),
+                LINK       = new CreateElement("a", null, null).createElement(),
+                IMG        = new CreateElement("img", null, null).createElement(),
+                VIDEO      = new CreateElement("video", null, null).createElement(),
+                FILE_PATH  = null,
+                isPlayable = false;
             
             switch(this.getMediaType()) {
                 case "image":
                     FILE_PATH = BASE_IMAGE_PATH.concat(filenames[i]);
                     this.setImageAttribute(IMG, filenames[i], FILE_PATH);
-                    this.resizeBaseOnCount(count, i, IMG, LINK);
+                    this.resizeBaseOnCount(count, i, IMG, isPlayable, MEDIA_DIV, LINK);
                     break;
                 case "video":
-                    FILE_PATH = BASE_VIDEO_PATH.concat(filenames[i]);
+                    FILE_PATH  = BASE_VIDEO_PATH.concat(filenames[i]);
+                    isPlayable = true;
                     this.setVideoAttribute(VIDEO, FILE_PATH);
-                    this.resizeBaseOnCount(count, i, VIDEO, LINK);
+                    this.resizeBaseOnCount(count, i, VIDEO, isPlayable, MEDIA_DIV, LINK);
                     break;
-                case "iframe":
+                case "youtube":
                     let EMBED_LINK = filenames[i],
                     LINK_SPLIT     = EMBED_LINK.split("/"),
                     EMBED_CODE     = LINK_SPLIT[LINK_SPLIT.length - 1],
                     THUMBNAIL      = "https://img.youtube.com/vi/".concat(EMBED_CODE).concat("/maxresdefault.jpg");
                     FILE_PATH      = filenames[i];
+                    isPlayable     = true;
                     this.setImageAttribute(IMG, filenames[i], THUMBNAIL);
-                    this.resizeBaseOnCount(count, i, IMG, LINK);
+                    this.resizeBaseOnCount(count, i, IMG, isPlayable, MEDIA_DIV, LINK);
                     break;
                 default:
                     break;
@@ -137,15 +141,21 @@ export class GeneratePostMedia {
         }
     }
 
-    resizeBaseOnCount(count, counter, MEDIA, LINK) {
+    resizeBaseOnCount(count, counter, MEDIA, isPlayable, MEDIA_DIV, LINK) {
 
-        let newDiv = null;
+        let newDiv   = null,
+            playIcon = new CreateElement("i", null, "fa-solid fa-play").createElement();
+        
+        if(isPlayable == true) {
+            LINK.appendChild(playIcon);
+        } 
 
         switch(count) {
             case 1:
                 MEDIA.setAttribute("class", "img-fluid");
                 this.getPostHolder().appendChild(this.getMediaHolder());
-                this.getMediaHolder().appendChild(LINK);
+                this.getMediaHolder().appendChild(MEDIA_DIV);
+                MEDIA_DIV.appendChild(LINK);
                 LINK.appendChild(MEDIA);
                 break;
             case 2:
@@ -156,7 +166,8 @@ export class GeneratePostMedia {
                 MEDIA.setAttribute("class", "medium-media");
                 this.getPostHolder().appendChild(this.getMediaHolder());
                 this.getMediaHolder().appendChild(this.getDiv());
-                this.divLinkAppend(this.getDiv(), LINK, MEDIA);
+                this.getDiv().appendChild(MEDIA_DIV);
+                this.divLinkAppend(MEDIA_DIV, LINK, MEDIA);
                 break;
             case 3:
                 newDiv = new CreateElement("div", null, "small-media-2");
@@ -164,20 +175,23 @@ export class GeneratePostMedia {
                     case 0:
                         MEDIA.setAttribute("class", "big-media");
                         this.getPostHolder().appendChild(this.getMediaHolder());
-                        this.getMediaHolder().appendChild(LINK);
+                        this.getMediaHolder().appendChild(MEDIA_DIV);
+                        MEDIA_DIV.appendChild(LINK)
                         LINK.appendChild(MEDIA);
                         break;
                     case 1:
                         this.setDiv(newDiv.createElement());
                         MEDIA.setAttribute("class", "small-media");
-                        MEDIA.setAttribute("style", "padding-bottom: 0.5rem;");
+                        // MEDIA.setAttribute("style", "padding-bottom: 0rem;");
                         this.getPostHolder().appendChild(this.getMediaHolder());
                         this.getMediaHolder().appendChild(this.getDiv());
-                        this.divLinkAppend(this.getDiv(), LINK, MEDIA)
+                        this.getDiv().appendChild(MEDIA_DIV);
+                        this.divLinkAppend(MEDIA_DIV, LINK, MEDIA)
                         break;
                     case 2:
                         MEDIA.setAttribute("class", "small-media");
-                        this.divLinkAppend(this.getDiv(), LINK, MEDIA)
+                        this.getDiv().appendChild(MEDIA_DIV);
+                        this.divLinkAppend(MEDIA_DIV, LINK, MEDIA)
                         break;
                     default:
                         break;
@@ -195,12 +209,14 @@ export class GeneratePostMedia {
                         this.getMediaHolder().appendChild(this.getContainerDiv());
                         this.getContainerDiv().appendChild(this.getDiv());
                         this.getDiv().appendChild(colDiv);
-                        this.divLinkAppend(colDiv, LINK, MEDIA);
+                        colDiv.appendChild(MEDIA_DIV);
+                        this.divLinkAppend(MEDIA_DIV, LINK, MEDIA);
                         break;
                     case 1:
                         colDiv = colDiv.createElement();
                         this.getDiv().appendChild(colDiv);
-                        this.divLinkAppend(colDiv, LINK, MEDIA);
+                        colDiv.appendChild(MEDIA_DIV)
+                        this.divLinkAppend(MEDIA_DIV, LINK, MEDIA);
                         break;
                     default:
                         break;
@@ -208,6 +224,6 @@ export class GeneratePostMedia {
                 break;
             default:
                 break;
-        } 
+        }
     }
 }

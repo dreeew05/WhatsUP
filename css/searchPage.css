@@ -1,0 +1,75 @@
+@import url('/css/fonts.css');
+@import url('/css/generatePost.css');
+@import url('/css/sideNavbar.css');
+@import url('/css/navBarSectionDivider.css');
+
+html {
+    background-color: #d9d9d9;
+}
+
+body {
+    background-color: #d9d9d9;
+}
+
+.navbar-custom{
+    background-color: #006B3B;
+}
+
+.navbar-toggler:focus,
+.navbar-toggler:active,
+.navbar-toggler-icon:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+.siteLogo {
+    height: 5rem;
+}
+
+.btn-custom {
+    background-color: #961313;
+}
+
+.btn-custom:hover {
+    background-color: #961313;
+}
+
+.search-icon {
+    height: 1rem;
+}
+
+input:placeholder-shown {
+   font-style: italic;
+}
+
+#selection-holder {
+    background-color: white;
+    width: 56%;
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+    padding-top: 0.5rem;
+    padding-bottom: 1rem;
+    border-radius: 1rem;
+}
+
+/* NAVBARSECTION DIVIDER OVERRIDE */
+
+.nav-item a {
+    color: black !important;
+}
+
+#navbar-profile-options {
+    width: auto !important;
+    padding-left: 0 !important;
+}
+
+#navbar-profile-options a:hover {
+    color: black !important;
+    border-bottom: 2px solid black !important;
+}
+
+#navbar-profile-options a.active {
+    color: black !important;
+    border-bottom: 2px solid black !important;
+}
+

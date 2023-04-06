@@ -71,6 +71,10 @@
     margin-bottom: 0.5rem;
 }
 
+.container {
+    padding-left: 2%;
+    padding-right: 2%;
+}
 
 .small-media-2, .small-media-4, .medium-media {
     display: flex;
@@ -87,7 +91,6 @@
 .medium-media img, .medium-media video {
     width: 100%;
     height: 100%;
-    max-width: 31rem;
 }
 
 /* [END] 2 IMAGES*/
@@ -95,9 +98,8 @@
 /* [START] 3 IMAGES*/
 
 .big-media {
-    height: 100%;
+    height: 25vmax;
     width: 100%;
-    max-width: 30rem;
     object-fit: cover;
 }
 
@@ -107,8 +109,7 @@
 
 .small-media-2 img, .small-media-2 video {
     width: 100%;
-    height: 100%;
-    max-width: 32rem;
+    height: 12.25vmax;
 }
 
 /* [END] 3 IMAGES*/
@@ -126,13 +127,12 @@
 }
 
 .col {
-  flex: 1;
+    flex: 1;
 }
 
 .col img, .col video {
-  width: 100%;
-  height: 100%;
-  max-width: 30rem;
+    width: 100%;
+    height: 15vmax;
 }
 
 /* [END] 4 IMAGES*/
@@ -146,4 +146,18 @@
     margin-left: auto;
     margin-right: auto;
 }
+
+.media-div {
+    position: relative;
+}
+
+.media-div i {
+    color: white;
+    font-size: 4vmax;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
 

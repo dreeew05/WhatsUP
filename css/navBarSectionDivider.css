@@ -1,0 +1,32 @@
+#navbar-profile-options {
+    width: 70rem;
+    padding-left: 1rem;
+    overflow: hidden;
+}
+
+.nav-item {
+    margin-left: 1rem;
+    margin-right: 1rem;
+}
+
+.nav-item a {
+    font-size: 1.75vmin;
+    font-family: 'ProductSansRegular';
+    color: white;
+}
+
+#navbar-profile-options a {
+    text-decoration: none;
+    border-bottom: 2px solid transparent;
+    padding-bottom: 0.25rem;
+}
+
+#navbar-profile-options a:hover {
+    color: white;
+    border-bottom: 2px solid white;
+}
+
+#navbar-profile-options a.active {
+    color: white;
+    border-bottom: 2px solid white;
+}
