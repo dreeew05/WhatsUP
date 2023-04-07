@@ -1,12 +1,17 @@
+// Author: fiVe
+// Description: Stores User's Post Reaction Locally
+
 export class StoreUserPostData {
     
     getData() {
         var data = localStorage.getItem("post_data");
         return JSON.parse(data);
     }
+
     setData(data) {
         localStorage.setItem("post_data", data);
     }
+
     modifyData(tuple) {
         if(localStorage.getItem("post_data") == null) {
             this.createNullData();
@@ -25,20 +30,22 @@ export class StoreUserPostData {
             }
         }
     }
+
     addData(jsonData, key, value) {
         let data = {
             [key] : {
                 "reaction" : value
             } 
         }
-        // jsonData.push(data);
         jsonData = Object.assign(jsonData, data);
         this.setData(JSON.stringify(jsonData));
     }
+
     editData(jsonData, key, value) {
         jsonData[key]["reaction"] = value;
         this.setData(JSON.stringify(jsonData));
     }
+
     createNullData() {
         let data = {
             null : {
@@ -47,4 +54,5 @@ export class StoreUserPostData {
         }
         this.setData(JSON.stringify(data));
     }
+    
 }

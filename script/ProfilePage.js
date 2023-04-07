@@ -1,5 +1,5 @@
-//Author: fiVe
-//Description: JavaScript for ProfilePage
+// Author: fiVe
+// Description: JavaScript for ProfilePage
 
 import { NavBarSectionDivider } from "./classes/NavBarSectionDivider.js";
 import { FeedGenerator } from "./classes/FeedGenerator.js";

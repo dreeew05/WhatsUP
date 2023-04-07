@@ -73,12 +73,12 @@ export class Geocode {
             } 
             else if(request.status <= 500) {
                 // We reached our target server, but it returned an error
-                console.log("unable to geocode! Response code: " + request.status);
+                console.log("Unable to Geocode! Response Code: " + request.status);
                 var data = JSON.parse(request.responseText);
-                console.log('error msg: ' + data.status.message);
+                console.log('Error Message: ' + data.status.message);
             } 
             else {
-                console.log("server error");
+                console.log("Server Error");
             }
         };
 
@@ -87,7 +87,7 @@ export class Geocode {
 
         request.onerror = function() {
             // There was a connection error of some sort
-            console.log("unable to connect to server");
+            console.log("Unable to Connect to Server");
         };
 
         request.send();  // make the request

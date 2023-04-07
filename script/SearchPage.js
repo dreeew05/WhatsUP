@@ -20,7 +20,7 @@ class SearchPage {
               ALL_DIV     = "all",
               POSTS_DIV   = "posts",
               PROFILE_DIV = "profile",
-              CARD_DIVS = ["posts", "profile"];
+              CARD_DIVS   = ["posts", "profile"];
 
         let nbsd = new NavBarSectionDivider(links, CARD_DIVS);
 
