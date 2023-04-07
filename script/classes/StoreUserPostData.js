@@ -8,15 +8,21 @@ export class StoreUserPostData {
         localStorage.setItem("post_data", data);
     }
     modifyData(tuple) {
-        var jsonData = this.getData(),
+        if(localStorage.getItem("post_data") == null) {
+            this.createNullData();
+            this.modifyData(tuple);
+        }
+        else {
+            var jsonData = this.getData(),
             key      = tuple[0].toString(),
             value    = tuple[1];
 
-        if(key in jsonData) {
-            this.editData(jsonData, key, value);
-        }
-        else {
-            this.addData(jsonData, key, value);
+            if(key in jsonData) {
+                this.editData(jsonData, key, value);
+            }
+            else {
+                this.addData(jsonData, key, value);
+            }
         }
     }
     addData(jsonData, key, value) {
@@ -32,5 +38,13 @@ export class StoreUserPostData {
     editData(jsonData, key, value) {
         jsonData[key]["reaction"] = value;
         this.setData(JSON.stringify(jsonData));
+    }
+    createNullData() {
+        let data = {
+            null : {
+                "reaction" : null
+            }
+        }
+        this.setData(JSON.stringify(data));
     }
 }
