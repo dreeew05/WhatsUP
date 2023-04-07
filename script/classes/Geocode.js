@@ -43,7 +43,7 @@ export class Geocode {
         // var query = 'University of the Philippines - Visayas';
         // note: query needs to be URI encoded (see below)
 
-        var query = "University of the Philippines - Visayas";
+        var query = this.getQuery();
 
         var API_URL = 'https://api.opencagedata.com/geocode/v1/json'
 
@@ -67,8 +67,9 @@ export class Geocode {
             if(request.status === 200) {
                 // Success!
                 var data = JSON.parse(request.responseText);
-                localStorage.setItem('latitude', data.results[0].geometry.lat);
-                localStorage.setItem('longtitude', data.results[0].geometry.lng);
+                console.log(data);
+                sessionStorage.setItem('latitude', data.results[0].geometry.lat);
+                sessionStorage.setItem('longtitude', data.results[0].geometry.lng);
             } 
             else if(request.status <= 500) {
                 // We reached our target server, but it returned an error
@@ -81,8 +82,8 @@ export class Geocode {
             }
         };
 
-        this.setLatitude(localStorage.getItem('latitude'));
-        this.setLongtitude(localStorage.getItem('longtitude'));
+        this.setLatitude(sessionStorage.getItem('latitude'));
+        this.setLongtitude(sessionStorage.getItem('longtitude'));
 
         request.onerror = function() {
             // There was a connection error of some sort
