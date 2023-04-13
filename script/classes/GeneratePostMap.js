@@ -2,12 +2,7 @@
 // Description: Generates Map
 
 export class GeneratePostMap {
-    constructor(POST_ID, LATITUDE, LONGTITUDE) {
-        // PASSED VARIABLES
-        this.POST_ID    = POST_ID;
-        this.LATITUDE   = LATITUDE;
-        this.LONGTITUDE = LONGTITUDE;
-
+    constructor() {
         if(!window._GeneratePostMap) {
             this.callbackName = '_GeneratePostMap.loadMap';
             window._GeneratePostMap = this;
@@ -40,42 +35,29 @@ export class GeneratePostMap {
         }
     }
 
-
-    getPostID() {
-        return this.POST_ID;
-    }
-
-    getLatitude() {
-        return this.LATITUDE;
-    }
-
-    getLongtitude() {
-        return this.LONGTITUDE;
-    }
-
-    getMapOptions() {
+    getMapOptions(LATITUDE, LONGTITUDE) {
         const options = {
             zoom : 17, 
             center : {
-                lat : this.getLatitude(), 
-                lng : this.getLongtitude() 
+                lat : LATITUDE, 
+                lng : LONGTITUDE 
             }
         }
         return options;
     }
 
-    createMarker(MAP) {
+    createMarker(MAP, LATITUDE, LONGTITUDE) {
         new google.maps.Marker({
             position : {
-                lat : this.getLatitude(),
-                lng : this.getLongtitude()
+                lat : LATITUDE,
+                lng : LONGTITUDE
             },
             map : MAP
         });
     }
 
-    createMap() {
-        let map = new google.maps.Map(document.getElementById(this.getPostID()), this.getMapOptions());
-        this.createMarker(map);
+    createMap(POST_ID, LATITUDE, LONGTITUDE) {
+        let map = new google.maps.Map(document.getElementById(POST_ID), this.getMapOptions(LATITUDE, LONGTITUDE));
+        this.createMarker(map, LATITUDE, LONGTITUDE);
     }
 }

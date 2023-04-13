@@ -3,11 +3,16 @@
 
 import { GenerateAbout } from "./GenerateAbout.js";
 import { GeneratePost } from "./GeneratePost.js";
+import { GeneratePostMap } from "./GeneratePostMap.js";
 import { GenerateProfileSearch } from "./GenerateProfileSearch.js";
 import { GenerateThread } from "./GenerateThread.js";
 import { SideNavBar } from "./SideNavbar.js";
 
 export class FeedGenerator {
+
+    constructor() {
+        this.mapAPI = new GeneratePostMap();
+    }
 
     generatePost(jsonData) {
 
@@ -21,7 +26,7 @@ export class FeedGenerator {
                 postMediaType   = jsonData[i].post_media.type,
                 postCoordinates = jsonData[i].post_coordinates;
             
-            new GeneratePost(postID, profileName, profilePic, dateTime, post, postMedia, postMediaType, postCoordinates).createPost();
+            new GeneratePost(postID, profileName, profilePic, dateTime, post, postMedia, postMediaType, postCoordinates, this.mapAPI).createPost();
         } 
     }
 
@@ -59,7 +64,7 @@ export class FeedGenerator {
                 postMediaType   = jsonData[i].post_media.type,
                 postCoordinates = jsonData[i].post_coordinates; 
 
-            new GenerateThread(threadID, postID, profileName, profilePic, dateTime, post, postMedia, postMediaType, postCoordinates).createThread();
+            new GenerateThread(threadID, postID, profileName, profilePic, dateTime, post, postMedia, postMediaType, postCoordinates, this.mapAPI).createThread();
         }        
     }
 

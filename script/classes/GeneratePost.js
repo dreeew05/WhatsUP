@@ -7,7 +7,7 @@ import { CreateElement } from "./CreateElement.js";
 
 export class GeneratePost {
 
-    constructor(postID, profileName, profilePic, dateTime, post, postMedia, postMediaType, postCoordinates) {
+    constructor(postID, profileName, profilePic, dateTime, post, postMedia, postMediaType, postCoordinates, mapAPI) {
         this.postID          = postID;
         this.profileName     = profileName;
         this.profilePic      = profilePic;
@@ -16,6 +16,7 @@ export class GeneratePost {
         this.postMedia       = postMedia;
         this.postMediaType   = postMediaType;
         this.postCoordinates = postCoordinates;
+        this.mapAPI          = mapAPI;
     }
 
     getPostID() {
@@ -45,6 +46,9 @@ export class GeneratePost {
     }
     getPostCoordinates() {
         return this.postCoordinates;
+    }
+    getMapAPI() {
+        return this.mapAPI;
     }
 
     createPostProfile(POST_HOLDER) {
@@ -94,9 +98,8 @@ export class GeneratePost {
             mapTextHolder = new CreateElement("div", null, null).createElement(),
             mapText       = new CreateElement("p", null, "map-text").createElement();
         
-        const api = new GeneratePostMap(mapID, this.getPostCoordinates().latitude, this.getPostCoordinates().longtitude);
-        api.loadAPI().then(() => {
-            api.createMap();
+        this.getMapAPI().loadAPI().then(() => {
+            this.getMapAPI().createMap(mapID, this.getPostCoordinates().latitude, this.getPostCoordinates().longtitude);
         });
         
         POST_HOLDER.appendChild(mapDiv);
