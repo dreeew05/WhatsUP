@@ -12,7 +12,7 @@ class SearchPage {
 
     constructor() {
         this.navBarSectionDividerImplementation();
-        this.initializeFeedGenerator();
+        this.initializeFeedGenerator();       
     }
 
     navBarSectionDividerImplementation() {

@@ -155,4 +155,26 @@
     transform: translate(-50%, -50%);
 }
 
+/* MAP */
+
+.map-div {
+    padding-left: 3%;
+    padding-right: 3%;
+    height: 20vmax;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+.map-text {
+    font-family: 'ProductSansBold';
+    font-size: 3vmax;
+}
+
+.map-holder {
+    height: 15vmax;
+    border-radius: 1rem;
+    border: 2.5px solid black;
+}
+
+
 

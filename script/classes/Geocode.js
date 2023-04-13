@@ -67,7 +67,7 @@ export class Geocode {
             if(request.status === 200) {
                 // Success!
                 var data = JSON.parse(request.responseText);
-                console.log(data);
+                // console.log(data);
                 sessionStorage.setItem('latitude', data.results[0].geometry.lat);
                 sessionStorage.setItem('longtitude', data.results[0].geometry.lng);
             } 

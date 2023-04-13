@@ -2,19 +2,20 @@
 // Description: Generates Posts
 
 import { GeneratePostMedia } from "./GeneratePostMedia.js";
+import { GeneratePostMap } from "./GeneratePostMap.js";
 import { CreateElement } from "./CreateElement.js";
 
 export class GeneratePost {
 
-    constructor(postID, profileName, profilePic, dateTime, post, postMedia, postMediaType, postMap) {
-        this.postID        = postID;
-        this.profileName   = profileName;
-        this.profilePic    = profilePic;
-        this.dateTime      = dateTime;
-        this.post          = post;
-        this.postMedia     = postMedia;
-        this.postMediaType = postMediaType;
-        this.postMap       = postMap;
+    constructor(postID, profileName, profilePic, dateTime, post, postMedia, postMediaType, postCoordinates) {
+        this.postID          = postID;
+        this.profileName     = profileName;
+        this.profilePic      = profilePic;
+        this.dateTime        = dateTime;
+        this.post            = post;
+        this.postMedia       = postMedia;
+        this.postMediaType   = postMediaType;
+        this.postCoordinates = postCoordinates;
     }
 
     getPostID() {
@@ -42,8 +43,8 @@ export class GeneratePost {
     getPostMediaType() {
         return this.postMediaType;
     }
-    getPostMap() {
-        return this.postMap;
+    getPostCoordinates() {
+        return this.postCoordinates;
     }
 
     createPostProfile(POST_HOLDER) {
@@ -86,6 +87,27 @@ export class GeneratePost {
         new GeneratePostMedia(POST_HOLDER, this.getPostMediaType(), this.getPostMedia(), this.getPost());
     }
 
+    createPostMap(POST_HOLDER) {
+        let mapID         = "map-".concat(this.getPostID()),
+            mapDiv        = new CreateElement("div", null, "map-div").createElement(),
+            mapHolder     = new CreateElement("div", mapID, "map-holder").createElement(),
+            mapTextHolder = new CreateElement("div", null, null).createElement(),
+            mapText       = new CreateElement("p", null, "map-text").createElement();
+        
+        const api = new GeneratePostMap(mapID, this.getPostCoordinates().latitude, this.getPostCoordinates().longtitude);
+        api.loadAPI().then(() => {
+            api.createMap();
+        });
+        
+        POST_HOLDER.appendChild(mapDiv);
+        mapDiv.appendChild(mapTextHolder);
+        mapTextHolder.appendChild(mapText);
+        mapDiv.appendChild(mapHolder);
+
+        mapText.textContent = "Map";
+
+    }
+
     createPost() {
         let postHolder = new CreateElement("div", "post-holder-" + this.getPostID(), "container justify-content-center post-holder").createElement();
         this.getPostsContainer().appendChild(postHolder);
@@ -93,6 +115,10 @@ export class GeneratePost {
         this.createPostProfile(postHolder);
         this.createPostParagraph(postHolder);
         this.createPostImages(postHolder);
+
+        if(this.getPostCoordinates() != null) {
+            this.createPostMap(postHolder);
+        }
     }
 
 }

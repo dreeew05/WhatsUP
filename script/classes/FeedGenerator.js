@@ -10,17 +10,18 @@ import { SideNavBar } from "./SideNavbar.js";
 export class FeedGenerator {
 
     generatePost(jsonData) {
+
         for(let i = 0; i < jsonData.length; i++) {
-            let postID        = jsonData[i].post_id,
-                profileName   = jsonData[i].profile_name,
-                profilePic    = jsonData[i].profile_pic,
-                dateTime      = jsonData[i].date_time,
-                post          = jsonData[i].post,
-                postMedia     = jsonData[i].post_media.file,
-                postMediaType = jsonData[i].post_media.type,
-                postMap       = jsonData[i].post_map;
+            let postID          = jsonData[i].post_id,
+                profileName     = jsonData[i].profile_name,
+                profilePic      = jsonData[i].profile_pic,
+                dateTime        = jsonData[i].date_time,
+                post            = jsonData[i].post,
+                postMedia       = jsonData[i].post_media.file,
+                postMediaType   = jsonData[i].post_media.type,
+                postCoordinates = jsonData[i].post_coordinates;
             
-            new GeneratePost(postID, profileName, profilePic, dateTime, post, postMedia, postMediaType, postMap).createPost();
+            new GeneratePost(postID, profileName, profilePic, dateTime, post, postMedia, postMediaType, postCoordinates).createPost();
         } 
     }
 
@@ -48,17 +49,17 @@ export class FeedGenerator {
     generateThread(jsonData) {
         // TEST DATA [FINAL DATA MUST COME FROM THE DATABASE]
         for(let i = 0; i < jsonData.length; i++) {
-            let threadID      = jsonData[i].thread_id,
-                postID        = jsonData[i].post_id,
-                profileName   = jsonData[i].profile_name,
-                profilePic    = jsonData[i].profile_pic,
-                dateTime      = jsonData[i].date_time,
-                post          = jsonData[i].post,
-                postMedia     = jsonData[i].post_media.file,
-                postMediaType = jsonData[i].post_media.type,
-                postMap       = jsonData[i].post_map; 
+            let threadID        = jsonData[i].thread_id,
+                postID          = jsonData[i].post_id,
+                profileName     = jsonData[i].profile_name,
+                profilePic      = jsonData[i].profile_pic,
+                dateTime        = jsonData[i].date_time,
+                post            = jsonData[i].post,
+                postMedia       = jsonData[i].post_media.file,
+                postMediaType   = jsonData[i].post_media.type,
+                postCoordinates = jsonData[i].post_coordinates; 
 
-            new GenerateThread(threadID, postID, profileName, profilePic, dateTime, post, postMedia, postMediaType, postMap).createThread();
+            new GenerateThread(threadID, postID, profileName, profilePic, dateTime, post, postMedia, postMediaType, postCoordinates).createThread();
         }        
     }
 
