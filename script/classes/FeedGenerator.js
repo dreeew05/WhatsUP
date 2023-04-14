@@ -24,9 +24,12 @@ export class FeedGenerator {
                 post            = jsonData[i].post,
                 postMedia       = jsonData[i].post_media.file,
                 postMediaType   = jsonData[i].post_media.type,
-                postCoordinates = jsonData[i].post_coordinates;
+                postCoordinates = jsonData[i].post_coordinates,
+                tags            = jsonData[i].tags;
             
-            new GeneratePost(postID, profileName, profilePic, dateTime, post, postMedia, postMediaType, postCoordinates, this.mapAPI).createPost();
+            new GeneratePost(postID, profileName, profilePic, dateTime, post, 
+                             postMedia, postMediaType, postCoordinates, 
+                             this.mapAPI, tags).createPost();
         } 
     }
 
@@ -39,7 +42,8 @@ export class FeedGenerator {
                 profileCategory    = jsonData[i].profile_category,
                 profileDescription = jsonData[i].profile_description;
             
-            genProfile.generateProfile(profileImage, profileName, profileCategory, profileDescription);
+            genProfile.generateProfile(profileImage, profileName, profileCategory, 
+                                       profileDescription);
         }
     }
 
@@ -62,9 +66,11 @@ export class FeedGenerator {
                 post            = jsonData[i].post,
                 postMedia       = jsonData[i].post_media.file,
                 postMediaType   = jsonData[i].post_media.type,
-                postCoordinates = jsonData[i].post_coordinates; 
+                postCoordinates = jsonData[i].post_coordinates;
 
-            new GenerateThread(threadID, postID, profileName, profilePic, dateTime, post, postMedia, postMediaType, postCoordinates, this.mapAPI).createThread();
+            new GenerateThread(threadID, postID, profileName, profilePic, dateTime, post, 
+                               postMedia, postMediaType, postCoordinates, 
+                               this.mapAPI).createThread();
         }        
     }
 

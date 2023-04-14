@@ -11,6 +11,7 @@
             "file": ["cityCampus2.jpg", "cityCampus.jpg", "cityCampus4.jpg"]
         },
         "post_coordinates": null,
+        "tags" : ["UP", "UPV", "CityCampus", "Hehe", "SecondPost"],
         "reactions": {
             "like": 0,
             "haha": 0,
@@ -30,6 +31,7 @@
             "file": ["cityCampus4.jpg", "sample1.jpg", "sample2.jpg"]
         },
         "post_coordinates": null,
+        "tags" : ["UP", "UPV", "CityCampus", "Hehe", "Threads"],
         "reactions": {
             "like": 0,
             "haha": 0,
@@ -49,6 +51,7 @@
             "file": ["sample4.jpg", "poster1.jpg"]
         },
         "post_coordinates": null,
+        "tags" : ["UP", "UPV", "CityCampus", "Hehe", "Threads"],
         "reactions": {
             "like": 0,
             "haha": 0,
@@ -68,6 +71,7 @@
             "file": ["cityCampus3.jpg"]
         },
         "post_coordinates": null,
+        "tags" : ["UP", "UPV", "CityCampus", "Hehe", "Threads"],
         "reactions": {
             "like": 0,
             "haha": 0,
@@ -87,6 +91,7 @@
             "file": ["cityCampus3.jpg", "sample1.jpg", "sample2.jpg", "cityCampus3.jpg"]
         },
         "post_coordinates": null,
+        "tags" : ["UP", "UPV", "CityCampus", "Hehe", "Threads"],
         "reactions": {
             "like": 0,
             "haha": 0,
@@ -106,6 +111,7 @@
             "file": ["https://www.youtube.com/embed/TmaAOV4SJNQ", "https://www.youtube.com/embed/C_duDk5e8yU", "https://www.youtube.com/embed/dpZhGzZ3hNc", "https://www.youtube.com/embed/NHEE_-87mNE"]
         },
         "post_coordinates": null,
+        "tags" : ["UP", "UPV", "CityCampus", "Hehe", "Threads"],
         "reactions": {
             "like": 0,
             "haha": 0,
@@ -128,6 +134,7 @@
             "latitude" : 11.5938763,
             "longtitude" : 122.7616445
         },
+        "tags" : ["UP", "UPV", "CityCampus", "Hehe", "Threads"],
         "reactions": {
             "like": 0,
             "haha": 0,

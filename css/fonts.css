@@ -4,6 +4,11 @@
 }
 
 @font-face {
+    font-family: 'ProductSansItalic';
+    src: url('../assets/fonts/product-sans/ProductSansItalic.ttf');
+}
+
+@font-face {
     font-family: 'ProductSansBold';
     src: url('../assets/fonts/product-sans/ProductSansBold.ttf');
 }

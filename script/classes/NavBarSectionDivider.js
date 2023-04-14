@@ -44,8 +44,9 @@ export class NavBarSectionDivider {
             }
         }
     }
+
     defaultViewProfilePage() {
-        document.getElementById("posts").style.display = "block";
         document.getElementById("about").style.display = "none";
+        document.getElementById("posts").style.display = "block";
     }
 }  

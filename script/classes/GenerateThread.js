@@ -2,8 +2,12 @@ import { CreateElement } from "./CreateElement.js";
 import { GeneratePost } from "./GeneratePost.js";
 
 export class GenerateThread extends GeneratePost {
-    constructor(threadID, postID, profileName, profilePic, dateTime, post, postMedia, postMediaType, postCoordinates, mapAPI) {
-        super(postID, profileName, profilePic, dateTime, post, postMedia, postMediaType, postCoordinates, mapAPI);
+    constructor(threadID, postID, profileName, profilePic, dateTime, 
+                post, postMedia, postMediaType, postCoordinates, mapAPI) {
+
+        super(postID, profileName, profilePic, dateTime, post, postMedia, 
+              postMediaType, postCoordinates, mapAPI);
+
         this.threadID = threadID;
     }
 
@@ -11,12 +15,15 @@ export class GenerateThread extends GeneratePost {
         return this.threadID;
     }
 
-    createThread(counter, arrLen) {
-        let POST_HOLDER = document.getElementById("post-holder-" + super.getPostID());
+    createThread() {
+        let POST_HOLDER = document.getElementById("post-holder-" 
+                          + super.getPostID());
 
-        let THREAD_HOLDER = new CreateElement("div", null, "thread-holder-" + this.getThreadID()).createElement();
+        let THREAD_HOLDER = new CreateElement("div", null, "thread-holder-" 
+                            + this.getThreadID()).createElement();
         
-        let line = new CreateElement("hr", null, "thread-divider").createElement();
+        let line = new CreateElement("hr", null, 
+                   "thread-divider").createElement();
         
         POST_HOLDER.appendChild(line);
         POST_HOLDER.appendChild(THREAD_HOLDER);

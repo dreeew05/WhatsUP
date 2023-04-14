@@ -6,6 +6,7 @@ import { FeedGenerator } from "./classes/FeedGenerator.js";
 
 // TEST DATA
 import postsJSON from "../test/posts.json" assert { type: 'json' };
+import threadJSON from "../test/threads.json" assert { type: 'json' };
 import profileJSON from "../test/searchProfile.json" assert { type: 'json' };
 
 class SearchPage {
@@ -40,6 +41,7 @@ class SearchPage {
         
         feedGenerator.initializeSideNavBar();
         feedGenerator.generatePost(postsJSON);
+        feedGenerator.generateThread(threadJSON);
         feedGenerator.generateProfile(profileJSON);
     }
 

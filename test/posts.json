@@ -9,6 +9,7 @@
             "type": "image",
             "file": ["cityCampus2.jpg", "cityCampus.jpg", "cityCampus4.jpg"]
         },
+        "tags" : ["UP", "UPV", "CityCampus", "Hehe", "Wassup", "hehhehe", "KOmsai", "Stat", "AppMath", "Elektrons", "Chem", "Heheeh", "Glen", "Andrew", "Bulaong", "Heheh hehe hehe", "Hoho"],
         "post_coordinates": null,
         "reactions": {
             "like": 0,
@@ -27,6 +28,7 @@
             "type": "image",
             "file": ["cityCampus4.jpg", "sample1.jpg", "sample2.jpg"]
         },
+        "tags" : ["UP", "UPV", "CityCampus", "Hehe", "SecondPost"],
         "post_coordinates": null,
         "reactions": {
             "like": 0,
@@ -45,6 +47,7 @@
             "type": "image",
             "file": ["sample4.jpg", "poster1.jpg"]
         },
+        "tags" : ["UP", "UPV", "CityCampus", "HEHehehheheh", "Hahah"],
         "post_coordinates": null,
         "reactions": {
             "like": 0,
@@ -63,6 +66,7 @@
             "type": "image",
             "file": ["cityCampus3.jpg"]
         },
+        "tags" : ["UP", "UPV", "CityCampus", "JayVeeGwapo"],
         "post_coordinates": null,
         "reactions": {
             "like": 0,
@@ -81,6 +85,7 @@
             "type": "image",
             "file": ["cityCampus3.jpg", "sample1.jpg", "sample2.jpg", "cityCampus3.jpg"]
         },
+        "tags" : ["UP", "UPV", "CAS", "Hoho"],
         "post_coordinates": null,
         "reactions": {
             "like": 0,
@@ -99,6 +104,7 @@
             "type": "video",
             "file": ["genshin1.mp4"]
         },
+        "tags" : ["UP", "UPV", "KomsaiORg", "Genshin"],
         "post_coordinates": null,
         "reactions": {
             "like": 0,
@@ -117,6 +123,7 @@
             "type": "video",
             "file": ["genshin1.mp4", "genshin2.mp4", "genshin3.mp4"]
         },
+        "tags" : ["UP", "UPV", "Genshin", "Genshin2"],
         "post_coordinates": null,
         "reactions": {
             "like": 0,
@@ -135,6 +142,7 @@
             "type": "youtube",
             "file": ["https://www.youtube.com/embed/4oBpaBEMBIM", "https://www.youtube.com/embed/mvrW4aKwAXw"]
         },
+        "tags" : ["UP", "UPV", "CityCampus", "Hehe"],
         "post_coordinates": null,
         "reactions": {
             "like": 0,
@@ -153,6 +161,7 @@
             "type": "youtube",
             "file": ["https://www.youtube.com/embed/4oBpaBEMBIM", "https://www.youtube.com/embed/mvrW4aKwAXw"]
         },
+        "tags" : ["UP", "UPV", "CityCampus", "Hehe"],
         "post_coordinates": {
             "latitude" : 10.6420,
             "longtitude" : 122.2308

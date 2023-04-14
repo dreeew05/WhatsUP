@@ -61,7 +61,7 @@
     font-size: 0.85vmax;
 }
 
-#media-holder {
+.media-holder, .custom-container {
     margin-top: 0.5rem;
     margin-bottom: 0.5rem;
 }
@@ -161,13 +161,13 @@
     padding-left: 3%;
     padding-right: 3%;
     height: 20vmax;
-    margin-top: 1rem;
-    margin-bottom: 1rem;
+    margin-top: 0.25rem;
+    margin-bottom: 0.25rem;
 }
 
 .map-text {
     font-family: 'ProductSansBold';
-    font-size: 3vmax;
+    font-size: 2vmax;
 }
 
 .map-holder {
@@ -176,5 +176,36 @@
     border: 2.5px solid black;
 }
 
+/* TAGS */
+.tag-div {
+    padding-left: 3%;
+    padding-right: 3%;
+    margin-bottom: 0.5rem;
+}
+
+.tag-text-holder {
+    margin-bottom: -0.75rem;
+}
+
+.tag-button {
+    font-size: 0.75vmax;
+    padding-top: 0.5vmax;
+    padding-bottom: 0.5vmax;
+    padding-left: 0.75vmax;
+    padding-right: 0.75vmax;
+    border-radius: 1vmax;
+    font-family: 'ProductSansItalic';
+    color: white;
+    background-color: #006b3b;
+    margin-left: 0.125vmax;
+    margin-right: 0.125vmax;
+    margin-top: 0.125vmax;
+    margin-bottom: 0.125vmax;
+}
+
+.tag-text {
+    font-family: 'ProductSansBold';
+    font-size: 2vmax;
+}
 
 

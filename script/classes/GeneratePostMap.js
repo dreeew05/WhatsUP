@@ -17,7 +17,8 @@ export class GeneratePostMap {
                 this.resolve = resolve;
                 if(typeof window.google === 'undefined') {
                     const script = document.createElement('script');
-                    script.src = `//maps.googleapis.com/maps/api/js?key=${API_KEY}&callback=${this.callbackName}`;
+                    script.src = `//maps.googleapis.com/maps/api/js?key=
+                                  ${API_KEY}&callback=${this.callbackName}`;
                     script.async = true;
                     document.body.append(script);
                 }
@@ -57,7 +58,8 @@ export class GeneratePostMap {
     }
 
     createMap(POST_ID, LATITUDE, LONGTITUDE) {
-        let map = new google.maps.Map(document.getElementById(POST_ID), this.getMapOptions(LATITUDE, LONGTITUDE));
+        let map = new google.maps.Map(document.getElementById(POST_ID), 
+                  this.getMapOptions(LATITUDE, LONGTITUDE));
         this.createMarker(map, LATITUDE, LONGTITUDE);
     }
 }
