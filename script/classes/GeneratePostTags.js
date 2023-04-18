@@ -41,10 +41,21 @@ export class GeneratePostTags {
             let tagButton = new CreateElement("button", null, "tag-button")
                             .createElement();
 
+            let value = this.getTags()[i];
+
             // SET ATTRIBUTES
             tagButton.setAttribute("type", "button");
-            tagButton.textContent = this.getTags()[i];
+            tagButton.setAttribute("value", value);
+            tagButton.textContent = value;
             tagButtonsDiv.appendChild(tagButton);
+
+            // WHEN BUTTON IS CLICKED
+            // tagButton.addEventListener("click", 
+            //     function() {
+            //         alert(value);
+            //     }
+            // );
+
         }
     }
 

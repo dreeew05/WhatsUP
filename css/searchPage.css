@@ -15,35 +15,75 @@ img {
     object-fit: cover;
 }
 
-.navbar-custom{
+nav {
     background-color: #006B3B;
+    position: fixed;
+    width: 100%;
+    z-index: 1;
 }
 
-.navbar-toggler:focus,
-.navbar-toggler:active,
-.navbar-toggler-icon:focus {
-    outline: none;
-    box-shadow: none;
+#navbar-contents {
+    display: flex;
+    flex-direction: row;
+    padding-left: 2%;
+    padding-right: 2%;
+    padding-top: 0.5%;
+    padding-bottom: 0.5%;
 }
 
-.siteLogo {
-    height: 5rem;
+#hamburger {
+    display: block;
+    margin-top: auto;
+    margin-bottom: auto;
 }
 
-.btn-custom {
-    background-color: #961313;
+#brand-logo {
+    display: block;
+    margin-top: auto;
+    margin-bottom: auto;
 }
 
-.btn-custom:hover {
-    background-color: #961313;
+#brand-logo img{
+    height: 100%;
+    height: 3.5vmax;
 }
 
-.search-icon {
-    height: 1rem;
+#search {
+    width: 30vmax;
+    display: block;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+form {
+    margin-left: 5%;
+}
+
+#search-bar, #search-button {
+    margin-top: 1%;
+    margin-bottom: 1%;
 }
 
 input:placeholder-shown {
-   font-style: italic;
+    font-style: italic;
+ }
+
+#search-button {
+    background-color: #961313;
+    z-index: 0;
+}
+
+#search-button:hover {
+    background-color: #961313;
+}
+
+#search-icon {
+    color: white;
+}
+
+main {
+    position: relative;
+    top: 4.5vmax;
 }
 
 #main-content-holder {

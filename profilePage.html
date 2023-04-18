@@ -2,6 +2,7 @@
 <html>
     <head>
         <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Profile - What's Up?</title>
 
         <!-- [START] BOOTSTRAP PREREQUISITE FILES -->
@@ -30,70 +31,80 @@
 
     <body>
 
-        <nav class="navbar navbar-custom">
-            <div class="container-fluid">
+        <nav>
+            <div id="navbar-contents">
                 <!-- [START] HAMBURGER MENU -->
-                <!-- Collapse button -->
-                <button id="hamburger-button" class="navbar-toggler me-3 hamburger-button" type="button" data-toggle="collapse" aria-expanded="false" aria-label="Toggle navigation">
-                    <div class="animated-icon"><span></span><span></span><span></span></div>
-                </button>
+                <div id="hamburger">
+                     <!-- Collapse button -->
+                    <button id="hamburger-button" class="navbar-toggler me-3 hamburger-button" type="button" data-toggle="collapse" aria-expanded="false" aria-label="Toggle navigation">
+                        <div class="animated-icon"><span></span><span></span><span></span></div>
+                    </button>
+
+                    <!-- [START] SIDENAVBAR -->
+                    <div class="row">
+                        <div class="col-2 d-flex justify-content-center">
+                            <div id="mySidenav" class="sidenav">
+                            </div>  
+                        </div>
+                    </div>
+                    <!-- [END] SIDENAVBAR -->
+
+                </div>
                 <!-- [END] HAMBURGER MENU -->
 
-                <!-- [START] SIDENAVBAR -->
-                <div class="row">
-                    <div class="col-2 d-flex justify-content-center">
-                        <div id="mySidenav" class="sidenav">
-                        </div>  
-                    </div>
+                <div id="brand-logo">
+                    <a id="brand-link" href="#">
+                        <img alt="Site Logo" src="assets/svg/What'sUpLogo.svg" class="siteLogo">
+                    </a> 
                 </div>
-                <!-- [END] SIDENAVBAR -->
 
-                <a class="navbar-brand" href="#">
-                    <img alt="Site Logo" src="assets/svg/What'sUpLogo.svg" class="siteLogo">
-                </a> 
+                <div id="search">
+                    <form action="" class="d-flex input-group w-100">
+                        <input id="search-bar" class="form-control me-0" type="search" placeholder="Search What's UP?" aria-label="Search">
+                        <button type="submit" id="search-button" class="btn">
+                            <i class="fa-solid fa-magnifying-glass" id="search-icon"></i>
+                        </button>
+                    </form>
+                    </form>
+                </div>
 
-                <!-- [START] SEARCH -->
-                <form class="d-flex me-auto input-group w-25">
-                    <input class="form-control me-0" type="search" placeholder="Search What's UP?" aria-label="Search">
-                    <button type="button" class="btn btn-custom">
-                        <img alt="Site Logo" src="assets/images/search_icon.png" class="search-icon">
-                    </button>
-                </form>
-                <!-- [END] SEARCH -->
             </div>
-
         </nav>
         
         <div id="profile-background">
-            <!-- [START] COVER PHOTO -->
-            <div class="d-flex justify-content-center align-items-center">
-                <img src="assets/images/temporaryBackground.jpg" alt="CoverPhoto" id="cover-photo">
-            </div>
-            <!-- [END] COVER PHOTO -->
-            <div class="d-flex justify-content-center">
-                <div id="profile">
-                    <img src="assets/images/logos/upvLogo.png" alt="ProfilePicture" id="profile-picture">
-                    <div id="profile-details">
-                        <p id="page-name">University of the Philippines Visayas</p>
-                        <p id="classification">Official University Account</p>
+            <div id="profile-contents">
+                <!-- [START] COVER PHOTO -->
+                <div class="d-flex justify-content-center align-items-center">
+                    <div id="cover-photo-div">
+                        <img src="assets/images/temporaryBackground.jpg" alt="CoverPhoto" id="cover-photo">
                     </div>
                 </div>
-            </div>
-            <div class="d-flex justify-content-center">
-                <div id="profile-divider">
-                    <hr></hr>
+                <!-- [END] COVER PHOTO -->
+                <div class="d-flex justify-content-center">
+                    <div id="profile">
+                        <img src="assets/images/logos/upvLogo.png" alt="ProfilePicture" id="profile-picture">
+                        <div id="profile-details">
+                            <p id="page-name">University of the Philippines Visayas</p>
+                            <p id="classification">Official University Account</p>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div class="d-flex justify-content-center">
-                <div id="navbar-profile-options">
-                    <ul class="navbar-nav ms auto list-group list-group-horizontal">
-                        <li class="nav-item">
-                            <a id="home-button" class="nav-link active">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a id="about-button" class="nav-link">About</a>
-                        </li>
-                    </ul>
+                <div class="d-flex justify-content-center">
+                    <div id="profile-divider">
+                        <hr></hr>
+                    </div>
+                </div>
+                <div class="d-flex justify-content-center">
+                    <div id="navbar-profile-options">
+                        <ul class="navbar-nav ms auto list-group list-group-horizontal">
+                            <li class="nav-item">
+                                <a id="home-button" class="nav-link active">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a id="about-button" class="nav-link">About</a>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>

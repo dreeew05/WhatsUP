@@ -31,8 +31,8 @@
 
 .animated-icon {
     z-index: 4;
-    width: 30px;
-    height: 20px;
+    width: 2vmax;
+    height: 2vmax;
     position: relative;
     margin: 0px;
     -webkit-transform: rotate(0deg);
@@ -49,8 +49,8 @@
 .animated-icon span {
     display: block;
     position: absolute;
-    height: 3px;
-    width: 100%;
+    height: 0.15vmax;
+    width: 87.5%;
     border-radius: 9px;
     opacity: 1;
     left: 0;
@@ -69,7 +69,7 @@
 }
   
 .animated-icon span:nth-child(1) {
-    top: 0px;
+    top: 0.3vmax;
     -webkit-transform-origin: left center;
     -moz-transform-origin: left center;
     -o-transform-origin: left center;
@@ -77,7 +77,7 @@
 }
   
 .animated-icon span:nth-child(2) {
-    top: 10px;
+    top: .925vmax;
     -webkit-transform-origin: left center;
     -moz-transform-origin: left center;
     -o-transform-origin: left center;
@@ -85,7 +85,7 @@
 }
   
 .animated-icon span:nth-child(3) {
-    top: 20px;
+    top: 1.55vmax;
     -webkit-transform-origin: left center;
     -moz-transform-origin: left center;
     -o-transform-origin: left center;
@@ -97,8 +97,8 @@
     -moz-transform: rotate(45deg);
     -o-transform: rotate(45deg);
     transform: rotate(45deg);
-    top: 0px;
-    left: 8px;
+    top: 0.3vmax;
+    left: 0.8vmax;
     background: black;
 }
   
@@ -112,8 +112,8 @@
     -moz-transform: rotate(-45deg);
     -o-transform: rotate(-45deg);
     transform: rotate(-45deg);
-    top: 21px;
-    left: 8px;
+    top: 1.55vmax;
+    left: 0.8vmax;
     background: black;
 }
   
