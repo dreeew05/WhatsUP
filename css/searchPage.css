@@ -120,7 +120,7 @@ input:placeholder-shown {
 .profile-text p {
     text-align: left;
     font-family: 'ProductSansBold';
-    font-size: 2.25vmax;
+    font-size: 2.25rem;
 }
 
 #profile-results-holder {
@@ -133,8 +133,8 @@ input:placeholder-shown {
 #profile-results-holder img {
     height: 100%;
     width: 100%;
-    max-height: 4vmax;
-    max-width: 4vmax;
+    max-height: 4rem;
+    max-width: 4rem;
 }
 
 .profile-result-text {
@@ -150,19 +150,19 @@ input:placeholder-shown {
 
 .profile-title {
     font-family: 'ProductSansBold';
-    font-size: 1.25vmax;
+    font-size: 1.25rem;
     margin-bottom: 0rem;
 }
 
 .profile-category {
     font-family: 'ProductSansRegular';
-    font-size: 0.75vmax;
+    font-size: 0.75rem;
     font-style: italic;
     margin-bottom: 0.10rem;
 }
 
 .profile-description {
-    font-size: 0.5vmax;
+    font-size: 0.5rem;
     font-family: 'ProductSansRegular';
 }
 
