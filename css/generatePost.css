@@ -21,7 +21,7 @@
     padding-bottom: 0.5rem;
     display: flex;
     flex-direction: row;
-    height: 2.5rem;
+    height: 2.5vmax;
     margin-top: 0.5rem;
     margin-bottom: 0.25rem;
 }
@@ -41,12 +41,12 @@
 }
 
 .profile-text-content .profile-name {
-    font-size: 0.75rem;
+    font-size: 0.75vmax;
     font-family: 'ProductSansBold';
 }
 
 .profile-text-content .date-time {
-    font-size: 0.5rem;
+    font-size: 0.5vmax;
     font-family: 'ProductSansRegular';
     margin-top: -1rem;
 }
@@ -58,7 +58,7 @@
 }
 
 .post-text p {
-    font-size: 0.85rem;
+    font-size: 0.85vmax;
 }
 
 .media-holder, .custom-container {
@@ -148,7 +148,7 @@
 
 .media-div i {
     color: white;
-    font-size: 4rem;
+    font-size: 4vmax;
     position: absolute;
     top: 50%;
     left: 50%;
@@ -160,18 +160,18 @@
 .map-div {
     padding-left: 3%;
     padding-right: 3%;
-    height: 20rem;
+    height: 20vmax;
     margin-top: 0.25rem;
     margin-bottom: 0.25rem;
 }
 
 .map-text {
     font-family: 'ProductSansBold';
-    font-size: 2rem;
+    font-size: 2vmax;
 }
 
 .map-holder {
-    height: 15rem;
+    height: 15vmax;
     border-radius: 1rem;
     border: 2.5px solid black;
 }
@@ -188,7 +188,7 @@
 }
 
 .tag-button {
-    font-size: 0.75rem;
+    font-size: 0.75vmax;
     padding-top: 0.5vmax;
     padding-bottom: 0.5vmax;
     padding-left: 0.75vmax;
@@ -205,7 +205,7 @@
 
 .tag-text {
     font-family: 'ProductSansBold';
-    font-size: 2rem;
+    font-size: 2vmax;
 }
 
 

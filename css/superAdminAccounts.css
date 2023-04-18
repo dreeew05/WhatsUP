@@ -1,0 +1,59 @@
+@import url('/css/fonts.css');
+
+html {
+    background-color: #d9d9d9;
+}
+
+body {
+    background-color: #d9d9d9;
+}
+
+img {
+    object-fit: cover;
+}
+
+.navbar-custom{
+    background-color: #006B3B;
+}
+
+.navbar-toggler:focus,
+.navbar-toggler:active,
+.navbar-toggler-icon:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+.siteLogo {
+    height: 5rem;
+}
+
+.btn-custom {
+    background-color: #961313;
+}
+
+.btn-custom:hover {
+    background-color: #961313;
+}
+
+.search-icon {
+    height: 1rem;
+}
+
+input:placeholder-shown {
+   font-style: italic;
+}
+
+#main-content-holder {
+    margin-top: 1.25rem;
+}
+
+#selection-holder {
+    background-color: white;
+    padding-top: 0.25rem;
+    padding-bottom: 0.5rem;
+    border-radius: 0.75vmax;
+    width: 80%;
+    display: block;
+    margin: auto;
+    margin-bottom: 1rem;
+}

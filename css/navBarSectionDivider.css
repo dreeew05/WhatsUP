@@ -1,6 +1,5 @@
 #navbar-profile-options {
-    width: 70rem;
-    padding-left: 1rem;
+    width: auto;
     overflow: hidden;
 }
 
@@ -10,7 +9,7 @@
 }
 
 .nav-item a {
-    font-size: 1.75vmin;
+    font-size: 1vmax;
     font-family: 'ProductSansRegular';
     color: white;
 }
