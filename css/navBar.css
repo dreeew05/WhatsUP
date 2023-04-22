@@ -21,7 +21,8 @@ nav {
 }
 
 #logos {
-    display: block;
+    display: flex;
+    flex-direction: row;
     margin-top: auto;
     margin-bottom: auto;
 }
@@ -80,4 +81,9 @@ input:placeholder-shown {
     border-radius: 5px;
     background-color: #961313;
     padding: 20%;
+}
+
+#log-button:hover {
+    background-color: white;
+    color: black;
 }

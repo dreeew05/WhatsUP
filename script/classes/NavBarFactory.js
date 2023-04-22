@@ -95,25 +95,7 @@ export class NavBarFactory {
     }
 
     generateLogos(QUANTITY) {
-        let logos       = new CreateElement("div", "logos", null).createElement(),
-            brandLogo  = new CreateElement("div", "brand-logo", null)
-                            .createElement(),
-            brandLink  = new CreateElement("a", "brand-link", null)
-                            .createElement(),
-            brandImage = new CreateElement("img", null, "site-logo")
-                            .createElement();
-                
-        // SET ATTRIBUTE
-        brandLink.href        = "#";
-        const BRAND_LOGO_PATH = "/assets/svg/What'sUpLogo.svg"
-        this.setImageAttributes(brandImage, "Source Logo", 
-            BRAND_LOGO_PATH);
-
-        // APPEND CHILD
-        this.getNavBarContents().appendChild(logos);
-        logos.appendChild(brandLogo);
-        brandLogo.appendChild(brandLink);
-        brandLink.appendChild(brandImage);
+        let logos       = new CreateElement("div", "logos", null).createElement();
 
         if(QUANTITY == 2) {
             let upLogo  = new CreateElement("div", "up-logo", null)
@@ -133,6 +115,25 @@ export class NavBarFactory {
             upLogo.appendChild(upLink);
             upLink.appendChild(upImage);
         }
+
+        let brandLogo  = new CreateElement("div", "brand-logo", null)
+                            .createElement(),
+            brandLink  = new CreateElement("a", "brand-link", null)
+                            .createElement(),
+            brandImage = new CreateElement("img", null, "site-logo")
+                            .createElement();
+                
+        // SET ATTRIBUTE
+        brandLink.href        = "#";
+        const BRAND_LOGO_PATH = "/assets/svg/What'sUpLogo.svg"
+        this.setImageAttributes(brandImage, "Source Logo", 
+            BRAND_LOGO_PATH);
+
+        // APPEND CHILD
+        this.getNavBarContents().appendChild(logos);
+        logos.appendChild(brandLogo);
+        brandLogo.appendChild(brandLink);
+        brandLink.appendChild(brandImage);
     }
 
     setImageAttributes(image, alt, source) {

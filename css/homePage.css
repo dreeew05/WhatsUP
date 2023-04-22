@@ -1,0 +1,25 @@
+@import url('/css/fonts.css');
+@import url('/css/scrollBar.css');
+@import url('/css/generatePost.css');
+@import url('/css/navBar.css');
+@import url('/css/sideNavbar.css');
+
+html {
+    background-color: #d9d9d9;
+}
+
+body {
+    background-color: #d9d9d9;
+}
+
+/* NAVBAR SECTION DIVIDER */
+
+#navbar-profile-options {
+    width: 70rem !important;
+    padding-left: 1rem;
+    margin-bottom: 1rem;
+}
+
+#posts {
+    margin-top: 5vmax;
+}
