@@ -106,8 +106,8 @@ export class NavBarFactory {
                           .createElement();
             
             // SET ATTRIBUTE
-            upLink.href        = "https://www.up.edu.ph";
-            const UP_LOGO_PATH = "/assets/images/logos/upSystemLogo.png";
+            upLink.href        = "https://www.upv.edu.ph/";
+            const UP_LOGO_PATH = "/assets/images/logos/upvLogo.png";
             this.setImageAttributes(upImage, "UP Logo", UP_LOGO_PATH);
 
             // APPEND CHILD
