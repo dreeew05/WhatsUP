@@ -72,11 +72,11 @@ class ProfilePage {
         for(let i = 0; i < buttons.length; i++) {
             buttons[i].onclick = function() {
 
-                let type  = object[i].type,
-                    id    = object[i].id,
-                    query = "?type=" + type + "&id=" + id;
+                let type   = object[i].type,
+                    id     = object[i].id,
+                    query  = "?type=" + type + "&id=" + id;
 
-                window.location.href = BASE_PATH + query;
+                window.location.href = BASE_PATH  + query;
             }
         }
     }

@@ -19,8 +19,8 @@ export class GenerateThread extends GeneratePost {
         let POST_HOLDER = document.getElementById("post-holder-" 
                           + super.getID());
 
-        let THREAD_HOLDER = new CreateElement("div", null, "thread-holder-" 
-                            + this.getThreadID()).createElement();
+        let THREAD_HOLDER = new CreateElement("div", "thread-holder-" 
+                            + this.getThreadID(), null).createElement();
         
         let line = new CreateElement("hr", null, 
                    "thread-divider").createElement();

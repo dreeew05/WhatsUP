@@ -16,7 +16,7 @@ class ShowPostThread {
         this.threadArray = [];
 
         this.getData(); //TEST DATA
-        
+
         this.initializeFeedGenerator();
         this.goBack();
     }
@@ -27,7 +27,7 @@ class ShowPostThread {
     // VISUALIZATION PURPOSES THROUGH JSON
     // [START]
     getData() {
-        let locationHeader = window.location.search,
+        let locationHeader = window.location.href,
             type           = null,
             id             = null;
 
@@ -41,6 +41,9 @@ class ShowPostThread {
         else {
             this.getPostIDFromThreads(id);
         }
+
+        // GO TO TARGET ID
+        this.scrollIntoID(type, id);
 
     }
 
@@ -72,13 +75,25 @@ class ShowPostThread {
 
     getPostIDFromThreads(id) {
         for(let i = 0; i < threadJSON.length; i++) {
-            if(threadJSON[i].id = id) {
+            if(threadJSON[i].id == id) {
                 this.getPostData(threadJSON[i].post_id);
                 break;
             }
         }
     }
     // [END]
+
+    scrollIntoID(TYPE, ID) {
+        let goToID   = TYPE + "-holder-" + ID;
+        // let goToID = "thread-holder-2006";
+
+        window.onload = function() {
+            console.log(document.getElementById(goToID));
+            document.getElementById(goToID).scrollIntoView({
+                behavior : "smooth"
+            });
+        }
+    }
 
     initializeFeedGenerator() {
         let feedGenerator = new FeedGenerator();
