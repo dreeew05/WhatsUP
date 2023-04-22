@@ -29,10 +29,7 @@ class HomePage {
         let all = postsJSON.concat(threadJSON);
 
         feedGenerator.initializeSideNavBar();
-        // feedGenerator.generatePost(postsJSON);
-        // feedGenerator.generateThread(threadJSON);
         feedGenerator.generateDefaultPostThread(all)
-        feedGenerator.generateAbout(aboutJSON);
         
         new PostThreadDataDriver(feedGenerator.getHasThreadsArray());
     }

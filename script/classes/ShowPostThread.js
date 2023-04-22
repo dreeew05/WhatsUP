@@ -94,7 +94,6 @@ class ShowPostThread {
         // let goToID = "thread-holder-2006";
 
         window.onload = function() {
-            console.log(document.getElementById(goToID));
             document.getElementById(goToID).scrollIntoView({
                 behavior : "smooth"
             });
