@@ -1,13 +1,18 @@
 import { CreateElement } from "./CreateElement.js";
 
 export class NavBarFactory {
-    constructor(type) {
-        this.type = type;
+    constructor(type, logStatus) {
+        this.type      = type;
+        this.logStatus = logStatus;
+
         this.navbarFactory(this.getType());
     }
 
     getType() {
         return this.type;
+    }
+    getLogStatus() {
+        return this.logStatus;
     }
 
     getNavBarContents() {
@@ -35,6 +40,14 @@ export class NavBarFactory {
         this.generateHamburger();
         this.generateLogos(1);
         this.generateSearch();
+        this.generateLogButton();
+    }
+
+    typeTwo() {
+        this.generateHamburger();
+        this.generateLogos(2);
+        this.generateSearch();
+        this.generateLogButton();
     }
 
     generateHamburger() {
@@ -144,6 +157,7 @@ export class NavBarFactory {
 
         // SET ATTRIBUTE 
         searchForm.setAttribute("action", "");
+        searchBtn.setAttribute("type", "submit");
         searchBar.setAttribute("type", "search");
         searchBar.setAttribute("placeholder", "Search What's UP?");
         searchBar.setAttribute("aria-label", "Search");
@@ -154,6 +168,27 @@ export class NavBarFactory {
         searchForm.appendChild(searchBar);
         searchForm.appendChild(searchBtn);
         searchBtn.appendChild(searchIcon);
+
+    }
+
+    generateLogButton() {
+        let buttonHolder = new CreateElement("div", "log-button-holder", null)
+                           .createElement(),
+            button       = new CreateElement("button", "log-button", null)
+                           .createElement();
+        
+        // SET ATTRIBUTE
+        button.setAttribute("type", "button");
+        if(this.getLogStatus() == "visitor") {
+            button.textContent = "Admin";
+        }
+        else {
+            button.textContent = "Logout";
+        }
+
+        // APPEND CHILD
+        this.getNavBarContents().appendChild(buttonHolder);
+        buttonHolder.appendChild(button);
     }
 
 }

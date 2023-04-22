@@ -1,0 +1,83 @@
+nav {
+    background-color: #006B3B;
+    position: fixed;
+    width: 100%;
+    z-index: 1;
+}
+
+#navbar-contents {
+    display: flex;
+    flex-direction: row;
+    padding-left: 2%;
+    padding-right: 2%;
+    padding-top: 0.5%;
+    padding-bottom: 0.5%;
+}
+
+#hamburger {
+    display: block;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+#logos {
+    display: block;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+#logos img{
+    height: 100%;
+    height: 3.5vmax;
+}
+
+#search {
+    width: 30vmax;
+    display: block;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+form {
+    margin-left: 5%;
+}
+
+#search-bar, #search-button {
+    margin-top: 1%;
+    margin-bottom: 1%;
+}
+
+input:placeholder-shown {
+    font-style: italic;
+ }
+
+#search-button {
+    background-color: #961313;
+    z-index: 0;
+}
+
+#search-button:hover {
+    background-color: #961313;
+}
+
+#search-icon {
+    color: white;
+}
+
+#log-button-holder {
+    display: block;
+    margin-top: auto;
+    margin-bottom: auto;
+    float: right;
+    margin-left: auto;
+    margin-right: 1%;
+}
+
+#log-button {
+    font-family: 'ProductSansBold';
+    font-size: 1vmax;
+    color: white;
+    border-radius: 5px;
+    background-color: #961313;
+    padding: 20%;
+}

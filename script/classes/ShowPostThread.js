@@ -86,7 +86,7 @@ class ShowPostThread {
     // [END]
 
     initializeNavBar() {
-        new NavBarFactory("type1");
+        new NavBarFactory("type1", "visitor");
     }
 
     scrollIntoID(TYPE, ID) {

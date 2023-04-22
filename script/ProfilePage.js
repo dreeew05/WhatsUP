@@ -21,7 +21,7 @@ class ProfilePage {
     }
 
     initializeNavBar() {
-        new NavBarFactory("type1");
+        new NavBarFactory("type1", "visitor");
     }
 
     navBarSectionDividerImplementation() {
