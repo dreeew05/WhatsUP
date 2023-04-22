@@ -4,6 +4,7 @@
 import { NavBarSectionDivider } from "./classes/NavBarSectionDivider.js";
 import { FeedGenerator } from "./classes/FeedGenerator.js";
 import { PostThreadDataDriver } from "./classes/PostThreadDataDriver.js";
+import { NavBarFactory } from "./classes/NavBarFactory.js";
 
 // TEST DATA
 import postsJSON from "../test/posts.json" assert { type: 'json' };
@@ -13,10 +14,14 @@ import aboutJSON from "../test/about.json" assert { type: 'json' };
 class ProfilePage {
 
     constructor() {
+        this.initializeNavBar();
         this.navBarSectionDividerImplementation();
         this.initializeFeedGenerator();
-        this.showThreadButton();
 
+    }
+
+    initializeNavBar() {
+        new NavBarFactory("type1");
     }
 
     navBarSectionDividerImplementation() {

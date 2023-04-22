@@ -2,6 +2,7 @@
 // Description: Show Threads for the Particular Post
 
 import { FeedGenerator } from "./FeedGenerator.js";
+import { NavBarFactory } from "./NavBarFactory.js";
 
 // TEST DATA
 import postsJSON from "../../test/posts.json" assert { type: 'json' };
@@ -17,6 +18,7 @@ class ShowPostThread {
 
         this.getData(); //TEST DATA
 
+        this.initializeNavBar();
         this.initializeFeedGenerator();
         this.goBack();
     }
@@ -82,6 +84,10 @@ class ShowPostThread {
         }
     }
     // [END]
+
+    initializeNavBar() {
+        new NavBarFactory("type1");
+    }
 
     scrollIntoID(TYPE, ID) {
         let goToID   = TYPE + "-holder-" + ID;

@@ -4,6 +4,7 @@
 import { NavBarSectionDivider } from "./classes/NavBarSectionDivider.js";
 import { FeedGenerator } from "./classes/FeedGenerator.js";
 import { PostThreadDataDriver } from "./classes/PostThreadDataDriver.js";
+import { NavBarFactory } from "./classes/NavBarFactory.js";
 
 // TEST DATA
 import postsJSON from "../test/posts.json" assert { type: 'json' };
@@ -12,8 +13,13 @@ import profileJSON from "../test/searchProfile.json" assert { type: 'json' };
 class SearchPage {
 
     constructor() {
+        this.initializeNavBar();
         this.navBarSectionDividerImplementation();
         this.initializeFeedGenerator();       
+    }
+
+    initializeNavBar() {
+        new NavBarFactory("type1");
     }
 
     navBarSectionDividerImplementation() {
