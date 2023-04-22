@@ -7,10 +7,12 @@ import { GeneratePostTags } from "./GeneratePostTags.js";
 
 export class GeneratePost {
 
-    constructor(postID, profileName, profilePic, dateTime, post, postMedia, 
-                postMediaType, postCoordinates, mapAPI, tags) {
-
-        this.postID          = postID;
+    constructor(id, profileName, profilePic, dateTime, post, postMedia, 
+                postMediaType, postCoordinates, mapAPI, tags, hasThread,
+                type) {
+        
+        // PASSED VARIABLES
+        this.id              = id;
         this.profileName     = profileName;
         this.profilePic      = profilePic;
         this.dateTime        = dateTime;
@@ -20,10 +22,15 @@ export class GeneratePost {
         this.postCoordinates = postCoordinates;
         this.mapAPI          = mapAPI;
         this.tags            = tags;
+        this.hasThread       = hasThread;
+        this.type            = type;
+
+        // GLOBAL VARIABLES
+        this.threadObject = null;
     }
 
-    getPostID() {
-        return this.postID;
+    getID() {
+        return this.id;
     }
     getPostsContainer() {
         let POSTS  = document.getElementById("posts");
@@ -55,6 +62,19 @@ export class GeneratePost {
     }
     getTags() {
         return this.tags;
+    }
+    getHasThread() {
+        return this.hasThread;
+    }
+    getType() {
+        return this.type;
+    }
+    getThreadObject() {
+        return this.threadObject;
+    }
+
+    setThreadObject(threadObject) {
+        this.threadObject = threadObject;
     }
 
     createPostProfile(POST_HOLDER) {
@@ -99,7 +119,7 @@ export class GeneratePost {
     }
 
     createPostMap(POST_HOLDER) {
-        let mapID         = "map-".concat(this.getPostID()),
+        let mapID         = "map-".concat(this.getID()),
             mapDiv        = new CreateElement("div", null, "map-div").createElement(),
             mapHolder     = new CreateElement("div", mapID, "map-holder").createElement(),
             mapTextHolder = new CreateElement("div", null, null).createElement(),
@@ -123,24 +143,79 @@ export class GeneratePost {
         new GeneratePostTags(POST_HOLDER, TAGS);
     }
 
-    createPost() {
-        let postHolder = new CreateElement("div", "post-holder-" + this.getPostID(), 
-                                           "container justify-content-center post-holder")
-                                           .createElement();
-
-        this.getPostsContainer().appendChild(postHolder);
+    createPost(POST_HOLDER) {
+        this.getPostsContainer().appendChild(POST_HOLDER);
 
         // ACCORDING TO ORDER OF PRECEDENCE
 
-        this.createPostProfile(postHolder);
-        this.createPostParagraph(postHolder);
-        this.createPostImages(postHolder);
+        this.createPostProfile(POST_HOLDER);
+        this.createPostParagraph(POST_HOLDER);
+        this.createPostImages(POST_HOLDER);
 
         if(this.getPostCoordinates() != null) {
-            this.createPostMap(postHolder);
+            this.createPostMap(POST_HOLDER);
         }
 
-        this.createPostTags(postHolder, this.getTags());
+        this.createPostTags(POST_HOLDER, this.getTags());
+        // this.showThreadOption(POST_HOLDER);
+
+        if(this.getHasThread() == true) {
+            this.showThreadOption(POST_HOLDER);
+        }
+    }
+
+    showThreadOption(POST_HOLDER) {
+        let threadButtonDiv  = new CreateElement("div", null, 
+                               "thread-button-holder").createElement(),
+            showThreadButton = new CreateElement("button", null, 
+                               "show-thread-button").createElement();
+            
+        // SET ATTRIBUTE
+        showThreadButton.setAttribute("type", "button");
+        showThreadButton.textContent = "Show Thread";
+
+        POST_HOLDER.appendChild(threadButtonDiv);
+        threadButtonDiv.appendChild(showThreadButton);
+
+        // RETURN OBJECT
+        let obj = {
+            type : this.getType(),
+            id : this.getID()
+        }
+        this.setThreadObject(obj);
+    }
+
+    showDefault() {
+         let postHolder = new CreateElement("div", null, "container justify-content-center post-holder")
+                          .createElement();
+
+        this.createPost(postHolder);
+    }
+
+    showThreadView() {
+        let postHolder = new CreateElement("div", "post-holder-" + this.getID(), 
+                         "container justify-content-center post-holder")
+                        .createElement(),
+            headerDiv  = new CreateElement("div", "header-div", 
+                         null).createElement(), 
+            backButton = new CreateElement("button", "back-button", 
+                         null).createElement(),
+            backIcon   = new CreateElement("i", null, "fa fa-arrow-left")
+                         .createElement(),
+            threadText = new CreateElement("p", "thread-text", 
+                         null).createElement();
+        
+        // SET ATTRIBUTE
+        threadText.textContent = "Thread";
+        backButton.setAttribute("type", "button");
+        
+        // APPENDCHILD
+        postHolder.appendChild(headerDiv);
+        headerDiv.appendChild(backButton);
+        backButton.appendChild(backIcon);
+        headerDiv.appendChild(threadText);
+        this.createPost(postHolder);
+ 
     }
 
 }

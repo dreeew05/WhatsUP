@@ -13,6 +13,8 @@ body {
     background-color: #d9d9d9;
 }
 
+/* [START] NAVBAR */
+
 nav {
     background-color: #006B3B;
     position: fixed;
@@ -147,6 +149,8 @@ input:placeholder-shown {
     margin-right: 1rem;
     border: 0.10rem solid white;
 }
+
+/* [END] NAVBAR */
 
 /* NAVBAR SECTION DIVIDER */
 

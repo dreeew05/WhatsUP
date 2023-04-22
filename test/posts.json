@@ -1,6 +1,6 @@
 [
     {
-        "post_id": 1123,
+        "id": 1123,
         "profile_name": "University of the Philippines Visayas",
         "profile_pic": "upvLogo.png",
         "date_time": "March 1, 2022 7:00 AM",
@@ -16,10 +16,12 @@
             "haha": 0,
             "sad": 0,
             "angry": 0
-        }
+        },
+        "type" : "post",
+        "has_thread" : true
     },
     {
-        "post_id": 1124,
+        "id": 1124,
         "profile_name": "University of the Philippines Visayas",
         "profile_pic": "upvLogo.png",
         "date_time": "March 2, 2022 7:00 AM",
@@ -35,10 +37,12 @@
             "haha": 0,
             "sad": 0,
             "angry": 0
-        }
+        },
+        "type" : "post",
+        "has_thread" : true
     },
     {
-        "post_id": 1125,
+        "id": 1125,
         "profile_name": "University of the Philippines Visayas",
         "profile_pic": "upvLogo.png",
         "date_time": "March 2, 2022 7:00 AM",
@@ -54,10 +58,12 @@
             "haha": 0,
             "sad": 0,
             "angry": 0
-        }
+        },
+        "type" : "post",
+        "has_thread" : false
     },
     {
-        "post_id": 1126,
+        "id": 1126,
         "profile_name": "College of Arts and Sciences",
         "profile_pic": "casLogo.jpg",
         "date_time": "March 2, 2022 7:00 AM",
@@ -73,10 +79,12 @@
             "haha": 0,
             "sad": 0,
             "angry": 0
-        }
+        },
+        "type" : "post",
+        "has_thread" : true
     },
     {
-        "post_id": 1127,
+        "id": 1127,
         "profile_name": "College of Arts and Sciences",
         "profile_pic": "casLogo.jpg",
         "date_time": "March 2, 2022 7:00 AM",
@@ -92,10 +100,12 @@
             "haha": 0,
             "sad": 0,
             "angry": 0
-        }
+        },
+        
+        "has_thread" : false
     },
     {
-        "post_id": 1128,
+        "id": 1128,
         "profile_name": "UPV Komsai.org",
         "profile_pic": "komsai.png",
         "date_time": "March 3, 2022 7:00 AM",
@@ -111,10 +121,12 @@
             "haha": 0,
             "sad": 0,
             "angry": 0
-        }
+        },
+        "type" : "post",
+        "has_thread" : false
     },
     {
-        "post_id": 1129,
+        "id": 1129,
         "profile_name": "UPV Komsai.org",
         "profile_pic": "komsai.png",
         "date_time": "March 3, 2022 7:00 AM",
@@ -130,10 +142,12 @@
             "haha": 0,
             "sad": 0,
             "angry": 0
-        }
+        },
+        "type" : "post",
+        "has_thread" : false
     },
     {
-        "post_id": 1130,
+        "id": 1130,
         "profile_name": "UPV Komsai.org",
         "profile_pic": "komsai.png",
         "date_time": "March 3, 2022 7:00 AM",
@@ -149,10 +163,12 @@
             "haha": 0,
             "sad": 0,
             "angry": 0
-        }
+        },
+        "type" : "post",
+        "has_thread" : true
     },
     {
-        "post_id": 1131,
+        "id": 1131,
         "profile_name": "UPV Komsai.org",
         "profile_pic": "komsai.png",
         "date_time": "March 3, 2022 7:00 AM",
@@ -171,6 +187,8 @@
             "haha": 0,
             "sad": 0,
             "angry": 0
-        }
+        },
+        "type" : "post",
+        "has_thread" : false
     }
 ]

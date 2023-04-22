@@ -1,6 +1,6 @@
 [
     {
-        "thread_id": 2000,
+        "id": 2000,
         "post_id": 1123,
         "profile_name": "University of the Philippines Visayas",
         "profile_pic": "upvLogo.png",
@@ -17,10 +17,12 @@
             "haha": 0,
             "sad": 0,
             "angry": 0
-        }
+        },
+        "type" : "thread",
+        "has_thread" : true
     },
     {
-        "thread_id": 2001,
+        "id": 2001,
         "post_id": 1123,
         "profile_name": "University of the Philippines Visayas",
         "profile_pic": "upvLogo.png",
@@ -37,10 +39,12 @@
             "haha": 0,
             "sad": 0,
             "angry": 0
-        }
+        },
+        "type" : "thread",
+        "has_thread" : true
     },
     {
-        "thread_id": 2002,
+        "id": 2002,
         "post_id": 1124,
         "profile_name": "University of the Philippines Visayas",
         "profile_pic": "upvLogo.png",
@@ -57,10 +61,12 @@
             "haha": 0,
             "sad": 0,
             "angry": 0
-        }
+        },
+        "type" : "thread",
+        "has_thread" : true
     },
     {
-        "thread_id": 2003,
+        "id": 2003,
         "post_id": 1123,
         "profile_name": "College of Arts and Sciences",
         "profile_pic": "casLogo.jpg",
@@ -77,10 +83,12 @@
             "haha": 0,
             "sad": 0,
             "angry": 0
-        }
+        },
+        "type" : "thread",
+        "has_thread" : true
     },
     {
-        "thread_id": 2004,
+        "id": 2004,
         "post_id": 1126,
         "profile_name": "College of Arts and Sciences",
         "profile_pic": "casLogo.jpg",
@@ -97,10 +105,12 @@
             "haha": 0,
             "sad": 0,
             "angry": 0
-        }
+        },
+        "type" : "thread",
+        "has_thread" : true
     },
     {
-        "thread_id" : 2005,
+        "id" : 2005,
         "post_id": 1130,
         "profile_name": "UPV Komsai.org",
         "profile_pic": "komsai.png",
@@ -117,10 +127,12 @@
             "haha": 0,
             "sad": 0,
             "angry": 0
-        }
+        },
+        "type" : "thread",
+        "has_thread" : true
     },
     {
-        "thread_id" : 2006,
+        "id" : 2006,
         "post_id": 1123,
         "profile_name": "UPV Komsai.org",
         "profile_pic": "komsai.png",
@@ -140,6 +152,8 @@
             "haha": 0,
             "sad": 0,
             "angry": 0
-        }
+        },
+        "type" : "thread",
+        "has_thread" : true
     }
 ]

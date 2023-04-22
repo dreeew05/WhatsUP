@@ -39,7 +39,7 @@ export class GenerateSideNavBarContents {
         holderTitleText.textContent = this.getEntityName();
 
         // LINK ELEMENTS
-        let SIDENAV = document.getElementById("mySidenav");
+        let SIDENAV = document.getElementById("sidenavbar");
         SIDENAV.appendChild(entity);
         entity.appendChild(holderTitle);
         holderTitle.appendChild(holderTitleText);

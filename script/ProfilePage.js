@@ -14,6 +14,19 @@ class ProfilePage {
     constructor() {
         this.navBarSectionDividerImplementation();
         this.initializeFeedGenerator();
+        this.showThreadButton();
+
+        // GLOBAL VARIABLE
+        this.hasThreadsArray = [];
+
+    }
+
+    getHasThreadsArray() {
+        return this.hasThreadsArray;
+    }
+    
+    setThreadsArray(threadsArray) {
+        this.hasThreadsArray = threadsArray;
     }
 
     navBarSectionDividerImplementation() {
@@ -37,11 +50,37 @@ class ProfilePage {
     initializeFeedGenerator() {
         let feedGenerator = new FeedGenerator();
 
+        // TEST DATA
+        // POST + THREAD
+        let all = postsJSON.concat(threadJSON);
+
         feedGenerator.initializeSideNavBar();
-        feedGenerator.generatePost(postsJSON);
-        feedGenerator.generateThread(threadJSON);
+        // feedGenerator.generatePost(postsJSON);
+        // feedGenerator.generateThread(threadJSON);
+        feedGenerator.generateDefaultPostThread(all)
         feedGenerator.generateAbout(aboutJSON);
+        
+        this.setThreadsArray(feedGenerator.getHasThreadsArray());
     }
+
+    showThreadButton() {
+        // HTML PHASE [NOT] FINAL
+        const BASE_PATH = "http://127.0.0.1:5500/showPostThread.html",
+              object    = this.getHasThreadsArray();
+
+        let buttons = document.querySelectorAll(".show-thread-button");
+        for(let i = 0; i < buttons.length; i++) {
+            buttons[i].onclick = function() {
+
+                let type  = object[i].type,
+                    id    = object[i].id,
+                    query = "?type=" + type + "&id=" + id;
+
+                window.location.href = BASE_PATH + query;
+            }
+        }
+    }
+
 }
 
 // DRIVER [PLEASE DO NOT MODFIY]

@@ -1,4 +1,5 @@
 @import url('/css/fonts.css');
+@import url('/css/scrollBar.css');
 
 html {
     background-color: #d9d9d9;
@@ -12,48 +13,35 @@ img {
     object-fit: cover;
 }
 
-.navbar-custom{
+nav {
     background-color: #006B3B;
+    position: fixed;
+    width: 100%;
+    z-index: 1;
 }
 
-.navbar-toggler:focus,
-.navbar-toggler:active,
-.navbar-toggler-icon:focus {
-    outline: none;
-    box-shadow: none;
+#navbar-contents {
+    display: flex;
+    flex-direction: row;
+    padding-left: 2%;
+    padding-right: 2%;
+    padding-top: 0.5%;
+    padding-bottom: 0.5%;
 }
 
-.siteLogo {
-    height: 5rem;
-}
-
-.btn-custom {
-    background-color: #961313;
-}
-
-.btn-custom:hover {
-    background-color: #961313;
-}
-
-.search-icon {
-    height: 1rem;
-}
-
-input:placeholder-shown {
-   font-style: italic;
-}
-
-#main-content-holder {
-    margin-top: 1.25rem;
-}
-
-#selection-holder {
-    background-color: white;
-    padding-top: 0.25rem;
-    padding-bottom: 0.5rem;
-    border-radius: 0.75vmax;
-    width: 80%;
+#hamburger {
     display: block;
-    margin: auto;
-    margin-bottom: 1rem;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+#brand-logo {
+    display: block;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+#brand-logo img{
+    height: 100%;
+    height: 3.5vmax;
 }

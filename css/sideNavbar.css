@@ -30,7 +30,7 @@
 }
 
 .animated-icon {
-    z-index: 4;
+    z-index: 2;
     width: 2vmax;
     height: 2vmax;
     position: relative;
@@ -50,7 +50,7 @@
     display: block;
     position: absolute;
     height: 0.15vmax;
-    width: 87.5%;
+    width: 1.75vmax;
     border-radius: 9px;
     opacity: 1;
     left: 0;

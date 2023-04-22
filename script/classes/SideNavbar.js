@@ -7,6 +7,7 @@ import { GenerateSideNavBarContents } from "./GenerateSideNavBarContents.js";
 import collegeJSON from "../../test/sideNavBar/collegeContents.json" assert { type: 'json' };
 import studentJSON from "../../test/sideNavBar/studentContents.json" assert { type: 'json' };
 import universityJSON from "../../test/sideNavBar/universityContents.json" assert { type: 'json' };
+import { CreateElement } from "./CreateElement.js";
 
 export class SideNavBar {
 
@@ -27,13 +28,13 @@ export class SideNavBar {
     }
 
     hamburgerToggler() {
-        var width = document.getElementById("mySidenav").style.width;
+        var width = document.getElementById("sidenavbar").style.width;
         if (width === "0px" || width == "") {
-            document.getElementById("mySidenav").style.width = "24rem";
+            document.getElementById("sidenavbar").style.width = "24rem";
             $('.animated-icon').toggleClass('open');
         }
         else {
-            document.getElementById("mySidenav").style.width = "0px";
+            document.getElementById("sidenavbar").style.width = "0px";
             $('.animated-icon').toggleClass('open');
         }   
     }
