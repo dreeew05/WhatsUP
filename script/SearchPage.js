@@ -3,10 +3,10 @@
 
 import { NavBarSectionDivider } from "./classes/NavBarSectionDivider.js";
 import { FeedGenerator } from "./classes/FeedGenerator.js";
+import { PostThreadDataDriver } from "./classes/PostThreadDataDriver.js";
 
 // TEST DATA
 import postsJSON from "../test/posts.json" assert { type: 'json' };
-import threadJSON from "../test/threads.json" assert { type: 'json' };
 import profileJSON from "../test/searchProfile.json" assert { type: 'json' };
 
 class SearchPage {
@@ -40,9 +40,10 @@ class SearchPage {
         let feedGenerator = new FeedGenerator();
         
         feedGenerator.initializeSideNavBar();
-        feedGenerator.generatePost(postsJSON);
-        feedGenerator.generateThread(threadJSON);
+        feedGenerator.generateDefaultPostThread(postsJSON);
         feedGenerator.generateProfile(profileJSON);
+
+        new PostThreadDataDriver(feedGenerator.getHasThreadsArray());
     }
 
 }

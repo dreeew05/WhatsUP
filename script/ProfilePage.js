@@ -3,6 +3,7 @@
 
 import { NavBarSectionDivider } from "./classes/NavBarSectionDivider.js";
 import { FeedGenerator } from "./classes/FeedGenerator.js";
+import { PostThreadDataDriver } from "./classes/PostThreadDataDriver.js";
 
 // TEST DATA
 import postsJSON from "../test/posts.json" assert { type: 'json' };
@@ -16,17 +17,6 @@ class ProfilePage {
         this.initializeFeedGenerator();
         this.showThreadButton();
 
-        // GLOBAL VARIABLE
-        this.hasThreadsArray = [];
-
-    }
-
-    getHasThreadsArray() {
-        return this.hasThreadsArray;
-    }
-    
-    setThreadsArray(threadsArray) {
-        this.hasThreadsArray = threadsArray;
     }
 
     navBarSectionDividerImplementation() {
@@ -60,25 +50,7 @@ class ProfilePage {
         feedGenerator.generateDefaultPostThread(all)
         feedGenerator.generateAbout(aboutJSON);
         
-        this.setThreadsArray(feedGenerator.getHasThreadsArray());
-    }
-
-    showThreadButton() {
-        // HTML PHASE [NOT] FINAL
-        const BASE_PATH = "http://127.0.0.1:5500/showPostThread.html",
-              object    = this.getHasThreadsArray();
-
-        let buttons = document.querySelectorAll(".show-thread-button");
-        for(let i = 0; i < buttons.length; i++) {
-            buttons[i].onclick = function() {
-
-                let type   = object[i].type,
-                    id     = object[i].id,
-                    query  = "?type=" + type + "&id=" + id;
-
-                window.location.href = BASE_PATH  + query;
-            }
-        }
+        new PostThreadDataDriver(feedGenerator.getHasThreadsArray());
     }
 
 }
