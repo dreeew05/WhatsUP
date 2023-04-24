@@ -124,7 +124,7 @@ export class NavBarFactory {
                             .createElement();
                 
         // SET ATTRIBUTE
-        brandLink.href        = "#";
+        brandLink.href        = "homepage.html";
         const BRAND_LOGO_PATH = "/assets/svg/What'sUpLogo.svg"
         this.setImageAttributes(brandImage, "Source Logo", 
             BRAND_LOGO_PATH);
