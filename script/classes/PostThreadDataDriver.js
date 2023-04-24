@@ -1,3 +1,6 @@
+// Author: fiVe
+// Description: Creates unique links for each thread button
+
 export class PostThreadDataDriver {
     constructor(HAS_THREADS_ARRAY) {
         this.hasThreadsArray = HAS_THREADS_ARRAY;

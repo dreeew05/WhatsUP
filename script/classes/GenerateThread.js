@@ -1,3 +1,6 @@
+// Author: fiVe
+// Description: Generate Threads
+
 import { CreateElement } from "./CreateElement.js";
 import { GeneratePost } from "./GeneratePost.js";
 

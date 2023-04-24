@@ -1,3 +1,6 @@
+// Author: fiVe
+// Description: Generate the contents of the Side Navigation Bar
+
 import { IntegerToEnglishWord } from "./IntegerToEnglishWord.js";
 import { CreateElement } from "./CreateElement.js";
 

@@ -1,3 +1,6 @@
+// Author: fiVe
+// Description: Factory Method for different types of Navigation Bar
+
 import { CreateElement } from "./CreateElement.js";
 
 export class NavBarFactory {
