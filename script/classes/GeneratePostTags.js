@@ -50,11 +50,13 @@ export class GeneratePostTags {
             tagButtonsDiv.appendChild(tagButton);
 
             // WHEN BUTTON IS CLICKED
-            // tagButton.addEventListener("click", 
-            //     function() {
-            //         alert(value);
-            //     }
-            // );
+            tagButton.addEventListener("click", 
+                function() {
+                    const SEARCH_PATH    = "searchPage.html";
+                    let query            = "?search=" + value;
+                    window.location.href = SEARCH_PATH + query;
+                }
+            );
 
         }
     }
