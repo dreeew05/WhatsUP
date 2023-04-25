@@ -71,7 +71,7 @@ input:placeholder-shown {
     margin-bottom: auto;
     float: right;
     margin-left: auto;
-    margin-right: 1%;
+    margin-right: 2%;
 }
 
 #log-button {
@@ -86,4 +86,8 @@ input:placeholder-shown {
 #log-button:hover {
     background-color: white;
     color: black;
+}
+
+#sample {
+    height: 1vmax;
 }

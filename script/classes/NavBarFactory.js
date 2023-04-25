@@ -152,8 +152,8 @@ export class NavBarFactory {
     generateSearch() {
         let searchDiv  = new CreateElement("div", "search", null)
                        .createElement(),
-            searchForm = new CreateElement("form", null, 
-                         "d-flex input-group w-100")
+            searchForm = new CreateElement("form", "search-form", 
+                         "d-flex input-group")
                          .createElement(),
             searchBar  = new CreateElement("input", "search-bar", 
                          "form-control me-0")

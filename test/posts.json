@@ -190,5 +190,29 @@
         },
         "type" : "post",
         "has_thread" : false
+    },
+    {
+        "id": 1132,
+        "profile_name": "UPV Komsai.org",
+        "profile_pic": "komsai.png",
+        "date_time": "March 5, 2022 7:00 AM",
+        "post": "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc.",
+        "post_media": {
+            "type": "image",
+            "file": ["temporaryBackground.jpg", "sample3.jpg", "sample1.jpg", "sample2.jpg"]
+        },
+        "tags" : ["temporaryBackground", "sample3", "sample1", "sample2"],
+        "post_coordinates": {
+            "latitude" : 10.6420,
+            "longtitude" : 122.2308
+        },
+        "reactions": {
+            "like": 0,
+            "haha": 0,
+            "sad": 0,
+            "angry": 0
+        },
+        "type" : "post",
+        "has_thread" : false
     }
 ]

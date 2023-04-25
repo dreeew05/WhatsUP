@@ -36,6 +36,13 @@ body {
     width: 100%;
 }
 
+label {
+    font-family: 'ProductSansRegular';
+    font-size: 1vmax;
+    margin-top: 0.5vmax;
+    margin-bottom: 0.5vmax;
+}
+
 hr {
     width: 95%;
     border: 0.10vmax solid black;
@@ -44,6 +51,8 @@ hr {
 input, textarea {
     border-radius: 0.25vmax;
     border: none;
+    padding: 2%;
+    font-family: 'ProductSansRegular';
 }
 
 input {
@@ -54,6 +63,7 @@ input {
 textarea {
     width: 95%;
     height: 15rem;
+    overflow: auto;
 }
 
 #register-account-contents {
@@ -63,7 +73,7 @@ textarea {
 
 .category-title {
     font-family: 'ProductSansBold';
-    font-size: 1.5vmax;
+    font-size: 2vmax;
 }
 
 #credentials {
