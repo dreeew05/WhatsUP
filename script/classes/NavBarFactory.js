@@ -53,6 +53,11 @@ export class NavBarFactory {
         this.generateLogButton();
     }
 
+    typeThree() {
+        this.generateLogos(1);
+        this.generateLogButton();
+    }
+
     generateHamburger() {
         let hamburger       = new CreateElement("div", "hamburger", null).createElement(),
             hamburgerButton = new CreateElement("button", "hamburger-button", 

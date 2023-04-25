@@ -44,7 +44,7 @@ export class GenerateAbout {
             category             = new CreateElement("div", "category", null).createElement(),
             categoryTitle        = new CreateElement("p", null, "emphasized-text").createElement(),
             categoryDetailHolder = new CreateElement("div", null, "logo-text-holder").createElement(),
-            folderOpen           = new CreateElement("i", null, "fa-solid fa-folder-open").createElement(),
+            // folderOpen           = new CreateElement("i", null, "fa-solid fa-folder-open").createElement(),
             categoryPara         = new CreateElement("p", null, "about-paragraph").createElement();
 
         aboutDiv.appendChild(aboutHolder);
@@ -61,7 +61,7 @@ export class GenerateAbout {
         aboutHolder.appendChild(category);
         category.appendChild(categoryTitle);
         category.appendChild(categoryDetailHolder);
-        categoryDetailHolder.appendChild(folderOpen);
+        categoryDetailHolder.appendChild(this.getIcon());
         categoryDetailHolder.appendChild(categoryPara);
         categoryTitle.textContent = "Category";
         categoryPara.textContent  = this.getCategory();
@@ -94,6 +94,25 @@ export class GenerateAbout {
 
         this.generateMultipleDetails("socials", socialValues, socialIcons, social);
     }
+
+    getIcon() {
+        const CATEGORY = this.getCategory();
+        let icon       = null;
+        switch(CATEGORY) {
+            case "College & University" :
+                icon = new CreateElement("i", null, 
+                       "fa-solid fa-graduation-cap").createElement()
+                break;
+            case "Organization" :
+                icon = new CreateElement("i", null,
+                       "fa-solid fa-user-group").createElement();
+                break;
+            default:
+                break;
+        }
+        return icon;
+    }
+
     generateMultipleDetails(TYPE, VALUES, ICONS, parentDiv) {
         for(let i = 0; i < VALUES.length; i++) {
             if(VALUES[i] != null) {

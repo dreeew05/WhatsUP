@@ -25,5 +25,50 @@
             <div id="navbar-contents"></div>
         </nav>
 
+        <main>
+            <div id="tabbed-panel" class="container">
+              <ul class="nav nav-tabs nav-fill nav-justified" id="tab-header" role="tablist">
+                <li class="nav-item" role="presentation">
+                  <button class="nav-link active" id="register-tab" data-bs-toggle="tab" data-bs-target="#register" type="button" role="tab" aria-controls="register" aria-selected="true">Register Account</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                  <button class="nav-link" id="edit-credentials-tab" data-bs-toggle="tab" data-bs-target="#edit-credentials" type="button" role="tab" aria-controls="edit-credentials" aria-selected="false">Edit Credentials</button>
+                </li>
+              </ul>
+              <div class="tab-content" id="tab-content-id">
+                <div class="tab-pane fade show active" id="register" role="tabpanel" aria-labelledby="register-tab">
+                    <div id="register-account-contents">
+                        <!-- REGISTER ACCOUNT CONTENT -->
+                        <form action="#">
+                            <div id="credentials">
+                                <p class="category-title">Credentials</p>
+                                <hr>
+                                <label for="username">Username</label><br>
+                                <input type="text" name="username" id="username"><br>
+                                <label for="password">Password</label><br>
+                                <input type="password" name="password" id="password"><br>
+                                <label for="re-enter-pw">Re-enter Password</label><br>
+                                <input type="password" name="reEnterPassword" id="re-enter-pw"><br>
+                            </div>
+                            <div id="profile-information">
+                                <p class="category-title">Profile Information</p>
+                                <hr>
+                                <label for="profileName">Profile Name</label><br>
+                                <input type="text" name="profileName" id="profile-name"><br>
+                                <label for="category">Category</label><br>
+                                <input type="text" name="category" id="category"><br>
+                                <label for="brief-description">Brief Description of the Profile</label><br>
+                                <textarea name="briefDescription" id="brief-description"></textarea>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="edit-credentials" role="tabpanel" aria-labelledby="edit-credentials-tab">
+                    <!-- EDIT CREDENTIALS CONTENT -->
+                </div>
+              </div>
+            </div>
+        </main>
+
     </body>
 </html>
