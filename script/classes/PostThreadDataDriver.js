@@ -14,7 +14,7 @@ export class PostThreadDataDriver {
 
     showThreadButton() {
         // HTML PHASE [NOT] FINAL
-        const BASE_PATH = "http://127.0.0.1:5500/showPostThread.html",
+        const BASE_PATH = "/showPostThread.html",
               object    = this.getHasThreadsArray();
 
         let buttons = document.querySelectorAll(".show-thread-button");
