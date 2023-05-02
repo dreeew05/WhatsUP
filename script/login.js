@@ -34,7 +34,7 @@ function togglePassword() {
     }
 }
 
-// subject to change...
+// example
 var count = 2;
 
 function validate ()
@@ -56,7 +56,6 @@ if (password == passwordArray [i])
 if(valid)
 {
    alert("Login was successful");
-   window.location.href = "admin.html";
    return false ;
 }
 var again = "tries";
