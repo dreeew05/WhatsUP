@@ -203,6 +203,7 @@
     margin-right: 0.125vmax;
     margin-top: 0.125vmax;
     margin-bottom: 0.125vmax;
+    display: inline-block;
 }
 
 .tag-text {

@@ -5,6 +5,7 @@ import { NavBarSectionDivider } from "./classes/NavBarSectionDivider.js";
 import { FeedGenerator } from "./classes/FeedGenerator.js";
 import { PostThreadDataDriver } from "./classes/PostThreadDataDriver.js";
 import { NavBarFactory } from "./classes/NavBarFactory.js";
+import { PostCreator } from "./classes/PostCreator.js";
 
 // TEST DATA
 import postsJSON from "../test/posts.json" assert { type: 'json' };
@@ -14,14 +15,28 @@ import aboutJSON from "../test/about.json" assert { type: 'json' };
 class ProfilePage {
 
     constructor() {
+
+        // GLOBAL VARIABLE
+        this.logStatus = null;
+        this.setLogStatus("admin");
+        
+        this.initializePostButton();
         this.initializeNavBar();
         this.navBarSectionDividerImplementation();
         this.initializeFeedGenerator();
 
     }
 
+    getLogStatus() {
+        return this.logStatus;
+    }
+
+    setLogStatus(logStatus) {
+        this.logStatus = logStatus;
+    }
+
     initializeNavBar() {
-        new NavBarFactory("type1", "visitor");
+        new NavBarFactory("type1", this.getLogStatus());
     }
 
     navBarSectionDividerImplementation() {
@@ -56,6 +71,12 @@ class ProfilePage {
         feedGenerator.generateAbout(aboutJSON);
         
         new PostThreadDataDriver(feedGenerator.getHasThreadsArray());
+    }
+
+    initializePostButton() {
+        if(this.getLogStatus() == "admin") {
+            new PostCreator();
+        }
     }
 
 }
