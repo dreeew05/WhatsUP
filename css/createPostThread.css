@@ -1,4 +1,5 @@
 @import url('/css/fonts.css');
+@import url('/css/scrollBar.css');
 
 /* ADMIN PRIVILEGES */
 
@@ -20,6 +21,8 @@
     background-color: #d9d9d9;
     padding-left: 3%;
     padding-right: 3%;
+    height: 35rem;
+    overflow: auto;
 }
 
 #post-modal-label {

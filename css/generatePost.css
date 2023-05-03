@@ -104,7 +104,7 @@
 }
 
 .small-media-2 img, .small-media-2 video {
-    width: 100%;
+    width: 35vmin;
     height: 12.25vmax;
 }
 
@@ -128,7 +128,7 @@
 }
 
 .col img, .col video {
-    height: 18vmax;
+    height: 15vmax;
     width: 100%;
 }
 

@@ -11,6 +11,7 @@ import { PostCreator } from "./classes/PostCreator.js";
 import postsJSON from "../test/posts.json" assert { type: 'json' };
 import threadJSON from "../test/threads.json" assert { type: 'json' };
 import aboutJSON from "../test/about.json" assert { type: 'json' };
+import { Geocode } from "./classes/Geocode.js";
 
 class ProfilePage {
 
@@ -21,10 +22,18 @@ class ProfilePage {
         this.setLogStatus("admin");
         
         // this.initializePostButton();
+        this.initializeSample();
         this.initializeNavBar();
         this.navBarSectionDividerImplementation();
         this.initializeFeedGenerator();
 
+    }
+
+    initializeSample() {
+        let sample = new Geocode();
+        sample.getCoordinates("University of the Philippines - Visayas");
+        console.log("Latitude: ", sample.getLatitude());
+        console.log("Longtitude: ", sample.getLongtitude());
     }
 
     getLogStatus() {

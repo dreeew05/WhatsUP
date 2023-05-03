@@ -2,16 +2,11 @@
 // Description: Parse Latitude and Longtitude Using OpenCage API
 
 export class Geocode {
-    constructor(QUERY) {
-        // PASSED VALUE
-        this.QUERY = QUERY;
-
+    constructor() {
         // GLOBAL VARIABLE
         this.latitude   = null;
         this.longtitude = null;
 
-        // METHODS
-        this.getCoordinates();
     }
 
     getQuery() {
@@ -31,33 +26,31 @@ export class Geocode {
         this.longtitude = longitude;
     }
 
-    getCoordinates() {
-        var API_KEY = '55e81b28eee541ffac95c63f56699c5a';
+    getCoordinates(QUERY) {
+        let API_KEY = '55e81b28eee541ffac95c63f56699c5a';
 
         // reverse geocoding example (coordinates to address)
-        // var latitude = '52.3877830';
-        // var longitude = '9.7334394';
-        // var query = latitude + ',' + longitude;
+        // let latitude = '52.3877830';
+        // let longitude = '9.7334394';
+        // let query = latitude + ',' + longitude;
 
         // forward geocoding example (address to coordinate)
-        // var query = 'University of the Philippines - Visayas';
+        // let query = 'University of the Philippines - Visayas';
         // note: query needs to be URI encoded (see below)
 
-        var query = this.getQuery();
+        let API_URL = 'https://api.opencagedata.com/geocode/v1/json'
 
-        var API_URL = 'https://api.opencagedata.com/geocode/v1/json'
-
-        var REQUEST_URL = API_URL
+        let REQUEST_URL = API_URL
             + '?'
             + 'key=' + API_KEY
-            + '&q=' + encodeURIComponent(query)
+            + '&q=' + encodeURIComponent(QUERY)
             + '&pretty=1'
             + '&no_annotations=1';
 
         // see full list of required and optional parameters:
         // https://opencagedata.com/api#forward
 
-        var request = new XMLHttpRequest();
+        let request = new XMLHttpRequest();
         request.open('GET', REQUEST_URL, true);
 
         request.onload = function() {
@@ -66,7 +59,7 @@ export class Geocode {
 
             if(request.status === 200) {
                 // Success!
-                var data = JSON.parse(request.responseText);
+                let data = JSON.parse(request.responseText);
                 // console.log(data);
                 sessionStorage.setItem('latitude', data.results[0].geometry.lat);
                 sessionStorage.setItem('longtitude', data.results[0].geometry.lng);
@@ -74,7 +67,7 @@ export class Geocode {
             else if(request.status <= 500) {
                 // We reached our target server, but it returned an error
                 console.log("Unable to Geocode! Response Code: " + request.status);
-                var data = JSON.parse(request.responseText);
+                let data = JSON.parse(request.responseText);
                 console.log('Error Message: ' + data.status.message);
             } 
             else {
