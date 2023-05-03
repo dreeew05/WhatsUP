@@ -87,10 +87,13 @@
 
 
 .projLogo{
+  display: block;
+  margin: auto;
+  /* position: absolute; */
   position: relative;
+  top: 3rem;
   object-position: center;
   height: 110px;
-  margin-left: 570px;
   z-index: -1;
   margin-top: 0px;
   z-index: 3;
@@ -117,18 +120,20 @@ input {
 }
 
 .container {
-  position: absolute;
-  width: 34%;
+  /* position: absolute; */
+  width: 30%;
   height: 200px;
   text-align: center;
   top: 330px;
+  display: block;
+  margin: auto;
   background-color: #800000;
-  margin-left: 400px;
-  - webkit-box-shadow: 3px 0px 10px 0px black;
-  - moz -box-shadow: 3px 0px 10px 0px black;
+  -webkit-box-shadow: 3px 0px 10px 0px black;
+  -moz-box-shadow: 3px 0px 10px 0px black;
   box-shadow: 3px 0px 10px 0px black;
   z-index: 2;
 }
+
 
 .submit{
   background-color: white;
@@ -150,7 +155,7 @@ input {
   font-family: 'Inter', sans-serif;
 }
 
-.password, .username {
+#password, #username {
   width: 50%
 }
 #cas{

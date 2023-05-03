@@ -20,7 +20,7 @@ class ProfilePage {
         this.logStatus = null;
         this.setLogStatus("admin");
         
-        this.initializePostButton();
+        // this.initializePostButton();
         this.initializeNavBar();
         this.navBarSectionDividerImplementation();
         this.initializeFeedGenerator();

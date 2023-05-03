@@ -1,3 +1,6 @@
+// Author: fiVe
+// Description: Data driver for the creation of tags
+
 export class TagButtonDataDriver {
 
     constructor() {
@@ -26,8 +29,9 @@ export class TagButtonDataDriver {
         this.getTagsArray().push(entry);
     }
 
-    removeFromTagsArray(index) {
-        this.getTagsArray().splice(index, 1);
+    removeFromTagsArray(entry) {
+        let entryIndex = this.getTagsArray().indexOf(entry);
+        this.getTagsArray().splice(entryIndex - 1, 1);
     }
 
 }

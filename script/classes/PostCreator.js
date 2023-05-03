@@ -154,7 +154,8 @@ export class PostCreator {
                 document.getElementById(tagButtonID).remove();
                 let index = tagButtonID.split("-")[1];
                 dataDriver.decrementCounter();
-                dataDriver.removeFromTagsArray(index - 1);
+                dataDriver.removeFromTagsArray(tagButtonID);
+                console.log(dataDriver.getTagsArray());
             }
 
             console.log(dataDriver.getTagsArray());
