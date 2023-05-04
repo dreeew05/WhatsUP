@@ -13,6 +13,9 @@ import profileJSON from "../test/searchProfile.json" assert { type: 'json' };
 class SearchPage {
 
     constructor() {
+        // GLOBAL VARIABLE
+        this.mapAPI = new GeneratePostMap();
+
         this.initializeNavBar();
         this.navBarSectionDividerImplementation();
         this.initializeFeedGenerator();       
@@ -43,7 +46,7 @@ class SearchPage {
     }
 
     initializeFeedGenerator() {
-        let feedGenerator = new FeedGenerator();
+        let feedGenerator = new FeedGenerator(this.mapAPI);
         
         feedGenerator.initializeSideNavBar();
         feedGenerator.generateDefaultPostThread(postsJSON);

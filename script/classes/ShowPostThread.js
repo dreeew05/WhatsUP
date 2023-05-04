@@ -7,9 +7,13 @@ import { NavBarFactory } from "./NavBarFactory.js";
 // TEST DATA
 import postsJSON from "../../test/posts.json" assert { type: 'json' };
 import threadJSON from "../../test/threads.json" assert { type: 'json' };
+import { GeneratePostMap } from "./GeneratePostMap.js";
 
 class ShowPostThread {
     constructor() {
+        // GLOBAL VARIABLE
+        this.mapAPI = new GeneratePostMap();
+
         // TEST DATA
         this.postID      = null;
         this.threadID    = null;
@@ -101,7 +105,7 @@ class ShowPostThread {
     }
 
     initializeFeedGenerator() {
-        let feedGenerator = new FeedGenerator();
+        let feedGenerator = new FeedGenerator(this.mapAPI);
         // console.log(this.getThreadsArray())
         // console.log(this.getPostObject())
 

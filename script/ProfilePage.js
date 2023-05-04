@@ -24,18 +24,10 @@ class ProfilePage {
         this.mapAPI = new GeneratePostMap();
         
         this.initializePostButton();
-        // this.initializeSample();
         this.initializeNavBar();
         this.navBarSectionDividerImplementation();
         this.initializeFeedGenerator();
 
-    }
-
-    initializeSample() {
-        let sample = new Geocode();
-        sample.getCoordinates("University of the Philippines - Visayas");
-        console.log("Latitude: ", sample.getLatitude());
-        console.log("Longtitude: ", sample.getLongtitude());
     }
 
     getLogStatus() {
