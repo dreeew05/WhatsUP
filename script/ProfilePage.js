@@ -12,6 +12,7 @@ import postsJSON from "../test/posts.json" assert { type: 'json' };
 import threadJSON from "../test/threads.json" assert { type: 'json' };
 import aboutJSON from "../test/about.json" assert { type: 'json' };
 import { Geocode } from "./classes/Geocode.js";
+import { GeneratePostMap } from "./classes/GeneratePostMap.js";
 
 class ProfilePage {
 
@@ -20,9 +21,10 @@ class ProfilePage {
         // GLOBAL VARIABLE
         this.logStatus = null;
         this.setLogStatus("admin");
+        this.mapAPI = new GeneratePostMap();
         
-        // this.initializePostButton();
-        this.initializeSample();
+        this.initializePostButton();
+        // this.initializeSample();
         this.initializeNavBar();
         this.navBarSectionDividerImplementation();
         this.initializeFeedGenerator();
@@ -67,7 +69,7 @@ class ProfilePage {
     }
 
     initializeFeedGenerator() {
-        let feedGenerator = new FeedGenerator();
+        let feedGenerator = new FeedGenerator(this.mapAPI);
 
         // TEST DATA
         // POST + THREAD
@@ -76,7 +78,7 @@ class ProfilePage {
         feedGenerator.initializeSideNavBar();
         // feedGenerator.generatePost(postsJSON);
         // feedGenerator.generateThread(threadJSON);
-        feedGenerator.generateDefaultPostThread(all)
+        feedGenerator.generateDefaultPostThread(all);
         feedGenerator.generateAbout(aboutJSON);
         
         new PostThreadDataDriver(feedGenerator.getHasThreadsArray());

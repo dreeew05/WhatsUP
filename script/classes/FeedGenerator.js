@@ -10,10 +10,16 @@ import { SideNavBar } from "./SideNavbar.js";
 
 export class FeedGenerator {
 
-    constructor() {
+    constructor(mapAPI) {
         // GLOBAL VARIABLES
-        this.mapAPI          = new GeneratePostMap();
         this.hasThreadsArray = [];
+
+        // PASSED VARIABLESS
+        this.mapAPI = mapAPI;
+    }
+
+    getMapAPI() {
+        return this.mapAPI;
     }
 
     getHasThreadsArray() {
@@ -63,7 +69,7 @@ export class FeedGenerator {
             
             let generatePost = new GeneratePost(id, profileName, profilePic, 
                                dateTime, post, postMedia, postMediaType, 
-                               postCoordinates, this.mapAPI, tags, hasThread, 
+                               postCoordinates, this.getMapAPI(), tags, hasThread, 
                                type);
             
             generatePost.showDefault();
@@ -88,7 +94,7 @@ export class FeedGenerator {
         
         new GeneratePost(postID, profileName, profilePic, dateTime, post, 
                         postMedia, postMediaType, postCoordinates, 
-                        this.mapAPI, tags).showThreadView();
+                        this.getMapAPI(), tags).showThreadView();
     }
 
     generateThread(jsonData) {
@@ -106,7 +112,7 @@ export class FeedGenerator {
 
             new GenerateThread(threadID, postID, profileName, profilePic, dateTime, post, 
                                postMedia, postMediaType, postCoordinates, 
-                               this.mapAPI).createThread();
+                               this.getMapAPI()).createThread();
         }        
     }
 

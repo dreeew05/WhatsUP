@@ -2,6 +2,8 @@
 // Description: Create Posts [Admin Priveleges]
 
 import { CreateElement } from "./CreateElement.js";
+import { GeneratePostMap } from "./GeneratePostMap.js";
+import { Geocode } from "./Geocode.js";
 import { TagButtonDataDriver } from "./TagButtonDataDriver.js";
 
 export class PostCreator {
@@ -11,9 +13,12 @@ export class PostCreator {
         // GLOBAL VARIBLE
         this.buttonCounter = 0;
         this.buttonArray   = [];
- 
+        
+        const POST_HOLDER = document.getElementById("posts");
+
         this.displayPostButton();
-        this.displayPostModal();
+        this.displayPostModal(POST_HOLDER);
+        this.displayMapModal(POST_HOLDER);
 
     }
 
@@ -33,8 +38,7 @@ export class PostCreator {
 
     }
 
-    displayPostModal() {
-        const POST_HOLDER = document.getElementById("posts");
+    displayPostModal(POST_HOLDER) {
 
         let postModal       = new CreateElement("div", "post-modal", "modal fade")
                               .createElement(),
@@ -67,13 +71,34 @@ export class PostCreator {
                               .createElement(),
             tagButtons      = new CreateElement("div", "tag-button", null)
                               .createElement(),
+            displayMap      = new CreateElement("div", "display-map", null)
+                              .createElement(),
             mediaControl    = new CreateElement("div", "media-control", null)
+                              .createElement(),
+            mediaControlTxt = new CreateElement("div", "media-control-text", 
+                              null).createElement(),
+            mediaControlBtn = new CreateElement("div", "media-control-buttons",
+                              null).createElement(),
+            imageButton     = new CreateElement("button", null, "media-button")
+                              .createElement(),
+            imageIcon       = new CreateElement("i", null, "fa-solid fa-image")
+                              .createElement(),
+            videoButton     = new CreateElement("button", null, "media-button")
+                              .createElement(),
+            videoIcon       = new CreateElement("i", null, "fa-solid fa-video")
+                              .createElement(), 
+            ytButton        = new CreateElement("button", null, "media-button")
+                              .createElement(),
+            ytIcon          = new CreateElement("i", null, "fa-brands fa-youtube")
+                              .createElement(),
+            mapButton       = new CreateElement("button", null, "media-button")
+                              .createElement(),
+            mapIcon         = new CreateElement("i", null, "fa-sharp fa-solid fa-location-dot")
                               .createElement(),
             modalFooter     = new CreateElement("div", null, "modal-footer")
                               .createElement(),
             postButton      = new CreateElement("div", null, "btn btn-primary")
                               .createElement();
-            
         // SET ATTRIBUTES
         postModal.setAttribute("tabindex", "-1");
         postModal.setAttribute("aria-labelledby", "post-modal-label");
@@ -85,7 +110,15 @@ export class PostCreator {
         tagTextHeader.textContent = "Tags";
         addTagTextField.setAttribute("type", "text");
         addTagButton.setAttribute("type", "submit");
+        mediaControlTxt.textContent = "Add To Post";
         postButton.textContent = "Post";
+        imageButton.setAttribute("type", "button");
+        videoButton.setAttribute("type", "button");
+        ytButton.setAttribute("type", "button");
+        mapButton.setAttribute("type", "button");
+        mapButton.setAttribute("data-bs-target", "#map-modal");
+        mapButton.setAttribute("data-bs-toggle", "modal");
+        mapButton.setAttribute("data-bs-dismmis", "modal");
 
         // APPEND CHILD
         POST_HOLDER.appendChild(postModal);
@@ -104,13 +137,79 @@ export class PostCreator {
         addTag.appendChild(addTagButton);
         addTagButton.appendChild(plusSign);
         tagsDiv.appendChild(tagButtons);
-        modalContent.appendChild(mediaControl);
+        modalBody.appendChild(mediaControl);
+        mediaControl.appendChild(mediaControlTxt);
+        mediaControl.appendChild(mediaControlBtn);
+        mediaControlBtn.appendChild(imageButton);
+        imageButton.appendChild(imageIcon);
+        mediaControlBtn.appendChild(videoButton);
+        videoButton.appendChild(videoIcon);
+        mediaControlBtn.appendChild(ytButton);
+        ytButton.appendChild(ytIcon);
+        mediaControlBtn.appendChild(mapButton);
+        mapButton.appendChild(mapIcon);
+        modalContent.appendChild(displayMap);
         modalContent.appendChild(modalFooter);
         modalFooter.appendChild(postButton);
 
         // ADD TAGS EVERYTIME BUTTON IS CLICKED
         this.modifyTagEntry(tagsDiv, addTagTextField, addTagButton);
 
+    }
+
+    displayMapModal(POST_HOLDER) {
+        let searchMapModal  = new CreateElement("div", "map-modal", "modal fade")
+                              .createElement(),
+            modalDialog     = new CreateElement("div", null, "modal-dialog modal-dialog-centered modal-lg")
+                              .createElement(),
+            modalContent    = new CreateElement("div", null, "modal-content")
+                              .createElement(),
+            modalHeader     = new CreateElement("div", null, "modal-header")
+                              .createElement(),
+            modalTitle      = new CreateElement("h3", null, "modal-title")
+                              .createElement(),
+            closeButton     = new CreateElement("button", null, "btn-close")
+                              .createElement(),
+            modalBody       = new CreateElement("div", null, "modal-body")
+                              .createElement(),
+            mapSearch       = new CreateElement("div", "map-search", null)
+                              .createElement(),
+            inputMap        = new CreateElement("div", "input-map", null)
+                              .createElement(),
+            searchText      = new CreateElement("input", null, "post-text-fields")
+                              .createElement(),
+            searchButton    = new CreateElement("button", null, null)
+                              .createElement(),
+            searchIcon      = new CreateElement("i", null, "fa-sharp fa-solid fa-magnifying-glass")
+                              .createElement();
+
+            // SET ATTRIBUTE
+            searchMapModal.setAttribute("tabindex", "-1");
+            searchMapModal.setAttribute("aria-labelledby", "post-modal-label");
+            searchMapModal.setAttribute("aria-hidden", "true");
+            modalDialog.setAttribute("role", "document");
+            modalTitle.textContent = "Search Map";
+            closeButton.setAttribute("data-bs-dismiss", "modal");
+            closeButton.setAttribute("aria-label", "Close");
+            searchButton.setAttribute("type", "submit");
+
+            // APPEND CHILD
+            POST_HOLDER.appendChild(searchMapModal);
+            searchMapModal.appendChild(modalDialog);
+            modalDialog.appendChild(modalContent);
+            modalContent.appendChild(modalHeader);
+            modalHeader.appendChild(modalTitle);
+            modalHeader.appendChild(closeButton);
+            modalContent.appendChild(modalBody);
+            modalBody.appendChild(mapSearch);
+            mapSearch.appendChild(inputMap);
+            inputMap.appendChild(searchText);
+            inputMap.appendChild(searchButton);
+            searchButton.appendChild(searchIcon);
+            // modalBody.appendChild(displayMap);
+
+            // ACTION WHEN SEARCH BUTTON IS CLICKED
+            this.geocodeMap(searchButton, searchText, modalBody);
 
     }
 
@@ -162,5 +261,39 @@ export class PostCreator {
 
         }
     } 
+
+    geocodeMap(searchButton, searchText, modalBody) {
+
+        let geocoder = new Geocode(),
+            mapAPI   = new GeneratePostMap();
+
+        searchButton.onclick = function() {
+
+            // CHECK IF DIV EXISTS
+            const divElement = document.querySelector('#display-map-search');
+            if(!divElement) {
+                let displayMap = new CreateElement("div", "display-map-search", null)
+                                .createElement();
+                modalBody.appendChild(displayMap);
+            }
+            
+            // GET COORDINATES THROUGH GEOCODER 
+            let location = searchText.value;
+            geocoder.getCoordinates(location);
+            console.log(geocoder.getLatitude());
+            console.log(geocoder.getLongtitude());
+
+            let latitude  = parseFloat(geocoder.getLatitude()),
+                longitude = parseFloat(geocoder.getLongtitude());
+
+            // DISPLAY ASSOCIATED MAP
+            mapAPI.loadAPI().then(() => {
+                mapAPI.createMap("display-map-search",
+                    latitude,
+                    longitude);
+            });
+        }
+
+    }
 
 }
