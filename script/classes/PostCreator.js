@@ -44,7 +44,7 @@ export class PostCreator {
                               .createElement(),
             modalDialog     = new CreateElement("div", null, "modal-dialog modal-dialog-centered modal-lg")
                               .createElement(),
-            modalContent    = new CreateElement("div", null, "modal-content")
+            modalContent    = new CreateElement("div", "modal-content-create-post", "modal-content")
                               .createElement(),
             modalHeader     = new CreateElement("div", null, "modal-header")
                               .createElement(),
@@ -52,7 +52,7 @@ export class PostCreator {
                               .createElement(),
             closeButton     = new CreateElement("button", null, "btn-close")
                               .createElement(),
-            modalBody       = new CreateElement("div", null, "modal-body")
+            modalBody       = new CreateElement("div", "post-modal-body", "modal-body")
                               .createElement(),
             postTextArea    = new CreateElement("textarea", "post-text-area", null)
                               .createElement(),
@@ -70,8 +70,6 @@ export class PostCreator {
             plusSign        = new CreateElement("i", null, "fa-sharp fa-solid fa-plus")
                               .createElement(),
             tagButtons      = new CreateElement("div", "tag-button", null)
-                              .createElement(),
-            displayMap      = new CreateElement("div", "display-map", null)
                               .createElement(),
             mediaControl    = new CreateElement("div", "media-control", null)
                               .createElement(),
@@ -148,7 +146,6 @@ export class PostCreator {
         ytButton.appendChild(ytIcon);
         mediaControlBtn.appendChild(mapButton);
         mapButton.appendChild(mapIcon);
-        modalContent.appendChild(displayMap);
         modalContent.appendChild(modalFooter);
         modalFooter.appendChild(postButton);
 
@@ -251,7 +248,6 @@ export class PostCreator {
             // REMOVING ENTRY
             removeButton.onclick = function() {
                 document.getElementById(tagButtonID).remove();
-                let index = tagButtonID.split("-")[1];
                 dataDriver.decrementCounter();
                 dataDriver.removeFromTagsArray(tagButtonID);
                 console.log(dataDriver.getTagsArray());
@@ -270,28 +266,17 @@ export class PostCreator {
         searchButton.onclick = function() {
 
             // CHECK IF DIV EXISTS
-            const divElement = document.querySelector('#display-map-search');
+            const elementID  = "display-map-search",
+                  divElement = document.querySelector('#'.concat(elementID));
             if(!divElement) {
-                let displayMap = new CreateElement("div", "display-map-search", null)
+                let displayMap = new CreateElement("div", elementID, null)
                                 .createElement();
                 modalBody.appendChild(displayMap);
             }
             
             // GET COORDINATES THROUGH GEOCODER 
             let location = searchText.value;
-            geocoder.getCoordinates(location);
-            console.log(geocoder.getLatitude());
-            console.log(geocoder.getLongtitude());
-
-            let latitude  = parseFloat(geocoder.getLatitude()),
-                longitude = parseFloat(geocoder.getLongtitude());
-
-            // DISPLAY ASSOCIATED MAP
-            mapAPI.loadAPI().then(() => {
-                mapAPI.createMap("display-map-search",
-                    latitude,
-                    longitude);
-            });
+            geocoder.displayMap(location, mapAPI, elementID);
         }
 
     }

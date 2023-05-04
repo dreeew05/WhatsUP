@@ -1,6 +1,8 @@
 // Author: fiVe
 // Description: Parse Latitude and Longtitude Using OpenCage API
 
+import { CreateElement } from "./CreateElement.js";
+
 export class Geocode {
     constructor() {
         // GLOBAL VARIABLE
@@ -9,24 +11,24 @@ export class Geocode {
 
     }
 
-    getQuery() {
-        return this.QUERY;
-    }
+    // getQuery() {
+    //     return this.QUERY;
+    // }
 
-    getLatitude() {
-        return this.latitude;
-    }
-    getLongtitude() {
-        return this.longtitude;
-    }
-    setLatitude(latitude) {
-        this.latitude = latitude;
-    }
-    setLongtitude(longitude) {
-        this.longtitude = longitude;
-    }
+    // getLatitude() {
+    //     return this.latitude;
+    // }
+    // getLongtitude() {
+    //     return this.longtitude;
+    // }
+    // setLatitude(latitude) {
+    //     this.latitude = latitude;
+    // }
+    // setLongtitude(longitude) {
+    //     this.longtitude = longitude;
+    // }
 
-    getCoordinates(QUERY) {
+    displayMap(QUERY, mapAPI, elementID) {
         let API_KEY = '55e81b28eee541ffac95c63f56699c5a';
 
         // reverse geocoding example (coordinates to address)
@@ -59,10 +61,29 @@ export class Geocode {
 
             if(request.status === 200) {
                 // Success!
-                let data = JSON.parse(request.responseText);
-                // console.log(data);
-                sessionStorage.setItem('latitude', data.results[0].geometry.lat);
-                sessionStorage.setItem('longtitude', data.results[0].geometry.lng);
+                let data      = JSON.parse(request.responseText),
+                    latitude  = data.results[0].geometry.lat,
+                    longitude = data.results[0].geometry.lng;
+                
+                // MAP MODAL
+                mapAPI.loadAPI().then(() => {
+                    mapAPI.createMap(elementID, latitude, longitude);
+                });
+
+                // CREATE POST MODAL
+                const modalBody      = document.getElementById("post-modal-body"),
+                      elementPostID  = "display-map-post",
+                      divElement     = document.querySelector('#'.concat(elementPostID));
+                if(!divElement) {
+                    console.log(modalBody);
+                    let displayMapInPostModal = new CreateElement("div", elementPostID,
+                                                null).createElement();
+                    modalBody.appendChild(displayMapInPostModal);
+                }
+
+                mapAPI.loadAPI().then(() => {
+                    mapAPI.createMap(elementPostID, latitude, longitude);
+                });
             } 
             else if(request.status <= 500) {
                 // We reached our target server, but it returned an error
@@ -75,8 +96,8 @@ export class Geocode {
             }
         };
 
-        this.setLatitude(sessionStorage.getItem('latitude'));
-        this.setLongtitude(sessionStorage.getItem('longtitude'));
+        // this.setLatitude(sessionStorage.getItem('latitude'));
+        // this.setLongtitude(sessionStorage.getItem('longtitude'));
 
         request.onerror = function() {
             // There was a connection error of some sort
