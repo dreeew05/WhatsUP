@@ -93,6 +93,12 @@ export class PostCreator {
                               .createElement(),
             mapIcon         = new CreateElement("i", null, "fa-sharp fa-solid fa-location-dot")
                               .createElement(),
+            mapCoordsHolder = new CreateElement("div", null, "map-coordinates-holder-hidden")
+                              .createElement(),
+            latFieldHidden  = new CreateElement("input", "latitude-text-field-hidden", 
+                              "post-text-fields").createElement(),
+            lngFieldHidden  = new CreateElement("input", "longtitude-text-field-hidden",
+                              "post-text-fields").createElement(),
             modalFooter     = new CreateElement("div", null, "modal-footer")
                               .createElement(),
             postButton      = new CreateElement("div", null, "btn btn-primary")
@@ -117,6 +123,10 @@ export class PostCreator {
         mapButton.setAttribute("data-bs-target", "#map-modal");
         mapButton.setAttribute("data-bs-toggle", "modal");
         mapButton.setAttribute("data-bs-dismmis", "modal");
+        latFieldHidden.setAttribute("type", "text");
+        latFieldHidden.disabled = true;
+        lngFieldHidden.setAttribute("type", "text");
+        lngFieldHidden.disabled = true;
 
         // APPEND CHILD
         POST_HOLDER.appendChild(postModal);
@@ -145,6 +155,9 @@ export class PostCreator {
         mediaControlBtn.appendChild(ytButton);
         ytButton.appendChild(ytIcon);
         mediaControlBtn.appendChild(mapButton);
+        modalBody.appendChild(mapCoordsHolder);
+        mapCoordsHolder.appendChild(latFieldHidden);
+        mapCoordsHolder.appendChild(lngFieldHidden);
         mapButton.appendChild(mapIcon);
         modalContent.appendChild(modalFooter);
         modalFooter.appendChild(postButton);

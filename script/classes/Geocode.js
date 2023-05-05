@@ -84,6 +84,13 @@ export class Geocode {
                 mapAPI.loadAPI().then(() => {
                     mapAPI.createMap(elementPostID, latitude, longitude);
                 });
+
+                // PUT LATITUDE AND LONGTITUDE TO HIDDEN TEXT FIELDS
+                const latTextField = document.getElementById('latitude-text-field-hidden'),
+                      lngTextField = document.getElementById('longtitude-text-field-hidden');
+                
+                latTextField.value = latitude;
+                lngTextField.value = longitude;
             } 
             else if(request.status <= 500) {
                 // We reached our target server, but it returned an error
