@@ -60,7 +60,6 @@ export class PostCreator {
                               .createElement(),
             tagsText        = new CreateElement("div", "tag-text", null)
                               .createElement(),
-            tagTextHeader   = new CreateElement("h4", null, null).createElement(),
             addTag          = new CreateElement("div", "add-tag", null)
                               .createElement(),
             addTagTextField = new CreateElement("input", "tag-text-field", "post-text-fields")
@@ -111,7 +110,7 @@ export class PostCreator {
         modalTitle.textContent = "Create Post";
         closeButton.setAttribute("data-bs-dismiss", "modal");
         closeButton.setAttribute("aria-label", "Close");
-        tagTextHeader.textContent = "Tags";
+        tagsText.textContent = "Tags";
         addTagTextField.setAttribute("type", "text");
         addTagButton.setAttribute("type", "submit");
         mediaControlTxt.textContent = "Add To Post";
@@ -125,8 +124,10 @@ export class PostCreator {
         mapButton.setAttribute("data-bs-dismmis", "modal");
         latFieldHidden.setAttribute("type", "text");
         latFieldHidden.disabled = true;
+        // latFieldHidden.style.visibility = "hidden";
         lngFieldHidden.setAttribute("type", "text");
         lngFieldHidden.disabled = true;
+        // lngFieldHidden.style.visibility = "hidden";
 
         // APPEND CHILD
         POST_HOLDER.appendChild(postModal);
@@ -139,7 +140,6 @@ export class PostCreator {
         modalBody.appendChild(postTextArea);
         modalBody.appendChild(tagsDiv);
         tagsDiv.appendChild(tagsText);
-        tagsText.appendChild(tagTextHeader);
         tagsDiv.appendChild(addTag);
         addTag.appendChild(addTagTextField);
         addTag.appendChild(addTagButton);
@@ -164,6 +164,12 @@ export class PostCreator {
 
         // ADD TAGS EVERYTIME BUTTON IS CLICKED
         this.modifyTagEntry(tagsDiv, addTagTextField, addTagButton);
+
+        // ACTION WHEN POST BUTTON IS CLICKED
+        postButton.onclick = function() {
+            console.log(latFieldHidden.value);
+            console.log(lngFieldHidden.value);
+        }
 
     }
 
@@ -221,6 +227,10 @@ export class PostCreator {
             // ACTION WHEN SEARCH BUTTON IS CLICKED
             this.geocodeMap(searchButton, searchText, modalBody);
 
+    }
+
+    displayYoutubeModal(POST_HOLDER) {
+        
     }
 
     modifyTagEntry(tagsDiv, textField, button) {

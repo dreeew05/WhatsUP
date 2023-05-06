@@ -58,8 +58,9 @@ export class GeneratePostMap {
     }
 
     createMap(POST_ID, LATITUDE, LONGTITUDE) {
-        let map = new google.maps.Map(document.getElementById(POST_ID), 
-                  this.getMapOptions(LATITUDE, LONGTITUDE));
+        let map               = new google.maps.Map(document.getElementById(POST_ID), 
+                                this.getMapOptions(LATITUDE, LONGTITUDE));
+
         this.createMarker(map, LATITUDE, LONGTITUDE);
     }
 }

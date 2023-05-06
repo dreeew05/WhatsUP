@@ -12,8 +12,8 @@
     font-family: 'ProductSansBold';
     font-size: 1.5vmax;
     border-radius: 0.5vmax;
-    margin-top: 1rem;
-    margin-bottom: 1rem;
+    margin-top: 2%;
+    margin-bottom: 2%;
     padding: 0.5rem;
 }
 
@@ -62,9 +62,15 @@
 #tags-div {
     border: 2px solid #A2A2A2;
     border-radius: 1vmax;
-    margin-top: 0.5rem;
+    margin-top: 1%;
     padding: 2%;
     font-family: 'ProductSansRegular';
+}
+
+#tag-text {
+     font-size: 1.25vmax;
+     font-family: 'ProductSansRegular';
+     margin-bottom: 1%;
 }
 
 #add-tag, #input-map {
@@ -91,7 +97,7 @@
 }
 
 .tag-buttons {
-    margin-top: 0.5rem;
+    margin-top: 1%;
     display: inline-block;
 }
 
@@ -108,6 +114,16 @@
     margin-left: 0.25vmax;
 }
 
+/* LAT - LNG TEXTFIELDS */
+
+#latitude-text-field-hidden {
+    display: none;
+}
+
+#longtitude-text-field-hidden {
+    display: none;
+}
+
 /* MEDIA-CONTROL */
 
 #media-control {
@@ -117,15 +133,16 @@
     flex-direction: row;
     margin: auto;
     width: 100%;
-    margin-top: 1rem;
+    margin-top: 2%;
 }
 
 #media-control-text {
     display: block;
     margin: auto;
     width: 50%;
-    padding: 2%;
-    font-size: 1vmax;
+    padding: 1%;
+    padding-left: 2%;
+    font-size: 1.20vmax;
     font-family: 'ProductSansRegular';
 }
 
@@ -133,7 +150,7 @@
     display: block;
     margin: auto;
     width: 50%;
-    padding: 2%;
+    padding: 1%;
 
 }
 
@@ -169,19 +186,65 @@
 }
 
 #display-map-post {
-    margin-top: 1rem;
+    margin-top: 2%;
+    border: 2px solid #A2A2A2;
+    border-radius: 1vmax;
+    padding-left: 2%;
+    padding-right: 2%;
+    padding-bottom: 2%;
+}
+
+#map-result {
+    height: 20rem;
+    width: 100%;
+    border-radius: 1vmax;
+}
+
+#map-header {
+    display: flex;
+    flex-direction: row;
+    margin-top: 2%;
+    margin-bottom: 0.5rem;
+}
+
+#map-header-text {
+    width: 50%;
+    font-size: 1.25vmax;
+    font-family: 'ProductSansRegular';
+    display: block;
+    margin: auto;
+    padding-left: 2%;
+    padding-right: 2%;
+}
+
+#map-header-close {
+    width: 50%;
+    display: block;
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-left: 80%;
+}
+
+#remove-map {
+    height: 1.5vmax;
+    width: 1.5vmax;
+    background-color: red;
+    color: white;
+    border-radius: 50%;
+    font-size: 0.75vmax;
+    display: block;
+    margin: auto;
+}
+
+/* MAP MODAL */
+
+#display-map-search {
+    margin-top: 2%;
     height: 20rem;
     width: 100%;
     border: 1px solid  black;
     border-radius: 1vmax;
 }
 
-#display-map-search {
-    margin-top: 1rem;
-    height: 20rem;
-    width: 100%;
-    border: 1px solid  black;
-    border-radius: 1vmax;
-}
 
 
