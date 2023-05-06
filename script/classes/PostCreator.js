@@ -2,23 +2,30 @@
 // Description: Create Posts [Admin Priveleges]
 
 import { CreateElement } from "./CreateElement.js";
+import { DataSerializer } from "./DataSerializer.js";
 import { GeneratePostMap } from "./GeneratePostMap.js";
 import { Geocode } from "./Geocode.js";
-import { TagButtonDataDriver } from "./TagButtonDataDriver.js";
+import { SweetAlertFactory } from "./SweetAlertFactory.js";
+import { TagLinkDataDriver } from "./TagLinkDataDriver.js";
 
 export class PostCreator {
 
     constructor() {
 
         // GLOBAL VARIBLE
-        this.buttonCounter = 0;
-        this.buttonArray   = [];
+        this.buttonCounter     = 0;
+        this.buttonArray       = [];
+        this.tagsDataDriver    = new TagLinkDataDriver();
+        this.ytLinksDataDriver = new TagLinkDataDriver();
+        this.sweetAlert        = new SweetAlertFactory();
+        this.dataSerializer    = new DataSerializer();
         
         const POST_HOLDER = document.getElementById("posts");
 
         this.displayPostButton();
         this.displayPostModal(POST_HOLDER);
         this.displayMapModal(POST_HOLDER);
+        this.displayYoutubeModal(POST_HOLDER);
 
     }
 
@@ -68,8 +75,6 @@ export class PostCreator {
                               .createElement(),
             plusSign        = new CreateElement("i", null, "fa-sharp fa-solid fa-plus")
                               .createElement(),
-            tagButtons      = new CreateElement("div", "tag-button", null)
-                              .createElement(),
             mediaControl    = new CreateElement("div", "media-control", null)
                               .createElement(),
             mediaControlTxt = new CreateElement("div", "media-control-text", 
@@ -118,6 +123,9 @@ export class PostCreator {
         imageButton.setAttribute("type", "button");
         videoButton.setAttribute("type", "button");
         ytButton.setAttribute("type", "button");
+        ytButton.setAttribute("data-bs-target", "#yt-modal");
+        ytButton.setAttribute("data-bs-toggle", "modal");
+        ytButton.setAttribute("data-bs-dismmis", "modal");
         mapButton.setAttribute("type", "button");
         mapButton.setAttribute("data-bs-target", "#map-modal");
         mapButton.setAttribute("data-bs-toggle", "modal");
@@ -144,7 +152,6 @@ export class PostCreator {
         addTag.appendChild(addTagTextField);
         addTag.appendChild(addTagButton);
         addTagButton.appendChild(plusSign);
-        tagsDiv.appendChild(tagButtons);
         modalBody.appendChild(mediaControl);
         mediaControl.appendChild(mediaControlTxt);
         mediaControl.appendChild(mediaControlBtn);
@@ -162,13 +169,17 @@ export class PostCreator {
         modalContent.appendChild(modalFooter);
         modalFooter.appendChild(postButton);
 
-        // ADD TAGS EVERYTIME BUTTON IS CLICKED
-        this.modifyTagEntry(tagsDiv, addTagTextField, addTagButton);
+        // MODIFY TAGS 
+        this.modifyEntries(tagsDiv, addTagTextField, addTagButton, "tag",
+            this.tagsDataDriver, null);
+
+        let ds = this.dataSerializer;
 
         // ACTION WHEN POST BUTTON IS CLICKED
         postButton.onclick = function() {
-            console.log(latFieldHidden.value);
-            console.log(lngFieldHidden.value);
+            // console.log(latFieldHidden.value);
+            // console.log(lngFieldHidden.value);
+            console.log(ds.getData());
         }
 
     }
@@ -201,12 +212,13 @@ export class PostCreator {
 
             // SET ATTRIBUTE
             searchMapModal.setAttribute("tabindex", "-1");
-            searchMapModal.setAttribute("aria-labelledby", "post-modal-label");
+            searchMapModal.setAttribute("aria-labelledby", "map-modal-label");
             searchMapModal.setAttribute("aria-hidden", "true");
             modalDialog.setAttribute("role", "document");
             modalTitle.textContent = "Search Map";
             closeButton.setAttribute("data-bs-dismiss", "modal");
             closeButton.setAttribute("aria-label", "Close");
+            searchText.setAttribute("type", "text");
             searchButton.setAttribute("type", "submit");
 
             // APPEND CHILD
@@ -230,53 +242,149 @@ export class PostCreator {
     }
 
     displayYoutubeModal(POST_HOLDER) {
-        
-    }
+        let ytModal        = new CreateElement("div", "yt-modal", "modal fade")
+                             .createElement(),
+            modalDialog    = new CreateElement("div", null, "modal-dialog modal-dialog-centered modal-lg")
+                             .createElement(),
+            modalContent   = new CreateElement("div", "modal-content-add-yt", "modal-content")
+                             .createElement(),
+            modalHeader    = new CreateElement("div", null, "modal-header")
+                             .createElement(),
+            modalTitle     = new CreateElement("h3", "yt-modal-label", "modal-title")
+                             .createElement(),
+            closeButton    = new CreateElement("button", null, "btn-close")
+                             .createElement(),
+            modalBody      = new CreateElement("div", "yt-modal-body", "modal-body")
+                             .createElement(),
+            linkDiv        = new CreateElement("div", "link-div", null)
+                             .createElement(),
+            addLinks       = new CreateElement("div", "add-links", null)
+                             .createElement(),
+            addLinksTField = new CreateElement("input", "link-text-field", "post-text-fields")
+                             .createElement(),
+            addYTButton    = new CreateElement("button", "add-link-button", null)
+                             .createElement(),
+            plusSign       = new CreateElement("i", null, "fa-sharp fa-solid fa-plus")
+                             .createElement();
 
-    modifyTagEntry(tagsDiv, textField, button) {
-
-        let dataDriver = new TagButtonDataDriver();
-
-        button.onclick = function() {
-
-            const entry = textField.value;
-
-            // ADD COUNTER FOR ID REFERENCE
-            dataDriver.incrementCounter();
-
-            let tagButtonID  = "tag-" + dataDriver.getCounter(),
-                removeBtnID  = "remove-tag-" + dataDriver.getCounter(),
-                tagButtons   = new CreateElement("div", tagButtonID, "tag-buttons")
-                               .createElement(),
-                tagButton    = new CreateElement("div", null, "tag-button")
-                               .createElement(),
-                removeButton = new CreateElement("button", removeBtnID, "remove-tag")
-                               .createElement(),
-                removeIcon   = new CreateElement("i", null, "fa-sharp fa-solid fa-xmark")
-                               .createElement();
-            
             // SET ATTRIBUTE
-            tagButton.textContent = entry;
-            removeButton.setAttribute("type", "button");
+            ytModal.setAttribute("tabindex", "-1");
+            ytModal.setAttribute("aria-labelledby", "yt-modal-label");
+            ytModal.setAttribute("aria-hidden", "true");
+            modalDialog.setAttribute("role", "document");
+            modalTitle.textContent = "Add Youtube Links";
+            closeButton.setAttribute("data-bs-dismiss", "modal");
+            closeButton.setAttribute("aria-label", "Close");
+            addLinksTField.setAttribute("type", "text");
+            addYTButton.setAttribute("type", "submit");
 
             // APPEND CHILD
-            tagsDiv.appendChild(tagButtons);
-            tagButtons.appendChild(tagButton);
-            tagButton.appendChild(removeButton);
-            removeButton.appendChild(removeIcon);   
+            POST_HOLDER.appendChild(ytModal);
+            ytModal.appendChild(modalDialog);
+            modalDialog.appendChild(modalContent);
+            modalContent.appendChild(modalHeader);
+            modalHeader.appendChild(modalTitle);
+            modalHeader.appendChild(closeButton);
+            modalContent.appendChild(modalBody);
+            modalBody.appendChild(linkDiv);
+            linkDiv.appendChild(addLinks)
+            addLinks.appendChild(addLinksTField);
+            addLinks.appendChild(addYTButton);
+            addYTButton.appendChild(plusSign);
 
-            // ADD ITEM TO ARRAY
-            dataDriver.appendToTagsArray(entry);
+            // MODIFY Links
+            this.modifyEntries(linkDiv, addLinksTField, addYTButton, "link",
+            this.ytLinksDataDriver, 4);
+    }
 
-            // REMOVING ENTRY
-            removeButton.onclick = function() {
-                document.getElementById(tagButtonID).remove();
-                dataDriver.decrementCounter();
-                dataDriver.removeFromTagsArray(tagButtonID);
+    modifyEntries(tagsDiv, textField, button, type, dataDriver, limit) {
+
+        let alertBox = this.sweetAlert,
+            ds       = this.dataSerializer;
+
+        button.onclick = async function() {
+
+            function generateButtons() {
+                // ADD COUNTER FOR ID REFERENCE
+                dataDriver.incrementCounter();
+
+                let tagButtonID  = type + "-" + dataDriver.getCounter(),
+                    removeBtnID  = "remove-" + type + "-" + dataDriver.getCounter(),
+                    tagButtons   = new CreateElement("div", tagButtonID, "tag-buttons")
+                                .createElement(),
+                    tagButton    = new CreateElement("div", null, "tag-button")
+                                .createElement(),
+                    removeButton = new CreateElement("button", removeBtnID, "remove-tag")
+                                .createElement(),
+                    removeIcon   = new CreateElement("i", null, "fa-sharp fa-solid fa-xmark")
+                                .createElement();
+                
+                // SET ATTRIBUTE
+                tagButton.textContent = entry;
+                removeButton.setAttribute("type", "button");
+
+                // APPEND CHILD
+                tagsDiv.appendChild(tagButtons);
+                tagButtons.appendChild(tagButton);
+                tagButton.appendChild(removeButton);
+                removeButton.appendChild(removeIcon);   
+
+                // ADD ITEM TO ARRAY
+                dataDriver.appendToTagsArray(entry);
+
+                // REMOVING ENTRY
+                removeButton.onclick = function() {
+                    document.getElementById(tagButtonID).remove();
+                    dataDriver.decrementCounter();
+                    dataDriver.removeFromTagsArray(tagButtonID);
+                    console.log(dataDriver.getTagsArray());
+                }
+
                 console.log(dataDriver.getTagsArray());
             }
 
-            console.log(dataDriver.getTagsArray());
+            const entry = textField.value;
+
+            if(entry == "") {
+                // USER ENTERS EMPTY STRING
+                alertBox.createAlertBox(
+                    'Error!', 
+                    'Please Enter Something on the Textfield',
+                    'error',
+                    'Okay'
+                );
+                return;
+            }
+
+            if(limit != null) {
+                if(dataDriver.getTagsArray().length == limit) {
+                    // ALERT USER THAT IT CAN'T INPUT ANYMORE
+                    alertBox.createAlertBox(
+                        'Error!',
+                        'Cannot Add More than Four Links',
+                        'error',
+                        'Okay'
+                    );
+                    return;
+                }
+                
+                const phpURL  = '../../php/VerifyYoutubeLink.php',
+                      urlData = {
+                        url : entry
+                      };
+                
+                (async() => {
+                    let result = await ds.postData(urlData, phpURL);
+                    if(result['result'] == true) {
+                        generateButtons();
+                    }
+                    console.log(result['result']);
+                })();
+
+            }
+            else {
+                generateButtons();
+            }
 
         }
     } 

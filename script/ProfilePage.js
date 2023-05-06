@@ -6,13 +6,12 @@ import { FeedGenerator } from "./classes/FeedGenerator.js";
 import { PostThreadDataDriver } from "./classes/PostThreadDataDriver.js";
 import { NavBarFactory } from "./classes/NavBarFactory.js";
 import { PostCreator } from "./classes/PostCreator.js";
+import { GeneratePostMap } from "./classes/GeneratePostMap.js";
 
 // TEST DATA
 import postsJSON from "../test/posts.json" assert { type: 'json' };
 import threadJSON from "../test/threads.json" assert { type: 'json' };
 import aboutJSON from "../test/about.json" assert { type: 'json' };
-import { Geocode } from "./classes/Geocode.js";
-import { GeneratePostMap } from "./classes/GeneratePostMap.js";
 
 class ProfilePage {
 
