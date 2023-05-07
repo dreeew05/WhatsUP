@@ -5,6 +5,7 @@ import { NavBarSectionDivider } from "./classes/NavBarSectionDivider.js";
 import { FeedGenerator } from "./classes/FeedGenerator.js";
 import { PostThreadDataDriver } from "./classes/PostThreadDataDriver.js";
 import { NavBarFactory } from "./classes/NavBarFactory.js";
+import { GeneratePostMap } from "./classes/GeneratePostMap.js";
 
 // TEST DATA
 import postsJSON from "../test/posts.json" assert { type: 'json' };
