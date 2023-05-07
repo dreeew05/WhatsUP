@@ -14,21 +14,9 @@ export class DataSerializer {
     }
 
     async postData(postedData, phpFile) {
-        let alertBox = this.sweetAlert,
-            sample   = null;
+        let alertBox = this.sweetAlert;
     
-        async function serializeData(url = '', jsonData = {}) {
-            const response = await fetch(url, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(jsonData)
-            });
-            return response.json();
-        }
-    
-        return await serializeData(phpFile, postedData)
+        return await this.serializeData(phpFile, postedData)
             .then(data => {
                 console.log(data);
                 return data;
@@ -41,10 +29,21 @@ export class DataSerializer {
                     'Okay'
                 );
                 const errorData = {
-                    result : false
+                    result : null
                 };
                 return errorData; 
             });
+    }
+
+    async serializeData(url, jsonData) {
+        const response = await fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(jsonData)
+        });
+        return response.json();
     }
 
 }

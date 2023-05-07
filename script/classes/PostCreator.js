@@ -297,51 +297,51 @@ export class PostCreator {
             this.ytLinksDataDriver, 4);
     }
 
+    generateButtons(tagsDiv, dataDriver, type, entry) {
+        // ADD COUNTER FOR ID REFERENCE
+        dataDriver.incrementCounter();
+
+        let tagButtonID  = type + "-" + dataDriver.getCounter(),
+            removeBtnID  = "remove-" + type + "-" + dataDriver.getCounter(),
+            tagButtons   = new CreateElement("div", tagButtonID, "tag-buttons")
+                        .createElement(),
+            tagButton    = new CreateElement("div", null, "tag-button")
+                        .createElement(),
+            removeButton = new CreateElement("button", removeBtnID, "remove-tag")
+                        .createElement(),
+            removeIcon   = new CreateElement("i", null, "fa-sharp fa-solid fa-xmark")
+                        .createElement();
+        
+        // SET ATTRIBUTE
+        tagButton.textContent = entry;
+        removeButton.setAttribute("type", "button");
+
+        // APPEND CHILD
+        tagsDiv.appendChild(tagButtons);
+        tagButtons.appendChild(tagButton);
+        tagButton.appendChild(removeButton);
+        removeButton.appendChild(removeIcon);   
+
+        // ADD ITEM TO ARRAY
+        dataDriver.appendToTagsArray(entry);
+
+        // REMOVING ENTRY
+        removeButton.onclick = function() {
+            document.getElementById(tagButtonID).remove();
+            dataDriver.decrementCounter();
+            dataDriver.removeFromTagsArray(tagButtonID);
+            console.log(dataDriver.getTagsArray());
+        }
+
+        console.log(dataDriver.getTagsArray());
+    }
+
     modifyEntries(tagsDiv, textField, button, type, dataDriver, limit) {
 
         let alertBox = this.sweetAlert,
             ds       = this.dataSerializer;
 
-        button.onclick = async function() {
-
-            function generateButtons() {
-                // ADD COUNTER FOR ID REFERENCE
-                dataDriver.incrementCounter();
-
-                let tagButtonID  = type + "-" + dataDriver.getCounter(),
-                    removeBtnID  = "remove-" + type + "-" + dataDriver.getCounter(),
-                    tagButtons   = new CreateElement("div", tagButtonID, "tag-buttons")
-                                .createElement(),
-                    tagButton    = new CreateElement("div", null, "tag-button")
-                                .createElement(),
-                    removeButton = new CreateElement("button", removeBtnID, "remove-tag")
-                                .createElement(),
-                    removeIcon   = new CreateElement("i", null, "fa-sharp fa-solid fa-xmark")
-                                .createElement();
-                
-                // SET ATTRIBUTE
-                tagButton.textContent = entry;
-                removeButton.setAttribute("type", "button");
-
-                // APPEND CHILD
-                tagsDiv.appendChild(tagButtons);
-                tagButtons.appendChild(tagButton);
-                tagButton.appendChild(removeButton);
-                removeButton.appendChild(removeIcon);   
-
-                // ADD ITEM TO ARRAY
-                dataDriver.appendToTagsArray(entry);
-
-                // REMOVING ENTRY
-                removeButton.onclick = function() {
-                    document.getElementById(tagButtonID).remove();
-                    dataDriver.decrementCounter();
-                    dataDriver.removeFromTagsArray(tagButtonID);
-                    console.log(dataDriver.getTagsArray());
-                }
-
-                console.log(dataDriver.getTagsArray());
-            }
+        button.onclick = async () => {
 
             const entry = textField.value;
 
@@ -376,14 +376,14 @@ export class PostCreator {
                 (async() => {
                     let result = await ds.postData(urlData, phpURL);
                     if(result['result'] == true) {
-                        generateButtons();
+                        this.generateButtons(tagsDiv, dataDriver, type, entry);
                     }
                     console.log(result['result']);
                 })();
 
             }
             else {
-                generateButtons();
+                this.generateButtons(tagsDiv, dataDriver, type, entry);
             }
 
         }
