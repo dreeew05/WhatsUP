@@ -31,7 +31,7 @@ export class TagLinkDataDriver {
 
     removeFromTagsArray(entry) {
         let entryIndex = this.getTagsArray().indexOf(entry);
-        this.getTagsArray().splice(entryIndex - 1, 1);
+        this.getTagsArray().splice(entryIndex, 1);
     }
 
 }

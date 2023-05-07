@@ -5,6 +5,7 @@ import { CreateElement } from "./CreateElement.js";
 import { DataSerializer } from "./DataSerializer.js";
 import { GeneratePostMap } from "./GeneratePostMap.js";
 import { Geocode } from "./Geocode.js";
+import { PostThumbnailFactory } from "./PostThumbnailFactory.js";
 import { SweetAlertFactory } from "./SweetAlertFactory.js";
 import { TagLinkDataDriver } from "./TagLinkDataDriver.js";
 
@@ -19,6 +20,7 @@ export class PostCreator {
         this.ytLinksDataDriver = new TagLinkDataDriver();
         this.sweetAlert        = new SweetAlertFactory();
         this.dataSerializer    = new DataSerializer();
+        this.thumbnailFactory  = new PostThumbnailFactory();
         
         const POST_HOLDER = document.getElementById("posts");
 
@@ -326,14 +328,25 @@ export class PostCreator {
         dataDriver.appendToTagsArray(entry);
 
         // REMOVING ENTRY
-        removeButton.onclick = function() {
+        removeButton.onclick = () => {
             document.getElementById(tagButtonID).remove();
             dataDriver.decrementCounter();
-            dataDriver.removeFromTagsArray(tagButtonID);
+            dataDriver.removeFromTagsArray(entry);
+
+            if(type == "link") {
+                // THUMBNAIL VIEWER
+                const elementID  = "yt-thumbnails",
+                parentDiv  = document.getElementById("yt-modal-body"),
+                divElement = document.querySelector('#'.concat(elementID));
+                
+                if(divElement) {
+                    divElement.remove();
+                    this.createThumbnailViewer(elementID, parentDiv, 
+                        this.ytLinkToThumbnail(dataDriver.getTagsArray()));
+                }
+            }
             console.log(dataDriver.getTagsArray());
         }
-
-        console.log(dataDriver.getTagsArray());
     }
 
     modifyEntries(tagsDiv, textField, button, type, dataDriver, limit) {
@@ -377,8 +390,20 @@ export class PostCreator {
                     let result = await ds.postData(urlData, phpURL);
                     if(result['result'] == true) {
                         this.generateButtons(tagsDiv, dataDriver, type, entry);
+                        console.log(this.ytLinkToThumbnail(dataDriver.getTagsArray()));
+
+                        // THUMBNAIL VIEWER
+                        const elementID  = "yt-thumbnails",
+                              parentDiv  = document.getElementById("yt-modal-body"),
+                              divElement = document.querySelector('#'.concat(elementID));
+                            
+                        if(divElement) {
+                            divElement.remove();
+                        }
+                        
+                        this.createThumbnailViewer(elementID, parentDiv, 
+                            this.ytLinkToThumbnail(dataDriver.getTagsArray()));
                     }
-                    // console.log(result['result']);
                 })();
 
             }
@@ -388,6 +413,28 @@ export class PostCreator {
 
         }
     } 
+
+    createThumbnailViewer(elementID, parentDiv, thumbnailArray) {
+        // CREATE ELEMENT
+        let newDivElement = new CreateElement("div", elementID,
+                            'thumbnail-div-holder').createElement();
+
+        parentDiv.appendChild(newDivElement);
+        this.thumbnailFactory.generateThumbnail(thumbnailArray, 
+            newDivElement);
+    }
+
+    ytLinkToThumbnail(ytLinks) {
+        let ytThumbnails = [];
+        for(let i = 0; i < ytLinks.length; i ++) {
+            let linkSplit = ytLinks[i].split("="),
+                videoCode = linkSplit[linkSplit.length - 1],
+                thumbnail = "https://img.youtube.com/vi/".concat(
+                            videoCode).concat("/maxresdefault.jpg");
+            ytThumbnails.push(thumbnail);
+        }
+        return ytThumbnails;
+    }
 
     geocodeMap(searchButton, searchText, modalBody) {
 

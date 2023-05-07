@@ -27,7 +27,9 @@
 
     }
 
+    // DRIVER
     $data    = json_decode(file_get_contents('php://input'),true);
     $process = new VerifyYoutubeLink($data['url']);
+    // RETURN OUTPUT IN JSON
     echo json_encode(array('result' => $process -> checkYoutubeLink()));
 ?>
