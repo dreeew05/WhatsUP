@@ -356,7 +356,7 @@ export class PostCreator {
                 return;
             }
 
-            if(limit != null) {
+            if(type == "link") {
                 if(dataDriver.getTagsArray().length == limit) {
                     // ALERT USER THAT IT CAN'T INPUT ANYMORE
                     alertBox.createAlertBox(
@@ -378,7 +378,7 @@ export class PostCreator {
                     if(result['result'] == true) {
                         this.generateButtons(tagsDiv, dataDriver, type, entry);
                     }
-                    console.log(result['result']);
+                    // console.log(result['result']);
                 })();
 
             }

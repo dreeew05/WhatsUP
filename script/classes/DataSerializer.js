@@ -28,10 +28,9 @@ export class DataSerializer {
                     'error',
                     'Okay'
                 );
-                const errorData = {
+                return {
                     result : null
-                };
-                return errorData; 
+                }; 
             });
     }
 
