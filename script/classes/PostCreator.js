@@ -14,26 +14,27 @@ export class PostCreator {
     constructor() {
 
         // GLOBAL VARIBLE
-        this.buttonCounter     = 0;
-        this.buttonArray       = [];
         this.tagsDataDriver    = new TagLinkDataDriver();
         this.ytLinksDataDriver = new TagLinkDataDriver();
+        this.mediaDriver       = new TagLinkDataDriver();
         this.sweetAlert        = new SweetAlertFactory();
         this.dataSerializer    = new DataSerializer();
         this.thumbnailFactory  = new PostThumbnailFactory();
-        
-        const POST_HOLDER = document.getElementById("posts");
+        this.postHolder        = document.getElementById("posts");
 
         this.displayPostButton();
-        this.displayPostModal(POST_HOLDER);
-        this.displayMapModal(POST_HOLDER);
-        this.displayYoutubeModal(POST_HOLDER);
+        this.displayPostModal();
+        this.displayMapModal();
+        this.displayYoutubeModal();
+        this.displayMediaModal();
 
     }
 
-    displayPostButton() {
-        const POST_HOLDER = document.getElementById("posts");
-        
+    getPostHolder() {
+        return this.postHolder;
+    }
+
+    displayPostButton() {        
         let postButton = new CreateElement("button", "post-button", null).createElement();
 
         // SET ATTRIBUTE
@@ -43,11 +44,11 @@ export class PostCreator {
         postButton.textContent = "Create Post";
 
         // APPEND CHILD
-        POST_HOLDER.appendChild(postButton);
+        this.getPostHolder().appendChild(postButton);
 
     }
 
-    displayPostModal(POST_HOLDER) {
+    displayPostModal() {
 
         let postModal       = new CreateElement("div", "post-modal", "modal fade")
                               .createElement(),
@@ -109,6 +110,7 @@ export class PostCreator {
                               .createElement(),
             postButton      = new CreateElement("div", null, "btn btn-primary")
                               .createElement();
+                
         // SET ATTRIBUTES
         postModal.setAttribute("tabindex", "-1");
         postModal.setAttribute("aria-labelledby", "post-modal-label");
@@ -123,7 +125,13 @@ export class PostCreator {
         mediaControlTxt.textContent = "Add To Post";
         postButton.textContent = "Post";
         imageButton.setAttribute("type", "button");
+        imageButton.setAttribute("data-bs-target", "#media-modal");
+        imageButton.setAttribute("data-bs-toggle", "modal");
+        imageButton.setAttribute("data-bs-dismmis", "modal");
         videoButton.setAttribute("type", "button");
+        videoButton.setAttribute("data-bs-target", "#media-modal");
+        videoButton.setAttribute("data-bs-toggle", "modal");
+        videoButton.setAttribute("data-bs-dismmis", "modal");
         ytButton.setAttribute("type", "button");
         ytButton.setAttribute("data-bs-target", "#yt-modal");
         ytButton.setAttribute("data-bs-toggle", "modal");
@@ -140,7 +148,7 @@ export class PostCreator {
         // lngFieldHidden.style.visibility = "hidden";
 
         // APPEND CHILD
-        POST_HOLDER.appendChild(postModal);
+        this.getPostHolder().appendChild(postModal);
         postModal.appendChild(modalDialog);
         modalDialog.appendChild(modalContent);
         modalContent.appendChild(modalHeader);
@@ -186,7 +194,7 @@ export class PostCreator {
 
     }
 
-    displayMapModal(POST_HOLDER) {
+    displayMapModal() {
         let searchMapModal  = new CreateElement("div", "map-modal", "modal fade")
                               .createElement(),
             modalDialog     = new CreateElement("div", null, "modal-dialog modal-dialog-centered modal-lg")
@@ -224,7 +232,7 @@ export class PostCreator {
             searchButton.setAttribute("type", "submit");
 
             // APPEND CHILD
-            POST_HOLDER.appendChild(searchMapModal);
+            this.getPostHolder().appendChild(searchMapModal);
             searchMapModal.appendChild(modalDialog);
             modalDialog.appendChild(modalContent);
             modalContent.appendChild(modalHeader);
@@ -243,7 +251,7 @@ export class PostCreator {
 
     }
 
-    displayYoutubeModal(POST_HOLDER) {
+    displayYoutubeModal() {
         let ytModal        = new CreateElement("div", "yt-modal", "modal fade")
                              .createElement(),
             modalDialog    = new CreateElement("div", null, "modal-dialog modal-dialog-centered modal-lg")
@@ -281,7 +289,7 @@ export class PostCreator {
             addYTButton.setAttribute("type", "submit");
 
             // APPEND CHILD
-            POST_HOLDER.appendChild(ytModal);
+            this.getPostHolder().appendChild(ytModal);
             ytModal.appendChild(modalDialog);
             modalDialog.appendChild(modalContent);
             modalContent.appendChild(modalHeader);
@@ -297,6 +305,62 @@ export class PostCreator {
             // MODIFY Links
             this.modifyEntries(linkDiv, addLinksTField, addYTButton, "link",
             this.ytLinksDataDriver, 4);
+    }
+
+    displayMediaModal() {
+        let mediaModal    = new CreateElement("div", "media-modal", "modal fade")
+                            .createElement(),
+            modalDialog   = new CreateElement("div", null, "modal-dialog modal-dialog-centered modal-lg")
+                            .createElement(),
+            modalContent  = new CreateElement("div", "modal-content-add-media", "modal-content")
+                            .createElement(),
+            modalHeader   = new CreateElement("div", null, "modal-header")
+                            .createElement(),
+            modalTitle    = new CreateElement("h3", "media-modal-label", "modal-title")
+                            .createElement(),
+            closeButton   = new CreateElement("button", null, "btn-close")
+                            .createElement(),
+            modalBody     = new CreateElement("div", "media-modal-body", "modal-body")
+                            .createElement(),
+            fileDiv       = new CreateElement("div", "file-div", null)
+                            .createElement(),
+            addFile       = new CreateElement("div", "add-file", null)
+                            .createElement(),
+            addFileTField = new CreateElement("input", "file-text-field", "post-text-fields")
+                            .createElement(),
+            addFileButton = new CreateElement("button", "add-file-button", null)
+                            .createElement(),
+            plusSign      = new CreateElement("i", null, "fa-sharp fa-solid fa-plus")
+                            .createElement();
+
+            // SET ATTRIBUTE
+            mediaModal.setAttribute("tabindex", "-1");
+            mediaModal.setAttribute("aria-labelledby", "media-modal-label");
+            mediaModal.setAttribute("aria-hidden", "true");
+            modalTitle.textContent = "Add Media";
+            modalDialog.setAttribute("role", "document");
+            closeButton.setAttribute("data-bs-dismiss", "modal");
+            closeButton.setAttribute("aria-label", "Close");
+            addFileTField.setAttribute("type", "file");
+            addFileButton.setAttribute("type", "submit");
+
+            // APPEND CHILD
+            this.getPostHolder().appendChild(mediaModal);
+            mediaModal.appendChild(modalDialog);
+            modalDialog.appendChild(modalContent);
+            modalContent.appendChild(modalHeader);
+            modalHeader.appendChild(modalTitle);
+            modalHeader.appendChild(closeButton);
+            modalContent.appendChild(modalBody);
+            modalBody.appendChild(fileDiv);
+            fileDiv.appendChild(addFile)
+            addFile.appendChild(addFileTField);
+            addFile.appendChild(addFileButton);
+            addFileButton.appendChild(plusSign);
+
+            // MODIFY Links
+            this.modifyEntries(fileDiv, addFileTField, addFileButton, "media",
+            this.mediaDriver, 4);
     }
 
     generateButtons(tagsDiv, dataDriver, type, entry) {
@@ -315,7 +379,17 @@ export class PostCreator {
                         .createElement();
         
         // SET ATTRIBUTE
-        tagButton.textContent = entry;
+        // tagButton.textContent = entry.value;
+        switch(type) {
+            case "media":
+                let fileSplit = entry.value.split("\\"),
+                    fileName  = fileSplit[fileSplit.length - 1];
+                tagButton.textContent = fileName;
+                break;
+            default:
+                tagButton.textContent = entry.value;
+                break;
+        }
         removeButton.setAttribute("type", "button");
 
         // APPEND CHILD
@@ -325,6 +399,14 @@ export class PostCreator {
         removeButton.appendChild(removeIcon);   
 
         // ADD ITEM TO ARRAY
+        switch(type) {
+            case "media":
+                entry = URL.createObjectURL(entry.files[0]);
+                break;
+            default:
+                entry = entry.value;
+                break;
+        }
         dataDriver.appendToTagsArray(entry);
 
         // REMOVING ENTRY
@@ -333,19 +415,43 @@ export class PostCreator {
             dataDriver.decrementCounter();
             dataDriver.removeFromTagsArray(entry);
 
-            if(type == "link") {
-                // THUMBNAIL VIEWER
-                const elementID  = "yt-thumbnails",
-                parentDiv  = document.getElementById("yt-modal-body"),
+            this.addRemoveThumbnail(type, dataDriver);
+            console.log(dataDriver.getTagsArray());
+        }
+    }
+
+    addRemoveThumbnail(type, dataDriver) {
+
+        let elementID  = null,
+            parentDiv  = null,
+            divElement = null;
+
+        switch(type) {
+            case "link":
+                elementID  = "yt-thumbnails";
+                parentDiv  = document.getElementById("yt-modal-body");
                 divElement = document.querySelector('#'.concat(elementID));
                 
                 if(divElement) {
                     divElement.remove();
-                    this.createThumbnailViewer(elementID, parentDiv, 
-                        this.ytLinkToThumbnail(dataDriver.getTagsArray()));
                 }
-            }
-            console.log(dataDriver.getTagsArray());
+                this.createThumbnailViewer(elementID, parentDiv, 
+                    this.ytLinkToThumbnail(dataDriver.getTagsArray()));
+
+                break;
+            case "media":
+                elementID  = "media-thumbnails",
+                parentDiv  = document.getElementById("media-modal-body");
+                divElement = document.querySelector('#'.concat(elementID));
+                
+                if(divElement) {
+                    divElement.remove();
+                }
+                this.createThumbnailViewer(elementID, parentDiv,
+                    dataDriver.getTagsArray());
+                break;
+            default:
+                break;
         }
     }
 
@@ -356,9 +462,7 @@ export class PostCreator {
 
         button.onclick = async () => {
 
-            const entry = textField.value;
-
-            if(entry == "") {
+            if(textField.value == "") {
                 // USER ENTERS EMPTY STRING
                 alertBox.createAlertBox(
                     'Error!', 
@@ -369,48 +473,66 @@ export class PostCreator {
                 return;
             }
 
-            if(type == "link") {
-                if(dataDriver.getTagsArray().length == limit) {
-                    // ALERT USER THAT IT CAN'T INPUT ANYMORE
-                    alertBox.createAlertBox(
-                        'Error!',
-                        'Cannot Add More than Four Links',
-                        'error',
-                        'Okay'
-                    );
-                    return;
-                }
-                
-                const phpURL  = '../../php/VerifyYoutubeLink.php',
-                      urlData = {
-                        url : entry
-                      };
-                
-                (async() => {
-                    let result = await ds.postData(urlData, phpURL);
-                    if(result['result'] == true) {
-                        this.generateButtons(tagsDiv, dataDriver, type, entry);
-                        console.log(this.ytLinkToThumbnail(dataDriver.getTagsArray()));
+            let elementID  = null,
+                parentDiv  = null,
+                divElement = null;
 
-                        // THUMBNAIL VIEWER
-                        const elementID  = "yt-thumbnails",
-                              parentDiv  = document.getElementById("yt-modal-body"),
-                              divElement = document.querySelector('#'.concat(elementID));
-                            
-                        if(divElement) {
-                            divElement.remove();
-                        }
-                        
-                        this.createThumbnailViewer(elementID, parentDiv, 
-                            this.ytLinkToThumbnail(dataDriver.getTagsArray()));
+            switch(type) {
+                case "link":
+                    if(dataDriver.getTagsArray().length == limit) {
+                        // ALERT USER THAT IT CAN'T INPUT ANYMORE
+                        alertBox.createAlertBox(
+                            'Error!',
+                            'Cannot Add More than Four Links',
+                            'error',
+                            'Okay'
+                        );
+                        return;
                     }
-                })();
-
+                    
+                    const phpURL  = '../../php/VerifyYoutubeLink.php',
+                          urlData = {
+                            url : textField.value
+                          };
+                    
+                    (async() => {
+                        let result = await ds.postData(urlData, phpURL);
+                        if(result['result'] == true) {
+                            this.generateButtons(tagsDiv, dataDriver, type, textField);
+                            console.log(this.ytLinkToThumbnail(dataDriver.getTagsArray()));
+    
+                            // THUMBNAIL VIEWER
+                            this.addRemoveThumbnail("link", dataDriver);
+                        }
+                        else {
+                            alertBox.createAlertBox(
+                                'Error!',
+                                'Invalid Link',
+                                'error',
+                                'Okay'
+                            );
+                        }
+                    })();
+                    break;
+                case "media":
+                    if(dataDriver.getTagsArray().length == limit) {
+                        // ALERT USER THAT IT CAN'T INPUT ANYMORE
+                        alertBox.createAlertBox(
+                            'Error!',
+                            'Cannot Add More than Four Media',
+                            'error',
+                            'Okay'
+                        );
+                        return;
+                    }
+                    this.generateButtons(tagsDiv, dataDriver, type, textField)
+                    this.addRemoveThumbnail(type, dataDriver);
+                    console.log(this.mediaDriver.getTagsArray());
+                    break;
+                default:
+                    this.generateButtons(tagsDiv, dataDriver, type, textField);
+                    break;
             }
-            else {
-                this.generateButtons(tagsDiv, dataDriver, type, entry);
-            }
-
         }
     } 
 

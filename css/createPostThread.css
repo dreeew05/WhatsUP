@@ -59,7 +59,7 @@
     margin-right: 2%;
 }
 
-#tags-div, #link-div {
+#tags-div, #link-div, #file-div {
     border: 2px solid #A2A2A2;
     border-radius: 1vmax;
     margin-top: 1%;
@@ -73,19 +73,23 @@
      margin-bottom: 1%;
 }
 
-#add-tag, #input-map, #add-links {
+#add-tag, #input-map, #add-links, #add-file {
     height: 2vmax;
     width: 100%;
     display: flex;
     flex-direction: row;
 }
 
-#add-tag input, #input-map input, #add-links input {
+/* #add-file {
+    border: 1px solid black;
+} */
+
+#add-tag input, #input-map input, #add-links input, #add-file input {
     border-top-right-radius: 0px;
     border-bottom-right-radius: 0px;
 }
 
-#add-tag button, #input-map button, #add-links button {
+#add-tag button, #input-map button, #add-links button, #add-file button {
     background-color: green;
     font-size: 0.75vmax;
     color: white;
@@ -94,6 +98,12 @@
     padding-left: 3%;
     padding-right: 3%;
     height: 2vmax;
+}
+
+#file-text-field {
+    display: block;
+    margin-top: auto;
+    margin-bottom: auto;
 }
 
 .tag-buttons {
@@ -251,16 +261,23 @@
     margin-top: 1rem;
 }
 
-.thumbnail-holder img{
+.thumbnail-holder img {
     height: 20vmax;
     width: 100%;
     object-fit: cover;
     border-radius: 1vmax;
 }
 
+.thumbnail-images-div {
+    display: flex;
+    flex-direction: row;
+}
+
 .half-div {
     width: 50%;
     padding: 0.5%;
+    display: flex;
+    flex-direction: column;
 }
 
 .tranche-div {
@@ -277,7 +294,7 @@
     height: 9.75vmax;
 }
 
-#two-images-div {
+/* #two-images-div {
     display: flex;
     flex-direction: row;
 }
@@ -296,7 +313,7 @@
 #three-images-second-half {
     display: flex;
     flex-direction: column;
-}
+} 
 
 #four-images-div {
     display: flex;
@@ -306,4 +323,4 @@
 #four-images-div .half-div {
     display: flex;
     flex-direction: column;
-}
+} */

@@ -31,7 +31,7 @@ export class PostThumbnailFactory {
     }
 
     oneImage(imageURL, thumbnailHolder) {
-        let image = new CreateElement("img", "single-image", null)
+        let image = new CreateElement("img", null, "thumbnail-images-div")
                     .createElement();
         
         // SET ATTRIBUTE
@@ -42,7 +42,7 @@ export class PostThumbnailFactory {
     }
 
     twoImages(thumbnailArray, thumbnailHolder) {
-        let twoImagesDiv = new CreateElement("div", "two-images-div", null)
+        let twoImagesDiv = new CreateElement("div", null, "thumbnail-images-div")
                            .createElement();
         for(let i = 0; i < thumbnailArray.length; i++) {
             let imageDiv = new CreateElement("div", "thumbnail-two-media",
@@ -60,7 +60,7 @@ export class PostThumbnailFactory {
     }
 
     threeImages(thumbnailArray, thumbnailHolder) {
-        let threeImagesDiv = new CreateElement("div", "three-images-div", null)
+        let threeImagesDiv = new CreateElement("div", null, "thumbnail-images-div")
                              .createElement(),
             firstHalfDiv   = new CreateElement("div", "three-images-first-half",
                              "half-div").createElement(),
@@ -87,7 +87,7 @@ export class PostThumbnailFactory {
     }
 
     fourImages(thumbnailArray, thumbnailHolder) {
-        let fourImagesDiv = new CreateElement("div", "four-images-div", null)
+        let fourImagesDiv = new CreateElement("div", null, "thumbnail-images-div")
                             .createElement(),
             halfDiv       = null;
 
