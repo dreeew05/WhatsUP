@@ -3,7 +3,7 @@
 
 /* ADMIN PRIVILEGES */
 
-#post-button {
+#create-post-button {
     display: block;
     margin: auto;
     width: 80%;
@@ -73,6 +73,15 @@
      margin-bottom: 1%;
 }
 
+.save-button {
+    background-color: #0b5ed7;
+    width: 100%;
+    font-family: 'ProductSansRegular';
+    color: white;
+    border-radius: 0.5vmax;
+    padding: 1%;
+}
+
 #add-tag, #input-map, #add-links, #add-file {
     height: 2vmax;
     width: 100%;
@@ -106,7 +115,7 @@
     margin-bottom: auto;
 }
 
-.tag-buttons {
+.tag-buttons, .media-tag-buttons {
     margin-top: 1%;
     display: inline-block;
 }
@@ -178,6 +187,9 @@
     background-color: rgba(0, 0, 0, 0.5);
 }
 
+.media-button.active {
+    background-color: rgba(0, 0, 0, 0.5);
+}
 
 .media-button:nth-child(1) {
     color: #58c472;
@@ -258,7 +270,7 @@
 
 /* THUMBNAILS */
 .thumbnail-holder {
-    margin-top: 1rem;
+    margin-top: 0.5vmax;
 }
 
 .thumbnail-holder img {
@@ -294,33 +306,44 @@
     height: 9.75vmax;
 }
 
-/* #two-images-div {
-    display: flex;
-    flex-direction: row;
-}
+/* POST MODAL THUMBNAILS */
 
-#thumbnail-two-media img {
-    height: 20vmax;
+#post-thumbnails {
     width: 100%;
-    object-fit: cover;
-}
-
-#three-images-div {
-    display: flex;
-    flex-direction: row;
-}
-
-#three-images-second-half {
+    border: 2px solid #A2A2A2;
+    border-radius: 1vmax;
     display: flex;
     flex-direction: column;
-} 
-
-#four-images-div {
-    display: flex;
-    flex-direction: row;
+    margin-top: 1rem;
+    padding: 2%;
 }
 
-#four-images-div .half-div {
+#thumbnail-header {
+    height: 2vmax;
+    width: 100%;
     display: flex;
-    flex-direction: column;
-} */
+    flex-direction: row; 
+}
+
+#thumbnail-header-text {
+    width: 50%;
+    padding-left: 2%;
+    font-size: 1.25vmax;
+    font-family: 'ProductSansRegular';
+}
+
+#thumbnail-header-close {
+    width: 50%;
+    margin-left: 80%;
+}
+
+#remove-thumbnail {
+    height: 1.5vmax;
+    width: 1.5vmax;
+    background-color: red;
+    color: white;
+    border-radius: 50%;
+    font-size: 0.75vmax;
+    display: block;
+    margin: auto;
+}

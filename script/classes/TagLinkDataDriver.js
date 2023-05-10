@@ -21,6 +21,10 @@ export class TagLinkDataDriver {
         this.counter--;
     }
 
+    emptyCounter() {
+        this.counter = 0;
+    }
+
     getTagsArray() {
         return this.tagsArray;
     }
@@ -32,6 +36,10 @@ export class TagLinkDataDriver {
     removeFromTagsArray(entry) {
         let entryIndex = this.getTagsArray().indexOf(entry);
         this.getTagsArray().splice(entryIndex, 1);
+    }
+
+    emptyTagsArray() {
+        this.tagsArray = [];
     }
 
 }

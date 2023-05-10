@@ -21,12 +21,15 @@ export class PostCreator {
         this.dataSerializer    = new DataSerializer();
         this.thumbnailFactory  = new PostThumbnailFactory();
         this.postHolder        = document.getElementById("posts");
+        this.dataArray         = null;
+        this.openedButton      = null;
 
         this.displayPostButton();
         this.displayPostModal();
         this.displayMapModal();
         this.displayYoutubeModal();
         this.displayMediaModal();
+        this.clickMediaButtons();
 
     }
 
@@ -34,8 +37,24 @@ export class PostCreator {
         return this.postHolder;
     }
 
+    getDataArray() {
+        return this.dataArray;
+    }
+
+    getOpenedButton() {
+        return this.openedButton;
+    }
+
+    setOpenedButton(openedButton) {
+        this.openedButton = openedButton;
+    }
+
+    setDataArray(dataArray) {
+        this.dataArray = dataArray;
+    }
+
     displayPostButton() {        
-        let postButton = new CreateElement("button", "post-button", null).createElement();
+        let postButton = new CreateElement("button", "create-post-button", null).createElement();
 
         // SET ATTRIBUTE
         postButton.setAttribute("type", "button");
@@ -84,15 +103,15 @@ export class PostCreator {
                               null).createElement(),
             mediaControlBtn = new CreateElement("div", "media-control-buttons",
                               null).createElement(),
-            imageButton     = new CreateElement("button", null, "media-button")
+            imageButton     = new CreateElement("button", "image-button", "media-button")
                               .createElement(),
             imageIcon       = new CreateElement("i", null, "fa-solid fa-image")
                               .createElement(),
-            videoButton     = new CreateElement("button", null, "media-button")
+            videoButton     = new CreateElement("button", "video-button", "media-button")
                               .createElement(),
             videoIcon       = new CreateElement("i", null, "fa-solid fa-video")
                               .createElement(), 
-            ytButton        = new CreateElement("button", null, "media-button")
+            ytButton        = new CreateElement("button", "yt-button", "media-button")
                               .createElement(),
             ytIcon          = new CreateElement("i", null, "fa-brands fa-youtube")
                               .createElement(),
@@ -108,7 +127,7 @@ export class PostCreator {
                               "post-text-fields").createElement(),
             modalFooter     = new CreateElement("div", null, "modal-footer")
                               .createElement(),
-            postButton      = new CreateElement("div", null, "btn btn-primary")
+            postButton      = new CreateElement("button", null, "save-button")
                               .createElement();
                 
         // SET ATTRIBUTES
@@ -124,22 +143,23 @@ export class PostCreator {
         addTagButton.setAttribute("type", "submit");
         mediaControlTxt.textContent = "Add To Post";
         postButton.textContent = "Post";
+        postButton.setAttribute("type", "submit");
         imageButton.setAttribute("type", "button");
         imageButton.setAttribute("data-bs-target", "#media-modal");
         imageButton.setAttribute("data-bs-toggle", "modal");
-        imageButton.setAttribute("data-bs-dismmis", "modal");
+        imageButton.setAttribute("data-bs-dismiss", "modal");
         videoButton.setAttribute("type", "button");
         videoButton.setAttribute("data-bs-target", "#media-modal");
         videoButton.setAttribute("data-bs-toggle", "modal");
-        videoButton.setAttribute("data-bs-dismmis", "modal");
+        videoButton.setAttribute("data-bs-dismiss", "modal");
         ytButton.setAttribute("type", "button");
         ytButton.setAttribute("data-bs-target", "#yt-modal");
         ytButton.setAttribute("data-bs-toggle", "modal");
-        ytButton.setAttribute("data-bs-dismmis", "modal");
+        ytButton.setAttribute("data-bs-dismiss", "modal");
         mapButton.setAttribute("type", "button");
         mapButton.setAttribute("data-bs-target", "#map-modal");
         mapButton.setAttribute("data-bs-toggle", "modal");
-        mapButton.setAttribute("data-bs-dismmis", "modal");
+        mapButton.setAttribute("data-bs-dismiss", "modal");
         latFieldHidden.setAttribute("type", "text");
         latFieldHidden.disabled = true;
         // latFieldHidden.style.visibility = "hidden";
@@ -181,15 +201,15 @@ export class PostCreator {
 
         // MODIFY TAGS 
         this.modifyEntries(tagsDiv, addTagTextField, addTagButton, "tag",
-            this.tagsDataDriver, null);
-
-        let ds = this.dataSerializer;
+            this.tagsDataDriver, null); 
 
         // ACTION WHEN POST BUTTON IS CLICKED
-        postButton.onclick = function() {
+        postButton.onclick = () => {
             // console.log(latFieldHidden.value);
             // console.log(lngFieldHidden.value);
-            console.log(ds.getData());
+            if(this.getDataArray() != null) {
+                console.log(this.getDataArray().tagsArray);
+            }
         }
 
     }
@@ -218,6 +238,10 @@ export class PostCreator {
             searchButton    = new CreateElement("button", null, null)
                               .createElement(),
             searchIcon      = new CreateElement("i", null, "fa-sharp fa-solid fa-magnifying-glass")
+                              .createElement(),
+            modalFooter     = new CreateElement("div", null, "modal-footer")
+                              .createElement(),
+            saveButton      = new CreateElement("button", null, "save-button")
                               .createElement();
 
             // SET ATTRIBUTE
@@ -230,6 +254,8 @@ export class PostCreator {
             closeButton.setAttribute("aria-label", "Close");
             searchText.setAttribute("type", "text");
             searchButton.setAttribute("type", "submit");
+            saveButton.textContent = "Save";
+            saveButton.setAttribute("type", "submit");
 
             // APPEND CHILD
             this.getPostHolder().appendChild(searchMapModal);
@@ -244,7 +270,8 @@ export class PostCreator {
             inputMap.appendChild(searchText);
             inputMap.appendChild(searchButton);
             searchButton.appendChild(searchIcon);
-            // modalBody.appendChild(displayMap);
+            modalContent.appendChild(modalFooter);
+            modalFooter.appendChild(saveButton);
 
             // ACTION WHEN SEARCH BUTTON IS CLICKED
             this.geocodeMap(searchButton, searchText, modalBody);
@@ -275,6 +302,10 @@ export class PostCreator {
             addYTButton    = new CreateElement("button", "add-link-button", null)
                              .createElement(),
             plusSign       = new CreateElement("i", null, "fa-sharp fa-solid fa-plus")
+                             .createElement(),
+            modalFooter     = new CreateElement("div", null, "modal-footer")
+                             .createElement(),
+            saveButton      = new CreateElement("button", null, "save-button")
                              .createElement();
 
             // SET ATTRIBUTE
@@ -286,7 +317,9 @@ export class PostCreator {
             closeButton.setAttribute("data-bs-dismiss", "modal");
             closeButton.setAttribute("aria-label", "Close");
             addLinksTField.setAttribute("type", "text");
-            addYTButton.setAttribute("type", "submit");
+            addYTButton.setAttribute("type", "submit"),
+            saveButton.textContent = "Save";
+            saveButton.setAttribute("type", "submit");
 
             // APPEND CHILD
             this.getPostHolder().appendChild(ytModal);
@@ -301,10 +334,18 @@ export class PostCreator {
             addLinks.appendChild(addLinksTField);
             addLinks.appendChild(addYTButton);
             addYTButton.appendChild(plusSign);
+            modalContent.appendChild(modalFooter);
+            modalFooter.appendChild(saveButton);
 
             // MODIFY Links
             this.modifyEntries(linkDiv, addLinksTField, addYTButton, "link",
             this.ytLinksDataDriver, 4);
+
+            // ADMIN Clicked Save
+            saveButton.onclick = () => {
+                console.log(this.getOpenedButton());
+                this.saveThumbnails(this.getOpenedButton());
+            }
     }
 
     displayMediaModal() {
@@ -331,6 +372,10 @@ export class PostCreator {
             addFileButton = new CreateElement("button", "add-file-button", null)
                             .createElement(),
             plusSign      = new CreateElement("i", null, "fa-sharp fa-solid fa-plus")
+                            .createElement(),
+            modalFooter     = new CreateElement("div", null, "modal-footer")
+                            .createElement(),
+            saveButton      = new CreateElement("button", null, "save-button")
                             .createElement();
 
             // SET ATTRIBUTE
@@ -343,6 +388,8 @@ export class PostCreator {
             closeButton.setAttribute("aria-label", "Close");
             addFileTField.setAttribute("type", "file");
             addFileButton.setAttribute("type", "submit");
+            saveButton.textContent = "Save";
+            saveButton.setAttribute("type", "submit");
 
             // APPEND CHILD
             this.getPostHolder().appendChild(mediaModal);
@@ -357,19 +404,166 @@ export class PostCreator {
             addFile.appendChild(addFileTField);
             addFile.appendChild(addFileButton);
             addFileButton.appendChild(plusSign);
+            modalContent.appendChild(modalFooter);
+            modalFooter.appendChild(saveButton);
 
             // MODIFY Links
             this.modifyEntries(fileDiv, addFileTField, addFileButton, "media",
             this.mediaDriver, 4);
+
+            // ADMIN Clicked Save
+            saveButton.onclick = () => {
+                console.log(this.getOpenedButton());
+                this.saveThumbnails(this.getOpenedButton());
+            }
+
+    }
+
+    clickMediaButtons() {
+
+        const imageButton = document.getElementById("image-button"),
+              videoButton = document.getElementById("video-button"),
+              ytButton    = document.getElementById("yt-button");
+
+        imageButton.onclick = () => {
+            this.setOpenedButton("image");
+        }
+        videoButton.onclick = () => {
+            this.setOpenedButton("video");
+        }
+        ytButton.onclick = () => {
+            this.setOpenedButton("youtube");
+        }
+    }
+
+    saveThumbnails(type) {
+
+        const imageButton = document.getElementById("image-button"),
+              videoButton = document.getElementById("video-button"),
+              ytButton    = document.getElementById("yt-button");
+
+        switch(type) {
+            case "image":
+                // videoButton.setAttribute("disabled", true);
+                // ytButton.setAttribute("disabled", true);
+                if(this.mediaDriver.getCounter() != 0) {
+                    if(!imageButton.classList.contains('active')) {
+                        imageButton.className += " active";
+                    }
+                    videoButton.disabled = true;
+                    ytButton.disabled    = true;
+                    videoButton.removeAttribute("data-bs-toggle");
+                    videoButton.removeAttribute("data-bs-dismiss");
+                    ytButton.removeAttribute("data-bs-toggle");
+                    ytButton.removeAttribute("data-bs-dismiss");
+                    this.setDataArray(this.mediaDriver);
+                    this.showThumbnailToPostModal(
+                        this.mediaDriver.getTagsArray()
+                    );
+                }
+                break;
+            case "video":
+                // imageButton.setAttribute("disabled", true);
+                // ytButton.setAttribute("disabled", true);
+                if(this.mediaDriver.getCounter() != 0) {
+                    if(!videoButton.classList.contains('active')) {
+                        videoButton.className += " active";
+                    }
+                    imageButton.disabled = true;
+                    ytButton.disabled    = true;
+                    imageButton.removeAttribute("data-bs-toggle");
+                    imageButton.removeAttribute("data-bs-dismiss");
+                    ytButton.removeAttribute("data-bs-toggle");
+                    ytButton.removeAttribute("data-bs-dismiss");
+                    this.setDataArray(this.mediaDriver);
+                    this.showThumbnailToPostModal(
+                        this.mediaDriver.getTagsArray()
+                    );
+                }
+                break;
+            case "youtube":
+                // imageButton.setAttribute("disabled", true);
+                // videoButton.setAttribute("disabled", true);
+                console.log(this.ytLinksDataDriver.getCounter());
+                if(this.ytLinksDataDriver.getCounter() != 0) {
+                    if(!ytButton.classList.contains('active')) {
+                        ytButton.className += " active";
+                    }
+                    imageButton.disabled = true;
+                    videoButton.disabled = true;
+                    imageButton.removeAttribute("data-bs-toggle");
+                    imageButton.removeAttribute("data-bs-dismiss");
+                    videoButton.removeAttribute("data-bs-toggle");
+                    videoButton.removeAttribute("data-bs-dismiss");
+                    this.setDataArray(this.ytLinksDataDriver);
+                    let ytThumbnailsArray = this.ytLinkToThumbnail(
+                        this.ytLinksDataDriver.getTagsArray()
+                    );
+                    this.showThumbnailToPostModal(ytThumbnailsArray);
+                }
+                break;
+            default:
+                break;
+        }
+    }
+
+    freeButtons() {
+        const imageButton = document.getElementById("image-button"),
+              videoButton = document.getElementById("video-button"),
+              ytButton    = document.getElementById("yt-button");
+        
+        // ENABLE BUTTONS
+        imageButton.removeAttribute("disabled");
+        videoButton.removeAttribute("disabled");
+        ytButton.removeAttribute("disabled");
+
+        // ACCESS MODAL
+        imageButton.setAttribute("data-bs-toggle", "modal");
+        imageButton.setAttribute("data-bs-dismiss", "modal");
+        videoButton.setAttribute("data-bs-toggle", "modal");
+        videoButton.setAttribute("data-bs-dismiss", "modal");
+        ytButton.setAttribute("data-bs-toggle", "modal");
+        ytButton.setAttribute("data-bs-dismiss", "modal");
+
+        // REMOVE ACTIVE STATUS
+        const buttons = document.getElementsByClassName("media-button");
+        for(let i = 0; i < buttons.length; i++) {
+            buttons[i].classList.remove("active");
+        }
+
+        // REMOVE EXISTING TAG BUTTONS
+        const tagButtons = document.querySelectorAll('.media-tag-buttons');
+        tagButtons.forEach(element => element.remove());
+
+        // REMOVE THUMBNAILS
+        const thumbnailDivHolders = document.querySelectorAll('.thumbnail-div-holder');
+        thumbnailDivHolders.forEach(element => element.remove());
+
+        this.mediaDriver.emptyCounter();
+        this.mediaDriver.emptyTagsArray();
+        this.ytLinksDataDriver.emptyCounter();
+        this.ytLinksDataDriver.emptyTagsArray();
+
+        // CLEAR DATA ARRAY
+        this.setDataArray(null);
     }
 
     generateButtons(tagsDiv, dataDriver, type, entry) {
         // ADD COUNTER FOR ID REFERENCE
         dataDriver.incrementCounter();
 
+        let classTag = null;
+
+        if(type == "link" || type == "media") {
+            classTag = "media-tag-buttons";
+        }
+        else {
+            classTag = "tag-buttons";
+        }
+
         let tagButtonID  = type + "-" + dataDriver.getCounter(),
             removeBtnID  = "remove-" + type + "-" + dataDriver.getCounter(),
-            tagButtons   = new CreateElement("div", tagButtonID, "tag-buttons")
+            tagButtons   = new CreateElement("div", tagButtonID, classTag)
                         .createElement(),
             tagButton    = new CreateElement("div", null, "tag-button")
                         .createElement(),
@@ -473,10 +667,6 @@ export class PostCreator {
                 return;
             }
 
-            let elementID  = null,
-                parentDiv  = null,
-                divElement = null;
-
             switch(type) {
                 case "link":
                     if(dataDriver.getTagsArray().length == limit) {
@@ -542,8 +732,63 @@ export class PostCreator {
                             'thumbnail-div-holder').createElement();
 
         parentDiv.appendChild(newDivElement);
+        // MEDIA MODAL
         this.thumbnailFactory.generateThumbnail(thumbnailArray, 
             newDivElement);
+
+    }
+
+    showThumbnailToPostModal(imagesArray) {
+        const modalBody      = document.getElementById("post-modal-body"),
+              postElementID  = "post-thumbnails",
+              divElement     = document.querySelector('#'.concat(postElementID)),
+              contentsID     = "media-contents";
+        
+        if(!divElement) {
+            let postThumbnails   = new CreateElement("div", postElementID, null)
+                                   .createElement(),
+                thumbnailHeader  = new CreateElement("div", "thumbnail-header")
+                                   .createElement(),
+                thumbnailText    = new CreateElement("div", "thumbnail-header-text",
+                                   null).createElement(),
+                closeThumbnail   = new CreateElement("div", "thumbnail-header-close",
+                                   null).createElement(),
+                closeButton      = new CreateElement("button", "remove-thumbnail",
+                                   null).createElement(),
+                closeButtonIcon  = new CreateElement("i", null, "fa-solid fa-xmark")
+                                   .createElement(),
+                thumbnailContent = new CreateElement("div", contentsID, null)
+                                   .createElement();
+                
+                // SET ATTRIBUTE
+                thumbnailText.textContent = "Media";
+                closeThumbnail.setAttribute("type", "button");
+
+                // APPEND CHILD 
+                modalBody.appendChild(postThumbnails);
+                postThumbnails.appendChild(thumbnailHeader);
+                thumbnailHeader.appendChild(thumbnailText);
+                thumbnailHeader.appendChild(closeThumbnail);
+                closeThumbnail.appendChild(closeButton);
+                closeButton.appendChild(closeButtonIcon);
+                postThumbnails.appendChild(thumbnailContent);
+
+                closeButton.onclick = () => {
+                    postThumbnails.remove();
+                    this.freeButtons();
+                }
+        }
+        else {
+            // document.getElementById("thumbnail-holder").remove();
+            document.getElementById(contentsID).remove();
+            let content = new CreateElement("div", contentsID, null).createElement();
+            document.getElementById(postElementID).appendChild(content);
+        }
+
+        // this.thumbnailFactory.generateThumbnail(thumbnailArray, 
+        //     document.getElementById(contentsID));
+        this.createThumbnailViewer(contentsID, document.getElementById(postElementID),
+            imagesArray);
     }
 
     ytLinkToThumbnail(ytLinks) {
