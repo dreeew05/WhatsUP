@@ -11,4 +11,4 @@ Instructions:
 
 Backend Approach:
 
-We will be using requests to contact the backend through the frontend. I will provide the framework for the JSON for each requirements. You just need to fetch and parse the data from the database. Just make sure that it returns the appropriate results. Refer to php folder for details.
+We will be using requests to contact the backend through the frontend. I will provide the framework of the JSON for each requirement. You just need to fetch and parse the data from the database. Just make sure that it returns the appropriate results and convert it to key-value pair array. Refer to php folder for details.
