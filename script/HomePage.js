@@ -4,15 +4,18 @@
 import { FeedGenerator } from "./classes/FeedGenerator.js";
 import { PostThreadDataDriver } from "./classes/PostThreadDataDriver.js";
 import { NavBarFactory } from "./classes/NavBarFactory.js";
+import { GeneratePostMap } from "./classes/GeneratePostMap.js";
 
 // TEST DATA
 import postsJSON from "../test/posts.json" assert { type: 'json' };
 import threadJSON from "../test/threads.json" assert { type: 'json' };
-import aboutJSON from "../test/about.json" assert { type: 'json' };
 
 class HomePage {
 
     constructor() {
+        // GLOBAL VARIABLE
+        this.mapAPI = new GeneratePostMap();
+
         this.initializeNavBar();
         this.initializeFeedGenerator();
     }
@@ -22,7 +25,7 @@ class HomePage {
     }
 
     initializeFeedGenerator() {
-        let feedGenerator = new FeedGenerator();
+        let feedGenerator = new FeedGenerator(this.mapAPI);
 
         // TEST DATA
         // POST + THREAD
