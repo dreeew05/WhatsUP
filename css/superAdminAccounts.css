@@ -48,14 +48,14 @@ hr {
     border: 0.10vmax solid black;
 }
 
-input, textarea {
+input, textarea, select {
     border-radius: 0.25vmax;
     border: none;
     padding: 2%;
     font-family: 'ProductSansRegular';
 }
 
-input {
+input, select {
     width: 95%;
     height: 3rem;
 }
@@ -69,6 +69,7 @@ textarea {
 #register-account-contents {
     padding-top: 1vmax;
     padding-bottom: 1vmax;
+    margin-bottom: 1vmax;
 }
 
 .category-title {
@@ -82,4 +83,17 @@ textarea {
 
 #profile-information {
     margin-top: 1vmax;
+}
+
+#classification-selection {
+    display: flex;
+    flex-direction: row;
+}
+
+#classification {
+    width: 50%;
+}
+
+#department {
+    width: 50%;
 }

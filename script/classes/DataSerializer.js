@@ -5,29 +5,18 @@ import { SweetAlertFactory } from "./SweetAlertFactory.js";
 
 export class DataSerializer {
 
-    constructor() {
-        this.sweetAlert = new SweetAlertFactory();
-    }
-
     getData() {
         return this.dataParser.getData();
     }
 
     async postData(postedData, phpFile) {
-        let alertBox = this.sweetAlert;
     
         return await this.serializeData(phpFile, postedData)
             .then(data => {
-                console.log(data);
+                // console.log(data);
                 return data;
             })
             .catch(error => {
-                alertBox.createAlertBox(
-                    'Error',
-                    'Invalid Link',
-                    'error',
-                    'Okay'
-                );
                 return {
                     result : null
                 }; 

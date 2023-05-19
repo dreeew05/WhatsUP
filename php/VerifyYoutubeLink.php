@@ -1,5 +1,8 @@
 <?php
 
+    // Author: fiVe
+    // Description: Verify if Link is Valid Youtube Link
+
     class VerifyYoutubeLink {
 
         private $url;
