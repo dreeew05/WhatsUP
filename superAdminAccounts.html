@@ -42,7 +42,7 @@
                 <div class="tab-pane fade show active" id="register" role="tabpanel" aria-labelledby="register-tab">
                     <div id="register-account-contents">
                         <!-- REGISTER ACCOUNT CONTENT -->
-                        <form action="#">
+                        <form method="post" action="/php/RegisterAccount.php" enctype="multipart/form-data">
                             <div id="credentials">
                                 <p class="category-title">Credentials</p>
                                 <hr>
@@ -76,7 +76,40 @@
                                         <select name="department" id="select-department"></select>
                                     </div>
                                 </div>
+                                <div>
+                                    <label for="formFileLg" class="form-label">Profile Picture</label>
+                                    <input class="form-control form-control-lg" id="formFileLg" type="file" name="imageSRC">
+                                </div>
                             </div>
+                            <div id="profile-contacts">
+                                <p class="category-title">Profile Contacts</p>
+                                <hr>
+                                <label for="address">Address</label><br>
+                                <input type="text" name="address" id="address"><br>
+                                <label for="email">Email</label><br>
+                                <input type="email" name="email" id="email"><br>
+                                <label for="number">Mobile</label><br>
+                                <input type="number" name="mobile" id="mobile"><br>
+                                <label for="telephone">Telephone</label><br>
+                                <input type="number" name="telephone" id="telephone"><br>
+                            </div>
+                            <div id="profile-socials">
+                                <p class="category-title">Profile Socials</p>
+                                <hr>
+                                <label for="website">Website</label><br>
+                                <input type="text" name="website" id="website"><br>
+                                <label for="facebook">Facebook</label><br>
+                                <input type="text" name="facebook" id="facebook"><br>
+                                <label for="twitter">Twitter</label><br>
+                                <input type="text" name="twitter" id="twitter"><br>
+                                <label for="youtube">Youtube</label><br>
+                                <input type="text" name="youtube" id="youtube"><br>
+                                <label for="tiktok">TikTok</label><br>
+                                <input type="text" name="tiktok" id="website"><br>
+                            </div>
+                            <button type="submit" id="submit-button" class="btn btn-success">
+                                Submit
+                            </button>
                         </form>
                     </div>
                 </div>

@@ -6,9 +6,7 @@
     require_once 'InterfaceClasses.php';
     require_once 'DatabaseConnector.php';
 
-    // use AbstractParseResults;
-
-    class DepartmentGetter implements AbstractParseResults {
+    class DepartmentGetter implements ParseResultsInterface {
 
         private $classification,
                 $connection;

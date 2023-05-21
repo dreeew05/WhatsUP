@@ -55,8 +55,13 @@ input, textarea, select {
     font-family: 'ProductSansRegular';
 }
 
-input, select {
+input {
     width: 95%;
+    height: 3rem;
+}
+
+select {
+    width: 90%;
     height: 3rem;
 }
 
@@ -81,7 +86,7 @@ textarea {
     margin-bottom: 1vmax;
 }
 
-#profile-information {
+#profile-information, #profile-contacts, #profile-socials {
     margin-top: 1vmax;
 }
 
@@ -96,4 +101,18 @@ textarea {
 
 #department {
     width: 50%;
+}
+
+#upload-image {
+    border: 1px solid black;
+}
+
+#formFileLg {
+    width: 95%;
+}
+
+#submit-button {
+    margin-top: 1vmax;
+    margin-bottom: 1vmax;
+    width: 95%;
 }

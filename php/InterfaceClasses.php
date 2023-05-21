@@ -1,11 +1,17 @@
 <?php 
 
     // Author: fiVe
-    // Description: Abstract Class for Parsing Results
+    // Description: Interface Classes
 
-    interface AbstractParseResults {
+    interface ParseResultsInterface {
         
         public function parseResults();
+
+    }
+
+    interface InsertEntriesInterface {
+
+        public function insertData();
 
     }
 
