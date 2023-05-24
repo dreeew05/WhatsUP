@@ -2,11 +2,6 @@
 
     class DatabaseConnector {
 
-        private $SERVERNAME,
-                $DB_USERNAME,
-                $DB_PASSWORD,
-                $DB_NAME;
-
         public function connectDatabase() {
             // define('SERVERNAME', 'localhost', false);
             // define('DB_USERNAME', 'root', false);

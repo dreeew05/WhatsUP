@@ -15,4 +15,11 @@
 
     }
 
+    interface DatabaseInterface {
+
+        public function initializeDBConnection();
+        public function killConnection();
+
+    }
+
 ?>

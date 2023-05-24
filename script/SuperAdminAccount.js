@@ -4,19 +4,55 @@
 import { CreateElement } from "./classes/CreateElement.js";
 import { DataSerializer } from "./classes/DataSerializer.js";
 import { NavBarFactory } from "./classes/NavBarFactory.js";
+import { SweetAlertFactory } from "./classes/SweetAlertFactory.js";
 
 class SuperAdminAcount {
 
     constructor() {
         // GLOBAL VARIABLES
         this.dataSerializer = new DataSerializer();
+        this.alertBox       = new SweetAlertFactory();
 
         this.initializeNavBar();
+        this.getResponse();
         this.getDepartments();
     }
 
     initializeNavBar() {
         new NavBarFactory("type3", "admin");
+    }
+
+    getResponse() {
+
+        const header = window.location.href;
+
+        if(header.includes("creationSuccess")) {
+            const header   = window.location.href,
+                  link     = header.split("?"),
+                  response = link[1].split("="),
+                  value    = response[1];
+
+            switch(value) {
+                case "true":
+                    this.alertBox.createAlertBox(
+                        'Congratulations!',
+                        'Account is Created',
+                        'success',
+                        'Okay'
+                    );
+                    break;
+                case "false":
+                    this.alertBox.createAlertBox(
+                        'Error!',
+                        'Cannot Create Account',
+                        'error',
+                        'Okay'
+                    );
+                    break;
+                default:
+                    break;
+            }
+        }
     }
 
     async getDepartments() {

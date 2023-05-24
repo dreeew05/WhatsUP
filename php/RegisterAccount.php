@@ -6,7 +6,8 @@
     require_once 'DatabaseConnector.php';
     require_once 'InterfaceClasses.php';
 
-    class RegisterAccount implements InsertEntriesInterface {
+    class RegisterAccount implements InsertEntriesInterface,
+        DatabaseInterface {
 
         private $username,
                 $password,
@@ -35,30 +36,34 @@
             // METHODS
             $this -> setAttributes();
             $this -> initializeDBConnection();
-            $this -> helperMethod();
+            // $this -> helperMethod();
             $this -> insertData();
         }
 
-        private function helperMethod() {
-            echo $this -> username . "<br>" .
-                $this -> password . "<br>" .
-                $this -> profileName . "<br>" .
-                $this -> category . "<br>" .
-                $this -> briefDescription . "<br>" .
-                $this -> classification . "<br>" .
-                $this -> department . "<br>" .
-                $this -> address . "<br>" .
-                $this -> email . "<br>" .
-                $this -> telephone . "<br>" .
-                $this -> website . "<br>" .
-                $this -> facebook . "<br>" .
-                $this -> twitter . "<br>" .
-                $this -> youtube . "<br>" .
-                $this -> tiktok . "<br>";
+        // private function helperMethod() {
+        //     echo $this -> username . "<br>" .
+        //         $this -> password . "<br>" .
+        //         $this -> profileName . "<br>" .
+        //         $this -> category . "<br>" .
+        //         $this -> briefDescription . "<br>" .
+        //         $this -> classification . "<br>" .
+        //         $this -> department . "<br>" .
+        //         $this -> address . "<br>" .
+        //         $this -> email . "<br>" .
+        //         $this -> telephone . "<br>" .
+        //         $this -> website . "<br>" .
+        //         $this -> facebook . "<br>" .
+        //         $this -> twitter . "<br>" .
+        //         $this -> youtube . "<br>" .
+        //         $this -> tiktok . "<br>";
+        // }
+
+        public function initializeDBConnection() {
+            $this -> conn = $this -> dbConnect -> connectDatabase();
         }
 
-        private function initializeDBConnection() {
-            $this -> conn = $this -> dbConnect -> connectDatabase();
+        public function killConnection() {
+            die();
         }
 
         private function setAttributes() {
@@ -93,17 +98,31 @@
             $this -> insertCredentials();
         }
 
+        private function returnResult($result) {
+            if($result) {
+                header("Location: http://whatsup.gg/superAdminAccounts.html?creationSuccess=true");
+            }
+            else {
+                header("Location: http://whatsup.gg/superAdminAccounts.html?creationSuccess=false");
+            }
+            $this -> killConnection();
+        }
+
         private function insertCredentials() {
             $query = "INSERT INTO profile_credentials(ProfileID, Username, Password)
                      VALUES(NULL, '{$this -> username}', '{$this -> password}')";
 
             $result = $this -> conn -> query($query);
 
-            if($result == TRUE) {
+            if($result) {
                 $lastID = $this -> conn -> insert_id;
                 $this -> insertProfileDetails($lastID);
                 $this -> insertContacts($lastID);
                 $this -> insertSocials($lastID);
+                $this -> returnResult(TRUE);
+            }
+            else {
+                $this -> returnResult(FALSE);
             }
         }
 
@@ -127,7 +146,11 @@
                                 '{$this -> category}', '$imageFileName', 
                                 '$departmentID')";
 
-            $this -> conn -> query($insertQuery);
+            $result = $this -> conn -> query($insertQuery);
+
+            if(!$result) {
+                $this -> returnResult(FALSE);
+            }
         }
 
         private function uploadImage() {
@@ -156,7 +179,11 @@
                      VALUES('$profileID', '{$this -> address}', '{$this -> email}',
                         '{$this -> mobile}', '{$this -> telephone}')";
 
-            $this -> conn -> query($query);
+            $result = $this -> conn -> query($query);
+
+            if(!$result) {
+                $this -> returnResult(FALSE);
+            }
         }   
 
         private function insertSocials($profileID) {
@@ -166,7 +193,12 @@
                         '{$this -> facebook}', '{$this -> youtube}',
                         '{$this -> twitter}', '{$this -> tiktok}')";
 
-        $this -> conn -> query($query);
+        $result = $this -> conn -> query($query);
+
+        if(!$result) {
+            $this -> returnResult(FALSE);
+        }
+
         }
 
     }

@@ -6,19 +6,31 @@ export class SweetAlertFactory {
     createAlertBox(title, text, icon, confirmButtonText) {
         switch(icon) {
             case 'error':
-                this.errorAlertBox(title, text, icon, confirmButtonText)
+                this.errorAlertBox(title, text, confirmButtonText)
+                break;
+            case 'success':
+                this.successAlertBox(title, text, confirmButtonText);
                 break;
             default:
                 break;
         }
     }
 
-    errorAlertBox(alertTitle, alertText, alertIcon, alertConfirmText) {
+    errorAlertBox(title, text, confirmText) {
         Swal.fire({
-            title: alertTitle,
-            text: alertText,
-            icon: alertIcon,
-            confirmButtonText: alertConfirmText
+            title : title,
+            text : text,
+            icon : 'error',
+            confirmButtonText : confirmText
+        });
+    }
+
+    successAlertBox(title, text, confirmText) {
+        Swal.fire({
+            title : title,
+            text : text,
+            icon : 'success',
+            confirmButtonText : confirmText
         });
     }
 

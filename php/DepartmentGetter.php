@@ -6,17 +6,34 @@
     require_once 'InterfaceClasses.php';
     require_once 'DatabaseConnector.php';
 
-    class DepartmentGetter implements ParseResultsInterface {
+    class DepartmentGetter implements ParseResultsInterface, 
+        DatabaseInterface {
 
         private $classification,
-                $connection;
+                $dbConnect,
+                $conn;
 
         public function __construct($classification) {
+            // PASSED VARIABLES
             $this -> classification = $classification;
-            $this -> connection     = new DatabaseConnector();
+
+            // GLOBAL VARIABLES
+            $this -> dbConnect     = new DatabaseConnector();
+
+            // METHODS
+            $this -> initializeDBConnection();
 
             // CLASS OUTPUT
             echo $this -> parseResults();
+            $this -> killConnection();
+        }
+
+        public function initializeDBConnection() {
+            $this -> conn = $this -> dbConnect -> connectDatabase();
+        }
+
+        public function killConnection() {
+            die();
         }
 
         public function getClassification() {
@@ -28,8 +45,7 @@
                       FROM departments
                       WHERE Classification = '{$this -> getClassification()}'";
             
-            $result = $this -> connection -> connectDatabase() 
-                      -> query($QUERY);
+            $result = $this -> conn -> query($QUERY);
 
             $jsonResult = array(
                 'result' => null
