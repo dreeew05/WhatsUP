@@ -69,7 +69,7 @@
         }
 
         private function parsePages($departmentID) {
-            $QUERY = "SELECT ProfileID, Name, ImageSRC
+            $QUERY = "SELECT ProfileID, Name, DisplayPicture
                      FROM profile
                      WHERE DepartmentID = '$departmentID'";
             
@@ -85,7 +85,7 @@
 
                 $id       = $row['ProfileID'];
                 $pageName = $row['Name'];
-                $image    = $row['ImageSRC'];
+                $image    = $row['DisplayPicture'];
 
                 $pages['pages'][$pageName] = array(
                     'image' => $image,

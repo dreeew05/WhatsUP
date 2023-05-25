@@ -5,18 +5,33 @@ import { CreateElement } from "./CreateElement.js";
 
 export class GenerateAbout {
 
-    constructor(PROFILE_NAME, DETAILS, CATEGORY, CONTACT, SOCIALS) {
-        this.PROFILE_NAME = PROFILE_NAME;
-        this.DETAILS      = DETAILS;
-        this.CATEGORY     = CATEGORY;
-        this.CONTACT      = CONTACT;
-        this.SOCIALS      = SOCIALS;
+    constructor(PROFILE_NAME, DISPLAY_PICTURE, BANNER_IMAGE,
+        DETAILS, CATEGORY, CONTACT, SOCIALS) {
+        
+        // PASSED VARIABLES
+        this.PROFILE_NAME    = PROFILE_NAME;
+        this.DISPLAY_PICTURE = DISPLAY_PICTURE,
+        this.BANNER_IMAGE    = BANNER_IMAGE,
+        this.DETAILS         = DETAILS;
+        this.CATEGORY        = CATEGORY;
+        this.CONTACT         = CONTACT;
+        this.SOCIALS         = SOCIALS;
 
+        // METHODS
+        this.generateProfileMisc();
         this.createAbout();
     }
 
     getProfileName() {
         return this.PROFILE_NAME;
+    }
+    getDisplayPicture() {
+        const BASE_SRC = "/assets/images/profiles/";
+        return BASE_SRC.concat(this.DISPLAY_PICTURE);
+    }
+    getBannerImage() {
+        const BASE_SRC = "/assets/images/profiles/banner/";
+        return BASE_SRC.concat(this.BANNER_IMAGE);
     }
     getDetails() {
         return this.DETAILS;
@@ -29,6 +44,19 @@ export class GenerateAbout {
     }
     getSocials() {
         return this.SOCIALS;
+    }
+
+    generateProfileMisc() {
+        const displayPicture = document.getElementById("profile-picture"),
+              coverImage     = document.getElementById("cover-photo"),
+              pageName       = document.getElementById("page-name"),
+              category       = document.getElementById("classification");
+
+        // SET ATTRIBUTE
+        displayPicture.src   = this.getDisplayPicture();
+        coverImage.src       = this.getBannerImage();
+        pageName.textContent = this.getProfileName();
+        category.textContent = this.getCategory();
     }
 
     createAbout() {
@@ -99,7 +127,7 @@ export class GenerateAbout {
         const CATEGORY = this.getCategory();
         let icon       = null;
         switch(CATEGORY) {
-            case "College & University" :
+            case "Official University Account" :
                 icon = new CreateElement("i", null, 
                        "fa-solid fa-graduation-cap").createElement()
                 break;

@@ -24,6 +24,7 @@ class ProfilePage {
         
         this.initializePostButton();
         this.initializeNavBar();
+        this.initializeProfile();
         this.navBarSectionDividerImplementation();
         this.initializeFeedGenerator();
 
@@ -74,6 +75,22 @@ class ProfilePage {
         
         new PostThreadDataDriver(feedGenerator.getHasThreadsArray());
     }
+
+    initializeProfile() {
+        const header = window.location.href;
+
+        if(header.includes("id")) {
+            const link     = header.split("?"),
+            response = link[1].split("="),
+            value    = response[1];
+
+            console.log(value);
+        }
+    }
+
+    // async initializeAbout(id) {
+    //     const phpURL = 
+    // }
 
     initializePostButton() {
         if(this.getLogStatus() == "admin") {

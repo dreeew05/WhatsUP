@@ -27,8 +27,7 @@ class SuperAdminAcount {
         const header = window.location.href;
 
         if(header.includes("creationSuccess")) {
-            const header   = window.location.href,
-                  link     = header.split("?"),
+            const link     = header.split("?"),
                   response = link[1].split("="),
                   value    = response[1];
 
