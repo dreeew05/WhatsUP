@@ -89,9 +89,10 @@
     flex-direction: row;
 }
 
-/* #add-file {
-    border: 1px solid black;
-} */
+#add-file input {
+    height: 2vmax;
+    font-size: 0.75vmax;
+}
 
 #add-tag input, #input-map input, #add-links input, #add-file input {
     border-top-right-radius: 0px;

@@ -12,6 +12,7 @@
     interface InsertEntriesInterface {
 
         public function insertData();
+        public function setAttributes();
 
     }
 

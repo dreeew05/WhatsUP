@@ -66,7 +66,7 @@
             die();
         }
 
-        private function setAttributes() {
+        public function setAttributes() {
             $this -> username         = $_POST['username'];
             $this -> password         = $_POST['password'];
             $this -> profileName      = $_POST['profileName'];

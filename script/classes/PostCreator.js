@@ -1,6 +1,7 @@
 // Author: fiVe
 // Description: Create Posts [Admin Priveleges]
 
+import { Base64Converter } from "./Base64Converter.js";
 import { CreateElement } from "./CreateElement.js";
 import { DataSerializer } from "./DataSerializer.js";
 import { GeneratePostMap } from "./GeneratePostMap.js";
@@ -20,6 +21,7 @@ export class PostCreator {
         this.sweetAlert        = new SweetAlertFactory();
         this.dataSerializer    = new DataSerializer();
         this.thumbnailFactory  = new PostThumbnailFactory();
+        this.base64Converter   = new Base64Converter();
         this.postHolder        = document.getElementById("posts");
         this.dataArray         = null;
         this.openedButton      = null;
@@ -204,12 +206,55 @@ export class PostCreator {
             this.tagsDataDriver, null); 
 
         // ACTION WHEN POST BUTTON IS CLICKED
-        postButton.onclick = () => {
+        postButton.onclick = async() => {
             // console.log(latFieldHidden.value);
             // console.log(lngFieldHidden.value);
-            if(this.getDataArray() != null) {
-                console.log(this.getDataArray().tagsArray);
+
+            const phpURL  = "/php/AddPostThread.php",
+                  contents = {
+                        'profileID' : 1048,
+                        'postContent' : postTextArea.value,
+                        'tags' : this.tagsDataDriver.getTagsArray(),
+                        'coordinates' : {
+                            'latitude' : latFieldHidden.value,
+                            'longtitude' : lngFieldHidden.value
+                        },
+                        'media' : null
+                  }; 
+
+            if(this.getDataArray() != null && 
+                this.getDataArray().getTagsArray().length != 0) {
+
+                switch(this.getOpenedButton()) {
+                    case 'image':
+                        // FALLS THROUGH
+                    case 'video':
+                        contents['media'] = {
+                            'type' : this.getOpenedButton(),
+                            'data' : await this.base64Converter.blobReader(
+                                        this.getDataArray().getTagsArray()
+                                     )
+                        }
+                        break;
+                    case 'youtube':
+                        contents['media'] = {
+                            'type' : this.getOpenedButton(),
+                            'data' : this.getDataArray().getTagsArray()
+                        }
+                        break;
+                    default:
+                        break;
+                }
             }
+
+            console.log(contents);
+
+            const response = await this.dataSerializer.postData(
+                contents, phpURL
+            );
+
+            console.log(response);
+
         }
 
     }
@@ -367,9 +412,9 @@ export class PostCreator {
                             .createElement(),
             addFile       = new CreateElement("div", "add-file", null)
                             .createElement(),
-            addFileTField = new CreateElement("input", "file-text-field", "post-text-fields")
+            addFileTField = new CreateElement("input", "file-text-field", "form-control")
                             .createElement(),
-            addFileButton = new CreateElement("button", "add-file-button", null)
+            addFileButton = new CreateElement("button", "add-file-button",)
                             .createElement(),
             plusSign      = new CreateElement("i", null, "fa-sharp fa-solid fa-plus")
                             .createElement(),
@@ -601,6 +646,14 @@ export class PostCreator {
                 entry = entry.value;
                 break;
         }
+
+        const blob = entry;
+
+        // this.base64Converter.convertToBase64(blob);
+
+        // console.log(blob);
+        // this.base64Converter.convertToBase64(blob)
+        
         dataDriver.appendToTagsArray(entry);
 
         // REMOVING ENTRY
