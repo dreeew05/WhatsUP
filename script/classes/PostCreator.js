@@ -247,13 +247,34 @@ export class PostCreator {
                 }
             }
 
-            console.log(contents);
+            // console.log(contents);
 
             const response = await this.dataSerializer.postData(
                 contents, phpURL
             );
 
-            console.log(response);
+            // console.log(response);
+
+            switch(response['success']) {
+                case 'true':
+                    this.sweetAlert.createAlertBox(
+                        'Success!', 
+                        'Post Has Been Created',
+                        'success',
+                        'Okay'
+                    );
+                    break;
+                case 'false':
+                    this.sweetAlert.createAlertBox(
+                        'Error!', 
+                        'An Error Occured While Creating Post',
+                        'error',
+                        'Okay'
+                    );
+                    break;
+                default:
+                    break;
+            }
 
         }
 

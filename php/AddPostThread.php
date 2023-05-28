@@ -96,7 +96,20 @@
                         'success' => 'true'
                     )
                 );
+
+                $this -> killConnection();
             }
+        }
+
+        private function returnResult($result) {
+            if(!$result) {
+                $this -> killConnection();
+                echo json_encode(
+                    array(
+                        'success' => 'false'
+                    )
+                );
+            } 
         }
 
         private function insertCoordinates($lastID) {
@@ -109,6 +122,10 @@
                           VALUES('$lastID', '$latitude', '$longtitude')";
 
                 $RESULT = $this -> conn -> query($QUERY);
+                
+                if(!$RESULT) {
+                    $this -> returnResult(FALSE);
+                }
             }
         }
 
@@ -119,6 +136,10 @@
                               VALUES('$lastID', '$tag')";
 
                     $RESULT = $this -> conn -> query($QUERY);
+
+                    if(!$RESULT) {
+                        $this -> returnResult(FALSE);
+                    }
                 }
             }
         }
@@ -147,6 +168,10 @@
                           VALUES('$lastID', '$type', '$embedLink')";
                 
                 $RESULT = $this -> conn -> query($QUERY);
+
+                if(!$RESULT) {
+                    $this -> returnResult(FALSE);
+                }
             }
         }
 
@@ -164,6 +189,10 @@
                           VALUES('$lastID', '$type', '$filename')";
                 
                 $RESULT = $this -> conn -> query($QUERY);
+
+                if(!$RESULT) {
+                    $this -> returnResult(FALSE);
+                }
                 
             }
         }
