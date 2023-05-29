@@ -3,10 +3,6 @@
 
 import { GenerateSideNavBarContents } from "./GenerateSideNavBarContents.js";
 
-// TEST DATA
-import collegeJSON from "../../test/sideNavBar/collegeContents.json" assert { type: 'json' };
-import studentJSON from "../../test/sideNavBar/studentContents.json" assert { type: 'json' };
-import universityJSON from "../../test/sideNavBar/universityContents.json" assert { type: 'json' };
 import { DataSerializer } from "./DataSerializer.js";
 
 export class SideNavBar {
@@ -30,6 +26,8 @@ export class SideNavBar {
               studentContents    = await this.getData("Student"),
               universityContents = await this.getData("University");
 
+        console.log(collegeContents);
+
         let college    = new GenerateSideNavBarContents("College", 
                          collegeContents.result, 0),
             student    = new GenerateSideNavBarContents("Student", 
@@ -43,7 +41,6 @@ export class SideNavBar {
               dataQuery = {
                 query : classification
               } 
-        
         return await this.dataSerializer.postData(dataQuery, phpURL);
     }
 

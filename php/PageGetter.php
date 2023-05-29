@@ -57,11 +57,7 @@
                 $departmentID   = $row['DepartmentID'];
                 $departmentName = $row['DepartmentName'];
 
-                $departmentData = array(
-                    $departmentName => $this -> parsePages($departmentID)
-                );
-
-                array_push($jsonResult['result'], $departmentData);
+                $jsonResult['result'][0][$departmentName] = $this -> parsePages($departmentID); 
 
             }
 

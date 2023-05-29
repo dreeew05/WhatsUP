@@ -206,11 +206,6 @@
             $extension = explode(';', explode('/', $metadata)[1])[0];
             $fileName  = uniqid() . '.' . $extension;
 
-            // WRITE FILE 
-            $file = fopen($fileName, 'wb');
-            fwrite($file, $imageData);
-            fclose($file);
-
             // UPLOAD FILE
             $folder    = '../assets/images/files/images/';
             $filePath  = $folder . $fileName;
