@@ -3,7 +3,7 @@
 
 import { CreateElement } from "./CreateElement.js";
 
-export class PostThumbnailFactory {
+export class ThumbnailFactory {
     
     generateThumbnail(thumbnailArray, DIV_HOLDER) {
         let count           = thumbnailArray.length,

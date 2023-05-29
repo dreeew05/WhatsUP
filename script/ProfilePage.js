@@ -12,6 +12,7 @@ import { GeneratePostMap } from "./classes/GeneratePostMap.js";
 import postsJSON from "../test/posts.json" assert { type: 'json' };
 import threadJSON from "../test/threads.json" assert { type: 'json' };
 import aboutJSON from "../test/about.json" assert { type: 'json' };
+import { ThreadCreator } from "./classes/ThreadCreator.js";
 
 class ProfilePage {
 
@@ -94,7 +95,8 @@ class ProfilePage {
 
     initializePostButton() {
         if(this.getLogStatus() == "admin") {
-            new PostCreator();
+            // new PostCreator();
+            new ThreadCreator(document.getElementById('posts'));
         }
     }
 

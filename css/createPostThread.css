@@ -32,7 +32,7 @@
     font-family: 'ProductSansBold';
 }
 
-#post-text-area, .post-text-fields {
+.text-area, .text-fields {
     width: 100%;
     font-family: 'ProductSansRegular';
     font-size: 0.75vmax;
@@ -42,7 +42,7 @@
     padding-right: 2%;
 }
 
-#post-text-area {
+.text-area {
     overflow: auto;
     height: 10vmax;
 }
@@ -309,7 +309,7 @@
 
 /* POST MODAL THUMBNAILS */
 
-#post-thumbnails {
+#post-thumbnails, #thread-thumbnails {
     width: 100%;
     border: 2px solid #A2A2A2;
     border-radius: 1vmax;

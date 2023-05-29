@@ -6,7 +6,7 @@ import { CreateElement } from "./CreateElement.js";
 import { DataSerializer } from "./DataSerializer.js";
 import { GeneratePostMap } from "./GeneratePostMap.js";
 import { Geocode } from "./Geocode.js";
-import { PostThumbnailFactory } from "./PostThumbnailFactory.js";
+import { ThumbnailFactory } from "./ThumbnailFactory.js";
 import { SweetAlertFactory } from "./SweetAlertFactory.js";
 import { TagLinkDataDriver } from "./TagLinkDataDriver.js";
 
@@ -20,7 +20,7 @@ export class PostCreator {
         this.mediaDriver       = new TagLinkDataDriver();
         this.sweetAlert        = new SweetAlertFactory();
         this.dataSerializer    = new DataSerializer();
-        this.thumbnailFactory  = new PostThumbnailFactory();
+        this.thumbnailFactory  = new ThumbnailFactory();
         this.base64Converter   = new Base64Converter();
         this.postHolder        = document.getElementById("posts");
         this.dataArray         = null;
@@ -817,7 +817,7 @@ export class PostCreator {
               postElementID  = "post-thumbnails",
               divElement     = document.querySelector('#'.concat(postElementID)),
               contentsID     = "media-contents";
-        
+
         if(!divElement) {
             let postThumbnails   = new CreateElement("div", postElementID, null)
                                    .createElement(),
