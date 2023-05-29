@@ -263,8 +263,8 @@ export class ModalOptions {
 
         this.mediaDriver.emptyCounter();
         this.mediaDriver.emptyTagsArray();
-        this.ytLinksDataDriver.emptyCounter();
-        this.ytLinksDataDriver.emptyTagsArray();
+        this.ytDriver.emptyCounter();
+        this.ytDriver.emptyTagsArray();
 
         // CLEAR DATA ARRAY
         this.setDataArray(null);

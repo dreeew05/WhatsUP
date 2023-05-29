@@ -1,9 +1,10 @@
 import { Base64Converter } from "./Base64Converter.js";
-import { ThumbnailFactory } from "./ThumbnailFactory.js";
-import { SweetAlertFactory } from "./SweetAlertFactory.js";
 import { TagLinkDataDriver } from "./TagLinkDataDriver.js";
 import { CreateElement } from "./CreateElement.js";
 import { BaseModalDisplay } from "./BaseModalDisplay.js";
+import { ModifyEntries } from "./ModifyEntries.js";
+import { DataSerializer } from "./DataSerializer.js";
+import { SweetAlertFactory } from "./SweetAlertFactory.js";
 
 export class ThreadCreator {
 
@@ -14,11 +15,10 @@ export class ThreadCreator {
         // GLOBAL
         this.ytLinksDataDriver = new TagLinkDataDriver();
         this.mediaDriver       = new TagLinkDataDriver();
+        this.base64Converter   = new Base64Converter(); 
+        this.entryModifier     = new ModifyEntries();
+        this.dataSerializer    = new DataSerializer();
         this.sweetAlert        = new SweetAlertFactory();
-        this.thumbnailFactory  = new ThumbnailFactory();
-        this.base64Converter   = new Base64Converter();  
-        this.dataArray         = null;
-        this.openedButton      = null;
 
         // METHODS
         this.displayThreadButton()
@@ -28,7 +28,8 @@ export class ThreadCreator {
         this.baseModalDisplay  = new BaseModalDisplay(
             'thread', 
             this.mediaDriver, 
-            this.ytLinksDataDriver
+            this.ytLinksDataDriver,
+            this.entryModifier
         );
 
         // NEXT-STATE METHODS
@@ -37,6 +38,14 @@ export class ThreadCreator {
 
     getThreadHolder() {
         return this.threadHolder;
+    }
+
+    getDataArray() {
+        return this.baseModalDisplay.getDataArray();
+    }
+
+    getOpenedButton() {
+        return this.baseModalDisplay.getOpenedButton();
     }
 
     displayThreadButton() {
@@ -163,6 +172,46 @@ export class ThreadCreator {
         mapButton.appendChild(mapIcon);
         modalContent.appendChild(modalFooter);
         modalFooter.appendChild(threadButton);
+
+        threadButton.onclick = async() => {
+            const phpURL   = null,
+                  contents = {
+                        'profileID' : 1048,
+                        'postContent' : threadTextArea.value,
+                        'coordinates' : {
+                            'latitude' : latFieldHidden.value,
+                            'longtitude' : lngFieldHidden.value
+                        },
+                        'media' : null
+                  }
+
+            if(this.getDataArray() != null && 
+                this.getDataArray().getTagsArray().length != 0) {
+
+                switch(this.getOpenedButton()) {
+                    case 'image':
+                        // FALLS THROUGH
+                    case 'video':
+                        contents['media'] = {
+                            'type' : this.getOpenedButton(),
+                            'data' : await this.base64Converter.blobReader(
+                                        this.getDataArray().getTagsArray()
+                                    )
+                        }
+                        break;
+                    case 'youtube':
+                        contents['media'] = {
+                            'type' : this.getOpenedButton(),
+                            'data' : this.getDataArray().getTagsArray()
+                        }
+                        break;
+                    default:
+                        break;
+                }
+            }
+
+            console.log(contents);
+        }
 
     }
 

@@ -96,7 +96,7 @@ class ProfilePage {
     initializePostButton() {
         if(this.getLogStatus() == "admin") {
             // new PostCreator();
-            new ThreadCreator(document.getElementById('posts'));
+            new PostCreator(document.getElementById('posts'));
         }
     }
 

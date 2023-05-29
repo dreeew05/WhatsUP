@@ -4,11 +4,16 @@
 import { CreateElement } from "./CreateElement.js";
 
 export class Geocode {
-    constructor() {
+    constructor(mode) {
+        this.mode       = mode;
         // GLOBAL VARIABLE
         this.latitude   = null;
         this.longtitude = null;
 
+    }
+
+    getMode() {
+        return this.mode;
     }
 
     displayMap(QUERY, mapAPI, elementID) {
@@ -38,7 +43,7 @@ export class Geocode {
         let request = new XMLHttpRequest();
         request.open('GET', REQUEST_URL, true);
 
-        request.onload = function() {
+        request.onload = () => {
             // see full list of possible response codes:
             // https://opencagedata.com/api#codes
 
@@ -54,12 +59,54 @@ export class Geocode {
                 });
 
                 // CREATE POST MODAL
-                const modalBody      = document.getElementById("post-modal-body"),
-                      elementPostID  = "display-map-post",
-                      divElement     = document.querySelector('#'.concat(elementPostID));
+                // const modalBody      = document.getElementById("post-modal-body"),
+                //       elementPostID  = "display-map-post",
+                //       divElement     = document.querySelector('#'.concat(elementPostID));
+
+                let modalBodyID   = null,
+                    elementModeID = null;
+
+                switch(this.getMode()) {
+                    case 'post':
+                        modalBodyID   = 'post-modal-body';
+                        elementModeID = 'display-map-post'; 
+                        break;
+                    case 'thread':
+                        modalBodyID   = 'thread-modal-body';
+                        elementModeID = 'display-map-thread'; 
+                        break;
+                    default:
+                        break;
+                } 
+
+                let mapModeID   = null,
+                    mapSearchID = null,
+                    latID       = null,
+                    lngID       = null;
+
+                switch(this.getMode()) {
+                    case 'post':
+                        mapModeID   = 'display-map-post';
+                        mapSearchID = 'display-map-search'; 
+                        latID       = 'latitude-text-field-hidden';
+                        lngID       = 'longtitude-text-field-hidden';
+                        break;
+                    case 'thread':
+                        mapModeID   = 'display-map-thread';
+                        mapSearchID = 'thread-display-map-search'; 
+                        latID       = 'thread-latitude-text-field-hidden';
+                        lngID       = 'thread-longtitude-text-field-hidden';
+                        break;
+                    default:
+                        break;
+                }
+
+                const modalBody  = document.getElementById(modalBodyID),
+                      divElement = document.querySelector('#'.concat(elementModeID));
+
                 if(!divElement) {
                     // CREATE ELEMENTS
-                    let displayMapInPostModal = new CreateElement("div", elementPostID,
+                    let displayMapInModal = new CreateElement("div", elementModeID,
                                                 null).createElement(),
                         mapHeader             = new CreateElement("div", "map-header", null)
                                                 .createElement(),
@@ -79,20 +126,25 @@ export class Geocode {
                     closeMap.setAttribute("type", "button");
 
                     // APPEND CHILD
-                    modalBody.appendChild(displayMapInPostModal);
-                    displayMapInPostModal.appendChild(mapHeader);
+                    modalBody.appendChild(displayMapInModal);
+                    displayMapInModal.appendChild(mapHeader);
                     mapHeader.appendChild(mapHeaderText);
                     mapHeader.appendChild(mapHeaderClose);
                     mapHeaderClose.appendChild(closeMap);
                     closeMap.appendChild(closeMapIcon);
-                    displayMapInPostModal.appendChild(mapResult);
+                    displayMapInModal.appendChild(mapResult);
 
                     // ACTION WHEN CLOSE BUTTON IS CLICKED
-                    closeMap.onclick = function() {
-                        const mapPost     = document.getElementById('display-map-post'),
-                              mapSearch   = document.getElementById('display-map-search'),
-                              latTxtField = document.getElementById('latitude-text-field-hidden'),
-                              lngTxtField = document.getElementById('longtitude-text-field-hidden');
+                    closeMap.onclick = () => {
+                        // const mapPost     = document.getElementById('display-map-post'),
+                        //       mapSearch   = document.getElementById('display-map-search'),
+                        //       latTxtField = document.getElementById('latitude-text-field-hidden'),
+                        //       lngTxtField = document.getElementById('longtitude-text-field-hidden');
+
+                        const mapPost     = document.getElementById(mapModeID),
+                              mapSearch   = document.getElementById(mapSearchID),
+                              latTxtField = document.getElementById(latID),
+                              lngTxtField = document.getElementById(lngID);
                         
                         // REMOVE MAP AND CLEAR COORDINATES
                         mapPost.remove();
@@ -107,8 +159,8 @@ export class Geocode {
                 });
 
                 // PUT LATITUDE AND LONGTITUDE TO HIDDEN TEXT FIELDS
-                const latTextField = document.getElementById('latitude-text-field-hidden'),
-                      lngTextField = document.getElementById('longtitude-text-field-hidden');
+                const latTextField = document.getElementById(latID),
+                      lngTextField = document.getElementById(lngID);
                 
                 latTextField.value = latitude;
                 lngTextField.value = longitude;

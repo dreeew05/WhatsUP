@@ -1,18 +1,17 @@
 import { CreateElement } from "./CreateElement.js";
 import { Geocode } from "./Geocode.js";
 import { GeneratePostMap } from "./GeneratePostMap.js";
-import { ModifyEntries } from "./ModifyEntries.js";
 import { ModalOptions } from "./ModalOptions.js";
 
 export class BaseModalDisplay {
 
-    constructor(mode, mediaDriver, ytDataDriver) {
+    constructor(mode, mediaDriver, ytDataDriver, entryModifier) {
         // PASSED
         this.mode          = mode;
         this.mediaDriver   = mediaDriver;
         this.ytDataDriver  = ytDataDriver;
+        this.entryModifier = entryModifier;
         // GLOBAL
-        this.entryModifier = new ModifyEntries();
         this.modalOptions  = new ModalOptions(
             this.getMode(),
             this.mediaDriver, 
@@ -100,14 +99,27 @@ export class BaseModalDisplay {
 
     geocodeMap(searchButton, searchText, modalBody) {
 
-        let geocoder = new Geocode(),
+        let geocoder = new Geocode(this.getMode()),
             mapAPI   = new GeneratePostMap();
 
-        searchButton.onclick = function() {
+        searchButton.onclick = () => {
 
             // CHECK IF DIV EXISTS
-            const elementID  = "display-map-search",
-                  divElement = document.querySelector('#'.concat(elementID));
+
+            let elementID = null;
+
+            switch(this.getMode()) {
+                case 'post':
+                    elementID = 'display-map-search';
+                    break;
+                case 'thread':
+                    elementID = 'thread-display-map-search';
+                    break;
+                default:
+                    break;
+            }
+
+            const divElement = document.querySelector('#'.concat(elementID));
             if(!divElement) {
                 let displayMap = new CreateElement("div", elementID, null)
                                 .createElement();

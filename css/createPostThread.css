@@ -136,11 +136,11 @@
 
 /* LAT - LNG TEXTFIELDS */
 
-#latitude-text-field-hidden {
+#latitude-text-field-hidden, #thread-latitude-text-field-hidden {
     display: none;
 }
 
-#longtitude-text-field-hidden {
+#longtitude-text-field-hidden, #thread-longtitude-text-field-hidden {
     display: none;
 }
 
@@ -261,7 +261,7 @@
 
 /* MAP MODAL */
 
-#display-map-search {
+#display-map-search, #thread-display-map-search {
     margin-top: 2%;
     height: 20rem;
     width: 100%;
