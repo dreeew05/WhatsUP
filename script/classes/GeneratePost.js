@@ -4,6 +4,7 @@
 import { GeneratePostMedia } from "./GeneratePostMedia.js";
 import { CreateElement } from "./CreateElement.js";
 import { GeneratePostTags } from "./GeneratePostTags.js";
+import { ThreadCreator } from "./ThreadCreator.js";
 
 export class GeneratePost {
 
@@ -162,6 +163,7 @@ export class GeneratePost {
         if(this.getHasThread() == true) {
             this.showThreadOption(POST_HOLDER);
         }
+        new ThreadCreator(this.getID(), POST_HOLDER);
     }
 
     showThreadOption(POST_HOLDER) {

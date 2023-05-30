@@ -8,8 +8,9 @@ import { SweetAlertFactory } from "./SweetAlertFactory.js";
 
 export class ThreadCreator {
 
-    constructor(threadHolder) {
+    constructor(postID, threadHolder) {
         // PASSED 
+        this.postID       = postID;
         this.threadHolder = threadHolder;
 
         // GLOBAL
@@ -29,11 +30,16 @@ export class ThreadCreator {
             'thread', 
             this.mediaDriver, 
             this.ytLinksDataDriver,
-            this.entryModifier
+            this.entryModifier,
+            this.getPostID()
         );
 
         // NEXT-STATE METHODS
         this.addDisplayModals();
+    }
+
+    getPostID() {
+        return this.postID;
     }
 
     getThreadHolder() {
@@ -49,7 +55,7 @@ export class ThreadCreator {
     }
 
     displayThreadButton() {
-        let threadButton = new CreateElement("button", "create-thread-button", null)
+        let threadButton = new CreateElement("button", null, "create-thread-button")
                          .createElement();
 
         // SET ATTRIBUTE
@@ -78,8 +84,8 @@ export class ThreadCreator {
                               .createElement(),
             modalBody       = new CreateElement("div", "thread-modal-body", "modal-body")
                               .createElement(),
-            threadTextArea    = new CreateElement("textarea", null, "text-area")
-                              .createElement(),
+            threadTextArea    = new CreateElement("textarea", String(this.getPostID()).concat('-text-area'),
+                              "text-area").createElement(),
             mediaControl    = new CreateElement("div", "media-control", null)
                               .createElement(),
             mediaControlTxt = new CreateElement("div", "media-control-text", 

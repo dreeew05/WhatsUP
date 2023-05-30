@@ -3,8 +3,10 @@ import { CreateElement } from "./CreateElement.js";
 
 export class ModalOptions {
 
-    constructor(mode, mediaDriver, ytDriver, entryModifier) {
+    constructor(mode, mediaDriver, ytDriver, entryModifier, 
+        postID) {
         // PASSED
+        this.postID          = postID;
         this.mode            = mode;
         this.mediaDriver     = mediaDriver;
         this.ytDriver        = ytDriver;
@@ -16,6 +18,10 @@ export class ModalOptions {
 
         // METHODS
         this.clickMediaButtons();
+    }
+
+    getPostID() {
+        return this.postID;
     }
 
     getMode() {
@@ -169,7 +175,7 @@ export class ModalOptions {
             case 'thread':
                 modalBodyID   = 'thread-modal-body';
                 modeElementID = 'thread-thumbnails';
-                contentsID    = 'thread-media-contents';
+                contentsID    = String(this.getPostID()).concat('-thread-media-contents');
                 break;
             default:
                 break;

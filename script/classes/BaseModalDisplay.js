@@ -5,8 +5,10 @@ import { ModalOptions } from "./ModalOptions.js";
 
 export class BaseModalDisplay {
 
-    constructor(mode, mediaDriver, ytDataDriver, entryModifier) {
+    constructor(mode, mediaDriver, ytDataDriver, entryModifier,
+        postID) {
         // PASSED
+        this.postID        = postID;
         this.mode          = mode;
         this.mediaDriver   = mediaDriver;
         this.ytDataDriver  = ytDataDriver;
@@ -16,9 +18,14 @@ export class BaseModalDisplay {
             this.getMode(),
             this.mediaDriver, 
             this.ytDataDriver,
-            this.entryModifier
+            this.entryModifier,
+            this.getPostID()
         );
         
+    }
+
+    getPostID() {
+        return this.postID;
     }
 
     getMode() {

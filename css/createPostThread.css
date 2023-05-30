@@ -17,6 +17,19 @@
     padding: 0.5rem;
 }
 
+.create-thread-button {
+    font-family: 'ProductSansBold';
+    font-size: 1vmax;
+    color: white;
+    background-color: #138496;
+    border-radius: 0.5vmax;
+    width: 94%;
+    height: 2.25vmax;
+    margin-left: 3%;
+    margin-right: 3%;
+    margin-top: 1%;
+}
+
 .modal-content {
     background-color: #d9d9d9;
     padding-left: 3%;

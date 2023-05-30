@@ -58,55 +58,37 @@ export class Geocode {
                     mapAPI.createMap(elementID, latitude, longitude);
                 });
 
-                // CREATE POST MODAL
-                // const modalBody      = document.getElementById("post-modal-body"),
-                //       elementPostID  = "display-map-post",
-                //       divElement     = document.querySelector('#'.concat(elementPostID));
-
-                let modalBodyID   = null,
-                    elementModeID = null;
-
-                switch(this.getMode()) {
-                    case 'post':
-                        modalBodyID   = 'post-modal-body';
-                        elementModeID = 'display-map-post'; 
-                        break;
-                    case 'thread':
-                        modalBodyID   = 'thread-modal-body';
-                        elementModeID = 'display-map-thread'; 
-                        break;
-                    default:
-                        break;
-                } 
-
-                let mapModeID   = null,
+                let modalBodyID = null,
+                    mapModeID   = null,
                     mapSearchID = null,
                     latID       = null,
                     lngID       = null;
 
                 switch(this.getMode()) {
                     case 'post':
-                        mapModeID   = 'display-map-post';
-                        mapSearchID = 'display-map-search'; 
-                        latID       = 'latitude-text-field-hidden';
-                        lngID       = 'longtitude-text-field-hidden';
+                        modalBodyID   = 'post-modal-body';
+                        mapModeID     = 'display-map-post';
+                        mapSearchID   = 'display-map-search'; 
+                        latID         = 'latitude-text-field-hidden';
+                        lngID         = 'longtitude-text-field-hidden';
                         break;
                     case 'thread':
-                        mapModeID   = 'display-map-thread';
-                        mapSearchID = 'thread-display-map-search'; 
-                        latID       = 'thread-latitude-text-field-hidden';
-                        lngID       = 'thread-longtitude-text-field-hidden';
+                        modalBodyID   = 'thread-modal-body';
+                        mapModeID     = 'display-map-thread';
+                        mapSearchID   = 'thread-display-map-search'; 
+                        latID         = 'thread-latitude-text-field-hidden';
+                        lngID         = 'thread-longtitude-text-field-hidden';
                         break;
                     default:
                         break;
-                }
+                } 
 
                 const modalBody  = document.getElementById(modalBodyID),
-                      divElement = document.querySelector('#'.concat(elementModeID));
+                      divElement = document.querySelector('#'.concat(mapModeID));
 
                 if(!divElement) {
                     // CREATE ELEMENTS
-                    let displayMapInModal = new CreateElement("div", elementModeID,
+                    let displayMapInModal = new CreateElement("div", mapModeID,
                                                 null).createElement(),
                         mapHeader             = new CreateElement("div", "map-header", null)
                                                 .createElement(),
@@ -136,13 +118,9 @@ export class Geocode {
 
                     // ACTION WHEN CLOSE BUTTON IS CLICKED
                     closeMap.onclick = () => {
-                        // const mapPost     = document.getElementById('display-map-post'),
-                        //       mapSearch   = document.getElementById('display-map-search'),
-                        //       latTxtField = document.getElementById('latitude-text-field-hidden'),
-                        //       lngTxtField = document.getElementById('longtitude-text-field-hidden');
 
                         const mapPost     = document.getElementById(mapModeID),
-                              mapSearch   = document.getElementById(mapSearchID),
+                              mapSearch   = document.getElementById(mapModeID),
                               latTxtField = document.getElementById(latID),
                               lngTxtField = document.getElementById(lngID);
                         
