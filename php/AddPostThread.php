@@ -53,57 +53,34 @@
         }
 
         public function insertData() {
-            switch($this -> getAction()) {
-                case 'post':
-                    $this -> insertPost();
-                    break;
-                case 'thread':
-                    $this -> insertThread();
-                    break;
-                default:
-                    break;
-            }
-        }
+            $QUERY = null;
 
-        private function getTable() {
-            $tableNames = null;
-
-            switch($this -> getAction()) {
-                case 'post':
-                    $tableNames = array(
-                        'base' => 'post',
-                        'coordinates' => 'post_coordinates',
-                        'media' => 'post_media',
-                    );
-                    break;
-                case 'thread':
-                    $tableNames = array(
-                        'base' => 'thread',
-                        'coordinates' => 'thread_coordinates',
-                        'media' => 'thread_media',
-                    );
-                    break;
-                default:
-                    break;
-            }
-
-            return $tableNames;
-        }
-
-        private function insertPost() {
             // ATTRIBUTES
             $profileID   = $this -> getData()['profileID'];
             $postContent = $this -> getData()['postContent'];
             $media       = $this -> getData()['media'];
+            $tags        = $this -> getData()['tags'];
             $hasThread   = 0;
 
-            // TABLE NAME
-            $tableName  = $this -> getTable()['base'];
-
-            $QUERY = "INSERT INTO $tableName(PostID, ProfileID, DateTime, 
-                PostContent, HasThread)
-                VALUES(NULL, '$profileID', '{$this -> getCurrentTime()}',
-                '$postContent', '$hasThread')";
+            switch($this -> getAction()) {
+                case 'post':
+                    // $this -> insertPost();
+                    $QUERY = "INSERT INTO post(PostID, ProfileID, DateTime, 
+                                PostContent, HasThread)
+                              VALUES(NULL, '$profileID', '{$this -> getCurrentTime()}',
+                                '$postContent', '$hasThread')";
+                    break;
+                case 'thread':
+                    // $this -> insertThread();
+                    $postID = $this -> getData()['postID'];
+                    $QUERY = "INSERT INTO thread(ThreadID, ProfileID, PostID, DateTime,
+                                PostContent)
+                              VALUES(NULL, '$profileID', '$postID', 
+                                '{$this -> getCurrentTime()}', '$postContent')";
+                    break;
+                default:
+                    break;
+            }
 
             $RESULT = $this -> conn -> query($QUERY);
 
@@ -112,7 +89,9 @@
                 if($media != null) {
                     $this -> saveMedia($lastID);
                 }
-                $this -> insertTags($lastID);
+                if($tags != null) {
+                    $this -> insertTags($lastID);
+                }
                 $this -> insertCoordinates($lastID);
 
                 echo json_encode(
@@ -125,17 +104,27 @@
             }
         }
 
-        private function insertThread() {
-            $profileID   = $this -> getData()['profileID'];
-            $postID      = $this -> getData()['postID'];
-            $postContent = $this -> getData()['postContent'];
+        private function getTable() {
+            $tableNames = null;
 
-            $QUERY = "INSERT INTO thread(ThreadID, ProfileID, PostID, DateTime,
-                        PostContent)
-                      VALUES(NULL, '$profileID', '$postID', 
-                        '{$this -> getCurrentTime()}', '$postContent')";
+            switch($this -> getAction()) {
+                case 'post':
+                    $tableNames = array(
+                        'coordinates' => 'post_coordinates',
+                        'media' => 'post_media',
+                    );
+                    break;
+                case 'thread':
+                    $tableNames = array(
+                        'coordinates' => 'thread_coordinates',
+                        'media' => 'thread_media',
+                    );
+                    break;
+                default:
+                    break;
+            }
 
-            $RESULT = $this -> conn -> query($QUERY);
+            return $tableNames;
         }
 
         private function returnResult($result) {
