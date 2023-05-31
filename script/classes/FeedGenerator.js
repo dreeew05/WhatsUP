@@ -30,7 +30,7 @@ export class FeedGenerator {
     }
 
     generateProfile(jsonData) {
-        let genProfile = new GenerateProfileSearch();
+        const genProfile = new GenerateProfileSearch();
 
         for(let i = 0; i < jsonData.length; i++) {
             let profileName        = jsonData[i].profile_name,
@@ -44,7 +44,7 @@ export class FeedGenerator {
     }
 
     initializeSideNavBar() {
-        let sideNavBar = new SideNavBar();
+        const sideNavBar = new SideNavBar();
         
         document.getElementById("hamburger-button").onclick = function() {
             sideNavBar.hamburgerToggler();
@@ -66,10 +66,10 @@ export class FeedGenerator {
                 hasThread       = jsonData[i].has_thread,
                 type            = jsonData[i].type;
             
-            let generatePost = new GeneratePost(id, profileName, profilePic, 
-                               dateTime, post, postMedia, postMediaType, 
-                               postCoordinates, this.getMapAPI(), tags, hasThread, 
-                               type);
+            const generatePost = new GeneratePost(id, profileName, profilePic, 
+                                 dateTime, post, postMedia, postMediaType, 
+                                 postCoordinates, this.getMapAPI(), tags, hasThread, 
+                                 type);
             
             generatePost.showDefault();
 
