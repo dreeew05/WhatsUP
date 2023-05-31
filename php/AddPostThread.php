@@ -104,27 +104,37 @@
             }
         }
 
-        private function getTable() {
-            $tableNames = null;
+        private function getTableAttribute() {
+            $tableAttribute = null;
 
             switch($this -> getAction()) {
                 case 'post':
-                    $tableNames = array(
-                        'coordinates' => 'post_coordinates',
-                        'media' => 'post_media',
+                    $tableAttribute = array(
+                        'table' => array(
+                            'coordinates' => 'post_coordinates',
+                            'media' => 'post_media'
+                        ),
+                        'attribute' => array(
+                            'id' => 'PostID'
+                        )
                     );
                     break;
                 case 'thread':
-                    $tableNames = array(
-                        'coordinates' => 'thread_coordinates',
-                        'media' => 'thread_media',
+                    $tableAttribute = array(
+                        'table' => array(
+                            'coordinates' => 'thread_coordinates',
+                            'media' => 'thread_media'
+                        ),
+                        'attribute' => array(
+                            'id' => 'ThreadID'
+                        )
                     );
                     break;
                 default:
                     break;
             }
 
-            return $tableNames;
+            return $tableAttribute;
         }
 
         private function returnResult($result) {
@@ -140,7 +150,8 @@
 
         private function insertCoordinates($lastID) {
             // TABLE NAME
-            $tableName = $this -> getTable()['coordinates'];
+            $tableName = $this -> getTableAttribute()['table']['coordinates'];
+            $idName    = $this -> getTableAttribute()['attribute']['id'];
 
             // ATTRIBUTES
             $coordinates = $this -> getData()['coordinates'];
@@ -148,7 +159,7 @@
             $longtitude  = $coordinates['longtitude'];
             
             if($latitude != '' && $longtitude != '') {
-                $QUERY = "INSERT INTO $tableName(PostID, Latitude,
+                $QUERY = "INSERT INTO $tableName($idName, Latitude,
                             Longtitude)
                           VALUES('$lastID', '$latitude', '$longtitude')";
 
@@ -180,7 +191,8 @@
 
         private function saveMedia($lastID) {
             // TABLE NAME
-            $tableName = $this -> getTable()['media'];
+            $tableName = $this -> getTableAttribute()['table']['media'];
+            $idName    = $this -> getTableAttribute()['attribute']['id'];
 
             // ATTRIBUTES
             $media = $this -> getData()['media'];
@@ -199,7 +211,7 @@
                     default:
                         break;
                 } 
-                $QUERY = "INSERT INTO $tableName(PostID, MediaType, URL)
+                $QUERY = "INSERT INTO $tableName($idName, MediaType, URL)
                           VALUES('$lastID', '$type', '$URL')";
                 
                 $RESULT = $this -> conn -> query($QUERY);
