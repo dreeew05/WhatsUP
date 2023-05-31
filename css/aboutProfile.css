@@ -1,5 +1,6 @@
-.about-holder {
-    width: 80%;
+#about-holder {
+    /* width: 80%; */
+    width: 50vmax;
     margin-top: 1rem;
     margin-bottom: 1rem;
     background-color: white;

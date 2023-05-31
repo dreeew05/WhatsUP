@@ -116,13 +116,13 @@ export class FeedGenerator {
     }
 
     generateAbout(jsonData) {
-        let profileName = jsonData[0].profile_name,
-            displayPic  = jsonData[0].display_picture,
-            bannerImage = jsonData[0].banner_image,
-            details     = jsonData[0].details,
-            category    = jsonData[0].category,
-            contact     = jsonData[0].contact,
-            socials     = jsonData[0].socials;
+        const profileName = jsonData[0].profile_name,
+              displayPic  = jsonData[0].display_picture,
+              bannerImage = jsonData[0].banner_image,
+              details     = jsonData[0].details,
+              category    = jsonData[0].category,
+              contact     = jsonData[0].contact,
+              socials     = jsonData[0].socials;
             
         new GenerateAbout(profileName, displayPic, bannerImage,
             details, category, contact, socials);

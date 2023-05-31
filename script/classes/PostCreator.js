@@ -11,9 +11,10 @@ import { SweetAlertFactory } from "./SweetAlertFactory.js";
 
 export class PostCreator {
     
-    constructor(postHolder) {
+    constructor(postHolder, profileID) {
         // PASSED
         this.postHolder = postHolder;
+        this.profileID  = profileID;
 
         // GLOBAL
         this.mode              = 'post';
@@ -44,6 +45,10 @@ export class PostCreator {
 
     getPostHolder() {
         return this.postHolder;
+    }
+
+    getProfileID() {
+        return this.profileID;
     }
 
     getDataArray() {
@@ -213,7 +218,7 @@ export class PostCreator {
 
             const phpURL  = "/php/AddPostThread.php",
                   contents = {
-                        'profileID' : 1048,
+                        'profileID' : this.getProfileID(),
                         'postContent' : postTextArea.value,
                         'tags' : this.tagsDataDriver.getTagsArray(),
                         'coordinates' : {

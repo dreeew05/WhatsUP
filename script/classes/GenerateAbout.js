@@ -62,7 +62,7 @@ export class GenerateAbout {
     createAbout() {
         let aboutDiv = document.getElementById("about");
 
-        let aboutHolder  = new CreateElement("div", null, "container justify-content-center about-holder").createElement(),
+        let aboutHolder  = new CreateElement("div", "about-holder", "container justify-content-center about-holder").createElement(),
             
             intro        = new CreateElement("div", "introduction", null).createElement(),
             introTitle   = new CreateElement("p", "intro-title", null).createElement(),
@@ -135,7 +135,20 @@ export class GenerateAbout {
                 icon = new CreateElement("i", null,
                        "fa-solid fa-user-group").createElement();
                 break;
+            case "Course Page":
+                icon = new CreateElement("i", null,
+                       "fa-sharp fa-solid fa-building-columns")
+                       .createElement();
+                break;
+            case "Student Financial Assistance":
+                icon = new CreateElement("i", null,
+                       "fa-solid fa-money-bills")
+                       .createElement();
+                break;
             default:
+                icon = new CreateElement("i", null,
+                       "fa-solid fa-user")
+                       .createElement();
                 break;
         }
         return icon;

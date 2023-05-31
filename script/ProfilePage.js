@@ -11,8 +11,7 @@ import { GeneratePostMap } from "./classes/GeneratePostMap.js";
 // TEST DATA
 import postsJSON from "../test/posts.json" assert { type: 'json' };
 import threadJSON from "../test/threads.json" assert { type: 'json' };
-import aboutJSON from "../test/about.json" assert { type: 'json' };
-import { ThreadCreator } from "./classes/ThreadCreator.js";
+import { DataSerializer } from "./classes/DataSerializer.js";
 
 class ProfilePage {
 
@@ -20,20 +19,32 @@ class ProfilePage {
 
         // GLOBAL VARIABLE
         this.logStatus = null;
+        this.profileID = null;
         this.setLogStatus("admin");
-        this.mapAPI = new GeneratePostMap();
+
+        this.dataSerializer = new DataSerializer();
+        this.mapAPI         = new GeneratePostMap();
+        this.feedGenerator  = new FeedGenerator(this.mapAPI);
         
-        this.initializePostButton();
         this.initializeNavBar();
-        this.initializeProfile();
         this.navBarSectionDividerImplementation();
-        this.initializeFeedGenerator();
+        this.initializeProfile()
+        this.initializePostButton();
+        this.initializePostFeedGenerator();
 
     }
 
     getLogStatus() {
         return this.logStatus;
     }
+
+    getProfileID() {
+        return this.profileID;
+    }
+
+    setProfileID(profileID) {
+        this.profileID = profileID;
+    } 
 
     setLogStatus(logStatus) {
         this.logStatus = logStatus;
@@ -61,42 +72,49 @@ class ProfilePage {
         }
     }
 
-    initializeFeedGenerator() {
-        let feedGenerator = new FeedGenerator(this.mapAPI);
-
+    initializePostFeedGenerator() {
         // TEST DATA
         // POST + THREAD
         let all = postsJSON.concat(threadJSON);
 
-        feedGenerator.initializeSideNavBar();
-        // feedGenerator.generatePost(postsJSON);
-        // feedGenerator.generateThread(threadJSON);
-        feedGenerator.generateDefaultPostThread(all);
-        feedGenerator.generateAbout(aboutJSON);
+        this.feedGenerator.initializeSideNavBar();
+        this.feedGenerator.generateDefaultPostThread(all);
         
-        new PostThreadDataDriver(feedGenerator.getHasThreadsArray());
+        new PostThreadDataDriver(
+            this.feedGenerator.getHasThreadsArray()
+        );
     }
 
-    initializeProfile() {
+    async initializeProfile() {
         const header = window.location.href;
 
         if(header.includes("id")) {
             const link     = header.split("?"),
-            response = link[1].split("="),
-            value    = response[1];
-
-            console.log(value);
+                  query    = link[1].split("="),
+                  id       = query[1],
+                  request  = {
+                    'id' : id
+                  },
+                  phpURL   = '/php/AboutGetter.php',
+                  response = await this.dataSerializer.postData(
+                                request, phpURL
+                             );
+            
+            this.setProfileID(id);
+            this.feedGenerator.generateAbout(
+                response
+            );
         }
-    }
 
-    // async initializeAbout(id) {
-    //     const phpURL = 
-    // }
+    }
 
     initializePostButton() {
         if(this.getLogStatus() == "admin") {
             // new PostCreator();
-            new PostCreator(document.getElementById('posts'));
+            new PostCreator(
+                document.getElementById('posts'),
+                this.getProfileID(),
+            );
         }
     }
 
