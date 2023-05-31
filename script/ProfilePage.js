@@ -103,7 +103,9 @@ class ProfilePage {
                 response
             );
             this.initializePostFeedGenerator();
-
+        }
+        else {
+            window.location.href = "/index.html";
         }
 
     }

@@ -218,6 +218,7 @@ export class PostCreator {
 
             const phpURL  = "/php/AddPostThread.php",
                   contents = {
+                        'action' : 'post',
                         'profileID' : this.getProfileID(),
                         'postContent' : postTextArea.value,
                         'tags' : this.tagsDataDriver.getTagsArray(),

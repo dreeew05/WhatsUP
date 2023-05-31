@@ -216,8 +216,9 @@ export class ThreadCreator {
         modalFooter.appendChild(threadButton);
 
         threadButton.onclick = async() => {
-            const phpURL   = null,
+            const phpURL   = '/php/AddPostThread.php',
                   contents = {
+                        'action' : 'thread',
                         'profileID' : 1048,
                         'postID' : this.getPostID(),
                         'postContent' : threadTextArea.value,
@@ -225,7 +226,8 @@ export class ThreadCreator {
                             'latitude' : latFieldHidden.value,
                             'longtitude' : lngFieldHidden.value
                         },
-                        'media' : null
+                        'media' : null,
+                        'tags' : null
                   }
 
             if(this.getDataArray() != null && 
@@ -254,6 +256,33 @@ export class ThreadCreator {
             }
 
             console.log(contents);
+
+            const response = await this.dataSerializer.postData(
+                contents, phpURL
+            );
+
+            console.log(response);
+
+            switch(response['success']) {
+                case 'true':
+                    this.sweetAlert.createAlertBox(
+                        'Success!', 
+                        'Thread Has Been Created',
+                        'success',
+                        'Okay'
+                    );
+                    break;
+                case 'false':
+                    this.sweetAlert.createAlertBox(
+                        'Error!', 
+                        'An Error Occured While Creating Thread',
+                        'error',
+                        'Okay'
+                    );
+                    break;
+                default:
+                    break;
+            }
         }
 
     }
