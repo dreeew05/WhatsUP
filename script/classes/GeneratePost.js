@@ -34,8 +34,7 @@ export class GeneratePost {
         return this.id;
     }
     getPostsContainer() {
-        let POSTS  = document.getElementById("posts");
-        return POSTS;
+        return document.getElementById("posts");
     }
     getProfileName() {
         return this.profileName;
@@ -163,7 +162,10 @@ export class GeneratePost {
         if(this.getHasThread() == true) {
             this.showThreadOption(POST_HOLDER);
         }
-        new ThreadCreator(this.getID(), POST_HOLDER);
+        // new ThreadCreator(this.getID(), POST_HOLDER);
+        if(this.getType() == 'post') {
+            new ThreadCreator(this.getID(), POST_HOLDER);
+        }
     }
 
     showThreadOption(POST_HOLDER) {

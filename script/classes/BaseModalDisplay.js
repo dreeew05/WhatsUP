@@ -8,11 +8,11 @@ export class BaseModalDisplay {
     constructor(mode, mediaDriver, ytDataDriver, entryModifier,
         postID) {
         // PASSED
-        this.postID        = postID;
         this.mode          = mode;
         this.mediaDriver   = mediaDriver;
         this.ytDataDriver  = ytDataDriver;
         this.entryModifier = entryModifier;
+        this.postID        = postID;
         // GLOBAL
         this.modalOptions  = new ModalOptions(
             this.getMode(),
@@ -40,8 +40,43 @@ export class BaseModalDisplay {
         return this.modalOptions.getOpenedButton();
     }
 
+    getGlobalID() {
+        const idStringify = String(this.getPostID());
+        
+        switch(this.getMode()) {
+            case 'post':
+                return {
+                    'mediaModalID'     : 'media-modal',
+                    'ytModalID'        : 'yt-modal',
+                    'mapModalID'       : 'map-modal',
+                    'mapSearchID'      : 'display-map-search',
+                    'ytModalBodyID'    : 'yt-modal-body',
+                    'mediaModalBodyID' : 'media-modal-body'
+                };
+            case 'thread':
+                return {
+                    'mediaModalID'     : 'thread-'.concat(idStringify)
+                                          .concat('-media-modal'),
+                    'ytModalID'        : 'thread-'.concat(idStringify)
+                                          .concat('-yt-modal'),
+                    'mapModalID'       : 'thread-'.concat(idStringify)
+                                          .concat('-map-modal'),
+                    'mapSearchID'      : 'thread-'.concat(idStringify)
+                                          .concat('-map-search'),
+                    'ytModalBodyID'    : 'thread-'.concat(idStringify)
+                                          .concat('yt-modal-body'),
+                    'mediaModalBodyID' : 'thread-'.concat(idStringify)
+                                          .concat('media-modal-body')
+                };
+            default:
+                break;
+        }
+    }
+
     displayMapModal(divHolder) {
-        let searchMapModal  = new CreateElement("div", "map-modal", "modal fade")
+        const mapModalID = this.getGlobalID()['mapModalID'];
+
+        let searchMapModal  = new CreateElement("div", mapModalID, "modal fade")
                               .createElement(),
             modalDialog     = new CreateElement("div", null, "modal-dialog modal-dialog-centered modal-lg")
                               .createElement(),
@@ -55,9 +90,9 @@ export class BaseModalDisplay {
                               .createElement(),
             modalBody       = new CreateElement("div", null, "modal-body")
                               .createElement(),
-            mapSearch       = new CreateElement("div", "map-search", null)
+            mapSearch       = new CreateElement("div", null, null)
                               .createElement(),
-            inputMap        = new CreateElement("div", "input-map", null)
+            inputMap        = new CreateElement("div", null, "input-map")
                               .createElement(),
             searchText      = new CreateElement("input", null, "text-fields")
                               .createElement(),
@@ -72,7 +107,7 @@ export class BaseModalDisplay {
 
         // SET ATTRIBUTE
         searchMapModal.setAttribute("tabindex", "-1");
-        searchMapModal.setAttribute("aria-labelledby", "map-modal-label");
+        // searchMapModal.setAttribute("aria-labelledby", "map-modal-label");
         searchMapModal.setAttribute("aria-hidden", "true");
         modalDialog.setAttribute("role", "document");
         modalTitle.textContent = "Search Map";
@@ -106,30 +141,18 @@ export class BaseModalDisplay {
 
     geocodeMap(searchButton, searchText, modalBody) {
 
-        let geocoder = new Geocode(this.getMode()),
+        let geocoder = new Geocode(this.getMode(), this.getPostID()),
             mapAPI   = new GeneratePostMap();
 
         searchButton.onclick = () => {
 
             // CHECK IF DIV EXISTS
-
-            let elementID = null;
-
-            switch(this.getMode()) {
-                case 'post':
-                    elementID = 'display-map-search';
-                    break;
-                case 'thread':
-                    elementID = 'thread-display-map-search';
-                    break;
-                default:
-                    break;
-            }
-
-            const divElement = document.querySelector('#'.concat(elementID));
+            const elementID  = this.getGlobalID()['mapSearchID'],
+                  divElement = document.querySelector('#'.concat(elementID));
             if(!divElement) {
-                let displayMap = new CreateElement("div", elementID, null)
-                                .createElement();
+                let displayMap = new CreateElement("div", elementID,
+                                 'display-map-search')
+                                 .createElement();
                 modalBody.appendChild(displayMap);
             }
             
@@ -141,27 +164,30 @@ export class BaseModalDisplay {
     }
 
     displayYoutubeModal(divHolder) {
-        let ytModal        = new CreateElement("div", "yt-modal", "modal fade")
+        const ytModalID     = this.getGlobalID()['ytModalID'],
+              ytModalBodyID = this.getGlobalID()['ytModalBodyID'];
+
+        let ytModal        = new CreateElement("div", ytModalID, "modal fade")
                              .createElement(),
             modalDialog    = new CreateElement("div", null, "modal-dialog modal-dialog-centered modal-lg")
                              .createElement(),
-            modalContent   = new CreateElement("div", "modal-content-add-yt", "modal-content")
+            modalContent   = new CreateElement("div", null, "modal-content")
                              .createElement(),
             modalHeader    = new CreateElement("div", null, "modal-header")
                              .createElement(),
-            modalTitle     = new CreateElement("h3", "yt-modal-label", "modal-title")
+            modalTitle     = new CreateElement("h3", null, "modal-title")
                              .createElement(),
             closeButton    = new CreateElement("button", null, "btn-close")
                              .createElement(),
-            modalBody      = new CreateElement("div", "yt-modal-body", "modal-body")
+            modalBody      = new CreateElement("div", ytModalBodyID, "modal-body")
                              .createElement(),
-            linkDiv        = new CreateElement("div", "link-div", null)
+            linkDiv        = new CreateElement("div", null, null)
                              .createElement(),
-            addLinks       = new CreateElement("div", "add-links", null)
+            addLinks       = new CreateElement("div", null, "add-links")
                              .createElement(),
-            addLinksTField = new CreateElement("input", "link-text-field", "text-fields")
+            addLinksTField = new CreateElement("input", null, "text-fields")
                              .createElement(),
-            addYTButton    = new CreateElement("button", "add-link-button", null)
+            addYTButton    = new CreateElement("button", null, null)
                              .createElement(),
             plusSign       = new CreateElement("i", null, "fa-sharp fa-solid fa-plus")
                              .createElement(),
@@ -172,7 +198,7 @@ export class BaseModalDisplay {
 
             // SET ATTRIBUTE
             ytModal.setAttribute("tabindex", "-1");
-            ytModal.setAttribute("aria-labelledby", "yt-modal-label");
+            // ytModal.setAttribute("aria-labelledby", "yt-modal-label");
             ytModal.setAttribute("aria-hidden", "true");
             modalDialog.setAttribute("role", "document");
             modalTitle.textContent = "Add Youtube Links";
@@ -218,27 +244,30 @@ export class BaseModalDisplay {
     }
 
     displayMediaModal(divHolder) {
-        let mediaModal    = new CreateElement("div", "media-modal", "modal fade")
+        const mediaModalID     = this.getGlobalID()['mediaModalID'],
+              mediaModalBodyID = this.getGlobalID()['mediaModalBodyID'];
+        
+        let mediaModal    = new CreateElement("div", mediaModalID, "modal fade")
                             .createElement(),
             modalDialog   = new CreateElement("div", null, "modal-dialog modal-dialog-centered modal-lg")
                             .createElement(),
-            modalContent  = new CreateElement("div", "modal-content-add-media", "modal-content")
+            modalContent  = new CreateElement("div", null, "modal-content")
                             .createElement(),
             modalHeader   = new CreateElement("div", null, "modal-header")
                             .createElement(),
-            modalTitle    = new CreateElement("h3", "media-modal-label", "modal-title")
+            modalTitle    = new CreateElement("h3", null, "modal-title")
                             .createElement(),
             closeButton   = new CreateElement("button", null, "btn-close")
                             .createElement(),
-            modalBody     = new CreateElement("div", "media-modal-body", "modal-body")
+            modalBody     = new CreateElement("div", mediaModalBodyID, "modal-body")
                             .createElement(),
-            fileDiv       = new CreateElement("div", "file-div", null)
+            fileDiv       = new CreateElement("div", null, "file-div")
                             .createElement(),
-            addFile       = new CreateElement("div", "add-file", null)
+            addFile       = new CreateElement("div", null, "add-file")
                             .createElement(),
-            addFileTField = new CreateElement("input", "file-text-field", "form-control")
+            addFileTField = new CreateElement("input", null, "form-control file-text-field")
                             .createElement(),
-            addFileButton = new CreateElement("button", "add-file-button",)
+            addFileButton = new CreateElement("button", null, "add-file-button")
                             .createElement(),
             plusSign      = new CreateElement("i", null, "fa-sharp fa-solid fa-plus")
                             .createElement(),

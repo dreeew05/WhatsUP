@@ -37,10 +37,6 @@
     overflow: auto;
 }
 
-#modal-content-create-post {
-    height: 31vmax;
-}
-
 .modal-title {
     font-family: 'ProductSansBold';
 }
@@ -72,7 +68,7 @@
     margin-right: 2%;
 }
 
-#tags-div, #link-div, #file-div {
+#tags-div, .link-div, .file-div {
     border: 2px solid #A2A2A2;
     border-radius: 1vmax;
     margin-top: 1%;
@@ -95,24 +91,24 @@
     padding: 1%;
 }
 
-#add-tag, #input-map, #add-links, #add-file {
+#add-tag, .input-map, .add-links, .add-file {
     height: 2vmax;
     width: 100%;
     display: flex;
     flex-direction: row;
 }
 
-#add-file input {
+.add-file input {
     height: 2vmax;
     font-size: 0.75vmax;
 }
 
-#add-tag input, #input-map input, #add-links input, #add-file input {
+#add-tag input, .input-map input, .add-links input, .add-file input {
     border-top-right-radius: 0px;
     border-bottom-right-radius: 0px;
 }
 
-#add-tag button, #input-map button, #add-links button, #add-file button {
+#add-tag button, .input-map button, .add-links button, .add-file button {
     background-color: green;
     font-size: 0.75vmax;
     color: white;
@@ -123,7 +119,7 @@
     height: 2vmax;
 }
 
-#file-text-field {
+.form-control.file-text-field {
     display: block;
     margin-top: auto;
     margin-bottom: auto;
@@ -149,17 +145,21 @@
 
 /* LAT - LNG TEXTFIELDS */
 
-#latitude-text-field-hidden, #thread-latitude-text-field-hidden {
+#latitude-text-field-hidden {
     display: none;
 }
 
-#longtitude-text-field-hidden, #thread-longtitude-text-field-hidden {
+#longtitude-text-field-hidden {
+    display: none;
+}
+
+.thread-text-fields.hidden {
     display: none;
 }
 
 /* MEDIA-CONTROL */
 
-#media-control {
+.media-control {
     border: 2px solid #A2A2A2;
     border-radius: 1vmax;
     display: flex;
@@ -169,7 +169,7 @@
     margin-top: 2%;
 }
 
-#media-control-text {
+.media-control-text {
     display: block;
     margin: auto;
     width: 50%;
@@ -179,7 +179,7 @@
     font-family: 'ProductSansRegular';
 }
 
-#media-control-buttons {
+.media-control-buttons {
     display: block;
     margin: auto;
     width: 50%;
@@ -221,7 +221,7 @@
     color: #e8be4c;
 }
 
-#display-map-post {
+.map-modal-display {
     margin-top: 2%;
     border: 2px solid #A2A2A2;
     border-radius: 1vmax;
@@ -230,7 +230,7 @@
     padding-bottom: 2%;
 }
 
-#map-result {
+.map-result {
     height: 20rem;
     width: 100%;
     border-radius: 1vmax;
@@ -274,7 +274,7 @@
 
 /* MAP MODAL */
 
-#display-map-search, #thread-display-map-search {
+.display-map-search {
     margin-top: 2%;
     height: 20rem;
     width: 100%;
@@ -322,7 +322,7 @@
 
 /* POST MODAL THUMBNAILS */
 
-#post-thumbnails, #thread-thumbnails {
+.main-modal-thumbnails {
     width: 100%;
     border: 2px solid #A2A2A2;
     border-radius: 1vmax;

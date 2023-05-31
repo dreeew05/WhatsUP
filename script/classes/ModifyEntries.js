@@ -6,11 +6,51 @@ import { ThumbnailFactory } from "./ThumbnailFactory.js";
 
 export class ModifyEntries {
 
-    constructor() {
+    constructor(mode, postID) {
+        // PASSED
+        this.mode             = mode;
+        this.postID           = postID;
+
+        // GLOBAL
         this.sweetAlert       = new SweetAlertFactory();
         this.dataSerializer   = new DataSerializer();
         this.linkToThumbnail  = new LinkToThumbnail() 
         this.thumbnailFactory = new ThumbnailFactory();
+    }
+
+    getMode() {
+        return this.mode;
+    }
+
+    getPostID() {
+        return this.postID;
+    }
+
+    getGlobalID() {
+        const idStringify = String(this.getPostID());
+        
+        switch(this.getMode()) {
+            case 'post':
+                return {
+                    'ytThumbnailID' : 'yt-thumbnails',
+                    'ytModalBodyID' : 'yt-modal-body',
+                    'mediaThumbnailID' : 'media-thumbnails',
+                    'mediaModalBodyID' : 'media-modal-body'
+                };
+            case 'thread':
+                return {
+                    'ytThumbnailID' : 'thread-'.concat(idStringify)
+                                       .concat('yt-thumbnails'),
+                    'ytModalBodyID' : 'thread-'.concat(idStringify)
+                                       .concat('yt-modal-body'),
+                    'mediaThumbnailID' : 'thread-'.concat(idStringify)
+                                          .concat('media-thumbnails'),
+                    'mediaModalBodyID' : 'thread-'.concat(idStringify)
+                                          .concat('media-modal-body')
+                };
+            default:
+                break;
+        }
     }
 
     modifyEntries(tagsDiv, textField, button, type, dataDriver, limit) {
@@ -95,39 +135,42 @@ export class ModifyEntries {
     addRemoveThumbnail(type, dataDriver) {
 
         let elementID  = null,
+            parentID   = null,
             parentDiv  = null,
             divElement = null;
 
         switch(type) {
             case "link":
-                elementID  = "yt-thumbnails";
-                parentDiv  = document.getElementById("yt-modal-body");
-                divElement = document.querySelector('#'.concat(elementID));
-                
+                elementID  = this.getGlobalID()['ytThumbnailID'];
+                parentID   = this.getGlobalID()['ytModalBodyID'];
+                parentDiv  = document.getElementById(parentID);
+                divElement = document.querySelector(
+                    '#'.concat(elementID)
+                );
                 if(divElement) {
                     divElement.remove();
                 }
-                // this.createThumbnailViewer(elementID, parentDiv, 
-                //     this.ytLinkToThumbnail(dataDriver.getTagsArray()));
-
                 this.createThumbnailViewer(
                     elementID, parentDiv,
                     this.linkToThumbnail.ytLinkToThumbnail(
                         dataDriver.getTagsArray()
                     )
                 );
-
                 break;
             case "media":
-                elementID  = "media-thumbnails",
-                parentDiv  = document.getElementById("media-modal-body");
-                divElement = document.querySelector('#'.concat(elementID));
-                
+                elementID  = this.getGlobalID()['mediaThumbnailID'];
+                parentID   = this.getGlobalID()['mediaModalBodyID'];
+                parentDiv  = document.getElementById(parentID);
+                divElement = document.querySelector(
+                    '#'.concat(elementID)
+                );
                 if(divElement) {
                     divElement.remove();
                 }
-                this.createThumbnailViewer(elementID, parentDiv,
-                    dataDriver.getTagsArray());
+                this.createThumbnailViewer(
+                    elementID, parentDiv,
+                    dataDriver.getTagsArray()
+                );
                 break;
             default:
                 break;

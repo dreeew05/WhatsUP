@@ -6,11 +6,11 @@ export class ModalOptions {
     constructor(mode, mediaDriver, ytDriver, entryModifier, 
         postID) {
         // PASSED
-        this.postID          = postID;
         this.mode            = mode;
         this.mediaDriver     = mediaDriver;
         this.ytDriver        = ytDriver;
         this.entryModifier   = entryModifier;
+        this.postID          = postID;
         // GLOBAL
         this.openedButton    = null;
         this.dataArray       = null;
@@ -40,6 +40,30 @@ export class ModalOptions {
         return this.dataArray;
     }
 
+    getGlobalID() {
+        const idStringify = String(this.getPostID());
+        
+        switch(this.getMode()) {
+            case 'post':
+                return {
+                    'modalBodyID'   : 'post-modal-body',
+                    'modeElementID' : 'post-thumbnails',
+                    'contentsID'    : 'post-media-contents',
+                };
+            case 'thread':
+                return {
+                    'modalBodyID'   : 'thread-'.concat(idStringify)
+                                       .concat('-modal-body'),
+                    'modeElementID' : 'thread-'.concat(idStringify)
+                                      .concat('-thumbnails'),
+                    'contentsID'    : 'thread-'.concat(idStringify)
+                                      .concat('-media-contents')
+                };
+            default:
+                break;
+        }
+    }
+
     setDataArray(dataArray) {
         this.dataArray = dataArray;
     }
@@ -50,8 +74,6 @@ export class ModalOptions {
               imageButton = document.getElementById(ids[0]),
               videoButton = document.getElementById(ids[1]),
               ytButton    = document.getElementById(ids[2]); 
-
-        // console.log(ids[0])
 
         imageButton.onclick = () => {
             this.setOpenedButton("image");
@@ -67,6 +89,11 @@ export class ModalOptions {
     determineButtonMode() {
         let butttonIDs = [];
 
+        const idStringify   = String(this.getPostID()),
+              threadImageID = 'thread-'.concat(idStringify).concat('-image-button'),
+              threadVideoID = 'thread-'.concat(idStringify).concat('-video-button'),
+              threadYTID    = 'thread-'.concat(idStringify).concat('-yt-button'); 
+
         switch(this.getMode()) {
             case 'post':
                 butttonIDs = [
@@ -77,9 +104,9 @@ export class ModalOptions {
                 break;
             case 'thread':
                 butttonIDs = [
-                    'thread-image-button',
-                    'thread-video-button',
-                    'thread-yt-button'
+                    threadImageID,
+                    threadVideoID,
+                    threadYTID
                 ];
                 break;
             default:
@@ -97,8 +124,6 @@ export class ModalOptions {
 
         switch(type) {
             case "image":
-                // videoButton.setAttribute("disabled", true);
-                // ytButton.setAttribute("disabled", true);
                 if(this.mediaDriver.getCounter() != 0) {
                     if(!imageButton.classList.contains('active')) {
                         imageButton.className += " active";
@@ -116,8 +141,6 @@ export class ModalOptions {
                 }
                 break;
             case "video":
-                // imageButton.setAttribute("disabled", true);
-                // ytButton.setAttribute("disabled", true);
                 if(this.mediaDriver.getCounter() != 0) {
                     if(!videoButton.classList.contains('active')) {
                         videoButton.className += " active";
@@ -135,8 +158,6 @@ export class ModalOptions {
                 }
                 break;
             case "youtube":
-                // imageButton.setAttribute("disabled", true);
-                // videoButton.setAttribute("disabled", true);
                 console.log(this.ytDriver.getCounter());
                 if(this.ytDriver.getCounter() != 0) {
                     if(!ytButton.classList.contains('active')) {
@@ -162,30 +183,15 @@ export class ModalOptions {
 
     showThumbnailToModeModal(imagesArray) {
 
-        let modeElementID = null,
-            modalBodyID   = null,
-            contentsID    = null;
-
-        switch(this.getMode()) {
-            case 'post':
-                modalBodyID   = 'post-modal-body';
-                modeElementID = 'post-thumbnails';
-                contentsID    = 'post-media-contents';
-                break;
-            case 'thread':
-                modalBodyID   = 'thread-modal-body';
-                modeElementID = 'thread-thumbnails';
-                contentsID    = String(this.getPostID()).concat('-thread-media-contents');
-                break;
-            default:
-                break;
-        }
-
-        const modalBody      = document.getElementById(modalBodyID),
+        const modalBodyID    = this.getGlobalID()['modalBodyID'],
+              modeElementID  = this.getGlobalID()['modeElementID'],
+              contentsID     = this.getGlobalID()['contentsID'],
+              modalBody      = document.getElementById(modalBodyID),
               divElement     = document.querySelector('#'.concat(modeElementID));
 
         if(!divElement) {
-            let postThumbnails   = new CreateElement("div", modeElementID, null)
+            let postThumbnails   = new CreateElement("div", modeElementID, 
+                                   "main-modal-thumbnails")
                                    .createElement(),
                 thumbnailHeader  = new CreateElement("div", "thumbnail-header")
                                    .createElement(),
@@ -219,14 +225,10 @@ export class ModalOptions {
                 }
         }
         else {
-            // document.getElementById("thumbnail-holder").remove();
             document.getElementById(contentsID).remove();
             let content = new CreateElement("div", contentsID, null).createElement();
             document.getElementById(modeElementID).appendChild(content);
         }
-
-        // this.thumbnailFactory.generateThumbnail(thumbnailArray, 
-        //     document.getElementById(contentsID));
         this.entryModifier.createThumbnailViewer(
             contentsID, 
             document.getElementById(modeElementID),

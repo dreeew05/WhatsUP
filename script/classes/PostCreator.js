@@ -16,11 +16,12 @@ export class PostCreator {
         this.postHolder = postHolder;
 
         // GLOBAL
+        this.mode              = 'post';
         this.tagsDataDriver    = new TagLinkDataDriver();
         this.ytLinksDataDriver = new TagLinkDataDriver();
         this.mediaDriver       = new TagLinkDataDriver();
         this.base64Converter   = new Base64Converter();
-        this.entryModifier     = new ModifyEntries();
+        this.entryModifier     = new ModifyEntries(this.mode);
         this.dataSerializer    = new DataSerializer();
         this.sweetAlert        = new SweetAlertFactory();
 
@@ -30,7 +31,7 @@ export class PostCreator {
 
         // NEXT-STATE GLOBAL
         this.baseModalDisplay  = new BaseModalDisplay(
-            'post', 
+            this.mode, 
             this.mediaDriver, 
             this.ytLinksDataDriver,
             this.entryModifier
@@ -97,12 +98,12 @@ export class PostCreator {
                               .createElement(),
             plusSign        = new CreateElement("i", null, "fa-sharp fa-solid fa-plus")
                               .createElement(),
-            mediaControl    = new CreateElement("div", "media-control", null)
+            mediaControl    = new CreateElement("div", null, "media-control")
                               .createElement(),
-            mediaControlTxt = new CreateElement("div", "media-control-text", 
-                              null).createElement(),
-            mediaControlBtn = new CreateElement("div", "media-control-buttons",
-                              null).createElement(),
+            mediaControlTxt = new CreateElement("div", null, "media-control-text") 
+                              .createElement(),
+            mediaControlBtn = new CreateElement("div", null, "media-control-buttons")
+                              .createElement(),
             imageButton     = new CreateElement("button", "image-button", "media-button")
                               .createElement(),
             imageIcon       = new CreateElement("i", null, "fa-solid fa-image")
@@ -247,13 +248,13 @@ export class PostCreator {
                 }
             }
 
-            // console.log(contents);
+            console.log(contents);
 
             const response = await this.dataSerializer.postData(
                 contents, phpURL
             );
 
-            // console.log(response);
+            console.log(response);
 
             switch(response['success']) {
                 case 'true':

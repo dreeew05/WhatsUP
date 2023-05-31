@@ -4,8 +4,9 @@
 import { CreateElement } from "./CreateElement.js";
 
 export class Geocode {
-    constructor(mode) {
+    constructor(mode, postID) {
         this.mode       = mode;
+        this.postID     = postID;
         // GLOBAL VARIABLE
         this.latitude   = null;
         this.longtitude = null;
@@ -14,6 +15,27 @@ export class Geocode {
 
     getMode() {
         return this.mode;
+    }
+
+    getPostID() {
+        return this.postID;
+    }
+
+    getGlobalID() {
+        const idStringify = String(this.getPostID());
+        return {
+            'threadBodyID' : 'thread-'.concat(idStringify)
+                             .concat('-modal-body'),
+            'threadLatID'  : 'thread-'.concat(idStringify)
+                             .concat('-latitude-text-field-hidden'),
+            'threadLngID'  : 'thread-'.concat(idStringify)
+                             .concat('-longtitude-text-field-hidden'),
+            'mapModeID'    : 'display-map-thread-'.concat(idStringify),
+            'mapSearchID'  : 'thread-'.concat(idStringify)
+                             .concat('-display-map-search'),
+            'mapResultID'  : 'thread-'.concat(idStringify)
+                             .concat('-map-result')
+        };
     }
 
     displayMap(QUERY, mapAPI, elementID) {
@@ -58,11 +80,16 @@ export class Geocode {
                     mapAPI.createMap(elementID, latitude, longitude);
                 });
 
+                // const threadBodyID = this.getGlobalID()['threadBodyID'],
+                //       threadLatID  = this.getGlobalID()['threadLatID'],
+                //       threadLngID  = this.getGlobalID()['threadLngID'];
+
                 let modalBodyID = null,
                     mapModeID   = null,
                     mapSearchID = null,
                     latID       = null,
-                    lngID       = null;
+                    lngID       = null,
+                    mapResultID = null;
 
                 switch(this.getMode()) {
                     case 'post':
@@ -71,13 +98,15 @@ export class Geocode {
                         mapSearchID   = 'display-map-search'; 
                         latID         = 'latitude-text-field-hidden';
                         lngID         = 'longtitude-text-field-hidden';
+                        mapResultID   = 'map-result';
                         break;
                     case 'thread':
-                        modalBodyID   = 'thread-modal-body';
-                        mapModeID     = 'display-map-thread';
-                        mapSearchID   = 'thread-display-map-search'; 
-                        latID         = 'thread-latitude-text-field-hidden';
-                        lngID         = 'thread-longtitude-text-field-hidden';
+                        modalBodyID   = this.getGlobalID()['threadBodyID'];
+                        mapModeID     = this.getGlobalID()['mapModeID'];
+                        mapSearchID   = this.getGlobalID()['mapSearchID']; 
+                        latID         = this.getGlobalID()['threadLatID'];
+                        lngID         = this.getGlobalID()['threadLngID'];
+                        mapResultID   = this.getGlobalID()['mapResultID'];
                         break;
                     default:
                         break;
@@ -89,7 +118,7 @@ export class Geocode {
                 if(!divElement) {
                     // CREATE ELEMENTS
                     let displayMapInModal = new CreateElement("div", mapModeID,
-                                                null).createElement(),
+                                                'map-modal-display').createElement(),
                         mapHeader             = new CreateElement("div", "map-header", null)
                                                 .createElement(),
                         mapHeaderText         = new CreateElement("div", "map-header-text", null)
@@ -100,7 +129,7 @@ export class Geocode {
                                                 .createElement(),
                         closeMapIcon          = new CreateElement("i", null, "fa-solid fa-xmark")
                                                 .createElement(),
-                        mapResult             = new CreateElement("div", "map-result", null)
+                        mapResult             = new CreateElement("div", mapResultID, 'map-result')
                                                 .createElement();
                     
                     // SET ATTRIBUTE
@@ -133,7 +162,7 @@ export class Geocode {
                 }
 
                 mapAPI.loadAPI().then(() => {
-                    mapAPI.createMap("map-result", latitude, longitude);
+                    mapAPI.createMap(mapResultID, latitude, longitude);
                 });
 
                 // PUT LATITUDE AND LONGTITUDE TO HIDDEN TEXT FIELDS

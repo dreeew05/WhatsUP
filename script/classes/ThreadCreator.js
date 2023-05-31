@@ -14,10 +14,14 @@ export class ThreadCreator {
         this.threadHolder = threadHolder;
 
         // GLOBAL
+        this.mode              = 'thread';
         this.ytLinksDataDriver = new TagLinkDataDriver();
         this.mediaDriver       = new TagLinkDataDriver();
         this.base64Converter   = new Base64Converter(); 
-        this.entryModifier     = new ModifyEntries();
+        this.entryModifier     = new ModifyEntries(
+            this.mode,
+            this.getPostID()
+        );
         this.dataSerializer    = new DataSerializer();
         this.sweetAlert        = new SweetAlertFactory();
 
@@ -27,7 +31,7 @@ export class ThreadCreator {
 
         // NEXT-STATE GLOBAL
         this.baseModalDisplay  = new BaseModalDisplay(
-            'thread', 
+            this.mode, 
             this.mediaDriver, 
             this.ytLinksDataDriver,
             this.entryModifier,
@@ -54,14 +58,34 @@ export class ThreadCreator {
         return this.baseModalDisplay.getOpenedButton();
     }
 
+    getGlobalID() {
+        const idStringify = String(this.getPostID());
+        return {
+            'mediaModalID'   : 'thread-'.concat(idStringify).concat('-media-modal'),
+            'ytModalID'     : 'thread-'.concat(idStringify).concat('-yt-modal'),
+            'mapModalID'    : 'thread-'.concat(idStringify).concat('-map-modal'),
+            'threadModalID' : 'thread-'.concat(idStringify).concat('-modal'),
+            'threadBodyID'  : 'thread-'.concat(idStringify).concat('-modal-body'),
+            'threadLabelID' : 'thread-'.concat(idStringify).concat('-modal-label'),
+            'threadImageID' : 'thread-'.concat(idStringify).concat('-image-button'),
+            'threadVideoID' : 'thread-'.concat(idStringify).concat('-video-button'),
+            'threadYTID'    : 'thread-'.concat(idStringify).concat('-yt-button'),
+            'threadLatID'   : 'thread-'.concat(idStringify).concat('-latitude-text-field-hidden'),
+            'threadLngID'   : 'thread-'.concat(idStringify).concat('-longtitude-text-field-hidden')
+        };
+    }
+
     displayThreadButton() {
+
+        const threadModalID = this.getGlobalID()['threadModalID'];
+
         let threadButton = new CreateElement("button", null, "create-thread-button")
                          .createElement();
 
         // SET ATTRIBUTE
         threadButton.setAttribute("type", "button");
         threadButton.setAttribute("data-bs-toggle", "modal");
-        threadButton.setAttribute("data-bs-target", "#thread-modal");
+        threadButton.setAttribute("data-bs-target", "#".concat(threadModalID));
         threadButton.textContent = "Add Thread";
 
         // APPEND CHILD
@@ -70,37 +94,49 @@ export class ThreadCreator {
 
     displayThreadModal() {
 
-        let threadModal       = new CreateElement("div", "thread-modal", "modal fade")
+        const threadModalID = this.getGlobalID()['threadModalID'],
+              threadBodyID  = this.getGlobalID()['threadBodyID'],
+              threadLabelID = this.getGlobalID()['threadLabelID'],
+              threadImageID = this.getGlobalID()['threadImageID'],
+              threadVideoID = this.getGlobalID()['threadVideoID'],
+              threadYTID    = this.getGlobalID()['threadYTID'],
+              threadLatID   = this.getGlobalID()['threadLatID'],
+              threadLngID   = this.getGlobalID()['threadLngID'],
+              mediaModalID  = this.getGlobalID()['mediaModalID'],
+              ytModalID     = this.getGlobalID()['ytModalID'],
+              mapModalID    = this.getGlobalID()['mapModalID'];
+
+        let threadModal       = new CreateElement("div", threadModalID, "modal fade")
                               .createElement(),
             modalDialog     = new CreateElement("div", null, "modal-dialog modal-dialog-centered modal-lg")
                               .createElement(),
-            modalContent    = new CreateElement("div", "modal-content-create-thread", "modal-content")
+            modalContent    = new CreateElement("div", null, "modal-content")
                               .createElement(),
             modalHeader     = new CreateElement("div", null, "modal-header")
                               .createElement(),
-            modalTitle      = new CreateElement("h3", "thread-modal-label", "modal-title")
+            modalTitle      = new CreateElement("h3", threadLabelID, "modal-title")
                               .createElement(),
             closeButton     = new CreateElement("button", null, "btn-close")
                               .createElement(),
-            modalBody       = new CreateElement("div", "thread-modal-body", "modal-body")
+            modalBody       = new CreateElement("div", threadBodyID, "modal-body")
                               .createElement(),
-            threadTextArea    = new CreateElement("textarea", String(this.getPostID()).concat('-text-area'),
-                              "text-area").createElement(),
-            mediaControl    = new CreateElement("div", "media-control", null)
+            threadTextArea  = new CreateElement("textarea", null, "text-area")
                               .createElement(),
-            mediaControlTxt = new CreateElement("div", "media-control-text", 
-                              null).createElement(),
-            mediaControlBtn = new CreateElement("div", "media-control-buttons",
-                              null).createElement(),
-            imageButton     = new CreateElement("button", "thread-image-button", "media-button")
+            mediaControl    = new CreateElement("div", null, "media-control")
+                              .createElement(),
+            mediaControlTxt = new CreateElement("div", null, "media-control-text")
+                              .createElement(),
+            mediaControlBtn = new CreateElement("div", null, "media-control-buttons")
+                              .createElement(),
+            imageButton     = new CreateElement("button", threadImageID, "media-button")
                               .createElement(),
             imageIcon       = new CreateElement("i", null, "fa-solid fa-image")
                               .createElement(),
-            videoButton     = new CreateElement("button", "thread-video-button", "media-button")
+            videoButton     = new CreateElement("button", threadVideoID, "media-button")
                               .createElement(),
             videoIcon       = new CreateElement("i", null, "fa-solid fa-video")
                               .createElement(), 
-            ytButton        = new CreateElement("button", "thread-yt-button", "media-button")
+            ytButton        = new CreateElement("button", threadYTID, "media-button")
                               .createElement(),
             ytIcon          = new CreateElement("i", null, "fa-brands fa-youtube")
                               .createElement(),
@@ -110,10 +146,10 @@ export class ThreadCreator {
                               .createElement(),
             mapCoordsHolder = new CreateElement("div", null, "map-coordinates-holder-hidden")
                               .createElement(),
-            latFieldHidden  = new CreateElement("input", "thread-latitude-text-field-hidden", 
-                              "thread-text-fields").createElement(),
-            lngFieldHidden  = new CreateElement("input", "thread-longtitude-text-field-hidden",
-                              "thread-text-fields").createElement(),
+            latFieldHidden  = new CreateElement("input", threadLatID, "thread-text-fields hidden")
+                              .createElement(),
+            lngFieldHidden  = new CreateElement("input", threadLngID, "thread-text-fields hidden")
+                              .createElement(),
             modalFooter     = new CreateElement("div", null, "modal-footer")
                               .createElement(),
             threadButton    = new CreateElement("button", null, "save-button")
@@ -121,7 +157,7 @@ export class ThreadCreator {
                 
         // SET ATTRIBUTES
         threadModal.setAttribute("tabindex", "-1");
-        threadModal.setAttribute("aria-labelledby", "thread-modal-label");
+        threadModal.setAttribute("aria-labelledby", threadLabelID);
         threadModal.setAttribute("aria-hidden", "true");
         modalDialog.setAttribute("role", "document");
         modalTitle.textContent = "Create thread";
@@ -131,19 +167,19 @@ export class ThreadCreator {
         threadButton.textContent = "Add Thread";
         threadButton.setAttribute("type", "submit");
         imageButton.setAttribute("type", "button");
-        imageButton.setAttribute("data-bs-target", "#media-modal");
+        imageButton.setAttribute("data-bs-target", "#".concat(mediaModalID));
         imageButton.setAttribute("data-bs-toggle", "modal");
         imageButton.setAttribute("data-bs-dismiss", "modal");
         videoButton.setAttribute("type", "button");
-        videoButton.setAttribute("data-bs-target", "#media-modal");
+        videoButton.setAttribute("data-bs-target", "#".concat(mediaModalID));
         videoButton.setAttribute("data-bs-toggle", "modal");
         videoButton.setAttribute("data-bs-dismiss", "modal");
         ytButton.setAttribute("type", "button");
-        ytButton.setAttribute("data-bs-target", "#yt-modal");
+        ytButton.setAttribute("data-bs-target", "#".concat(ytModalID));
         ytButton.setAttribute("data-bs-toggle", "modal");
         ytButton.setAttribute("data-bs-dismiss", "modal");
         mapButton.setAttribute("type", "button");
-        mapButton.setAttribute("data-bs-target", "#map-modal");
+        mapButton.setAttribute("data-bs-target", "#".concat(mapModalID));
         mapButton.setAttribute("data-bs-toggle", "modal");
         mapButton.setAttribute("data-bs-dismiss", "modal");
         latFieldHidden.setAttribute("type", "text");
@@ -183,6 +219,7 @@ export class ThreadCreator {
             const phpURL   = null,
                   contents = {
                         'profileID' : 1048,
+                        'postID' : this.getPostID(),
                         'postContent' : threadTextArea.value,
                         'coordinates' : {
                             'latitude' : latFieldHidden.value,

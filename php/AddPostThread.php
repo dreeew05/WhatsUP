@@ -87,7 +87,10 @@
 
             if($RESULT) {
                 $lastID = $this -> conn -> insert_id;
-                $this -> saveMedia($lastID);
+                // $this -> saveMedia($lastID);
+                if($this -> getMedia() != null) {
+                    $this -> saveMedia($lastID);
+                }
                 $this -> insertCoordinates($lastID);
                 $this -> insertTags($lastID);
 
@@ -140,6 +143,7 @@
                     if(!$RESULT) {
                         $this -> returnResult(FALSE);
                     }
+
                 }
             }
         }
