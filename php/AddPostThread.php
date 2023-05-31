@@ -74,13 +74,13 @@
 
         public function insertData() {
             $currentDateTime = date('Y-m-d H:i:s');
-            $type            = 'post';
+            // $type            = 'post';
             $hasThread       = 0;
 
             $QUERY = "INSERT INTO post(PostID, ProfileID, DateTime, 
-                        PostContent, Type, HasThread)
+                        PostContent, HasThread)
                       VALUES(NULL, '{$this -> getID()}', '$currentDateTime',
-                        '{$this -> getPostContent()}', '$type',
+                        '{$this -> getPostContent()}',
                         '$hasThread')";
             
             $RESULT = $this -> conn -> query($QUERY);
