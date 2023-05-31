@@ -28,10 +28,7 @@ class ProfilePage {
         
         this.initializeNavBar();
         this.navBarSectionDividerImplementation();
-        this.initializeProfile()
-        this.initializePostButton();
-        this.initializePostFeedGenerator();
-
+        this.initializeProfile();
     }
 
     getLogStatus() {
@@ -101,14 +98,18 @@ class ProfilePage {
                              );
             
             this.setProfileID(id);
+            this.initializePostButton();
             this.feedGenerator.generateAbout(
                 response
             );
+            this.initializePostFeedGenerator();
+
         }
 
     }
 
     initializePostButton() {
+        console.log(this.getProfileID());
         if(this.getLogStatus() == "admin") {
             // new PostCreator();
             new PostCreator(
