@@ -7,11 +7,7 @@
         InsertEntriesInterface{
 
         private $data,
-                $id,
-                $postContent,
-                $tags,
-                $coordinates,
-                $media,
+                $action,
                 
                 $dbConnect,
                 $conn;
@@ -20,24 +16,13 @@
             return $this -> data;
         }
 
-        private function getID() {
-            return $this -> id;
+        private function getAction() {
+
+            return $this -> action;
         }
 
-        private function getPostContent() {
-            return $this -> postContent;
-        }
-
-        private function getTags() {
-            return $this -> tags;
-        }
-
-        private function getCoordinates() {
-            return $this -> coordinates;
-        }
-
-        private function getMedia() {
-            return $this -> media;
+        private function getCurrentTime() {
+            return date('Y-m-d H:i:s');
         }
         
         public function __construct($data) {
@@ -64,35 +49,71 @@
         }
 
         public function setAttributes() {
-            $this -> id          = $this -> getData()['profileID'];
-            $this -> postContent = $this -> getData()['postContent'];
-            $this -> tags        = $this -> getData()['tags'];
-            $this -> coordinates = $this -> getData()['coordinates'];
-            $this -> media       = $this -> getData()['media'];
-
+            $this -> action = $this -> getData()['action'];
         }
 
         public function insertData() {
-            $currentDateTime = date('Y-m-d H:i:s');
-            // $type            = 'post';
-            $hasThread       = 0;
+            switch($this -> getAction()) {
+                case 'post':
+                    $this -> insertPost();
+                    break;
+                case 'thread':
+                    $this -> insertThread();
+                    break;
+                default:
+                    break;
+            }
+        }
 
-            $QUERY = "INSERT INTO post(PostID, ProfileID, DateTime, 
-                        PostContent, HasThread)
-                      VALUES(NULL, '{$this -> getID()}', '$currentDateTime',
-                        '{$this -> getPostContent()}',
-                        '$hasThread')";
-            
+        private function getTable() {
+            $tableNames = null;
+
+            switch($this -> getAction()) {
+                case 'post':
+                    $tableNames = array(
+                        'base' => 'post',
+                        'coordinates' => 'post_coordinates',
+                        'media' => 'post_media',
+                    );
+                    break;
+                case 'thread':
+                    $tableNames = array(
+                        'base' => 'thread',
+                        'coordinates' => 'thread_coordinates',
+                        'media' => 'thread_media',
+                    );
+                    break;
+                default:
+                    break;
+            }
+
+            return $tableNames;
+        }
+
+        private function insertPost() {
+            // ATTRIBUTES
+            $profileID   = $this -> getData()['profileID'];
+            $postContent = $this -> getData()['postContent'];
+            $media       = $this -> getData()['media'];
+            $hasThread   = 0;
+
+            // TABLE NAME
+            $tableName  = $this -> getTable()['base'];
+
+            $QUERY = "INSERT INTO $tableName(PostID, ProfileID, DateTime, 
+                PostContent, HasThread)
+                VALUES(NULL, '$profileID', '{$this -> getCurrentTime()}',
+                '$postContent', '$hasThread')";
+
             $RESULT = $this -> conn -> query($QUERY);
 
             if($RESULT) {
                 $lastID = $this -> conn -> insert_id;
-                // $this -> saveMedia($lastID);
-                if($this -> getMedia() != null) {
+                if($media != null) {
                     $this -> saveMedia($lastID);
                 }
-                $this -> insertCoordinates($lastID);
                 $this -> insertTags($lastID);
+                $this -> insertCoordinates($lastID);
 
                 echo json_encode(
                     array(
@@ -102,6 +123,19 @@
 
                 $this -> killConnection();
             }
+        }
+
+        private function insertThread() {
+            $profileID   = $this -> getData()['profileID'];
+            $postID      = $this -> getData()['postID'];
+            $postContent = $this -> getData()['postContent'];
+
+            $QUERY = "INSERT INTO thread(ThreadID, ProfileID, PostID, DateTime,
+                        PostContent)
+                      VALUES(NULL, '$profileID', '$postID', 
+                        '{$this -> getCurrentTime()}', '$postContent')";
+
+            $RESULT = $this -> conn -> query($QUERY);
         }
 
         private function returnResult($result) {
@@ -116,11 +150,16 @@
         }
 
         private function insertCoordinates($lastID) {
-            $latitude   = $this -> getCoordinates()['latitude'];
-            $longtitude = $this -> getCoordinates()['longtitude'];
+            // TABLE NAME
+            $tableName = $this -> getTable()['coordinates'];
+
+            // ATTRIBUTES
+            $coordinates = $this -> getData()['coordinates'];
+            $latitude    = $coordinates['latitude'];
+            $longtitude  = $coordinates['longtitude'];
             
             if($latitude != '' && $longtitude != '') {
-                $QUERY = "INSERT INTO post_coordinates(PostID, Latitude,
+                $QUERY = "INSERT INTO $tableName(PostID, Latitude,
                             Longtitude)
                           VALUES('$lastID', '$latitude', '$longtitude')";
 
@@ -133,8 +172,10 @@
         }
 
         private function insertTags($lastID) {
-            if(count($this -> getTags()) != 0) {
-                foreach($this -> getTags() as $tag) {
+            $tags = $this -> getData()['tags']; 
+
+            if(count($tags) != 0) {
+                foreach($tags as $tag) {
                     $QUERY = "INSERT INTO post_tags(PostID, Tags)
                               VALUES('$lastID', '$tag')";
 
@@ -149,27 +190,28 @@
         }
 
         private function saveMedia($lastID) {
-            $type  = $this -> getMedia()['type'];
-            $files = $this -> getMedia()['data']; 
+            // TABLE NAME
+            $tableName = $this -> getTable()['media'];
 
-            switch($type) {
-                case 'image':
-                    $this -> addImageToDatabase($lastID, $type, $files);
-                    break;
-                case 'youtube':
-                    $this -> addYtEmbedToDatabase($lastID, $type, $files);
-                    break;
-                default:
-                    break;
-            }
-            
-        }
+            // ATTRIBUTES
+            $media = $this -> getData()['media'];
+            $type  = $media['type'];
+            $files = $media['data']; 
+            $URL   = null;
 
-        private function addYTEmbedToDatabase($lastID, $type, $files) {
             foreach($files as $file) {
-                $embedLink = $this -> getYTEmbedLink($file);
-                $QUERY = "INSERT INTO post_media(PostID, MediaType, URL)
-                          VALUES('$lastID', '$type', '$embedLink')";
+                switch($type) {
+                    case 'image':
+                        $URL = $this -> uploadMedia($file);
+                        break;
+                    case 'youtube':
+                        $URL = $this -> getYTEmbedLink($file);
+                        break;
+                    default:
+                        break;
+                } 
+                $QUERY = "INSERT INTO $tableName(PostID, MediaType, URL)
+                          VALUES('$lastID', '$type', '$URL')";
                 
                 $RESULT = $this -> conn -> query($QUERY);
 
@@ -177,6 +219,7 @@
                     $this -> returnResult(FALSE);
                 }
             }
+            
         }
 
         private function getYTEmbedLink($link) {
@@ -184,21 +227,6 @@
             $baseEmbed = 'https://www.youtube.com/embed/';
             $embedLink = $baseEmbed . $urlSplit[1];
             return $embedLink;
-        }
-
-        private function addImageToDatabase($lastID, $type, $files) {
-            foreach($files as $file) {
-                $filename = $this -> uploadMedia($file);
-                $QUERY = "INSERT INTO post_media(PostID, MediaType, URL)
-                          VALUES('$lastID', '$type', '$filename')";
-                
-                $RESULT = $this -> conn -> query($QUERY);
-
-                if(!$RESULT) {
-                    $this -> returnResult(FALSE);
-                }
-                
-            }
         }
 
         private function uploadMedia($base64Data) {
@@ -223,5 +251,4 @@
     // DRIVER
     $data = json_decode(file_get_contents('php://input'), true);
     new AddPostThread($data);
-
 ?>
