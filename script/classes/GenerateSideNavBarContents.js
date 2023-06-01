@@ -103,7 +103,7 @@ export class GenerateSideNavBarContents {
                     profileLink        = new CreateElement("a", null, null).createElement();
 
                 // SET ATTRIBUTE
-                let BASE_PATH = "/assets/images/logos/";
+                let BASE_PATH = "/assets/images/profiles/";
                 profileImage.setAttribute("src", BASE_PATH + organizationImg);
                 profileImage.setAttribute("alt", organizationImg);
 

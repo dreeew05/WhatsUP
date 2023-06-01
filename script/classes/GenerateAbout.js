@@ -135,6 +135,10 @@ export class GenerateAbout {
                 icon = new CreateElement("i", null,
                        "fa-solid fa-user-group").createElement();
                 break;
+            case "Department Page":
+                icon = new CreateElement("i", null, 
+                       "fa-solid fa-building").createElement();
+                break;
             case "Course Page":
                 icon = new CreateElement("i", null,
                        "fa-sharp fa-solid fa-building-columns")

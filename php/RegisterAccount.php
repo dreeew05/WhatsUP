@@ -137,14 +137,19 @@
             
             $departmentID = $selectRow['DepartmentID'];
 
-            $imageFileName = $this -> uploadImage();
+            // IMAGES NAMES
+            $displayPictureName = 'imageDisplay';
+            $displayBannerName  = 'imageBanner';
+            // IMAGE FILE NAMES
+            $displayPicture = $this -> uploadImage($displayPictureName);
+            $displayBanner  = $this -> uploadImage($displayBannerName);
 
             $insertQuery = "INSERT INTO profile(ProfileID, Name, Details, Category, 
-                                ImageSRC, DepartmentID)
+                                DisplayPicture, DisplayBanner, DepartmentID)
                             VALUES('$profileID', '{$this -> profileName}',
                                 '{$this -> briefDescription}', 
-                                '{$this -> category}', '$imageFileName', 
-                                '$departmentID')";
+                                '{$this -> category}', '$displayPicture',
+                                '$displayBanner', '$departmentID')";
 
             $result = $this -> conn -> query($insertQuery);
 
@@ -153,16 +158,28 @@
             }
         }
 
-        private function uploadImage() {
-            $image      = $_FILES['imageSRC'];
-            $imageError = $_FILES['imageSRC']['error'];
-            $imageName  = $_FILES['imageSRC']['name'];
-            $tmpName    = $_FILES['imageSRC']['tmp_name'];
+        private function uploadImage($formFileName) {
+            $image      = $_FILES[$formFileName];
+            $imageError = $_FILES[$formFileName]['error'];
+            $imageName  = $_FILES[$formFileName]['name'];
+            $tmpName    = $_FILES[$formFileName]['tmp_name'];
 
             if(isset($image) && $imageError === UPLOAD_ERR_OK) {
 
+                // PLACE TO PROPER PATH
+                $directory = null;
+                switch($formFileName) {
+                    case 'imageDisplay':
+                        $directory = '../assets/images/profiles/'; 
+                        break;
+                    case 'imageBanner':
+                        $directory = '../assets/images/profiles/banner/'; 
+                        break;
+                    default:
+                        break;
+                }
+
                 // UPLOAD IMAGE TO THE SERVER
-                $directory = '../assets/images/profiles/'; 
                 $imageFile = $directory . basename($imageName);
                 move_uploaded_file($tmpName, $imageFile);
 

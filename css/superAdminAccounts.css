@@ -107,7 +107,7 @@ textarea {
     border: 1px solid black;
 }
 
-#formFileLg {
+#form-file-dp, #form-file-banner {
     width: 95%;
 }
 
