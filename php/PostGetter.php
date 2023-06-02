@@ -21,7 +21,9 @@ $sql = "SELECT post.ProfileID AS id, post.PostID AS post_id, post.DateTime AS da
     LEFT JOIN post_coordinates ON post.PostID = post_coordinates.PostID
     LEFT JOIN post_media ON post.PostID = post_media.PostID
     LEFT JOIN profile ON post.ProfileID = profile.ProfileID
-    GROUP BY post.ProfileID, post.PostID, post.DateTime, post.PostContent, post.HasThread, post_coordinates.Latitude, post_coordinates.Longtitude, post_media.MediaType, profile.Name, profile.DisplayPicture";
+    GROUP BY post.DateTime DESC";
+
+    // -- GROUP BY post.ProfileID, post.PostID, post.DateTime, post.PostContent, post.HasThread, post_coordinates.Latitude, post_coordinates.Longtitude, post_media.MediaType, profile.Name, profile.DisplayPicture";
 
 $result = $conn->query($sql);
 
@@ -37,6 +39,19 @@ if ($result->num_rows > 0) {
         // Store each row as an associative array in the output array
         $tags = explode(",", $row["tags"]);
         $urls = explode(",", $row["urls"]);
+
+        // MAKE COORDINATES NULL IF LAT AND LNG ARE NULL
+        $latitude   = $row['Latitude'];
+        $longtitude = $row['Longtitude'];
+        if($latitude == NULL || $longtitude == NULL) {
+            $coordinates = NULL;
+        }
+        else {
+            $coordinates = array(
+                'latitude'   => $latitude,
+                'longtitude' => $longtitude
+            );
+        }
         
         $output[] = [
             "id" => $row["post_id"],
@@ -49,10 +64,7 @@ if ($result->num_rows > 0) {
                 "File" => array_unique($urls)
             ],
             "tags" => array_unique($tags),
-            "post_coordinates" => [
-                "Latitude" => $row["Latitude"],
-                "Longitude" => $row["Longtitude"]
-            ],
+            "post_coordinates" => $coordinates,
             "type" => "post",
             "has_thread" => (bool)$row["has_thread"],
         ];
