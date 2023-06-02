@@ -54,17 +54,16 @@ export class FeedGenerator {
     generateDefaultPostThread(jsonData) {
         // TEST DATA [FINAL DATA MUST COME FROM THE DATABASE]
         for(let i = 0; i < jsonData.length; i++) {
-            let id              = jsonData[i].id,
-                profileName     = jsonData[i].profile_name,
-                profilePic      = jsonData[i].profile_pic,
-                dateTime        = jsonData[i].date_time, 
-                post            = jsonData[i].post, 
-                postMedia       = jsonData[i].post_media,
-                // postMediaType   = jsonData[i].post_media.type,
-                postCoordinates = jsonData[i].post_coordinates,
-                tags            = jsonData[i].tags,
-                hasThread       = jsonData[i].has_thread,
-                type            = jsonData[i].type;
+            const id              = jsonData[i].id,
+                  profileName     = jsonData[i].profile_name,
+                  profilePic      = jsonData[i].profile_pic,
+                  dateTime        = jsonData[i].date_time, 
+                  post            = jsonData[i].post, 
+                  postMedia       = jsonData[i].post_media,
+                  postCoordinates = jsonData[i].post_coordinates,
+                  tags            = jsonData[i].tags,
+                  hasThread       = jsonData[i].has_thread,
+                  type            = jsonData[i].type;
             
             const generatePost = new GeneratePost(id, profileName, 
                                  profilePic, dateTime, post, postMedia, 
@@ -81,18 +80,17 @@ export class FeedGenerator {
 
     generatePost(objectData) {
         // TEST DATA [FINAL DATA MUST COME FROM THE DATABASE]
-        let postID          = objectData.id,
+        const postID          = objectData.id,
             profileName     = objectData.profile_name,
             profilePic      = objectData.profile_pic,
             dateTime        = objectData.date_time,
             post            = objectData.post,
-            postMedia       = objectData.post_media.file,
-            postMediaType   = objectData.post_media.type,
+            postMedia       = jsonData[i].post_media,
             postCoordinates = objectData.post_coordinates,
             tags            = objectData.tags;
         
         new GeneratePost(postID, profileName, profilePic, dateTime, post, 
-                        postMedia, postMediaType, postCoordinates, 
+                        postMedia, postCoordinates, 
                         this.getMapAPI(), tags).showThreadView();
     }
 
@@ -105,12 +103,11 @@ export class FeedGenerator {
                 profilePic      = jsonData[i].profile_pic,
                 dateTime        = jsonData[i].date_time,
                 post            = jsonData[i].post,
-                postMedia       = jsonData[i].post_media.file,
-                postMediaType   = jsonData[i].post_media.type,
+                postMedia       = jsonData[i].post_media,
                 postCoordinates = jsonData[i].post_coordinates;
 
-            new GenerateThread(threadID, postID, profileName, profilePic, dateTime, post, 
-                               postMedia, postMediaType, postCoordinates, 
+            new GenerateThread(threadID, postID, profileName, profilePic, 
+                               dateTime, post, postMedia, postCoordinates, 
                                this.getMapAPI()).createThread();
         }        
     }

@@ -18,7 +18,6 @@ export class GeneratePost {
         this.dateTime        = dateTime;
         this.post            = post;
         this.postMedia       = postMedia;
-        // this.postMediaType   = postMediaType;
         this.postCoordinates = postCoordinates;
         this.mapAPI          = mapAPI;
         this.tags            = tags;
@@ -50,9 +49,6 @@ export class GeneratePost {
     getPostMedia() {
         return this.postMedia;
     }
-    // getPostMediaType() {
-    //     return this.postMediaType;
-    // }
     getPostCoordinates() {
         return this.postCoordinates;
     }
@@ -125,9 +121,6 @@ export class GeneratePost {
                 this.getPost()
             );
         }
-
-        // new GeneratePostMedia(POST_HOLDER, this.getPostMediaType(), 
-        //                       this.getPostMedia(), this.getPost());
     }
 
     createPostMap(POST_HOLDER) {
@@ -136,11 +129,6 @@ export class GeneratePost {
             mapHolder     = new CreateElement("div", mapID, "map-holder").createElement(),
             mapTextHolder = new CreateElement("div", null, null).createElement(),
             mapText       = new CreateElement("p", null, "map-text").createElement();
-        
-        // console.log(
-        //     this.getPostCoordinates().latitude,
-        //     this.getPostCoordinates().longtitude
-        // )
 
         const latitude = parseFloat(
             this.getPostCoordinates()['latitude']
@@ -150,8 +138,6 @@ export class GeneratePost {
         );
 
         this.getMapAPI().loadAPI().then(() => {
-            // this.getMapAPI().createMap(mapID, this.getPostCoordinates().latitude, 
-            //                            this.getPostCoordinates().longtitude);
             this.getMapAPI().createMap(
                 mapID, 
                 latitude,
