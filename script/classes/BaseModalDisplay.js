@@ -141,9 +141,6 @@ export class BaseModalDisplay {
 
     geocodeMap(searchButton, searchText, modalBody) {
 
-        // let geocoder = new Geocode(this.getMode(), this.getPostID()),
-        //     mapAPI   = new GeneratePostMap();
-
         const geocoder = new Geocode(
             this.getMode(), 
             this.getPostID()
