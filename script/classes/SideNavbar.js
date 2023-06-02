@@ -26,8 +26,6 @@ export class SideNavBar {
               studentContents    = await this.getData("Student"),
               universityContents = await this.getData("University");
 
-        console.log(collegeContents);
-
         let college    = new GenerateSideNavBarContents("College", 
                          collegeContents.result, 0),
             student    = new GenerateSideNavBarContents("Student", 
