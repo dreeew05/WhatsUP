@@ -70,13 +70,10 @@ class ProfilePage {
     }
 
     async initializePostFeedGenerator() {
-        // TEST DATA
-        // POST + THREAD
-        let all = postsJSON.concat(threadJSON);
-
         const phpURL   = '/php/PostGetter.php',
               request  = {
-                'mode' : 'all' //Change to ID 
+                'mode' : 'profile',
+                'profileID' : 1049
               },
               response = await this.dataSerializer.postData(
                             request, phpURL

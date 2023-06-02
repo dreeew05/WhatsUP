@@ -5,16 +5,14 @@ import { FeedGenerator } from "./classes/FeedGenerator.js";
 import { PostThreadDataDriver } from "./classes/PostThreadDataDriver.js";
 import { NavBarFactory } from "./classes/NavBarFactory.js";
 import { GeneratePostMap } from "./classes/GeneratePostMap.js";
-
-// TEST DATA
-import postsJSON from "../test/posts.json" assert { type: 'json' };
-import threadJSON from "../test/threads.json" assert { type: 'json' };
+import { DataSerializer } from "./classes/DataSerializer.js";
 
 class HomePage {
 
     constructor() {
         // GLOBAL VARIABLE
-        this.mapAPI = new GeneratePostMap();
+        this.mapAPI         = new GeneratePostMap();
+        this.dataSerializer = new DataSerializer();
 
         this.initializeNavBar();
         this.initializeFeedGenerator();
@@ -24,15 +22,18 @@ class HomePage {
         new NavBarFactory("type2", "visitor");
     }
 
-    initializeFeedGenerator() {
-        let feedGenerator = new FeedGenerator(this.mapAPI);
-
-        // TEST DATA
-        // POST + THREAD
-        let all = postsJSON.concat(threadJSON);
+    async initializeFeedGenerator() {
+        const feedGenerator = new FeedGenerator(this.mapAPI),
+              phpURL        = '/php/PostGetter.php',
+              request       = {
+                'mode' : 'all',
+              },
+              response = await this.dataSerializer.postData(
+                    request, phpURL
+              );
 
         feedGenerator.initializeSideNavBar();
-        feedGenerator.generateDefaultPostThread(all)
+        feedGenerator.generateDefaultPostThread(response);
         
         new PostThreadDataDriver(feedGenerator.getHasThreadsArray());
     }
