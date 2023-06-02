@@ -1,18 +1,18 @@
 import { CreateElement } from "./CreateElement.js";
 import { Geocode } from "./Geocode.js";
-import { GeneratePostMap } from "./GeneratePostMap.js";
 import { ModalOptions } from "./ModalOptions.js";
 
 export class BaseModalDisplay {
 
     constructor(mode, mediaDriver, ytDataDriver, entryModifier,
-        postID) {
+        postID, mapAPI) {
         // PASSED
         this.mode          = mode;
         this.mediaDriver   = mediaDriver;
         this.ytDataDriver  = ytDataDriver;
         this.entryModifier = entryModifier;
         this.postID        = postID;
+        this.mapAPI        = mapAPI;
         // GLOBAL
         this.modalOptions  = new ModalOptions(
             this.getMode(),
@@ -141,8 +141,13 @@ export class BaseModalDisplay {
 
     geocodeMap(searchButton, searchText, modalBody) {
 
-        let geocoder = new Geocode(this.getMode(), this.getPostID()),
-            mapAPI   = new GeneratePostMap();
+        // let geocoder = new Geocode(this.getMode(), this.getPostID()),
+        //     mapAPI   = new GeneratePostMap();
+
+        const geocoder = new Geocode(
+            this.getMode(), 
+            this.getPostID()
+        );
 
         searchButton.onclick = () => {
 
@@ -158,7 +163,7 @@ export class BaseModalDisplay {
             
             // GET COORDINATES THROUGH GEOCODER 
             let location = searchText.value;
-            geocoder.displayMap(location, mapAPI, elementID);
+            geocoder.displayMap(location, this.mapAPI, elementID);
         }
 
     }

@@ -11,10 +11,11 @@ import { SweetAlertFactory } from "./SweetAlertFactory.js";
 
 export class PostCreator {
     
-    constructor(postHolder, profileID) {
+    constructor(postHolder, profileID, mapAPI) {
         // PASSED
         this.postHolder = postHolder;
         this.profileID  = profileID;
+        this.mapAPI     = mapAPI;
 
         // GLOBAL
         this.mode              = 'post';
@@ -35,7 +36,8 @@ export class PostCreator {
             this.mode, 
             this.mediaDriver, 
             this.ytLinksDataDriver,
-            this.entryModifier
+            this.entryModifier,
+            this.mapAPI
         );
 
         // NEXT-STATE METHODS

@@ -18,6 +18,7 @@ class ProfilePage {
         this.profileID = null;
         this.setLogStatus("admin");
 
+        this.mapAPI         = new GeneratePostMap();
         this.dataSerializer = new DataSerializer();
         
         this.initializeNavBar();
@@ -72,12 +73,18 @@ class ProfilePage {
               response = await this.dataSerializer.postData(
                             request, phpURL
                          ),
-              mapAPI        = new GeneratePostMap(),
-              feedGenerator = new FeedGenerator();
+            //   mapAPI        = new GeneratePostMap(),
+              feedGenerator = new FeedGenerator(this.mapAPI);
+
+        // const threadResponse = await this.dataSerializer.postData(
+        //     request, '/php/AboutGetter.php'
+        // );
+
+        // console.log(threadResponse);
         
         feedGenerator.generateAbout(aboutResponse);
         feedGenerator.initializeSideNavBar();
-        feedGenerator.generateDefaultPostThread(await response);
+        feedGenerator.generateDefaultPostThread(response);
         
         new PostThreadDataDriver(
             feedGenerator.getHasThreadsArray()
@@ -115,6 +122,7 @@ class ProfilePage {
             new PostCreator(
                 document.getElementById('posts'),
                 this.getProfileID(),
+                this.mapAPI
             );
         }
     }
