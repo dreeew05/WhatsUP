@@ -7,10 +7,6 @@ import { PostThreadDataDriver } from "./classes/PostThreadDataDriver.js";
 import { NavBarFactory } from "./classes/NavBarFactory.js";
 import { PostCreator } from "./classes/PostCreator.js";
 import { GeneratePostMap } from "./classes/GeneratePostMap.js";
-
-// TEST DATA
-import postsJSON from "../test/posts.json" assert { type: 'json' };
-import threadJSON from "../test/threads.json" assert { type: 'json' };
 import { DataSerializer } from "./classes/DataSerializer.js";
 
 class ProfilePage {
@@ -23,8 +19,6 @@ class ProfilePage {
         this.setLogStatus("admin");
 
         this.dataSerializer = new DataSerializer();
-        this.mapAPI         = new GeneratePostMap();
-        this.feedGenerator  = new FeedGenerator(this.mapAPI);
         
         this.initializeNavBar();
         this.navBarSectionDividerImplementation();
@@ -69,7 +63,7 @@ class ProfilePage {
         }
     }
 
-    async initializePostFeedGenerator() {
+    async initializePostFeedGenerator(aboutResponse) {
         const phpURL   = '/php/PostGetter.php',
               request  = {
                 'mode' : 'profile',
@@ -77,13 +71,16 @@ class ProfilePage {
               },
               response = await this.dataSerializer.postData(
                             request, phpURL
-                         );
-
-        this.feedGenerator.initializeSideNavBar();
-        this.feedGenerator.generateDefaultPostThread(await response);
+                         ),
+              mapAPI        = new GeneratePostMap(),
+              feedGenerator = new FeedGenerator();
+        
+        feedGenerator.generateAbout(aboutResponse);
+        feedGenerator.initializeSideNavBar();
+        feedGenerator.generateDefaultPostThread(await response);
         
         new PostThreadDataDriver(
-            this.feedGenerator.getHasThreadsArray()
+            feedGenerator.getHasThreadsArray()
         );
     }
 
@@ -104,10 +101,7 @@ class ProfilePage {
             
             this.setProfileID(id);
             this.initializePostButton();
-            this.feedGenerator.generateAbout(
-                response
-            );
-            this.initializePostFeedGenerator();
+            this.initializePostFeedGenerator(response);
         }
         else {
             window.location.href = "/index.html";
