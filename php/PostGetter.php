@@ -5,7 +5,6 @@ $username = "root";
 $password = "";
 $dbname = "whatsup";
 
-
 // Create a connection
 $conn = new mysqli($servername, $username, $password, $dbname);
 
@@ -14,21 +13,21 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-   
 // SQL query to fetch data
 $sql = "SELECT post.ProfileID AS id, post.PostID AS post_id, post.DateTime AS date_time, post.PostContent AS post, post.HasThread AS has_thread,
-    post_tags.Tags, post_coordinates.Latitude, post_coordinates.Longtitude, post_media.MediaType, post_media.URL, profile.Name, profile.DisplayPicture
+    GROUP_CONCAT(DISTINCT post_tags.Tags) AS tags, post_coordinates.Latitude, post_coordinates.Longtitude, post_media.MediaType, GROUP_CONCAT(DISTINCT post_media.URL) AS urls, profile.Name, profile.DisplayPicture
     FROM post 
-    LEFT JOIN post_tags ON post.PostID =  post_tags.PostID 
+    LEFT JOIN post_tags ON post.PostID = post_tags.PostID 
     LEFT JOIN post_coordinates ON post.PostID = post_coordinates.PostID
     LEFT JOIN post_media ON post.PostID = post_media.PostID
-    LEFT JOIN profile ON post.ProfileID = profile.ProfileID";
-        
+    LEFT JOIN profile ON post.ProfileID = profile.ProfileID
+    GROUP BY post.ProfileID, post.PostID, post.DateTime, post.PostContent, post.HasThread, post_coordinates.Latitude, post_coordinates.Longtitude, post_media.MediaType, profile.Name, profile.DisplayPicture";
+
 $result = $conn->query($sql);
 
 if ($result === false) {
     die("Query execution failed: " . mysqli_error($conn));
-    }
+}
 
 // Array to store the fetched data
 $output = [];
@@ -36,24 +35,26 @@ $output = [];
 if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
         // Store each row as an associative array in the output array
+        $tags = explode(",", $row["tags"]);
+        $urls = explode(",", $row["urls"]);
+        
         $output[] = [
-            "id" => $row["id"],
-            // "post_id" => $row["post_id"],
+            "id" => $row["post_id"],
             "profile_name" => $row["Name"],
             "profile_pic" => $row["DisplayPicture"],
             "date_time" => $row["date_time"],
             "post" => $row["post"],
-            "post_media" =>[
-                "Type" => $row ["MediaType"],
-                "File" => $row ["URL"]
+            "post_media" => [
+                "Type" => $row["MediaType"],
+                "File" => array_unique($urls)
             ],
-            "tags" => $row["Tags"],
-            "post_coordinates" => [ 
-                "Latitude" => $row ["Latitude"],
-                "Longitude" => $row ["Longtitude"]
+            "tags" => array_unique($tags),
+            "post_coordinates" => [
+                "Latitude" => $row["Latitude"],
+                "Longitude" => $row["Longtitude"]
             ],
-            "type" => $row["post"],
-            "has_thread" => $row["has_thread"],
+            "type" => "post",
+            "has_thread" => (bool)$row["has_thread"],
         ];
     }
 }
