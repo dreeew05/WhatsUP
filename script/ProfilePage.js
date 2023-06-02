@@ -73,13 +73,11 @@ class ProfilePage {
         const phpURL   = '/php/PostGetter.php',
               request  = {
                 'mode' : 'profile',
-                'profileID' : 1049
+                'profileID' : this.getProfileID()
               },
               response = await this.dataSerializer.postData(
                             request, phpURL
                          );
-        
-        console.log(response);
 
         this.feedGenerator.initializeSideNavBar();
         this.feedGenerator.generateDefaultPostThread(await response);
@@ -118,7 +116,6 @@ class ProfilePage {
     }
 
     initializePostButton() {
-        console.log(this.getProfileID());
         if(this.getLogStatus() == "admin") {
             // new PostCreator();
             new PostCreator(
