@@ -59,17 +59,17 @@ export class FeedGenerator {
                 profilePic      = jsonData[i].profile_pic,
                 dateTime        = jsonData[i].date_time, 
                 post            = jsonData[i].post, 
-                postMedia       = jsonData[i].post_media.file,
-                postMediaType   = jsonData[i].post_media.type,
+                postMedia       = jsonData[i].post_media,
+                // postMediaType   = jsonData[i].post_media.type,
                 postCoordinates = jsonData[i].post_coordinates,
                 tags            = jsonData[i].tags,
                 hasThread       = jsonData[i].has_thread,
                 type            = jsonData[i].type;
             
-            const generatePost = new GeneratePost(id, profileName, profilePic, 
-                                 dateTime, post, postMedia, postMediaType, 
-                                 postCoordinates, this.getMapAPI(), tags, hasThread, 
-                                 type);
+            const generatePost = new GeneratePost(id, profileName, 
+                                 profilePic, dateTime, post, postMedia, 
+                                 postCoordinates, this.getMapAPI(), 
+                                 tags, hasThread, type);
             
             generatePost.showDefault();
 

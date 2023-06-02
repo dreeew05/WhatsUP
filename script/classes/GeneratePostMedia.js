@@ -99,7 +99,7 @@ export class GeneratePostMedia {
     generateImage(count, filenames, captions) {
         this.initializeImageHolder();
 
-        const BASE_IMAGE_PATH = "../../assets/images/",
+        const BASE_IMAGE_PATH = "../../assets/images/files/images/",
               BASE_VIDEO_PATH = "../../assets/videos/";    
 
         for(let i = 0; i < count; i++) {

@@ -69,13 +69,23 @@ class ProfilePage {
         }
     }
 
-    initializePostFeedGenerator() {
+    async initializePostFeedGenerator() {
         // TEST DATA
         // POST + THREAD
         let all = postsJSON.concat(threadJSON);
 
+        const phpURL   = '/php/PostGetter.php',
+              request  = {
+                'mode' : 'all' //Change to ID 
+              },
+              response = await this.dataSerializer.postData(
+                            request, phpURL
+                         );
+        
+        console.log(response);
+
         this.feedGenerator.initializeSideNavBar();
-        this.feedGenerator.generateDefaultPostThread(all);
+        this.feedGenerator.generateDefaultPostThread(await response);
         
         new PostThreadDataDriver(
             this.feedGenerator.getHasThreadsArray()

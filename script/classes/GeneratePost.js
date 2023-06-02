@@ -9,8 +9,7 @@ import { ThreadCreator } from "./ThreadCreator.js";
 export class GeneratePost {
 
     constructor(id, profileName, profilePic, dateTime, post, postMedia, 
-                postMediaType, postCoordinates, mapAPI, tags, hasThread,
-                type) {
+                postCoordinates, mapAPI, tags, hasThread, type) {
         
         // PASSED VARIABLES
         this.id              = id;
@@ -19,7 +18,7 @@ export class GeneratePost {
         this.dateTime        = dateTime;
         this.post            = post;
         this.postMedia       = postMedia;
-        this.postMediaType   = postMediaType;
+        // this.postMediaType   = postMediaType;
         this.postCoordinates = postCoordinates;
         this.mapAPI          = mapAPI;
         this.tags            = tags;
@@ -51,9 +50,9 @@ export class GeneratePost {
     getPostMedia() {
         return this.postMedia;
     }
-    getPostMediaType() {
-        return this.postMediaType;
-    }
+    // getPostMediaType() {
+    //     return this.postMediaType;
+    // }
     getPostCoordinates() {
         return this.postCoordinates;
     }
@@ -114,8 +113,21 @@ export class GeneratePost {
     }
 
     createPostImages(POST_HOLDER) {
-        new GeneratePostMedia(POST_HOLDER, this.getPostMediaType(), 
-                              this.getPostMedia(), this.getPost());
+
+        if(this.getPostMedia() != null) {
+            const mediaType = this.getPostMedia()['type'],
+                  mediaFile = this.getPostMedia()['file'];
+
+            new GeneratePostMedia(
+                POST_HOLDER,
+                mediaType,
+                mediaFile,
+                this.getPost()
+            );
+        }
+
+        // new GeneratePostMedia(POST_HOLDER, this.getPostMediaType(), 
+        //                       this.getPostMedia(), this.getPost());
     }
 
     createPostMap(POST_HOLDER) {
@@ -125,9 +137,26 @@ export class GeneratePost {
             mapTextHolder = new CreateElement("div", null, null).createElement(),
             mapText       = new CreateElement("p", null, "map-text").createElement();
         
+        // console.log(
+        //     this.getPostCoordinates().latitude,
+        //     this.getPostCoordinates().longtitude
+        // )
+
+        const latitude = parseFloat(
+            this.getPostCoordinates()['latitude']
+        );
+        const longtitude = parseFloat(
+            this.getPostCoordinates()['longtitude']
+        );
+
         this.getMapAPI().loadAPI().then(() => {
-            this.getMapAPI().createMap(mapID, this.getPostCoordinates().latitude, 
-                                       this.getPostCoordinates().longtitude);
+            // this.getMapAPI().createMap(mapID, this.getPostCoordinates().latitude, 
+            //                            this.getPostCoordinates().longtitude);
+            this.getMapAPI().createMap(
+                mapID, 
+                latitude,
+                longtitude
+            );
         });
         
         POST_HOLDER.appendChild(mapDiv);

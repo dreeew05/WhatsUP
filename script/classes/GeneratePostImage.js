@@ -72,7 +72,7 @@ export class GeneratePostImage {
 
     generateImage(count, filenames, captions) {
 
-        const BASE_PATH   = "../../assets/images/";      
+        const BASE_PATH   = "../../assets/images/files/images";      
         this.initializeImageHolder();
 
         for(let i = 0; i < count; i++) {
