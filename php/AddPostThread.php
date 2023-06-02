@@ -57,7 +57,7 @@
 
             // ATTRIBUTES
             $profileID   = $this -> getData()['profileID'];
-            $postContent = $this -> getData()['postContent'];
+            $postContent = addslashes($this -> getData()['postContent']);
             $media       = $this -> getData()['media'];
             $tags        = $this -> getData()['tags'];
             $hasThread   = 0;
