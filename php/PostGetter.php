@@ -13,15 +13,47 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// SQL query to fetch data
-$sql = "SELECT post.ProfileID AS id, post.PostID AS post_id, post.DateTime AS date_time, post.PostContent AS post, post.HasThread AS has_thread,
-    GROUP_CONCAT(DISTINCT post_tags.Tags) AS tags, post_coordinates.Latitude, post_coordinates.Longtitude, post_media.MediaType, GROUP_CONCAT(DISTINCT post_media.URL) AS urls, profile.Name, profile.DisplayPicture
-    FROM post 
-    LEFT JOIN post_tags ON post.PostID = post_tags.PostID 
-    LEFT JOIN post_coordinates ON post.PostID = post_coordinates.PostID
-    LEFT JOIN post_media ON post.PostID = post_media.PostID
-    LEFT JOIN profile ON post.ProfileID = profile.ProfileID
-    GROUP BY post.DateTime DESC";
+// Request from the front-end
+$request = json_decode(
+    file_get_contents('php://input'),
+    true
+);
+
+switch($request['mode']) {
+    case 'all':
+        // SQL query to fetch data
+        $sql = "SELECT post.ProfileID AS id, post.PostID AS post_id, post.DateTime 
+                    AS date_time, post.PostContent AS post, post.HasThread AS has_thread,
+                    GROUP_CONCAT(DISTINCT post_tags.Tags) AS tags, 
+                    post_coordinates.Latitude, post_coordinates.Longtitude, 
+                    post_media.MediaType, GROUP_CONCAT(DISTINCT post_media.URL) 
+                    AS urls, profile.Name, profile.DisplayPicture
+                FROM post 
+                LEFT JOIN post_tags ON post.PostID = post_tags.PostID 
+                LEFT JOIN post_coordinates ON post.PostID = post_coordinates.PostID
+                LEFT JOIN post_media ON post.PostID = post_media.PostID
+                LEFT JOIN profile ON post.ProfileID = profile.ProfileID
+                GROUP BY post.DateTime DESC";
+        break;
+    case 'profile':
+        $profileID = $request['profileID'];
+        $sql = "SELECT post.ProfileID AS id, post.PostID AS post_id, post.DateTime 
+                    AS date_time, post.PostContent AS post, post.HasThread AS has_thread,
+                    GROUP_CONCAT(DISTINCT post_tags.Tags) AS tags, 
+                    post_coordinates.Latitude, post_coordinates.Longtitude, 
+                    post_media.MediaType, GROUP_CONCAT(DISTINCT post_media.URL) 
+                    AS urls, profile.Name, profile.DisplayPicture
+                FROM post 
+                LEFT JOIN post_tags ON post.PostID = post_tags.PostID 
+                LEFT JOIN post_coordinates ON post.PostID = post_coordinates.PostID
+                LEFT JOIN post_media ON post.PostID = post_media.PostID
+                LEFT JOIN profile ON post.ProfileID = profile.ProfileID
+                WHERE post.ProfileID = '$profileID'
+                GROUP BY post.DateTime DESC";
+        break;
+    default:
+        break;
+}
 
     // -- GROUP BY post.ProfileID, post.PostID, post.DateTime, post.PostContent, post.HasThread, post_coordinates.Latitude, post_coordinates.Longtitude, post_media.MediaType, profile.Name, profile.DisplayPicture";
 
@@ -52,6 +84,18 @@ if ($result->num_rows > 0) {
                 'longtitude' => $longtitude
             );
         }
+
+        // MAKE MEDIA NULL IF TYPE IS NULL
+        $mediaType = $row["MediaType"];
+        if($mediaType == NULL) {
+            $postMedia = NULL;
+        }
+        else {
+            $postMedia = array(
+                'type' => $mediaType,
+                'file' => array_unique($urls)
+            );
+        }
         
         $output[] = [
             "id" => $row["post_id"],
@@ -59,10 +103,7 @@ if ($result->num_rows > 0) {
             "profile_pic" => $row["DisplayPicture"],
             "date_time" => $row["date_time"],
             "post" => $row["post"],
-            "post_media" => [
-                "Type" => $row["MediaType"],
-                "File" => array_unique($urls)
-            ],
+            "post_media" => $postMedia,
             "tags" => array_unique($tags),
             "post_coordinates" => $coordinates,
             "type" => "post",
