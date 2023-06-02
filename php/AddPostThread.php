@@ -53,8 +53,6 @@
         }
 
         public function insertData() {
-            $QUERY = null;
-
             // ATTRIBUTES
             $profileID   = $this -> getData()['profileID'];
             $postContent = addslashes($this -> getData()['postContent']);
@@ -77,6 +75,7 @@
                                 PostContent)
                               VALUES(NULL, '$profileID', '$postID', 
                                 '{$this -> getCurrentTime()}', '$postContent')";
+                    $this -> updatePostHasThread($postID);
                     break;
                 default:
                     break;
@@ -101,6 +100,28 @@
                 );
 
                 $this -> killConnection();
+            }
+        }
+
+        private function updatePostHasThread($postID) {
+            $SELECT_QUERY = "SELECT HasThread
+                             FROM post
+                             WHERE PostID = '$postID'";
+
+            $SELECT_RESULT = $this -> conn -> query($SELECT_QUERY);
+
+            $row = $SELECT_RESULT -> fetch_assoc();
+            $hasThread = $row['HasThread'];
+
+            if($hasThread == 0) {
+                $UPDATE_QUERY = "UPDATE post
+                                 SET HasThread = 1
+                                 WHERE PostID = '$postID'";
+            
+                $UPDATE_RESULT = $this -> conn -> query($UPDATE_QUERY);
+                if(!$UPDATE_RESULT) {
+                    $this -> returnResult(FALSE);
+                }
             }
         }
 
