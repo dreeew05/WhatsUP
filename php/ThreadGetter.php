@@ -2,7 +2,7 @@
 $servername = "localhost";
 $username = "root";
 $password = "";
-$dbname = "sample";
+$dbname = "whatsup";
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
@@ -12,12 +12,13 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-$sql = "SELECT post.PostID, post.ProfileID, profile.Name AS profile_name, profile.DisplayPicture AS profile_pic, post.DateTime, post.PostContent AS post, post_media.MediaType AS type, post_coordinates.Latitude AS post_latitude, post_coordinates.Longtitude AS post_longitude, post_tags.Tags
-FROM post
-INNER JOIN profile ON post.ProfileID = profile.ProfileID
-LEFT JOIN post_media ON post.PostID = post_media.PostID
-LEFT JOIN post_coordinates ON post.PostID = post_coordinates.PostID
-LEFT JOIN post_tags ON post.PostID = post_tags.PostID";
+$sql = "SELECT thread.ThreadID, thread.ProfileID, profile.Name AS profile_name, profile.DisplayPicture AS profile_pic, thread.DateTime, post.PostContent AS post, thread_media.MediaType AS type, thread_coordinates.Latitude AS post_latitude, thread_coordinates.Longtitude AS post_longitude, thread_tags.Tags
+FROM thread
+INNER JOIN profile ON thread.ProfileID = profile.ProfileID
+INNER JOIN post ON thread.ThreadID = post.PostID
+LEFT JOIN thread_media ON thread.ThreadID = thread_media.ThreadID
+LEFT JOIN thread_coordinates ON thread.ThreadID = thread_coordinates.ThreadID
+LEFT JOIN thread_tags ON thread.ThreadID = thread_tags.ThreadID";
 
 $result = $conn->query($sql);
 
@@ -25,13 +26,14 @@ if (!$result) {
     die("Query failed: " . $conn->error);
 }
 
+
 $data = array();
 
 if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
         $post = array(
-            "id" => $row["PostID"],
-            "post_id" => $row["PostID"],
+            "id" => $row["ThreadID"],
+            "post_id" => $row["ThreadID"],
             "profile_name" => $row["profile_name"],
             "profile_pic" => $row["profile_pic"],
             "date_time" => $row["DateTime"],
@@ -68,12 +70,11 @@ if ($result->num_rows > 0) {
     }
 }
 
-$conn->close();
-
 // Convert the data to JSON format
 $jsonData = json_encode($data, JSON_PRETTY_PRINT);
 
 // Output the JSON data
 header('Content-Type: application/json');
 echo $jsonData;
+$conn->close();
 ?>
