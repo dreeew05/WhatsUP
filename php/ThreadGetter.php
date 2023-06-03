@@ -12,13 +12,8 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-$sql = "SELECT thread.ThreadID, thread.ProfileID, profile.Name AS profile_name, profile.DisplayPicture AS profile_pic, thread.DateTime, post.PostContent AS post, thread_media.MediaType AS type, thread_coordinates.Latitude AS post_latitude, thread_coordinates.Longtitude AS post_longitude, thread_tags.Tags
-FROM thread
-INNER JOIN profile ON thread.ProfileID = profile.ProfileID
-INNER JOIN post ON thread.ThreadID = post.PostID
-LEFT JOIN thread_media ON thread.ThreadID = thread_media.ThreadID
-LEFT JOIN thread_coordinates ON thread.ThreadID = thread_coordinates.ThreadID
-LEFT JOIN thread_tags ON thread.ThreadID = thread_tags.ThreadID";
+$sql = "SELECT thread.ThreadID, thread.ProfileID, profile.Name AS profile_name, profile.DisplayPicture AS profile_pic, thread.DateTime, thread.PostContent AS thread, GROUP_CONCAT(DISTINCT thread_media.MediaType) AS type, thread_coordinates.Latitude AS latitude, thread_coordinates.Longtitude AS longtitude FROM thread LEFT JOIN thread_coordinates ON thread.ThreadID = thread_coordinates.ThreadID LEFT JOIN profile ON thread.ProfileID = profile.ProfileID LEFT JOIN thread_media ON thread.ThreadID = thread_media.ThreadID
+    GROUP BY thread.DateTime DESC";
 
 $result = $conn->query($sql);
 
