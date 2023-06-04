@@ -264,21 +264,29 @@ export class PostCreator {
 
             console.log(response);
 
+            const BASE_LINK = window.location.href;
+
             switch(response['success']) {
                 case 'true':
-                    this.sweetAlert.createAlertBox(
-                        'Success!', 
-                        'Post Has Been Created',
-                        'success',
-                        'Okay'
+                    // this.sweetAlert.createAlertBox(
+                    //     'Success!', 
+                    //     'Post Has Been Created',
+                    //     'success',
+                    //     'Okay'
+                    // );
+                    window.location.href = BASE_LINK.concat(
+                        '&mode=post&success=true'
                     );
                     break;
                 case 'false':
-                    this.sweetAlert.createAlertBox(
-                        'Error!', 
-                        'An Error Occured While Creating Post',
-                        'error',
-                        'Okay'
+                    // this.sweetAlert.createAlertBox(
+                    //     'Error!', 
+                    //     'An Error Occured While Creating Post',
+                    //     'error',
+                    //     'Okay'
+                    // );
+                    window.location.href = BASE_LINK.concat(
+                        '&mode=post&success=false'
                     );
                     break;
                 default:
