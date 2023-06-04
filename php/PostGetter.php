@@ -99,6 +99,7 @@ if ($result->num_rows > 0) {
         
         $output[] = [
             "id" => $row["post_id"],
+            "profile_id" => $row["id"],
             "profile_name" => $row["Name"],
             "profile_pic" => $row["DisplayPicture"],
             "date_time" => $row["date_time"],
