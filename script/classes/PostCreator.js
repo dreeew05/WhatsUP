@@ -7,7 +7,6 @@ import { CreateElement } from "./CreateElement.js";
 import { ModifyEntries } from "./ModifyEntries.js";
 import { BaseModalDisplay } from "./BaseModalDisplay.js";
 import { DataSerializer } from "./DataSerializer.js";
-import { SweetAlertFactory } from "./SweetAlertFactory.js";
 
 export class PostCreator {
     
@@ -25,7 +24,6 @@ export class PostCreator {
         this.base64Converter   = new Base64Converter();
         this.entryModifier     = new ModifyEntries(this.mode);
         this.dataSerializer    = new DataSerializer();
-        this.sweetAlert        = new SweetAlertFactory();
 
         // METHODS
         this.displayPostButton()
@@ -268,23 +266,11 @@ export class PostCreator {
 
             switch(response['success']) {
                 case 'true':
-                    // this.sweetAlert.createAlertBox(
-                    //     'Success!', 
-                    //     'Post Has Been Created',
-                    //     'success',
-                    //     'Okay'
-                    // );
                     window.location.href = BASE_LINK.concat(
                         '&mode=post&success=true'
                     );
                     break;
                 case 'false':
-                    // this.sweetAlert.createAlertBox(
-                    //     'Error!', 
-                    //     'An Error Occured While Creating Post',
-                    //     'error',
-                    //     'Okay'
-                    // );
                     window.location.href = BASE_LINK.concat(
                         '&mode=post&success=false'
                     );
