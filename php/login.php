@@ -17,14 +17,19 @@ if (isset($_POST['submit'])) {
     $username = $_POST['username'];
     $password = $_POST['pass'];
 
-    $result = ("SELECT * FROM profile_credentials WHERE Username = '$username' AND Password = '$password'");
+    $result = ("SELECT * 
+                FROM profile_credentials 
+                WHERE Username = '$username' AND Password = '$password'");
+                
     $log = $conn->query($result);
 
     if ($log->num_rows > 0){
         while ($row = $log->fetch_assoc()){
+            $profileID            = $row['ProfileID'];
             $_SESSION['username'] = $row['Username'];
             $_SESSION['password'] = $row['Password'];
-            header('Location: profilePage.php'); 
+            header("Location: ../profilePage.html?id=" . 
+                $profileID); 
             exit();
         }
     }
