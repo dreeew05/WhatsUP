@@ -25,9 +25,8 @@ if (isset($_POST['submit'])) {
 
     if ($log->num_rows > 0){
         while ($row = $log->fetch_assoc()){
-            $profileID            = $row['ProfileID'];
-            $_SESSION['username'] = $row['Username'];
-            $_SESSION['password'] = $row['Password'];
+            $profileID          = $row['ProfileID'];
+            $_SESSION['userID'] = $profileID;
             header("Location: ../profilePage.html?id=" . 
                 $profileID); 
             exit();
