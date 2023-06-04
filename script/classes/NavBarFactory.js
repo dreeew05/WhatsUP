@@ -19,8 +19,7 @@ export class NavBarFactory {
     }
 
     getNavBarContents() {
-        let navbarContents = document.getElementById("navbar-contents");
-        return navbarContents;
+        return document.getElementById("navbar-contents");
     }
 
     navbarFactory() {
@@ -193,6 +192,22 @@ export class NavBarFactory {
         }
         else {
             button.textContent = "Logout";
+        }
+
+        console.log(this.getLogStatus());
+
+        button.onclick = () => {
+            switch(this.getLogStatus()) {
+                case 'visitor':
+                    console.log("hello");
+                    window.location.href = 'login.html';
+                    break;
+                case 'admin':
+                    window.location.href = '/php/SessionDestroyer.php';
+                    break;
+                default:
+                    break;
+            }
         }
 
         // APPEND CHILD
