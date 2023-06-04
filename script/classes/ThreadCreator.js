@@ -8,10 +8,12 @@ import { SweetAlertFactory } from "./SweetAlertFactory.js";
 
 export class ThreadCreator {
 
-    constructor(postID, threadHolder) {
+    constructor(postID, threadHolder, mapAPI, threadID) {
         // PASSED 
         this.postID       = postID;
         this.threadHolder = threadHolder;
+        this.mapAPI       = mapAPI;
+        this.threadID     = threadID;
 
         // GLOBAL
         this.mode              = 'thread';
@@ -20,7 +22,7 @@ export class ThreadCreator {
         this.base64Converter   = new Base64Converter(); 
         this.entryModifier     = new ModifyEntries(
             this.mode,
-            this.getPostID()
+            this.getThreadID()
         );
         this.dataSerializer    = new DataSerializer();
         this.sweetAlert        = new SweetAlertFactory();
@@ -35,7 +37,8 @@ export class ThreadCreator {
             this.mediaDriver, 
             this.ytLinksDataDriver,
             this.entryModifier,
-            this.getPostID()
+            this.mapAPI,
+            this.getThreadID()
         );
 
         // NEXT-STATE METHODS
@@ -50,6 +53,10 @@ export class ThreadCreator {
         return this.threadHolder;
     }
 
+    getThreadID() {
+        return this.threadID;
+    }
+
     getDataArray() {
         return this.baseModalDisplay.getDataArray();
     }
@@ -59,7 +66,7 @@ export class ThreadCreator {
     }
 
     getGlobalID() {
-        const idStringify = String(this.getPostID());
+        const idStringify = String(this.getThreadID());
         return {
             'mediaModalID'   : 'thread-'.concat(idStringify).concat('-media-modal'),
             'ytModalID'     : 'thread-'.concat(idStringify).concat('-yt-modal'),

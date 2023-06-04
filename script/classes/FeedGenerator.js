@@ -52,9 +52,10 @@ export class FeedGenerator {
     }
 
     generateDefaultPostThread(jsonData) {
-        // TEST DATA [FINAL DATA MUST COME FROM THE DATABASE]
+        // console.log(jsonData);
         for(let i = 0; i < jsonData.length; i++) {
             const id              = jsonData[i].id,
+                  profileID       = jsonData[i].profile_id,
                   profileName     = jsonData[i].profile_name,
                   profilePic      = jsonData[i].profile_pic,
                   dateTime        = jsonData[i].date_time, 
@@ -65,7 +66,7 @@ export class FeedGenerator {
                   hasThread       = jsonData[i].has_thread,
                   type            = jsonData[i].type;
             
-            const generatePost = new GeneratePost(id, profileName, 
+            const generatePost = new GeneratePost(id, profileID, profileName, 
                                  profilePic, dateTime, post, postMedia, 
                                  postCoordinates, this.getMapAPI(), 
                                  tags, hasThread, type);
@@ -81,16 +82,17 @@ export class FeedGenerator {
     generatePost(objectData) {
         // TEST DATA [FINAL DATA MUST COME FROM THE DATABASE]
         const postID          = objectData.id,
-            profileName     = objectData.profile_name,
-            profilePic      = objectData.profile_pic,
-            dateTime        = objectData.date_time,
-            post            = objectData.post,
-            postMedia       = jsonData[i].post_media,
-            postCoordinates = objectData.post_coordinates,
-            tags            = objectData.tags;
+              profileID       = objectData.profile_id,
+              profileName     = objectData.profile_name,
+              profilePic      = objectData.profile_pic,
+              dateTime        = objectData.date_time,
+              post            = objectData.post,
+              postMedia       = jsonData[i].post_media,
+              postCoordinates = objectData.post_coordinates,
+              tags            = objectData.tags;
         
-        new GeneratePost(postID, profileName, profilePic, dateTime, post, 
-                        postMedia, postCoordinates, 
+        new GeneratePost(postID, profileID, profileName, profilePic, dateTime,
+                        post, postMedia, postCoordinates, 
                         this.getMapAPI(), tags).showThreadView();
     }
 

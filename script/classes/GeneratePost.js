@@ -5,14 +5,16 @@ import { GeneratePostMedia } from "./GeneratePostMedia.js";
 import { CreateElement } from "./CreateElement.js";
 import { GeneratePostTags } from "./GeneratePostTags.js";
 import { ThreadCreator } from "./ThreadCreator.js";
+import { DataSerializer } from "./DataSerializer.js";
 
 export class GeneratePost {
 
-    constructor(id, profileName, profilePic, dateTime, post, postMedia, 
+    constructor(id, profileID, profileName, profilePic, dateTime, post, postMedia, 
                 postCoordinates, mapAPI, tags, hasThread, type) {
         
         // PASSED VARIABLES
         this.id              = id;
+        this.profileID       = profileID;
         this.profileName     = profileName;
         this.profilePic      = profilePic;
         this.dateTime        = dateTime;
@@ -25,11 +27,15 @@ export class GeneratePost {
         this.type            = type;
 
         // GLOBAL VARIABLES
-        this.threadObject = null;
+        this.threadObject   = null;
+        this.dataSerializer = new DataSerializer();  
     }
 
     getID() {
         return this.id;
+    }
+    getProfileID() {
+        return this.profileID;
     }
     getPostsContainer() {
         return document.getElementById("posts");
@@ -88,7 +94,9 @@ export class GeneratePost {
         profileName.textContent = this.getProfileName();
         dateTime.textContent    = this.getDateTime();
         
-        linkHolder.setAttribute("href", "#")
+        const LINK = "/profilePage.html?id=".concat(this.getProfileID());
+
+        linkHolder.setAttribute("href", LINK);
 
         POST_HOLDER.appendChild(newDiv);
         newDiv.appendChild(profilePic);
@@ -158,7 +166,7 @@ export class GeneratePost {
         new GeneratePostTags(POST_HOLDER, TAGS);
     }
 
-    createPost(POST_HOLDER) {
+    async createPost(POST_HOLDER) {
         this.getPostsContainer().appendChild(POST_HOLDER);
 
         // ACCORDING TO ORDER OF PRECEDENCE
@@ -177,10 +185,27 @@ export class GeneratePost {
         if(this.getHasThread() == true) {
             this.showThreadOption(POST_HOLDER);
         }
-        // new ThreadCreator(this.getID(), POST_HOLDER);
-        if(this.getType() == 'post') {
-            new ThreadCreator(this.getID(), POST_HOLDER);
-        }
+
+        const response = await this.getThreadID(),
+              threadID = parseInt(response['maxID']) + 1;
+
+        new ThreadCreator(
+            this.getID(), 
+            POST_HOLDER,
+            this.mapAPI,
+            threadID
+        );
+    }
+
+    async getThreadID() {
+        const phpURL = '/php/IDGetter.php';
+        const request = {
+            'type' : 'thread'
+        };
+        return await this.dataSerializer.postData(
+            request, phpURL
+        )
+
     }
 
     showThreadOption(POST_HOLDER) {

@@ -77,6 +77,7 @@ export class ModalOptions {
 
         imageButton.onclick = () => {
             this.setOpenedButton("image");
+            console.log(this.getOpenedButton());
         }
         videoButton.onclick = () => {
             this.setOpenedButton("video");
@@ -115,14 +116,14 @@ export class ModalOptions {
         return butttonIDs;
     }
 
-    saveThumbnails(type) {
+    saveThumbnails() {
 
         const ids         = this.determineButtonMode(),
               imageButton = document.getElementById(ids[0]),
               videoButton = document.getElementById(ids[1]),
               ytButton    = document.getElementById(ids[2]); 
 
-        switch(type) {
+        switch(this.getOpenedButton()) {
             case "image":
                 if(this.mediaDriver.getCounter() != 0) {
                     if(!imageButton.classList.contains('active')) {

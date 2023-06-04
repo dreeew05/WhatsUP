@@ -5,7 +5,7 @@ import { ModalOptions } from "./ModalOptions.js";
 export class BaseModalDisplay {
 
     constructor(mode, mediaDriver, ytDataDriver, entryModifier,
-        postID, mapAPI) {
+        mapAPI, postID) {
         // PASSED
         this.mode          = mode;
         this.mediaDriver   = mediaDriver;
@@ -13,6 +13,7 @@ export class BaseModalDisplay {
         this.entryModifier = entryModifier;
         this.postID        = postID;
         this.mapAPI        = mapAPI;
+
         // GLOBAL
         this.modalOptions  = new ModalOptions(
             this.getMode(),
@@ -239,9 +240,7 @@ export class BaseModalDisplay {
             saveButton.onclick = () => {
                 console.log(this.getOpenedButton());
                 // this.saveThumbnails(this.getOpenedButton());
-                this.modalOptions.saveThumbnails(
-                    this.getOpenedButton()
-                );
+                this.modalOptions.saveThumbnails();
             }
     }
 
@@ -317,10 +316,7 @@ export class BaseModalDisplay {
 
             // ADMIN Clicked Save
             saveButton.onclick = () => {
-                console.log(this.getOpenedButton());
-                this.modalOptions.saveThumbnails(
-                    this.getOpenedButton()
-                );
+                this.modalOptions.saveThumbnails();
             }
 
     }
