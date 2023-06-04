@@ -4,7 +4,6 @@ import { CreateElement } from "./CreateElement.js";
 import { BaseModalDisplay } from "./BaseModalDisplay.js";
 import { ModifyEntries } from "./ModifyEntries.js";
 import { DataSerializer } from "./DataSerializer.js";
-import { SweetAlertFactory } from "./SweetAlertFactory.js";
 
 export class ThreadCreator {
 
@@ -25,7 +24,6 @@ export class ThreadCreator {
             this.getThreadID()
         );
         this.dataSerializer    = new DataSerializer();
-        this.sweetAlert        = new SweetAlertFactory();
 
         // METHODS
         this.displayThreadButton()
@@ -274,27 +272,24 @@ export class ThreadCreator {
             );
 
             console.log(response);
+            
+            const BASE_LINK = window.location.href;
 
             switch(response['success']) {
                 case 'true':
-                    this.sweetAlert.createAlertBox(
-                        'Success!', 
-                        'Thread Has Been Created',
-                        'success',
-                        'Okay'
+                    window.location.href = BASE_LINK.concat(
+                        '&mode=thread&success=true'
                     );
                     break;
                 case 'false':
-                    this.sweetAlert.createAlertBox(
-                        'Error!', 
-                        'An Error Occured While Creating Thread',
-                        'error',
-                        'Okay'
+                    window.location.href = BASE_LINK.concat(
+                        '&mode=thread&success=false'
                     );
                     break;
                 default:
                     break;
             }
+
         }
 
     }
