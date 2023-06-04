@@ -77,7 +77,6 @@ export class ModalOptions {
 
         imageButton.onclick = () => {
             this.setOpenedButton("image");
-            console.log(this.getOpenedButton());
         }
         videoButton.onclick = () => {
             this.setOpenedButton("video");

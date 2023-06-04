@@ -10,7 +10,7 @@ import { DataSerializer } from "./DataSerializer.js";
 export class GeneratePost {
 
     constructor(id, profileID, profileName, profilePic, dateTime, post, postMedia, 
-                postCoordinates, mapAPI, tags, hasThread, type) {
+                postCoordinates, mapAPI, tags, hasThread, type, threadPostID) {
         
         // PASSED VARIABLES
         this.id              = id;
@@ -25,6 +25,7 @@ export class GeneratePost {
         this.tags            = tags;
         this.hasThread       = hasThread;
         this.type            = type;
+        this.threadPostID    = threadPostID;
 
         // GLOBAL VARIABLES
         this.threadObject   = null;
@@ -69,6 +70,9 @@ export class GeneratePost {
     }
     getType() {
         return this.type;
+    }
+    getThreadPostID() {
+        return this.threadPostID;
     }
     getThreadObject() {
         return this.threadObject;
@@ -189,11 +193,29 @@ export class GeneratePost {
         const response = await this.getThreadID(),
               threadID = parseInt(response['maxID']) + 1;
 
+        console.log(threadID);
+
+        let postID = null;
+
+        switch(this.getType()) {
+            case 'post':
+                postID = this.getID();
+                break;
+            case 'thread':
+                postID = this.getThreadPostID();
+                break;
+            default:
+                break;
+        }
+
+        // TO GENERATE DIFFERENT IDs
+        let randNum = Math.floor((Math.random() * 100000) + 1);
+
         new ThreadCreator(
-            this.getID(), 
+            postID, 
             POST_HOLDER,
             this.mapAPI,
-            threadID
+            threadID + randNum
         );
     }
 

@@ -52,7 +52,7 @@ export class FeedGenerator {
     }
 
     generateDefaultPostThread(jsonData) {
-        // console.log(jsonData);
+        console.log(jsonData);
         for(let i = 0; i < jsonData.length; i++) {
             const id              = jsonData[i].id,
                   profileID       = jsonData[i].profile_id,
@@ -64,12 +64,14 @@ export class FeedGenerator {
                   postCoordinates = jsonData[i].post_coordinates,
                   tags            = jsonData[i].tags,
                   hasThread       = jsonData[i].has_thread,
-                  type            = jsonData[i].type;
+                  type            = jsonData[i].type,
+                  threadPostID    = jsonData[i].thread_post_id;
             
             const generatePost = new GeneratePost(id, profileID, profileName, 
                                  profilePic, dateTime, post, postMedia, 
                                  postCoordinates, this.getMapAPI(), 
-                                 tags, hasThread, type);
+                                 tags, hasThread, type,
+                                 threadPostID);
             
             generatePost.showDefault();
 

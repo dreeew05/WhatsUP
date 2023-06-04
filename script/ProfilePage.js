@@ -16,13 +16,11 @@ class ProfilePage {
         // GLOBAL VARIABLE
         this.logStatus = null;
         this.profileID = null;
-        this.setLogStatus("admin");
+        // this.setLogStatus("admin");
 
         this.mapAPI         = new GeneratePostMap();
         this.dataSerializer = new DataSerializer();
         
-        this.initializeNavBar();
-        this.navBarSectionDividerImplementation();
         this.initializeProfile();
     }
 
@@ -119,8 +117,21 @@ class ProfilePage {
                   response = await this.dataSerializer.postData(
                                 request, phpURL
                              );
-            
+
+            const userRequest = await this.dataSerializer.postData(
+                null, '/php/UserGetter.php'
+            );
+
+            if(userRequest['userID'] == null) {
+                this.setLogStatus("visitor");
+            }
+            else {
+                this.setLogStatus("admin");
+            }
+
             this.setProfileID(id);
+            this.initializeNavBar();
+            this.navBarSectionDividerImplementation();
             this.initializePostButton();
             this.initializePostFeedGenerator(response);
 
