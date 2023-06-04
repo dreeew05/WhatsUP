@@ -6,7 +6,6 @@
 </head>
 <body>
 
-
 <div class="carousel">
 
 <div class="mySlides fade">
@@ -49,20 +48,19 @@
 
  </div>
 
-<form name="login" id="login-form" onsubmit="return validateForm() ;" method="post">
-
+<form name="login" id="login-form" action = "php\login.php" method="post" enctype="multipart/form-data">
 <ul>
 <li>
   <label for = "username"> Username: </label>
-  <input type = "text" id="username" name="username"></li>
+  <input type = "text" id="username" name="username" required></li>
 <li>
   <label for = "password">Password: </label>
-  <input type="password" id="password" name="password">
+  <input type="password" id="password" name="pass" required>
   <input type="checkbox" onclick="togglePassword()"></input>
 </li>
 </ul>
+<input type="submit" class="submit" value="Submit" name="submit">
 
-<input type="button" class="submit" value="Login" name="submit" onclick="validate()">
 </form>
 </div>
 
