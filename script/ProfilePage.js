@@ -76,15 +76,29 @@ class ProfilePage {
             //   mapAPI        = new GeneratePostMap(),
               feedGenerator = new FeedGenerator(this.mapAPI);
 
-        // const threadResponse = await this.dataSerializer.postData(
-        //     request, '/php/AboutGetter.php'
-        // );
-
-        // console.log(threadResponse);
+        const threadResponse = await this.dataSerializer.postData(
+            request, '/php/ThreadGetter.php'
+        );
         
+        // SAVE ALL POST AND THREAD TO A SINGLE ARRAY
+        const all = [];
+
+        for(let i = 0; i < response.length; i++) {
+            all.push(response[i]);
+        }
+
+        for(let i = 0; i < threadResponse.length; i++) {
+            all.push(threadResponse[i]);
+        }
+
+        // THEN SORT USING DATE_TIME
+        all.sort(
+            (a, b) => new Date(b.date_time) - new Date(a.date_time)
+        );
+
         feedGenerator.generateAbout(aboutResponse);
         feedGenerator.initializeSideNavBar();
-        feedGenerator.generateDefaultPostThread(response);
+        feedGenerator.generateDefaultPostThread(all);
         
         new PostThreadDataDriver(
             feedGenerator.getHasThreadsArray()
@@ -109,6 +123,7 @@ class ProfilePage {
             this.setProfileID(id);
             this.initializePostButton();
             this.initializePostFeedGenerator(response);
+
         }
         else {
             window.location.href = "/index.html";

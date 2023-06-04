@@ -32,8 +32,30 @@ class HomePage {
                     request, phpURL
               );
 
+        const threadResponse = await this.dataSerializer.postData(
+            request, '/php/ThreadGetter.php'
+        );
+        
+        // SAVE ALL POST AND THREAD TO A SINGLE ARRAY
+        const all = [];
+
+        for(let i = 0; i < response.length; i++) {
+            all.push(response[i]);
+        }
+
+        for(let i = 0; i < threadResponse.length; i++) {
+            all.push(threadResponse[i]);
+        }
+
+        // THEN SORT USING DATE_TIME
+        all.sort(
+            (a, b) => new Date(b.date_time) - new Date(a.date_time)
+        );
+
+        console.log(response);
+
         feedGenerator.initializeSideNavBar();
-        feedGenerator.generateDefaultPostThread(response);
+        feedGenerator.generateDefaultPostThread(all);
         
         new PostThreadDataDriver(feedGenerator.getHasThreadsArray());
     }
