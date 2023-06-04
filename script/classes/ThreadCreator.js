@@ -223,10 +223,15 @@ export class ThreadCreator {
         modalFooter.appendChild(threadButton);
 
         threadButton.onclick = async() => {
+
+            const userRequest = await this.dataSerializer.postData(
+                null, '/php/UserGetter.php'
+            );
+
             const phpURL   = '/php/AddPostThread.php',
                   contents = {
                         'action' : 'thread',
-                        'profileID' : 1048,
+                        'profileID' : userRequest['userID'],
                         'postID' : this.getPostID(),
                         'postContent' : threadTextArea.value,
                         'coordinates' : {
