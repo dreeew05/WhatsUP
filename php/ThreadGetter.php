@@ -103,7 +103,7 @@ if ($result->num_rows > 0) {
         if ($row["latitude"] !== null && $row["longtitude"] !== null) {
             $post["post_coordinates"] = array(
                 "latitude" => $row["latitude"],
-                "longitude" => $row["longtitude"]
+                "longtitude" => $row["longtitude"]
             );
         }
 
