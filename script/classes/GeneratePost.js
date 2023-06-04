@@ -211,24 +211,24 @@ export class GeneratePost {
         // TO GENERATE DIFFERENT IDs
         let randNum = Math.floor((Math.random() * 100000) + 1);
 
-        const URL   = window.location.href;
+        const url    = window.location.href,
+              urlObj = new URL(url),
+              id     = urlObj.searchParams.get('id'),
+              path   = urlObj.pathname,
+              page   = path.substring(path.lastIndexOf('/') + 1);
         const userVerify = await this.dataSerializer.postData(
             null, '/php/UserGetter.php'
         );
         const userID = userVerify['userID'];
 
-        if(URL.includes('profilePage.html')) {
-            const link  = URL.split("?"),
-                  query = link[1].split("="),
-                  id    = query[1];
-            if(userID == id) {
+        if(page == 'profilePage.html' &&
+            userID == id) {
                 new ThreadCreator(
                     postID, 
                     POST_HOLDER,
                     this.mapAPI,
                     threadID + randNum
                 );
-            }
         }
     }
 
