@@ -21,6 +21,7 @@ $request = json_decode(
 switch($request['mode']) {
     case 'all':
         $sql = "SELECT thread.ThreadID, thread.ProfileID, 
+                    thread.PostID, 
                     profile.Name AS profile_name, 
                     profile.DisplayPicture AS profile_pic, 
                     thread.DateTime, thread.PostContent AS thread, 
@@ -43,6 +44,7 @@ switch($request['mode']) {
     case 'profile':
         $profileID = $request['profileID'];
         $sql = "SELECT thread.ThreadID, thread.ProfileID, 
+                    thread.PostID, 
                     profile.Name AS profile_name, 
                     profile.DisplayPicture AS profile_pic, 
                     thread.DateTime, thread.PostContent AS thread, 
@@ -84,6 +86,7 @@ if ($result->num_rows > 0) {
 
         $post = array(
             "id" => $row["ThreadID"],
+            "thread_post_id" => $row["PostID"],
             "profile_id" => $row["ProfileID"],
             "post_id" => $row["ThreadID"],
             "profile_name" => $row["profile_name"],
