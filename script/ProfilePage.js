@@ -8,6 +8,7 @@ import { NavBarFactory } from "./classes/NavBarFactory.js";
 import { PostCreator } from "./classes/PostCreator.js";
 import { GeneratePostMap } from "./classes/GeneratePostMap.js";
 import { DataSerializer } from "./classes/DataSerializer.js";
+import { SweetAlertFactory } from "./classes/SweetAlertFactory.js";
 
 class ProfilePage {
 
@@ -20,7 +21,9 @@ class ProfilePage {
 
         this.mapAPI         = new GeneratePostMap();
         this.dataSerializer = new DataSerializer();
+        this.sweetAlert     = new SweetAlertFactory();
         
+        this.getPostThreadStatus();
         this.initializeProfile();
     }
 
@@ -42,6 +45,38 @@ class ProfilePage {
 
     initializeNavBar() {
         new NavBarFactory("type1", this.getLogStatus());
+    }
+
+    getPostThreadStatus() {
+        const url     = window.location.href,
+              urlObj  = new URL(url),
+              mode    = urlObj.searchParams.get('mode'),
+              success = urlObj.searchParams.get('success');
+              
+        if(mode && success) {
+            const modeTxt = mode.charAt(0).toUpperCase() + 
+                            mode.slice(1).toLowerCase();
+            switch(success) {
+                case 'true':
+                    this.sweetAlert.createAlertBox(
+                        'Success!',
+                         modeTxt.concat(' Has Been Created'),
+                        'success',
+                        'Okay'
+                    );
+                    break;
+                case 'false':
+                    this.sweetAlert.createAlertBox(
+                        'Error!',
+                        'An Error Occured While Creating '.concat(modeTxt),
+                        'error',
+                        'Okay'
+                    );
+                    break;
+                default:
+                    break;
+            }
+        }
     }
 
     navBarSectionDividerImplementation() {
