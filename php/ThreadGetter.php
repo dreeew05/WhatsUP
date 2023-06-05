@@ -65,6 +65,30 @@ switch($request['mode']) {
                 WHERE profile.ProfileID = '$profileID'
                 GROUP BY thread.DateTime DESC";
         break;
+    case 'showThread':
+        $postID = $request['id'];
+        $sql = "SELECT thread.ThreadID, thread.ProfileID, 
+                    thread.PostID, 
+                    profile.Name AS profile_name, 
+                    profile.DisplayPicture AS profile_pic, 
+                    thread.DateTime, thread.PostContent AS thread, 
+                    thread_media.MediaType AS type, 
+                    GROUP_CONCAT(DISTINCT post_tags.Tags) AS tags, 
+                    GROUP_CONCAT(DISTINCT thread_media.URL) AS urls, 
+                    thread_coordinates.Latitude AS latitude, 
+                    thread_coordinates.Longtitude AS longtitude 
+                FROM thread 
+                LEFT JOIN thread_coordinates 
+                ON thread.ThreadID = thread_coordinates.ThreadID 
+                LEFT JOIN profile 
+                ON thread.ProfileID = profile.ProfileID 
+                LEFT JOIN thread_media 
+                ON thread.ThreadID = thread_media.ThreadID 
+                LEFT JOIN post_tags 
+                ON thread.PostID = post_tags.PostID 
+                WHERE thread.PostID = '$postID'
+                GROUP BY thread.DateTime DESC";
+        break;
     default:
         break;
 }
