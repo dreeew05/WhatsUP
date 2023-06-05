@@ -28,6 +28,11 @@
          $SQL = "SELECT MAX(ThreadID) As MaxID
                  FROM thread";
          break;
+      case 'getPostID':
+         $id = $request['id'];
+         $SQL = "SELECT PostID AS MaxID
+                 FROM thread
+                 WHERE ThreadID = '$id'";
       default:
          break;
    }

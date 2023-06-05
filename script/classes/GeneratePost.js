@@ -90,7 +90,7 @@ export class GeneratePost {
             dateTime    = new CreateElement("p", null, "date-time").createElement(),
             linkHolder  = new CreateElement("a", null, "profile-name-link-holder").createElement();
 
-        const BASE_PATH = "../../assets/images/logos/";
+        const BASE_PATH = "../../assets/images/profiles/";
 
         profilePic.setAttribute("src", BASE_PATH + this.getProfilePic());
         profilePic.setAttribute("alt", this.getProfilePic());

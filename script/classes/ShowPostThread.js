@@ -48,27 +48,36 @@ class ShowPostThread {
             }
             let postResponse,
                 threadResponse;
-            switch(type) {
-                case 'post':
-                    request.mode = 'showPost';
-                    postResponse = await this.dataSerializer.postData(
-                        request, '/php/PostGetter.php'
-                    );
-                    request.mode = 'showThread';
-                    threadResponse = await this.dataSerializer.postData(
-                        request, '/php/ThreadGetter.php'
-                    );
-                    break;
-                case 'thread':
-                    request.mode = 'showThread';
-                    break;
-                default:
-                    break;
+
+            const postPhpURL   = '/php/PostGetter.php',
+                  threadPhpURL = '/php/ThreadGetter.php',
+                  idReqPhpURL  = '/php/IDGetter.php';
+
+            if(type == 'thread') {
+                const idRequest = {
+                    'type' : 'getPostID',
+                    'id'   : id
+                };
+                const idResponse = await this.dataSerializer.postData(
+                    idRequest, idReqPhpURL
+                );
+                request.id = idResponse.maxID;
             }
+
+            request.mode = 'showPost';
+            postResponse = await this.dataSerializer.postData(
+                request, postPhpURL
+            );
+            request.mode = 'showThread';
+            threadResponse = await this.dataSerializer.postData(
+                request, threadPhpURL
+            );
+
             this.setPostData(postResponse[0]);
             this.setThreadData(threadResponse);
         }
         this.initializeFeedGenerator();
+        this.scrollIntoID(type, id);
         this.goBack();
 
     }
@@ -78,14 +87,11 @@ class ShowPostThread {
     }
 
     scrollIntoID(TYPE, ID) {
-        let goToID   = TYPE + "-holder-" + ID;
-        // let goToID = "thread-holder-2006";
+        const goToID   = TYPE + "-holder-" + ID;
 
-        window.onload = function() {
-            document.getElementById(goToID).scrollIntoView({
-                behavior : "smooth"
-            });
-        }
+        document.getElementById(goToID).scrollIntoView({
+            behavior : "smooth"
+        });
     }
 
     initializeFeedGenerator() {

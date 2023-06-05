@@ -87,7 +87,7 @@ switch($request['mode']) {
                 LEFT JOIN post_tags 
                 ON thread.PostID = post_tags.PostID 
                 WHERE thread.PostID = '$postID'
-                GROUP BY thread.DateTime DESC";
+                GROUP BY thread.DateTime";
         break;
     default:
         break;
