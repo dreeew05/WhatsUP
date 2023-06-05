@@ -262,18 +262,22 @@ export class PostCreator {
 
             console.log(response);
 
-            const BASE_LINK = window.location.href;
+            const BASE_LINK = 'http://whatsup.gg/profilePage.html?id=';
 
             switch(response['success']) {
                 case 'true':
                     window.location.href = BASE_LINK.concat(
-                        '&mode=post&success=true'
-                    );
+                        this.getProfileID().concat(
+                            '&mode=post&succes=true'
+                        )
+                    )
                     break;
                 case 'false':
                     window.location.href = BASE_LINK.concat(
-                        '&mode=post&success=false'
-                    );
+                        this.getProfileID().concat(
+                            '&mode=post&succes=false'
+                        )
+                    )
                     break;
                 default:
                     break;

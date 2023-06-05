@@ -273,18 +273,22 @@ export class ThreadCreator {
 
             console.log(response);
             
-            const BASE_LINK = window.location.href;
+            const BASE_LINK = 'http://whatsup.gg/profilePage.html?id=';
 
             switch(response['success']) {
                 case 'true':
                     window.location.href = BASE_LINK.concat(
-                        '&mode=thread&success=true'
-                    );
+                        userRequest['userID'].concat(
+                            '&mode=thread&success=true'
+                        )
+                    )
                     break;
                 case 'false':
                     window.location.href = BASE_LINK.concat(
-                        '&mode=thread&success=false'
-                    );
+                        userRequest['userID'].concat(
+                            '&mode=thread&success=false'
+                        )
+                    )
                     break;
                 default:
                     break;
