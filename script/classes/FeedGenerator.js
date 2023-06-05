@@ -52,7 +52,6 @@ export class FeedGenerator {
     }
 
     generateDefaultPostThread(jsonData) {
-        console.log(jsonData);
         for(let i = 0; i < jsonData.length; i++) {
             const id              = jsonData[i].id,
                   profileID       = jsonData[i].profile_id,
@@ -89,7 +88,7 @@ export class FeedGenerator {
               profilePic      = objectData.profile_pic,
               dateTime        = objectData.date_time,
               post            = objectData.post,
-              postMedia       = jsonData[i].post_media,
+              postMedia       = objectData.post_media,
               postCoordinates = objectData.post_coordinates,
               tags            = objectData.tags;
         
@@ -108,11 +107,13 @@ export class FeedGenerator {
                 dateTime        = jsonData[i].date_time,
                 post            = jsonData[i].post,
                 postMedia       = jsonData[i].post_media,
-                postCoordinates = jsonData[i].post_coordinates;
+                postCoordinates = jsonData[i].post_coordinates,
+                threadPostID    = jsonData[i].thread_post_id;
 
             new GenerateThread(threadID, postID, profileName, profilePic, 
                                dateTime, post, postMedia, postCoordinates, 
-                               this.getMapAPI()).createThread();
+                               this.getMapAPI(),
+                               threadPostID).createThread();
         }        
     }
 

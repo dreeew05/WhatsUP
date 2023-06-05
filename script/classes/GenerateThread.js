@@ -6,21 +6,27 @@ import { GeneratePost } from "./GeneratePost.js";
 
 export class GenerateThread extends GeneratePost {
     constructor(threadID, postID, profileName, profilePic, dateTime, 
-                post, postMedia, postMediaType, postCoordinates, mapAPI) {
+                post, postMedia, postCoordinates, mapAPI,
+                threadPostID) {
 
-        super(postID, profileName, profilePic, dateTime, post, postMedia, 
-              postMediaType, postCoordinates, mapAPI);
+        super(postID, null, profileName, profilePic, dateTime, post, postMedia, 
+              postCoordinates, mapAPI, null, null, null, threadPostID);
 
-        this.threadID = threadID;
+        this.threadID     = threadID;
+        this.threadPostID = threadPostID;
     }
 
     getThreadID() {
         return this.threadID;
     }
 
+    getThreadPostID() {
+        return this.threadPostID;
+    }
+
     createThread() {
         let POST_HOLDER = document.getElementById("post-holder-" 
-                          + super.getID());
+                          + this.getThreadPostID());
 
         let THREAD_HOLDER = new CreateElement("div", "thread-holder-" 
                             + this.getThreadID(), null).createElement();
