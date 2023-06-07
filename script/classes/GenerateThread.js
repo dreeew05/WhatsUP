@@ -42,7 +42,9 @@ export class GenerateThread extends GeneratePost {
         super.createPostImages(THREAD_HOLDER);
 
         if(super.getPostCoordinates() != null) {
-            super.createPostMap(POST_HOLDER);
+            super.createPostMap(THREAD_HOLDER);
         }
+
+        super.createReactions(THREAD_HOLDER, this.getThreadID());
     }
 }

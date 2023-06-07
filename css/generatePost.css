@@ -235,5 +235,35 @@
     height: 2.25vmax;
 }
 
+/* REACTIONS */
 
+.reaction-div {
+    width: 100%;
+    padding-left: 3%;
+    padding-right: 3%;
+    margin-top: 2%;
+}
+
+.react-btn {
+    font-size: 1vmax;
+    color: white;
+    margin-right: 1%;
+    border-radius: 50%;
+}
+
+.react-btn.heart {
+    background-color: #f55065;
+}
+
+.react-btn.haha {
+    background-color: #ccae54;
+}
+
+.react-btn.sad {
+    background-color: #f5c15c;
+}
+
+.react-btn.angry {
+    background-color: #f55866;
+}
 

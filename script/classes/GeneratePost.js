@@ -6,6 +6,7 @@ import { CreateElement } from "./CreateElement.js";
 import { GeneratePostTags } from "./GeneratePostTags.js";
 import { ThreadCreator } from "./ThreadCreator.js";
 import { DataSerializer } from "./DataSerializer.js";
+import { GenerateReactions } from "./GenerateReactions.js";
 
 export class GeneratePost {
 
@@ -170,6 +171,10 @@ export class GeneratePost {
         new GeneratePostTags(POST_HOLDER, TAGS);
     }
 
+    createReactions(POST_HOLDER, ID) {
+        new GenerateReactions(POST_HOLDER, ID);
+    }
+
     async createPost(POST_HOLDER) {
         this.getPostsContainer().appendChild(POST_HOLDER);
 
@@ -184,6 +189,7 @@ export class GeneratePost {
         }
 
         this.createPostTags(POST_HOLDER, this.getTags());
+        this.createReactions(POST_HOLDER, this.getID());
         // this.showThreadOption(POST_HOLDER);
 
         if(this.getHasThread() == true) {
