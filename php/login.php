@@ -27,10 +27,17 @@ if (isset($_POST['submit'])) {
         while ($row = $log->fetch_assoc()){
             $profileID          = $row['ProfileID'];
             $_SESSION['userID'] = $profileID;
+        }
+        if($profileID == 1058) {
+            // SUPERADMIN
+            header("Location: ../superAdminAccounts.html");
+        }
+        else {
+            // ADMIN ACCOUNTS
             header("Location: ../profilePage.html?id=" . 
                 $profileID); 
-            exit();
         }
+        exit();
     }
     else {
         // echo "Invalid Username or Password.";
