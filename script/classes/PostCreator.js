@@ -268,14 +268,14 @@ export class PostCreator {
                 case 'true':
                     window.location.href = BASE_LINK.concat(
                         this.getProfileID().concat(
-                            '&mode=post&succes=true'
+                            '&mode=post&success=true'
                         )
                     )
                     break;
                 case 'false':
                     window.location.href = BASE_LINK.concat(
                         this.getProfileID().concat(
-                            '&mode=post&succes=false'
+                            '&mode=post&successs=false'
                         )
                     )
                     break;

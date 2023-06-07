@@ -17,15 +17,17 @@
   parse_str($queryString, $params);
   
   // DETERMINE IF LOGIN IS SUCCESSFUL
-  if(isset($params['success']) && $response == 'false') {
+  if(isset($params['success'])) {
       $response = $params['success'];
-      echo "<script>
-            Swal.fire({
-              icon: 'error',
-              title: 'Login Failed',
-              text: 'Invalid Username or Password'
-            })
-           </script>";
+      if($response == 'false') {
+        echo "<script>
+              Swal.fire({
+                icon: 'error',
+                title: 'Login Failed',
+                text: 'Invalid Username or Password'
+              })
+            </script>";
+      }
   }
 ?>
 

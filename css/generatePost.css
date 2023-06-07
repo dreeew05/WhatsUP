@@ -262,12 +262,12 @@
 }
 
 .react-btn.sad.active {
-    background-color: #f5c15c;
+    background-color: #ffc303;
     color: white;
 }
 
 .react-btn.angry.active {
-    background-color: #f55866;
+    background-color: #f77c27;
     color: white;
 }
 

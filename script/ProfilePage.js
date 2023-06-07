@@ -24,7 +24,7 @@ class ProfilePage {
         this.sweetAlert     = new SweetAlertFactory();
         
         this.getPostThreadStatus();
-        this.initializeProfile();
+        // this.initializeProfile();
     }
 
     getLogStatus() {
@@ -51,7 +51,8 @@ class ProfilePage {
         const url     = window.location.href,
               urlObj  = new URL(url),
               mode    = urlObj.searchParams.get('mode'),
-              success = urlObj.searchParams.get('success');
+              success = urlObj.searchParams.get('success'),
+              id      = urlObj.searchParams.get('id');
               
         if(mode && success) {
             const modeTxt = mode.charAt(0).toUpperCase() + 
@@ -77,6 +78,7 @@ class ProfilePage {
                     break;
             }
         }
+        this.initializeProfile(id);
     }
 
     navBarSectionDividerImplementation() {
@@ -138,14 +140,11 @@ class ProfilePage {
         );
     }
 
-    async initializeProfile() {
+    async initializeProfile(id) {
         const header = window.location.href;
 
         if(header.includes("id")) {
-            const link     = header.split("?"),
-                  query    = link[1].split("="),
-                  id       = query[1],
-                  request  = {
+            const request  = {
                     'id' : id
                   },
                   phpURL   = '/php/AboutGetter.php',
@@ -167,7 +166,7 @@ class ProfilePage {
             this.setProfileID(id);
             this.initializeNavBar();
             this.navBarSectionDividerImplementation();
-            this.initializePostButton();
+            this.initializePostButton(id);
             this.initializePostFeedGenerator(response);
 
         }
@@ -177,7 +176,7 @@ class ProfilePage {
 
     }
 
-    async initializePostButton() {
+    async initializePostButton(pageID) {
 
         const userVerify = await this.dataSerializer.postData(
             null, '/php/UserGetter.php'
@@ -188,7 +187,7 @@ class ProfilePage {
         console.log(userID);
 
         if(this.getLogStatus() == "admin"
-            && this.getProfileID() == userID) {
+            && pageID == userID) {
             // new PostCreator();
             new PostCreator(
                 document.getElementById('posts'),
