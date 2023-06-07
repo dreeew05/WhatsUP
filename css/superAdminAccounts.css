@@ -125,21 +125,28 @@ textarea {
 
 #profile-img {
     width: 20vmax;
+    height: 20vmax;
     object-fit: cover;
     border-radius: 50%;
+    margin: 0 auto;
 }
 
 #profile-details {
     display: flex;
     flex-direction: column;
+    align-items: center;
+    text-align: center;
 }
 
 #profile-result-name {
+    font-size: 5vmax;
     font-family: 'ProductSansBold';
-    font-size: 2vmax;
+    margin-bottom: 5px;
 }
 
 #profile-category {
     font-family: 'ProductSansRegular';
-    font-size: 1vmax;
+    font-size: 2vmax;
+    margin-bottom: 10px;
+    color: #888;
 }
