@@ -33,13 +33,14 @@ export class FeedGenerator {
         const genProfile = new GenerateProfileSearch();
 
         for(let i = 0; i < jsonData.length; i++) {
-            let profileName        = jsonData[i].profile_name,
-                profileImage       = jsonData[i].profile_image,
-                profileCategory    = jsonData[i].profile_category,
-                profileDescription = jsonData[i].profile_description;
+            const profileID          = jsonData[i].profile_id,
+                  profileName        = jsonData[i].profile_name,
+                  profileImage       = jsonData[i].profile_image,
+                  profileCategory    = jsonData[i].profile_category,
+                  profileDescription = jsonData[i].profile_description;
             
             genProfile.generateProfile(profileImage, profileName, profileCategory, 
-                                       profileDescription);
+                                       profileDescription, profileID);
         }
     }
 

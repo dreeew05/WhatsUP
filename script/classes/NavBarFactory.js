@@ -165,7 +165,7 @@ export class NavBarFactory {
 
         // SET ATTRIBUTE 
         searchForm.setAttribute("action", "");
-        searchBtn.setAttribute("type", "submit");
+        searchBtn.setAttribute("type", "button");
         searchBar.setAttribute("type", "search");
         searchBar.setAttribute("placeholder", "Search What's UP?");
         searchBar.setAttribute("aria-label", "Search");
@@ -176,6 +176,14 @@ export class NavBarFactory {
         searchForm.appendChild(searchBar);
         searchForm.appendChild(searchBtn);
         searchBtn.appendChild(searchIcon);
+
+        // BUTTON ACTIONS
+        searchBtn.onclick = () => {
+            const BASE_LINK   = '/searchPage.html?mode=search&',
+                  searchQuery = 'search=' + searchBar.value;
+
+            window.location.href = BASE_LINK + searchQuery;
+        }
 
     }
 

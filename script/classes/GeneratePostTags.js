@@ -52,9 +52,14 @@ export class GeneratePostTags {
             // WHEN BUTTON IS CLICKED
             tagButton.addEventListener("click", 
                 function() {
-                    const SEARCH_PATH    = "searchPage.html";
-                    let query            = "?search=" + value;
-                    window.location.href = SEARCH_PATH + query;
+                    // const SEARCH_PATH    = "searchPage.html";
+                    // let query            = "?search=" + value;
+                    // window.location.href = SEARCH_PATH + query;
+                    const SEARCH_PATH = '/searchPage.html?',
+                          tagQuery    = 'search=' + value,
+                          mode        = 'mode=tag&';
+
+                    window.location.href = SEARCH_PATH + mode + tagQuery;
                 }
             );
 

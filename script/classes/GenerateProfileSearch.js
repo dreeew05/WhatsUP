@@ -29,23 +29,38 @@ export class GenerateProfileSearch {
         
     }
 
-    generateProfile(PROFILE_IMAGE, PROFILE_NAME, PROFILE_CATEGORY, PROFILE_DESCRIPTION) {
-        const PROFILE_PAGES_HOLDER = document.getElementById("profile-pages-holder");
+    generateProfile(PROFILE_IMAGE, PROFILE_NAME, PROFILE_CATEGORY, 
+        PROFILE_DESCRIPTION, PROFILE_ID) {
 
-        let profileResultsHolder = new CreateElement("div", "profile-results-holder", null).createElement(),
-            profileImage         = new CreateElement("img", null, null).createElement(),
-            profileResultText    = new CreateElement("div", null, "profile-result-text").createElement(),
-            profileLink          = new CreateElement("a", null, null).createElement(),
-            profileTitle         = new CreateElement("p", null, "profile-title").createElement(),
-            profileCategory      = new CreateElement("p", null, "profile-category").createElement(),
-            profileDescription   = new CreateElement("p", null, "profile-description").createElement(),
+        const PROFILE_PAGES_HOLDER = 
+            document.getElementById("profile-pages-holder");
+
+        const BASE_LINK     = '/profilePage.html?id=',
+              BASE_IMG_PATH = '/assets/images/profiles/';
+
+        let profileResultsHolder = new CreateElement("div", 
+                                   "profile-results-holder", null)
+                                   .createElement(),
+            profileImage         = new CreateElement("img", null, null)
+                                   .createElement(),
+            profileResultText    = new CreateElement("div", null, 
+                                   "profile-result-text").createElement(),
+            profileLink          = new CreateElement("a", null, null)
+                                   .createElement(),
+            profileTitle         = new CreateElement("p", null, 
+                                   "profile-title").createElement(),
+            profileCategory      = new CreateElement("p", null, 
+                                   "profile-category").createElement(),
+            profileDescription   = new CreateElement("p", null, 
+                                   "profile-description").createElement(),
 
             newProfileDescription = new LimitWords(PROFILE_DESCRIPTION, 75);
 
         // SET ATTRIBUTE
-        profileImage.src               = PROFILE_IMAGE;
+        profileImage.src               = BASE_IMG_PATH.concat(
+                                         PROFILE_IMAGE);
         profileImage.alt               = PROFILE_NAME + " image";
-        profileLink.href               = "#";
+        profileLink.href               = BASE_LINK.concat(PROFILE_ID);
         profileTitle.textContent       = PROFILE_NAME;
         profileCategory.textContent    = PROFILE_CATEGORY;
         profileDescription.textContent = newProfileDescription.getLimitWords();

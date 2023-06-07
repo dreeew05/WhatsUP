@@ -77,12 +77,14 @@ main {
     width: 80%;
     display: block;
     margin: auto;
+    margin-bottom: 2%;
 }
 
 #profile-pages-holder {
-    width: auto;
+    width: 70vmax;
     padding-left: 2%;
     padding-right: 2%;
+    padding-bottom: 2%;
 }
 
 #profile-pages-holder img {

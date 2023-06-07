@@ -68,6 +68,24 @@ switch($request['mode']) {
                 WHERE post.PostID = '$postID'
                 GROUP BY post.DateTime DESC";
         break;
+    case 'tagPost':
+        $postID = $request['id'];
+        $sql = "SELECT post.ProfileID AS id, post.PostID AS post_id, post.DateTime 
+                    AS date_time, post.PostContent AS post, post.HasThread AS has_thread,
+                    GROUP_CONCAT(DISTINCT post_tags.Tags) AS tags, 
+                    post_coordinates.Latitude, post_coordinates.Longtitude, 
+                    post_media.MediaType, GROUP_CONCAT(DISTINCT post_media.URL) 
+                    AS urls, profile.Name, profile.DisplayPicture
+                FROM post 
+                LEFT JOIN post_tags ON post.PostID = post_tags.PostID 
+                LEFT JOIN post_coordinates 
+                    ON post.PostID = post_coordinates.PostID
+                LEFT JOIN post_media ON post.PostID = post_media.PostID
+                LEFT JOIN profile ON post.ProfileID = profile.ProfileID
+                WHERE post.PostID = '$postID'";
+        break;
+    case 'searchPost':
+        break;
     default:
         break;
 }

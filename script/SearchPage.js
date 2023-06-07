@@ -3,23 +3,21 @@
 
 import { NavBarSectionDivider } from "./classes/NavBarSectionDivider.js";
 import { FeedGenerator } from "./classes/FeedGenerator.js";
-import { PostThreadDataDriver } from "./classes/PostThreadDataDriver.js";
 import { NavBarFactory } from "./classes/NavBarFactory.js";
 import { GeneratePostMap } from "./classes/GeneratePostMap.js";
-
-// TEST DATA
-import postsJSON from "../test/posts.json" assert { type: 'json' };
-import profileJSON from "../test/searchProfile.json" assert { type: 'json' };
+import { DataSerializer } from "./classes/DataSerializer.js";
+import { PostThreadDataDriver } from "./classes/PostThreadDataDriver.js";
 
 class SearchPage {
 
     constructor() {
         // GLOBAL VARIABLE
-        this.mapAPI = new GeneratePostMap();
+        this.mapAPI         = new GeneratePostMap();
+        this.dataSerializer = new DataSerializer();
 
         this.initializeNavBar();
         this.navBarSectionDividerImplementation();
-        this.initializeFeedGenerator();       
+        this.getData();   
     }
 
     initializeNavBar() {
@@ -46,14 +44,85 @@ class SearchPage {
         }
     }
 
-    initializeFeedGenerator() {
+    async getData() {
+        const url    = window.location.href,
+              urlObj = new URL(url),
+              search = urlObj.searchParams.get('search');
+
+        const allPostTags = await this.dataSerializer.postData(
+            {
+                'tag' : search,
+            },
+            '/php/TagSearch.php'
+        );
+
+        const postData    = [],
+              profiles    = [],
+              profileData = [];
+
+        const searchProfile = await this.dataSerializer.postData(
+            {
+                'mode'    : 'profile',
+                'profile' : search
+            },
+            '/php/ProfileGetter.php'
+        );
+
+        for(let i = 0; i < searchProfile.length; i++) {
+            profileData.push(searchProfile[i]);
+        }
+
+        console.log(searchProfile);
+        // console.log(allPostTags);
+        for(let i = 0; i < allPostTags.length; i++) {
+            // console.log(allPostTags[i]['post_id']);
+            const getPost = await this.dataSerializer.postData(
+                {   
+                    'mode' : 'tagPost',
+                    'id'   : allPostTags[i]['post_id']
+                },
+                '/php/PostGetter.php'
+            );
+            postData.push(getPost[0]);
+            // console.log(getPost[0]);
+            profiles.push(getPost[0]['profile_id'])
+        }
+        const profileSet = new Set(profiles);
+        for(const id of profileSet) {
+            // console.log(id)
+            const getProfile = await this.dataSerializer.postData(
+                {
+                    'mode' : 'tag',
+                    'id'   : id
+                },
+                '/php/ProfileGetter.php'
+            );
+            console.log(getProfile[0]);
+            // profileData.push(getProfile[0]);
+            const arrayContains = profileData.some(
+                obj => Object.values(obj).includes(
+                    getProfile[0]['profile_name']
+                )
+            );
+
+            if(!arrayContains) {
+                profileData.push(getProfile[0]);
+            }
+        }
+        console.log(profileData);
+        this.initializeFeedGenerator(profileData, postData);
+    }
+
+    initializeFeedGenerator(profileData, postData) {
         let feedGenerator = new FeedGenerator(this.mapAPI);
         
         feedGenerator.initializeSideNavBar();
-        feedGenerator.generateDefaultPostThread(postsJSON);
-        feedGenerator.generateProfile(profileJSON);
+        feedGenerator.generateProfile(profileData);
+        feedGenerator.generateDefaultPostThread(postData);
 
-        new PostThreadDataDriver(feedGenerator.getHasThreadsArray());
+        new PostThreadDataDriver(
+            feedGenerator.getHasThreadsArray()
+        );
     }
 
 }
