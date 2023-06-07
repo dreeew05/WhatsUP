@@ -1,49 +1,46 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>SuperAdmin - What's Up?</title>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SuperAdmin - What's Up?</title>
 
-        <!-- [START] BOOTSTRAP PREREQUISITE FILES -->
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
-        <!-- [END] BOOTSTRAP PREREQUISITE FILES -->
+    <!-- [START] BOOTSTRAP PREREQUISITE FILES -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+    <!-- [END] BOOTSTRAP PREREQUISITE FILES -->
 
-        <!-- PAGE CSS FILE -->
-        <link rel="stylesheet" type="text/css" href="css/superAdminAccounts.css">
+    <!-- PAGE CSS FILE -->
+    <link rel="stylesheet" type="text/css" href="css/superAdminAccounts.css">
 
-        <!-- PAGE SCRIPT -->
-        <script type="module" src="script/SuperAdminAccount.js"></script>
+    <!-- PAGE SCRIPT -->
+    <script type="module" src="script/SuperAdminAccount.js"></script>
 
-        <!-- [START] SWEETALERT -->
-        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-        <!-- [END] SWEETALERT -->
+    <!-- [START] SWEETALERT -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!-- [END] SWEETALERT -->
 
+    <!-- FAVICON -->
+    <link rel="icon" type="image/x-icon" href="/assets/svg/What_sUpLogo.ico">
+</head>
 
-        <!-- FAVICON -->
-        <link rel="icon" type="image/x-icon" href="/assets/svg/What_sUpLogo.ico">
+<body>
+    <nav>
+        <div id="navbar-contents"></div>
+    </nav>
 
-    </head>
-
-    <body>
-        
-        <nav>
-            <div id="navbar-contents"></div>
-        </nav>
-
-        <main>
-            <div id="tabbed-panel" class="container">
-              <ul class="nav nav-tabs nav-fill nav-justified" id="tab-header" role="tablist">
+    <main>
+        <div id="tabbed-panel" class="container">
+            <ul class="nav nav-tabs nav-fill nav-justified" id="tab-header" role="tablist">
                 <li class="nav-item" role="presentation">
-                  <button class="nav-link active" id="register-tab" data-bs-toggle="tab" data-bs-target="#register" type="button" role="tab" aria-controls="register" aria-selected="true">Register Account</button>
+                    <button class="nav-link active" id="register-tab" data-bs-toggle="tab" data-bs-target="#register" type="button" role="tab" aria-controls="register" aria-selected="true">Register Account</button>
                 </li>
                 <li class="nav-item" role="presentation">
-                  <button class="nav-link" id="edit-credentials-tab" data-bs-toggle="tab" data-bs-target="#edit-credentials" type="button" role="tab" aria-controls="edit-credentials" aria-selected="false">Edit Credentials</button>
+                    <button class="nav-link" id="edit-credentials-tab" data-bs-toggle="tab" data-bs-target="#edit-credentials" type="button" role="tab" aria-controls="edit-credentials" aria-selected="false">Edit Credentials</button>
                 </li>
-              </ul>
-              <div class="tab-content" id="tab-content-id">
+            </ul>
+            <div class="tab-content" id="tab-content-id">
                 <div class="tab-pane fade show active" id="register" role="tabpanel" aria-labelledby="register-tab">
                     <div id="register-account-contents">
                         <!-- REGISTER ACCOUNT CONTENT -->
@@ -124,10 +121,69 @@
                 </div>
                 <div class="tab-pane fade" id="edit-credentials" role="tabpanel" aria-labelledby="edit-credentials-tab">
                     <!-- EDIT CREDENTIALS CONTENT -->
-                </div>
-              </div>
-            </div>
-        </main>
+                    <div id="credentials">
+                        <div style="background-color: #b4b0b0; padding: 10px; border-radius: 10px; margin: 20px;">
+                            <div style="margin-left: 20px; margin-right: 20px;">
+                                <p class="category-title">Find Account</p>
+                                <hr>
+                                <div id="search-bar" class="input-group">
+                                    <input type="text" id="search-input" class="form-control" placeholder="Search...">
+                                </div>
+                                <div style="padding: 160px; background-color: #d9d9d9; border-radius: 5px;"></div>
+                                <div style="margin-top: 10px;">
+                                    <button type="button" class="btn btn-primary btn-lg btn-block" style="width: 100%;" onclick="showEditCredentials()">Edit</button>
+                                    <div style="margin-top: 10px;"></div>
+                                    <button type="button" class="btn btn-danger btn-lg btn-block" style="width: 100%; background-color: #961313;">Delete</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-    </body>
+                    <div id="edit-credentials-modal" class="modal">
+                        <div class="modal-dialog" style="margin: auto;">
+                            <div class="modal-content">
+                                <div style="margin-left: 20px; margin-right: 20px;"></div>
+                                <div style="background-color: #b4b0b0; padding: 10px; border-radius: 10px;">
+                                    <button type="button" class="close" onclick="closeEditCredentialsModal()" style="float: right;">&times;</button>
+                                    <p class="category-title">Edit Account Credentials</p>
+                                    <hr>
+                                    <label for="edit-username">Username</label><br>
+                                    <input type="text" id="edit-username" class="form-control"><br>
+                                    <label for="edit-password">Password</label><br>
+                                    <input type="password" id="edit-password" class="form-control"><br>
+                                    <label for="edit-re-enter-pw">Re-enter Password</label><br>
+                                    <input type="password" id="edit-re-enter-pw" class="form-control"><br>
+                                    <button type="button" class="btn btn-success btn-block" style="width: 100%;" onclick="saveEditCredentials()">Save</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <script>
+                        function showEditCredentials() {
+                            var modal = document.getElementById("edit-credentials-modal");
+                            modal.style.display = "block";
+                        }
+
+                        function closeEditCredentialsModal() {
+                            var modal = document.getElementById("edit-credentials-modal");
+                            modal.style.display = "none";
+                        }
+
+                        function saveEditCredentials() {
+                            var modal = document.getElementById("edit-credentials-modal");
+                            modal.style.display = "none";
+
+                            // save operation
+                            // ...
+                        }
+                    </script>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+</body>
+
 </html>
