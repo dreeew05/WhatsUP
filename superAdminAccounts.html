@@ -138,7 +138,7 @@
                                 </div>
                                 <div style="padding: 160px; background-color: #d9d9d9; border-radius: 5px;">
                                     <div id="profile-misc">
-                                        <img src="" id="profile-img">
+                                        <img src="" alt="Profile Image" id="profile-img">
                                         <div id="profile-details">
                                             <p id="profile-result-name"></p>
                                             <p id="profile-category"></p>
@@ -170,11 +170,13 @@
                                     <input type="password" id="edit-password" class="form-control"><br>
                                     <label for="edit-re-enter-pw">Re-enter Password</label><br>
                                     <input type="password" id="edit-re-enter-pw" class="form-control"><br>
-                                    <button type="button" class="btn btn-success btn-block" style="width: 100%;" onclick="saveEditCredentials()">Save</button>
+                                    <button type="button" id="save-btn" class="btn btn-success btn-block" style="width: 100%;" onclick="saveEditCredentials()">Save</button>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    
+                    
 
                     <script>
                         function showEditCredentials() {
@@ -191,8 +193,6 @@
                             var modal = document.getElementById("edit-credentials-modal");
                             modal.style.display = "none";
 
-                            // save operation
-                            // ...
                         }
                     </script>
                 </div>
