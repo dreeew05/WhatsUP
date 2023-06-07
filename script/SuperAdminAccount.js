@@ -105,10 +105,24 @@ class SuperAdminAcount {
                 'profile' : searchInput.value
             };
             const response = await this.dataSerializer.postData(
-                request, '/php/DeleteData.php'
+                request, '/php/SearchProfile.php'
             );
             console.log(response);
+
+            this.showProfile(response);
         }
+    }
+
+    showProfile(profileData) {
+        const image    = document.getElementById('profile-img'),
+              name     = document.getElementById('profile-name'),
+              category = document.getElementById('profile-category');
+
+        const IMG_BASE_PATH = '/assets/images/profiles/';
+        
+        image.src = IMG_BASE_PATH.concat(profileData['image']);
+        name.textContent = profileData['name'];
+        category.textContent = profileData['category'];
     }
 
 }
