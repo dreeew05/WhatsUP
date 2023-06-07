@@ -246,24 +246,28 @@
 
 .react-btn {
     font-size: 1vmax;
-    color: white;
+    color: black;
     margin-right: 1%;
     border-radius: 50%;
 }
 
-.react-btn.heart {
+.react-btn.heart.active {
     background-color: #f55065;
+    color: white;
 }
 
-.react-btn.haha {
+.react-btn.haha.active {
     background-color: #ccae54;
+    color: white;
 }
 
-.react-btn.sad {
+.react-btn.sad.active {
     background-color: #f5c15c;
+    color: white;
 }
 
-.react-btn.angry {
+.react-btn.angry.active {
     background-color: #f55866;
+    color: white;
 }
 

@@ -59,6 +59,68 @@ export class GenerateReactions {
         sadBtn.appendChild(sadIcn);
         buttonDiv.appendChild(agryBtn);
         agryBtn.appendChild(agryIcn);
+
+        // BUTTON ACTIONS
+        hrtBtn.onclick = () => {
+            if(!hrtBtn.classList.contains('active')) {
+                this.freeReactions();
+                hrtBtn.classList.add('active');
+            }
+            else {
+                this.freeReactions();
+            }
+            
+        }
+        hahaBtn.onclick = () => {
+            if(!hahaBtn.classList.contains('active')) {
+                this.freeReactions();
+                hahaBtn.classList.add('active');
+            }
+            else {
+                this.freeReactions();
+            }
+            
+        }
+        sadBtn.onclick = () => {
+            if(!sadBtn.classList.contains('active')) {
+                this.freeReactions();
+                sadBtn.classList.add('active');
+            }
+            else {
+                this.freeReactions();
+            }
+            
+        }
+        agryBtn.onclick = () => {
+            if(!agryBtn.classList.contains('active')) {
+                this.freeReactions();
+                agryBtn.classList.add('active');
+            }
+            else {
+                this.freeReactions();
+            }
+            
+        }
+    }
+
+    freeReactions() {
+        const heart = document.getElementById(
+            "heart-".concat(this.getID())
+        );
+        const haha = document.getElementById(
+            "haha-".concat(this.getID())
+        );
+        const sad = document.getElementById(
+            "sad-".concat(this.getID())
+        );
+        const angry = document.getElementById(
+            "angry-".concat(this.getID())
+        );
+
+        heart.classList.remove('active');
+        haha.classList.remove('active');
+        sad.classList.remove('active');
+        angry.classList.remove('active');
     }
 
 }
