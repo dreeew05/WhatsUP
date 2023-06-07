@@ -15,7 +15,7 @@ if ($conn->connect_error) {
 // Request from the front-end
 $request = json_decode(
     file_get_contents('php://input'),
-    true
+    true                                                                                
 );
 
 switch($request['mode']) {

@@ -207,8 +207,7 @@ export class NavBarFactory {
         button.onclick = () => {
             switch(this.getLogStatus()) {
                 case 'visitor':
-                    console.log("hello");
-                    window.location.href = 'login.html';
+                    window.location.href = 'userLogin.php';
                     break;
                 case 'admin':
                     window.location.href = '/php/SessionDestroyer.php';

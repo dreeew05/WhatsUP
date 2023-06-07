@@ -177,8 +177,18 @@ class ProfilePage {
 
     }
 
-    initializePostButton() {
-        if(this.getLogStatus() == "admin") {
+    async initializePostButton() {
+
+        const userVerify = await this.dataSerializer.postData(
+            null, '/php/UserGetter.php'
+        );
+
+        const userID = userVerify['userID'];
+
+        console.log(userID);
+
+        if(this.getLogStatus() == "admin"
+            && this.getProfileID() == userID) {
             // new PostCreator();
             new PostCreator(
                 document.getElementById('posts'),

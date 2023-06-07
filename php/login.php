@@ -33,7 +33,9 @@ if (isset($_POST['submit'])) {
         }
     }
     else {
-        echo "Invalid Username or Password.";
+        // echo "Invalid Username or Password.";
+        header("Location: ../userLogin.php?success=false");
+        exit();
     }
 }
 

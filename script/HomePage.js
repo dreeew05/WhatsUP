@@ -11,15 +11,41 @@ class HomePage {
 
     constructor() {
         // GLOBAL VARIABLE
+        this.logStatus      = null;
         this.mapAPI         = new GeneratePostMap();
         this.dataSerializer = new DataSerializer();
+
+        this.initializeProfile();
+        // this.initializeNavBar();
+        // this.initializeFeedGenerator();
+    }
+
+    getLogStatus() {
+        return this.logStatus;
+    }
+
+    setLogStatus(logStatus) {
+        this.logStatus = logStatus;
+    }
+
+    async initializeProfile() {
+        const userRequest = await this.dataSerializer.postData(
+            null, '/php/UserGetter.php'
+        );
+        
+        if(userRequest['userID'] == null) {
+            this.setLogStatus("visitor");
+        }
+        else {
+            this.setLogStatus("admin");
+        }
 
         this.initializeNavBar();
         this.initializeFeedGenerator();
     }
 
     initializeNavBar() {
-        new NavBarFactory("type2", "visitor");
+        new NavBarFactory("type2", this.getLogStatus());
     }
 
     async initializeFeedGenerator() {
