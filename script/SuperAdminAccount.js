@@ -115,7 +115,7 @@ class SuperAdminAcount {
 
     showProfile(profileData) {
         const image    = document.getElementById('profile-img'),
-              name     = document.getElementById('profile-name'),
+              name     = document.getElementById('profile-result-name'),
               category = document.getElementById('profile-category');
 
         const IMG_BASE_PATH = '/assets/images/profiles/';
@@ -123,6 +123,18 @@ class SuperAdminAcount {
         image.src = IMG_BASE_PATH.concat(profileData['image']);
         name.textContent = profileData['name'];
         category.textContent = profileData['category'];
+
+        // console.log(profile);
+        this.deleteData(profileData['id']);
+
+    }
+
+    deleteData(id) {
+        const deleteBtn = document.getElementById('delete-btn');
+
+        deleteBtn.onclick = () => {
+            console.log(id);
+        }
     }
 
 }
