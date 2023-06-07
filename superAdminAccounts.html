@@ -17,6 +17,10 @@
     <!-- PAGE SCRIPT -->
     <script type="module" src="script/SuperAdminAccount.js"></script>
 
+    <!-- [START] FONTAWESOME PREREQUISITE FILES -->
+    <script src="https://kit.fontawesome.com/ca20d7d04e.js" crossorigin="anonymous"></script>
+    <!-- [END] FONTAWESOME PREREQUISITE FILES -->
+
     <!-- [START] SWEETALERT -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <!-- [END] SWEETALERT -->
@@ -128,6 +132,9 @@
                                 <hr>
                                 <div id="search-bar" class="input-group">
                                     <input type="text" id="search-input" class="form-control" placeholder="Search...">
+                                    <button type="button" id="search-btn" class="btn btn-success">
+                                        <i class="fa-sharp fa-solid fa-magnifying-glass"></i>
+                                    </button>
                                 </div>
                                 <div style="padding: 160px; background-color: #d9d9d9; border-radius: 5px;"></div>
                                 <div style="margin-top: 10px;">
@@ -159,7 +166,7 @@
                         </div>
                     </div>
 
-                    <script>
+                    <!-- <script>
                         function showEditCredentials() {
                             var modal = document.getElementById("edit-credentials-modal");
                             modal.style.display = "block";
@@ -177,7 +184,7 @@
                             // save operation
                             // ...
                         }
-                    </script>
+                    </script> -->
                 </div>
             </div>
         </div>

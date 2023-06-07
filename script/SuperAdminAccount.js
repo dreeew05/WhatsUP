@@ -16,6 +16,7 @@ class SuperAdminAcount {
         this.initializeNavBar();
         this.getResponse();
         this.getDepartments();
+        this.getValueFromSearch();
     }
 
     initializeNavBar() {
@@ -93,6 +94,20 @@ class SuperAdminAcount {
             option.textContent = data.result[i];
 
             departmentButton.appendChild(option);
+        }
+    }
+
+    getValueFromSearch() {
+        const searchButton = document.getElementById('search-btn'),
+              searchInput  = document.getElementById('search-input');
+        searchButton.onclick = async() => {
+            const request = {
+                'profile' : searchInput.value
+            };
+            const response = await this.dataSerializer.postData(
+                request, '/php/DeleteData.php'
+            );
+            console.log(response);
         }
     }
 
