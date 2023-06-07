@@ -1,3 +1,4 @@
+
 // Author: fiVe
 // Description: JavaScript for SuperAdminAcount
 
@@ -112,33 +113,95 @@ class SuperAdminAcount {
             this.showProfile(response);
         }
     }
-
     showProfile(profileData) {
-        const image    = document.getElementById('profile-img'),
-              name     = document.getElementById('profile-result-name'),
-              category = document.getElementById('profile-category');
-
+        const image = document.getElementById('profile-img');
+        const name = document.getElementById('profile-result-name');
+        const category = document.getElementById('profile-category');
+    
         const IMG_BASE_PATH = '/assets/images/profiles/';
-        
+    
         image.src = IMG_BASE_PATH.concat(profileData['image']);
         name.textContent = profileData['name'];
         category.textContent = profileData['category'];
 
         // console.log(profile);
         this.deleteData(profileData['id']);
-
+        const saveBtn = document.getElementById('save-btn');
+        saveBtn.setAttribute('data-profile-id', profileData['id']);
+        saveBtn.addEventListener('click', this.saveEditCredentials.bind(this));
+        
     }
-
+    
     deleteData(id) {
         const deleteBtn = document.getElementById('delete-btn');
-
-        deleteBtn.onclick = () => {
-            console.log(id);
-        }
+        const image = document.getElementById('profile-img');
+        const name = document.getElementById('profile-result-name');
+        const category = document.getElementById('profile-category');
+        
+        deleteBtn.onclick = async () => {
+            try {
+                const request = {
+                    'id': id
+                };
+                
+                const response = await this.dataSerializer.postData(
+                    request, '/php/DeleteData.php'
+                );
+                
+                console.log(response);
+                
+                if (response.operation === 'success') {
+               
+                    image.src = '';
+                    name.textContent = '';
+                    category.textContent = '';
+                    
+                } else {
+                    window.alert ("No data found");
+                    
+                }
+            } catch (error) {
+                console.error(error);
+            }
+        };
     }
-
+    saveEditCredentials() {
+        const editUsername = document.getElementById('edit-username').value;
+        const editPassword = document.getElementById('edit-password').value;
+        const confirmEditPassword = document.getElementById('edit-re-enter-pw').value;
+        const profileId = document.getElementById('save-btn').getAttribute('data-profile-id');
+    
+        if (editPassword !== confirmEditPassword) {
+            alert('Password does not match.');
+            return;
+        }
+    
+        const request = {
+            'profileId': profileId,
+            'newUsername': editUsername,
+            'newPassword': editPassword,
+            'confirmPassword': confirmEditPassword
+        };
+    
+        fetch('/php/EditData.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(request)
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log(data);
+            
+        })
+        .catch(error => {
+            console.log(error);
+    
+        });
+    }
 }
-
+    
 // DRIVER
 let driver = new SuperAdminAcount();
 // DEFAULT OPTION VALUES
