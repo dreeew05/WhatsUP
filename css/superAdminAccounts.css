@@ -126,6 +126,7 @@ textarea {
 #profile-img {
     width: 20vmax;
     object-fit: cover;
+    border-radius: 50%;
 }
 
 #profile-details {
