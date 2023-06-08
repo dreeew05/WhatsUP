@@ -2,6 +2,7 @@
 // Author: fiVe
 // Description: JavaScript for SuperAdminAcount
 
+import { Base64Converter } from "./classes/Base64Converter.js";
 import { CreateElement } from "./classes/CreateElement.js";
 import { DataSerializer } from "./classes/DataSerializer.js";
 import { NavBarFactory } from "./classes/NavBarFactory.js";
@@ -13,6 +14,7 @@ class SuperAdminAcount {
         // GLOBAL VARIABLES
         this.dataSerializer = new DataSerializer();
         this.alertBox       = new SweetAlertFactory();
+        this.base64Convert  = new Base64Converter();
 
         this.initializeNavBar();
         this.getResponse();
@@ -126,9 +128,7 @@ class SuperAdminAcount {
 
         // console.log(profile);
         this.deleteData(profileData['id']);
-        const saveBtn = document.getElementById('save-btn');
-        saveBtn.setAttribute('data-profile-id', profileData['id']);
-        saveBtn.addEventListener('click', this.saveEditCredentials.bind(this));
+        this.editData(profileData);
         
     }
     
@@ -165,11 +165,30 @@ class SuperAdminAcount {
             }
         };
     }
-    saveEditCredentials() {
+
+    editData(jsonData) {
+        const saveBtn = document.getElementById('save-btn');
+        const id   = jsonData['id'],
+              name = jsonData['name']; 
+
+        const userNameField = document.getElementById('edit-username');
+
+        userNameField.value = name;
+
+        saveBtn.setAttribute('data-profile-id', id);
+        saveBtn.addEventListener('click', this.saveEditCredentials.bind(this));
+    }
+
+    async saveEditCredentials() {
         const editUsername = document.getElementById('edit-username').value;
         const editPassword = document.getElementById('edit-password').value;
-        const confirmEditPassword = document.getElementById('edit-re-enter-pw').value;
-        const profileId = document.getElementById('save-btn').getAttribute('data-profile-id');
+        const confirmEditPassword = document.getElementById('edit-re-enter-pw')
+            .value;
+        const profileImage = document.getElementById('profile-picture');
+        const blob = URL.createObjectURL(profileImage.files[0]);
+        const base64Data = await this.base64Convert.convertToBase64(blob);
+        const profileId = document.getElementById('save-btn')
+            .getAttribute('data-profile-id');
     
         if (editPassword !== confirmEditPassword) {
             alert('Password does not match.');
@@ -180,8 +199,11 @@ class SuperAdminAcount {
             'profileId': profileId,
             'newUsername': editUsername,
             'newPassword': editPassword,
-            'confirmPassword': confirmEditPassword
+            'confirmPassword': confirmEditPassword,
+            'base64Data' : base64Data
         };
+        
+        console.log(request);
     
         fetch('/php/EditData.php', {
             method: 'POST',
@@ -197,7 +219,6 @@ class SuperAdminAcount {
         })
         .catch(error => {
             console.log(error);
-    
         });
     }
 }
